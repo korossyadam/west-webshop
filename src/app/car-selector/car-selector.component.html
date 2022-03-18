@@ -1,21 +1,34 @@
 <p>car-selector works!</p>
 
-<tbody>
-    <!-- <tr *ngFor="let product of products" (click)="setSelectedID(product);"> -->
+<!-- Searchbars -->
+<div>
+  
+  <div *ngIf="stage == 0">
+    <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)"/>
+  </div>
+
+  <div *ngIf="stage == 1">
+    <input type="text" class="text-input"/>
+    <input type="text" class="text-input"/>
+  </div>
+
+  <div *ngIf="stage == 2">
+    <input type="text" class="text-input"/>
+    <input type="text" class="text-input"/>
+    <input type="text" class="text-input"/>
+  </div>
+</div>
+
+<div class = "inline">
+  <tbody>
     <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
-      <td><a href="#" class="carTypeButton">{{ element }}</a></td>
-      <div *ngIf="stage == 1"><img src="{{ obj1[i].imgurl }}" alt= {{i}}></div>
-      
-      
-      <!-- <td><mat-form-field>
-        <mat-select [disabled]="disableSelect.value">
-          <mat-option *ngFor="let ref of product.ref_user" [value]="ref" disabled>{{ref}}</mat-option>
-        </mat-select>
-      </mat-form-field></td>
-      <td><mat-form-field>
-        <mat-select [disabled]="disableSelect.value">
-          <mat-option *ngFor="let ref of product.ref_outOfBucketCounter" [value]="ref" disabled>{{ref}}</mat-option>
-        </mat-select>
-      </mat-form-field></td> -->
+      <td><a href="#" class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
+
     </tr>
   </tbody>
+</div>
+
+
+<div *ngIf="stage == 1" class = "inline">
+  <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
+</div>

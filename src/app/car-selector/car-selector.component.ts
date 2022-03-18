@@ -29,11 +29,30 @@ export class CarSelectorComponent implements OnInit {
   public obj2: Car[];
   public stage: number = 0;
 
+  public hoveredTextIndex = -1;
+
   constructor(private carSelectorService: CarSelectorService) {
     
   }
 
   ngOnInit(): void {
+  }
+
+  reAddBrands(inputEvent: any): void {
+    var searchedText = (inputEvent.target as HTMLInputElement).value;
+    
+    for(var i = 0; i < this.listElements.length; i++){
+      if(!this.listElements[i].startsWith(searchedText.toUpperCase())){
+        console.log(this.listElements[i] + " doesnt include " + searchedText.toUpperCase());
+        const index = this.listElements.indexOf(this.listElements[i], 0);
+        if(index > -1){
+          this.listElements.splice(index, 1);
+          i--;
+        }
+      }
+      
+    }
+
   }
 
   /*
