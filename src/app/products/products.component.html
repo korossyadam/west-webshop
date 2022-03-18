@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-title>Firebase adatok</mat-card-title>
+    <table>
+      <!-- Oszlopok -->
+      <thead>
+        <tr>
+          <th>Cikkszám</th>
+          <th>Név</th>
+          <th>Nettó beszerzési ár</th>
+          <th>IMG URL</th>
+      </tr>
+      </thead>
+
+      <!-- Sorok -->
+      <tbody>
+        <!-- <tr *ngFor="let product of products" (click)="setSelectedID(product);"> -->
+        <tr *ngFor="let product of products">
+          <td>{{ product.partNumber }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.imgurl }}</td>
+          <!-- <td><mat-form-field>
+            <mat-select [disabled]="disableSelect.value">
+              <mat-option *ngFor="let ref of product.ref_user" [value]="ref" disabled>{{ref}}</mat-option>
+            </mat-select>
+          </mat-form-field></td>
+          <td><mat-form-field>
+            <mat-select [disabled]="disableSelect.value">
+              <mat-option *ngFor="let ref of product.ref_outOfBucketCounter" [value]="ref" disabled>{{ref}}</mat-option>
+            </mat-select>
+          </mat-form-field></td> -->
+        </tr>
+      </tbody>
+
+      <button mat-raised-button color="warn" (click)="search()">Search</button>
+
+    </table>
+  </mat-card>

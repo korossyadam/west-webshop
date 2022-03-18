@@ -1,0 +1,19 @@
+<p>car-selector works!</p>
+
+<tbody>
+    <!-- <tr *ngFor="let product of products" (click)="setSelectedID(product);"> -->
+    <tr *ngFor="let element of listElements" (click)="selectElements(element)">
+      <td><a href="#" class="carTypeButton">{{ element }}</a></td>
+      
+      <!-- <td><mat-form-field>
+        <mat-select [disabled]="disableSelect.value">
+          <mat-option *ngFor="let ref of product.ref_user" [value]="ref" disabled>{{ref}}</mat-option>
+        </mat-select>
+      </mat-form-field></td>
+      <td><mat-form-field>
+        <mat-select [disabled]="disableSelect.value">
+          <mat-option *ngFor="let ref of product.ref_outOfBucketCounter" [value]="ref" disabled>{{ref}}</mat-option>
+        </mat-select>
+      </mat-form-field></td> -->
+    </tr>
+  </tbody>

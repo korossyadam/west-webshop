@@ -1,0 +1,24 @@
+
+.carTypeButton {
+	background-color: #ffffff;
+	display: inline-block;
+	cursor: pointer;
+	color: #000000;
+	font-family: Arial;
+	font-size: 21px;
+	font-weight: bold;
+	padding: 8px;
+    text-decoration: none;
+    padding-left: 0px;
+    width: 160%;
+}
+
+.carTypeButton:hover {
+	background-color: #1b2936;
+	color: #ffffff;
+}
+
+.carTypeButton:active {
+	position: relative;
+	top: 1px;
+}
