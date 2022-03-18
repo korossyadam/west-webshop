@@ -2,8 +2,10 @@
 
 <tbody>
     <!-- <tr *ngFor="let product of products" (click)="setSelectedID(product);"> -->
-    <tr *ngFor="let element of listElements" (click)="selectElements(element)">
+    <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
       <td><a href="#" class="carTypeButton">{{ element }}</a></td>
+      <div *ngIf="stage == 1"><img src="{{ obj1[i].imgurl }}" alt= {{i}}></div>
+      
       
       <!-- <td><mat-form-field>
         <mat-select [disabled]="disableSelect.value">
