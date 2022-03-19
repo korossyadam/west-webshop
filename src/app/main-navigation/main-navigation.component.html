@@ -1,11 +1,23 @@
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
-<p>main-navigation works!</p>
 
+<div class="topnav">
+    <a class="active" routerLink="/main">Főoldal</a>
+    <a routerLink="/profile">Profil</a>
+    <a href="#contact">11...11</a>
+    <a href="#about">22...222</a>
+  </div>
+  
+  <div style="padding-left:16px">
+    <h2>Top Navigation Example</h2>
+    <p>Some content..</p>
+  </div>
+
+  <h1>Angular Router App</h1>
+  <!-- This nav gives you links to click, which tells the router which route to use (defined in the routes constant in  AppRoutingModule) -->
+  <nav>
+    <ul>
+      <li><a routerLink="/profile" routerLinkActive="active">First Component</a></li>
+      <li><a routerLink="/second-component" routerLinkActive="active">Second Component</a></li>
+    </ul>
+  </nav>
+  <!-- The routed views render in the <router-outlet>-->
+  <router-outlet></router-outlet>
