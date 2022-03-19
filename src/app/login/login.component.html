@@ -1,0 +1,17 @@
+
+<div *ngIf="!isSignedIn">
+    <h2>Bejelentkezés</h2>
+    <input type="text" #signinEmail/>
+    <input type="text" #signinPassword/>
+    <button (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+</div>
+<hr>
+<div *ngIf="!isSignedIn">
+    <h2>Regisztráció</h2>
+    <input type="text" #signupEmail/>
+    <input type="text" #signupPassword/>
+    <button (click)="signUp(signupEmail.value, signupPassword.value)">Regisztráció</button>
+</div>
+
+<app-profile *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-profile>
+

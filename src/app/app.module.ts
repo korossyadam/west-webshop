@@ -13,13 +13,17 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CarSelectorComponent } from './car-selector/car-selector.component';
+import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainNavigationComponent,
     ProductsComponent,
-    CarSelectorComponent
+    CarSelectorComponent,
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
