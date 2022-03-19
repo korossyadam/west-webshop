@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFirestore, AngularFirestoreDocument, CollectionReference, Query } from '@angular/fire/compat/firestore';
@@ -9,6 +9,8 @@ import { Product } from '../models/product.model';
   providedIn: 'root'
 })
 export class ProductsService {
+
+  @Input() searchBarText = "";
 
   constructor(private afs: AngularFirestore, private db: AngularFireDatabase) {}
 

@@ -15,6 +15,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CarSelectorComponent } from './car-selector/car-selector.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProfileComponent } from './profile/profile.component';
     ProductsComponent,
     CarSelectorComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

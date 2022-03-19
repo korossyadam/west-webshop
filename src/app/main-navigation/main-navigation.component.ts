@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainNavigationComponent implements OnInit {
 
+  public searchedText: string;
+  public searchedSomething: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmitSearch(): void {
+    console.log("submitted");
+    this.searchedSomething = true;
   }
 
 }
