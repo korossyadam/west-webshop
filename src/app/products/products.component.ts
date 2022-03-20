@@ -15,10 +15,11 @@ export class ProductsComponent implements OnInit {
   constructor(private productService: ProductsService) {}
 
   ngOnInit(): void {
+    this.search();
   }
 
   search(): void {
-    this.productService.search('parts', 'cu40110').subscribe(data => this.products = data);
+    this.productService.search('products', this.searchedText).subscribe(data => this.products = data);
     console.log('called');
   }
 

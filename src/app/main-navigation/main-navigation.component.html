@@ -4,10 +4,10 @@
   <a routerLink="/carsearch" (click)="searchedSomething = false">Járműkereső</a>
   <a routerLink="/profile" (click)="searchedSomething = false">Profil</a>
   <input type="text" #inputText>
-  <button (click)="searchedText = inputText.value; onSubmitSearch();">Keresés</button>
+  <button (click)="searchedText = inputText.value; onSearch();">Keresés</button>
 </div>
 
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet *ngIf="!searchedSomething"></router-outlet>
 
-<app-products *ngIf="searchedSomething"></app-products>
+<app-products *ngIf="searchedSomething" [searchedText]="searchedText"></app-products>
