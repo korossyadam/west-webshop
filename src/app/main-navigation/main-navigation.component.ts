@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { ProductsComponent } from '../products/products.component';
 
 @Component({
@@ -13,9 +13,17 @@ export class MainNavigationComponent implements OnInit {
   public searchedText: string;
   public searchedSomething: boolean = false;
 
-  constructor() {}
+  isIf: boolean;
+
+  constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
+
+  updatChildIf(): void {
+    this.isIf = !this.isIf;
+    this.changeDetectorRef.detectChanges();
+    console.log("child", this.child);
+  }
 
   onSearch(): void {
     this.searchedSomething = true;

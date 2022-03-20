@@ -7,6 +7,7 @@ import { MainNavigationComponent } from './main-navigation/main-navigation.compo
 import { ProductsComponent } from './products/products.component';
 
 import { MatCardModule } from  '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -31,6 +32,7 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
+    MatIconModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFirestoreModule

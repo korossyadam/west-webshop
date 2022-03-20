@@ -1,13 +1,28 @@
 
 <div class="topnav">
-  <a class="active" routerLink="/main" (click)="searchedSomething = false">Főoldal</a>
-  <a routerLink="/carsearch" (click)="searchedSomething = false">Járműkereső</a>
-  <a routerLink="/profile" (click)="searchedSomething = false">Profil</a>
-  <input type="text" #inputText (input)="searchedText = inputText.value">
-  <button (click)="onSearch()">Keresés</button>
+
+  <!-- Left Side -->
+  <a class="active" routerLink="/main" (click)="searchedSomething = false; isIf = false;">Főoldal</a>
+  <a routerLink="/carsearch" (click)="searchedSomething = false; isIf = false;">Járműkereaaaaaaaaaaaaaaaaaaaaaaaaaaső</a>
+  <a routerLink="/profile" (click)="searchedSomething = false; isIf = false;">Profil</a>
+  
+
+  <!-- Account -->
+  <div>
+    <mat-icon class="white-icon">perm_identity</mat-icon>
+  </div>
+
 </div>
+
+
+<div class="max-width">
+  <input type="text" class="searchbar" #inputText (input)="searchedText = inputText.value">
+  <button (click)="updatChildIf(); onSearch();">Keresés</button>
+</div>
+
+
 
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet *ngIf="!searchedSomething"></router-outlet>
 
-<app-products *ngIf="searchedSomething" [searchedText]="searchedText"></app-products>
+<app-products *ngIf="isIf || searchedSomething" [searchedText]="searchedText"></app-products>
