@@ -3,8 +3,8 @@
   <a class="active" routerLink="/main" (click)="searchedSomething = false">Főoldal</a>
   <a routerLink="/carsearch" (click)="searchedSomething = false">Járműkereső</a>
   <a routerLink="/profile" (click)="searchedSomething = false">Profil</a>
-  <input type="text" #inputText>
-  <button (click)="searchedText = inputText.value; onSearch();">Keresés</button>
+  <input type="text" #inputText (input)="searchedText = inputText.value">
+  <button (click)="onSearch()">Keresés</button>
 </div>
 
 <!-- The routed views render in the <router-outlet>-->
