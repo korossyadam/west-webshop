@@ -1,9 +1,14 @@
 
-<div class="topnav">
+<div class="box-middle"></div>
+<div class="parallelogram-left"></div>
+<div class="parallelogram-right"></div>
+
+
+<div class="topnav fixed">
 
   <!-- Left Side -->
   <a class="active" routerLink="/main" (click)="searchedSomething = false; isIf = false;">Főoldal</a>
-  <a routerLink="/carsearch" (click)="searchedSomething = false; isIf = false;">Járműkereaaaaaaaaaaaaaaaaaaaaaaaaaaső</a>
+  <a routerLink="/carsearch" (click)="searchedSomething = false; isIf = false;">Járműkereső</a>
   <a routerLink="/profile" (click)="searchedSomething = false; isIf = false;">Profil</a>
   
 
@@ -14,11 +19,13 @@
 
 </div>
 
-
-<div class="max-width">
+<!-- Search bar in the middle -->
+<div class="fixed">
   <input type="text" class="searchbar" #inputText (input)="searchedText = inputText.value">
-  <button (click)="updatChildIf(); onSearch();">Keresés</button>
+  <mat-icon class ="search-icon" (click)="updatChildIf(); onSearch();">search</mat-icon>
+  <!-- <button class="search-button" (click)="updatChildIf(); onSearch();">Keresés</button> -->
 </div>
+
 
 
 
@@ -26,3 +33,6 @@
 <router-outlet *ngIf="!searchedSomething"></router-outlet>
 
 <app-products *ngIf="isIf || searchedSomething" [searchedText]="searchedText"></app-products>
+<body>
+
+</body>
