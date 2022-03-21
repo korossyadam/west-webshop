@@ -24,7 +24,7 @@
 <div class = "inline">
   <tbody>
     <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
-      <td><a href="#" class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
+      <td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
 
     </tr>
   </tbody>

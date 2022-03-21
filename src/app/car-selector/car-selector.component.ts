@@ -51,7 +51,6 @@ export class CarSelectorComponent implements OnInit {
         index += 1;
       }
     }
-
   }
 
   /*
@@ -118,6 +117,8 @@ export class CarSelectorComponent implements OnInit {
   selectElements(selected: string): void {
     selected = selected.replace(/(\r\n|\n|\r)/gm, "");
 
+    console.log("called: " + selected);
+
     if(this.stage == 0){
       this.carSelectorService.selectBrand(selected).subscribe(data => {
         console.log(data.length);
@@ -130,8 +131,8 @@ export class CarSelectorComponent implements OnInit {
           counter += 1;
         }
         console.log(selected);
+        this.stage += 1;
       });
-      this.stage += 1;
     }else if(this.stage == 1){
       this.carSelectorService.selectChassis(selected).subscribe(data => {
         console.log("length: " + data.length);
@@ -144,8 +145,8 @@ export class CarSelectorComponent implements OnInit {
           counter += 1;
         }
         console.log(selected);
+        this.stage += 1;
       });
-      this.stage += 1;
     }
     
   }

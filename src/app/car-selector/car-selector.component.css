@@ -19,14 +19,14 @@
 	font-family: Arial;
 	font-size: 21px;
 	font-weight: bold;
-	padding: 8px;
-    text-decoration: none;
-    padding-left: 0px;
-    width: 100%;
+   padding: 8px;
+   text-decoration: none;
+   padding-left: 0px;
+   width: 100%;
 }
 
 .car-type-button:hover {
-	background-color: #1b2936;
+   background-color: #1b2936;
 	color: #ffffff;
 }
 
