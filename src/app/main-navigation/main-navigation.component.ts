@@ -8,6 +8,8 @@ import { ProductsComponent } from '../products/products.component';
 })
 export class MainNavigationComponent implements OnInit {
 
+  public step: number = 0;
+
   @ViewChild(ProductsComponent) child: ProductsComponent;
 
   public searchedText: string;
