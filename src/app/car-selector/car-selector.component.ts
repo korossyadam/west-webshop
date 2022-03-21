@@ -12,7 +12,7 @@ import { Car } from '../models/car.model';
 })
 export class CarSelectorComponent implements OnInit {
 
-  public listElements: string[] = ['ABARTH', 'ACURA', 'AIXAM', 
+  public brands: string[] = ['ABARTH', 'ACURA', 'AIXAM', 
   'ALFA ROMEO', 'ANDORIA', 'ARO', 'ASTON MARTIN', 'AUDI', 'AUSTIN', 'AVIA',
   'BEDFORD', 'BENTLEY', 'BMW', 'BUICK', 'CADILLAC', 'CHERY', 'CHEVROLET',
   'CHRYSLER', 'CITROEN', 'DACIA', 'DAEWOO', 'DAF', 'DAIHATSU', 'DODGE', 'DS',
@@ -25,6 +25,7 @@ export class CarSelectorComponent implements OnInit {
   'ROLLS-ROYCE', 'ROVER', 'SAAB', 'SEAT', 'SEVIC', 'SKODA', 'SMART', 'SSANGYONG',
   'SUBARU', 'SUZUKI', 'TATA', 'TESLA', 'TOYOTA', 'TRABANT', 'UAZ', 'VOLVO', 'VW',
   'WARTBURG', 'ZASTAVA', 'ZAZ'];
+  public listElements: string[];
   public obj1: Chassis[];
   public obj2: Car[];
   public stage: number = 0;
@@ -36,21 +37,19 @@ export class CarSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.listElements = this.brands;
   }
 
   reAddBrands(inputEvent: any): void {
     var searchedText = (inputEvent.target as HTMLInputElement).value;
     
-    for(var i = 0; i < this.listElements.length; i++){
-      if(!this.listElements[i].startsWith(searchedText.toUpperCase())){
-        console.log(this.listElements[i] + " doesnt include " + searchedText.toUpperCase());
-        const index = this.listElements.indexOf(this.listElements[i], 0);
-        if(index > -1){
-          this.listElements.splice(index, 1);
-          i--;
-        }
+    this.listElements = [];
+    var index = 0;
+    for(var i = 0; i < this.brands.length; i++){
+      if(this.brands[i].startsWith(searchedText.toUpperCase())){
+        this.listElements[index] = this.brands[i];
+        index += 1;
       }
-      
     }
 
   }
