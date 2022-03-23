@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { ProductsComponent } from '../products/products.component';
 
 @Component({
@@ -9,7 +9,8 @@ import { ProductsComponent } from '../products/products.component';
 export class MainNavigationComponent implements OnInit {
 
   public step: number = 0;
-
+  
+  @Output() carSelectClickedEvent = new EventEmitter<boolean>();
   @ViewChild(ProductsComponent) child: ProductsComponent;
 
   public searchedText: string;
@@ -31,6 +32,10 @@ export class MainNavigationComponent implements OnInit {
   onSearch(): void {
     this.searchedSomething = true;
     this.child.search()
+  }
+
+  onCarSelectorButtonClick(): void {
+   this.carSelectClickedEvent.emit(true);
   }
    
    localStorageUser(): string {var currentUser = localStorage.getItem('user');

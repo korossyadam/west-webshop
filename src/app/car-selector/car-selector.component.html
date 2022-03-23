@@ -1,11 +1,10 @@
 
-
-<mat-sidenav-container hasBackdrop="false" class="side-container">
-   <mat-sidenav class="sidenav" mode="push" opened>
+<!-- Sidenav for vehicle search -->
+<mat-sidenav-container hasBackdrop="true" class="sidenav-container">
+   <mat-sidenav class="sidenav" mode="push" #sidenav>
       
       <!-- Searchbars -->
       <div>
-      
          <div *ngIf="stage == 0">
             <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)"/>
          </div>
@@ -24,6 +23,7 @@
 
       <br>
 
+      <!-- *ngFor for every element in the list -->
       <div class = "inline">
          <tbody>
             <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
@@ -33,19 +33,17 @@
          </tbody>
       </div>
 
-
+      <!-- Display hovered vehicle image -->
       <div *ngIf="stage == 1" class = "inline">
          <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
       </div>
 
    </mat-sidenav>
 
-   <mat-sidenav-content>
-      <h2>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBB</h2>
-      <app-main-navigation></app-main-navigation>
-   </mat-sidenav-content> 
-
-   
+   <!-- Main content -->
+    <mat-sidenav-content>
+        <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
+    </mat-sidenav-content> 
 
 </mat-sidenav-container>
 

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chassis } from '../models/chassis.model';
 import { CarSelectorService } from '../services/car-selector.service';
 
 import * as fs from 'fs';
 import { Car } from '../models/car.model';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-car-selector',
@@ -12,46 +13,51 @@ import { Car } from '../models/car.model';
 })
 export class CarSelectorComponent implements OnInit {
 
-  public brands: string[] = ['ABARTH', 'ACURA', 'AIXAM', 
-  'ALFA ROMEO', 'ANDORIA', 'ARO', 'ASTON MARTIN', 'AUDI', 'AUSTIN', 'AVIA',
-  'BEDFORD', 'BENTLEY', 'BMW', 'BUICK', 'CADILLAC', 'CHERY', 'CHEVROLET',
-  'CHRYSLER', 'CITROEN', 'DACIA', 'DAEWOO', 'DAF', 'DAIHATSU', 'DODGE', 'DS',
-  'ELARIS', 'FERRARI', 'FIAT', 'FORD', 'FORD USA', 'FSO', 'GAZ', 'GEO', 'GMC',
-  'GREAT WALL', 'HONDA', 'HUMMER', 'HYUNDAI', 'INFINITI', 'INNOCENTI', 'ISUZU',
-  'IVECO', 'JAGUAR', 'JEEP', 'KIA', 'LADA', 'LAMBORGHINI', 'LANCIA', 'LAND ROVER',
-  'LDV', 'LEXUS', 'LINCOLN', 'LOTUS', 'MAN', 'MASERATI', 'MAYBACH', 'MAZDA',
-  'MCLAREN', 'MERCEDES-BENZ', 'MG', 'MINI', 'MITSUBISHI', 'NISSAN', 'OPEL',
-  'PEUGEOT', 'PLYMOUTH', 'PONTIAC', 'PORSCHE', 'RENAULT', 'RENAULT TRUCKS',
-  'ROLLS-ROYCE', 'ROVER', 'SAAB', 'SEAT', 'SEVIC', 'SKODA', 'SMART', 'SSANGYONG',
-  'SUBARU', 'SUZUKI', 'TATA', 'TESLA', 'TOYOTA', 'TRABANT', 'UAZ', 'VOLVO', 'VW',
-  'WARTBURG', 'ZASTAVA', 'ZAZ'];
-  public listElements: string[];
-  public obj1: Chassis[];
-  public obj2: Car[];
-  public stage: number = 0;
-
-  public hoveredTextIndex = -1;
-
-  constructor(private carSelectorService: CarSelectorService) {
+    @ViewChild('sidenav') sidenav: MatSidenav;
     
-  }
+    public brands: string[] = ['ABARTH', 'ACURA', 'AIXAM', 
+    'ALFA ROMEO', 'ANDORIA', 'ARO', 'ASTON MARTIN', 'AUDI', 'AUSTIN', 'AVIA',
+    'BEDFORD', 'BENTLEY', 'BMW', 'BUICK', 'CADILLAC', 'CHERY', 'CHEVROLET',
+    'CHRYSLER', 'CITROEN', 'DACIA', 'DAEWOO', 'DAF', 'DAIHATSU', 'DODGE', 'DS',
+    'ELARIS', 'FERRARI', 'FIAT', 'FORD', 'FORD USA', 'FSO', 'GAZ', 'GEO', 'GMC',
+    'GREAT WALL', 'HONDA', 'HUMMER', 'HYUNDAI', 'INFINITI', 'INNOCENTI', 'ISUZU',
+    'IVECO', 'JAGUAR', 'JEEP', 'KIA', 'LADA', 'LAMBORGHINI', 'LANCIA', 'LAND ROVER',
+    'LDV', 'LEXUS', 'LINCOLN', 'LOTUS', 'MAN', 'MASERATI', 'MAYBACH', 'MAZDA',
+    'MCLAREN', 'MERCEDES-BENZ', 'MG', 'MINI', 'MITSUBISHI', 'NISSAN', 'OPEL',
+    'PEUGEOT', 'PLYMOUTH', 'PONTIAC', 'PORSCHE', 'RENAULT', 'RENAULT TRUCKS',
+    'ROLLS-ROYCE', 'ROVER', 'SAAB', 'SEAT', 'SEVIC', 'SKODA', 'SMART', 'SSANGYONG',
+    'SUBARU', 'SUZUKI', 'TATA', 'TESLA', 'TOYOTA', 'TRABANT', 'UAZ', 'VOLVO', 'VW',
+    'WARTBURG', 'ZASTAVA', 'ZAZ'];
 
-  ngOnInit(): void {
-    this.listElements = this.brands;
-  }
+    public listElements: string[];
+    public obj1: Chassis[];
+    public obj2: Car[];
+    public stage: number = 0;
 
-  reAddBrands(inputEvent: any): void {
-    var searchedText = (inputEvent.target as HTMLInputElement).value;
-    
-    this.listElements = [];
-    var index = 0;
-    for(var i = 0; i < this.brands.length; i++){
-      if(this.brands[i].startsWith(searchedText.toUpperCase())){
-        this.listElements[index] = this.brands[i];
-        index += 1;
-      }
+    public hoveredTextIndex = -1;
+
+    constructor(private carSelectorService: CarSelectorService) {}
+
+    ngOnInit(): void {
+        this.listElements = this.brands;
     }
-  }
+
+    openSideNav(){
+        this.sidenav.toggle();
+    }
+
+    reAddBrands(inputEvent: any): void {
+        var searchedText = (inputEvent.target as HTMLInputElement).value;
+    
+        this.listElements = [];
+        var index = 0;
+        for(var i = 0; i < this.brands.length; i++){
+            if(this.brands[i].startsWith(searchedText.toUpperCase())){
+                this.listElements[index] = this.brands[i];
+            index += 1;
+            }
+        }
+    }
 
   /*
   addChassis(): void {
