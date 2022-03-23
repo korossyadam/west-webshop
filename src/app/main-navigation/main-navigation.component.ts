@@ -25,11 +25,20 @@ export class MainNavigationComponent implements OnInit {
     this.isIf = !this.isIf;
     this.changeDetectorRef.detectChanges();
     console.log("child", this.child);
+    if(localStorage.getItem('user') == null){}
   }
 
   onSearch(): void {
     this.searchedSomething = true;
     this.child.search()
+  }
+   
+   localStorageUser(): string {var currentUser = localStorage.getItem('user');
+      if(currentUser != null){
+         return currentUser;
+      }else{
+         return '';
+      }
   }
 
 }

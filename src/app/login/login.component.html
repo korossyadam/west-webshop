@@ -1,3 +1,6 @@
+<br><br>
+
+<p class="ttest">LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOG</p>
 
 <div *ngIf="!isSignedIn">
     <h2>Bejelentkezés</h2>
@@ -6,6 +9,7 @@
     <button (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
 </div>
 <hr>
+<mat-divider [vertical]="true"></mat-divider>
 <div *ngIf="!isSignedIn">
     <h2>Regisztráció</h2>
     <input type="text" #signupEmail/>
@@ -14,4 +18,3 @@
 </div>
 
 <app-profile *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-profile>
-

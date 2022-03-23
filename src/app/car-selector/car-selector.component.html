@@ -1,36 +1,51 @@
-<p>car-selector works!</p>
-
-<!-- Searchbars -->
-<div>
-  
-  <div *ngIf="stage == 0">
-    <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)"/>
-  </div>
-
-  <div *ngIf="stage == 1">
-    <input type="text" class="text-input"/>
-    <input type="text" class="text-input"/>
-  </div>
-
-  <div *ngIf="stage == 2">
-    <input type="text" class="text-input"/>
-    <input type="text" class="text-input"/>
-    <input type="text" class="text-input"/>
-  </div>
-</div>
-
-<br>
-
-<div class = "inline">
-  <tbody>
-    <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
-      <td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
-
-    </tr>
-  </tbody>
-</div>
 
 
-<div *ngIf="stage == 1" class = "inline">
-  <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
-</div>
+<mat-sidenav-container hasBackdrop="false" class="side-container">
+   <mat-sidenav class="sidenav" mode="push" opened>
+      
+      <!-- Searchbars -->
+      <div>
+      
+         <div *ngIf="stage == 0">
+            <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)"/>
+         </div>
+
+         <div *ngIf="stage == 1">
+            <input type="text" class="text-input"/>
+            <input type="text" class="text-input"/>
+         </div>
+
+         <div *ngIf="stage == 2">
+            <input type="text" class="text-input"/>
+            <input type="text" class="text-input"/>
+            <input type="text" class="text-input"/>
+         </div>
+      </div>
+
+      <br>
+
+      <div class = "inline">
+         <tbody>
+            <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
+               <td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
+
+            </tr>
+         </tbody>
+      </div>
+
+
+      <div *ngIf="stage == 1" class = "inline">
+         <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
+      </div>
+
+   </mat-sidenav>
+
+   <mat-sidenav-content>
+      <h2>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBB</h2>
+      <app-main-navigation></app-main-navigation>
+   </mat-sidenav-content> 
+
+   
+
+</mat-sidenav-container>
+
