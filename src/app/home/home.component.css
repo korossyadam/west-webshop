@@ -1,4 +1,8 @@
 
+.container {
+    filter: drop-shadow(0px 0px 7px rgba(0,0,0,0.8));
+}
+
 .bcg-image {
     position: fixed;
     clip-path: polygon(0% 0%, 100% 0%, 100% 96.5%, 90% 96.5%, 89.25% 100%, 10.75% 100%, 10% 96.5%, 0% 96.5%);
