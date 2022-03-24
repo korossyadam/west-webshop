@@ -3,7 +3,7 @@
 <div class="parallelogram-left"></div>
 <div class="parallelogram-right"></div>
 
-<h2 class="logo"><span class="red">WEST</span> ALKATRÉSZ</h2>
+<h2 class="logo"><span class="darkblue">WEST</span> ALKATRÉSZ</h2>
 
 
 
@@ -11,16 +11,16 @@
     <div class="topnav fixed">
    
         <!-- Left Side -->
-        <a class="left-pushed menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
+        <a class="left-push menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
         <a class="menu-option" [ngClass]="{'active': step === 2}" routerLink="/profile" (click)="searchedSomething = false; isIf = false; step = 2;">Profil</a>
         <button mat-raised-button color="accent" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
      
         <!-- Account -->
         <div class="login-text">
-           <!-- <mat-icon class="white-icon">perm_identity</mat-icon> -->
+           <!-- <mat-icon>perm_identity</mat-icon> -->
            <div *ngIf="localStorageUser() == ''">
-              <a routerLink="/login">Bejelentkezés</a>
-              <a routerLink="/login">Regisztráció</a>
+              <a class="login-text"routerLink="/login">Bejelentkezés</a>
+              <a class="login-text"routerLink="/login">Regisztráció</a>
            </div>
         </div>
      

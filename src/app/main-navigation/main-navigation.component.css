@@ -4,24 +4,24 @@ body {
 
 .logo {
     position: fixed;
-    font-size: 30px;
-    width: 20%;
     top: -12px;
     left: 50%;
+    width: 20%;
     margin-left: -10%;
-    color:#383838;
+    font-size: 30px;
     font-family: 'Audiowide', cursive;
-    z-index: 9999;
     text-align: center;
+    color:#383838;
+    z-index: 9999;
 }
 
-.red {
+.darkblue {
     color: #1b2936;
 }
 
 .fixed {
-    position: fixed; /* Set the navbar to fixed position */
-    top: 30px; /* Position the navbar at the top of the page */
+    position: fixed;
+    top: 30px;
     left: 0px;
 }
 
@@ -31,10 +31,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 300px;
-    width: 100%;
     top: 0px;
     left: 0px;
+    width: 100%;
     filter: drop-shadow(0px 0px 7px rgba(0,0,0,0.8));
 }
 
@@ -43,25 +42,23 @@ body {
     position: fixed;
     display: block;
     background-color: white;
-    top: 30px;
 	height: 300px;
     width: 100%;
-    margin: 0 auto;
 }
 
 .menu-option {
     float: left;
-    color: black;
-    text-align: center;
     margin-top: 5px;
     padding: 10px 25px;
-    text-decoration: none;
     font-size: 17px;
     font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    color: black;
 }
 
 .topnav a:hover {
-    background-color: #ddd;
+    background-color: #dddddd;
     color: #1b2936;
 }
 
@@ -70,19 +67,8 @@ body {
     color: white;
 }
 
-.left-pushed {
+.left-push {
     margin-left: 2%;
-}
-
-.hovered-cursor {
-    cursor: pointer;
-}
-
-.carsearch-button {
-    color: white;
-    background-color: #f02930;
-    padding: 20px;
-    font-weight: bold;
 }
 
 .max-width {
@@ -93,37 +79,27 @@ body {
     background-color: #f02930;
 }
 
-
-
-.trapezoid {
-	border-bottom: 50px solid #555;
-	border-left: 25px solid transparent;
-	border-right: 25px solid transparent;
-	height: 0;
-	width: 125px;
-}
-
 .search-icon {
     position: fixed;
-    width: 10%;
     left: 70%;
+    width: 10%;
     margin-left: -6%;
     padding: 10px;
-    color: white;
+    color: black;
     transform: scale(1.6);
-}
-
-.white-icon {
-    color: white;
-    transform: scale(1.6);
-    padding: 10px;
-    padding-right: 1%;
-    float: right;
 }
 
 .login-text {
     padding-right: 1%;
     float: right;
+    color: black;
+    margin-top: 5px;
+    padding: 10px 25px;
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    color: black;
 }
 
 .parallelogram-left {
@@ -192,6 +168,5 @@ body {
 }
 
 ::ng-deep.mat-form-field-ripple {
-    /*change color of underline when focused*/
-    background-color: #f44336 !important;;
+    background-color: #f44336 !important;
 }
