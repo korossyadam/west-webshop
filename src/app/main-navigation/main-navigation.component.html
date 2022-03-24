@@ -3,28 +3,47 @@
 <div class="parallelogram-left"></div>
 <div class="parallelogram-right"></div>
 
+<h2 class="logo"><span class="red">WEST</span> ALKATRÉSZ</h2>
 
-<div class="topnav fixed">
+
+
+<div class="container">
+    <div class="topnav fixed">
    
-   <!-- Left Side -->
-   <a [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
-   <a [ngClass]="{'active': step === 2}" routerLink="/profile" (click)="searchedSomething = false; isIf = false; step = 2;">Profil</a>
-   <a (click)="onCarSelectorButtonClick()">Járműkereső</a>
-
-   <!-- Account -->
-   <div class="login-text">
-      <!-- <mat-icon class="white-icon">perm_identity</mat-icon> -->
-      <div *ngIf="localStorageUser() == ''">
-         <a routerLink="/login">Bejelentkezés</a>
-         <a routerLink="/login">Regisztráció</a>
-      </div>
-   </div>
-
+        <!-- Left Side -->
+        <a class="left-pushed menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
+        <a class="menu-option" [ngClass]="{'active': step === 2}" routerLink="/profile" (click)="searchedSomething = false; isIf = false; step = 2;">Profil</a>
+        <button mat-raised-button color="accent" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
+     
+        <!-- Account -->
+        <div class="login-text">
+           <!-- <mat-icon class="white-icon">perm_identity</mat-icon> -->
+           <div *ngIf="localStorageUser() == ''">
+              <a routerLink="/login">Bejelentkezés</a>
+              <a routerLink="/login">Regisztráció</a>
+           </div>
+        </div>
+     
+     </div>
 </div>
 
+
 <!-- Search bar in the middle -->
-<div class="fixed">
-  <input type="text" class="searchbar" #inputText (input)="searchedText = inputText.value">
+<div class="fixed text">
+    <div style="font-size: 16px">
+        <!-- <input class="searchbar"  #inputText (input)="searchedText = inputText.value" maxlength="256" placeholder="Cikkszám, gyári szám.." autocomplete="off" [(ngModel)]="value"> -->
+
+
+        <div class="form__group field">
+            <input type="input" class="form__field searchbar2" placeholder="Name" name="name" id='name' autocomplete="off" required />
+            <label for="name" class="form__label">Cikkszám, gyári szám..</label>
+        </div>
+
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    
   <mat-icon class ="search-icon" (click)="updatChildIf(); onSearch();">search</mat-icon>
   <!-- <button class="search-button" (click)="updatChildIf(); onSearch();">Keresés</button> -->
 </div>

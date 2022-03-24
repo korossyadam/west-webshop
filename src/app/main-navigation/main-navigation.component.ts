@@ -13,6 +13,7 @@ export class MainNavigationComponent implements OnInit {
   @Output() carSelectClickedEvent = new EventEmitter<boolean>();
   @ViewChild(ProductsComponent) child: ProductsComponent;
 
+  value = "";
   public searchedText: string;
   public searchedSomething: boolean = false;
 

@@ -7,11 +7,14 @@ import { AppComponent } from './app.component';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import { ProductsComponent } from './products/products.component';
 
+import { FormsModule } from '@angular/forms';
+
 import { MatCardModule } from  '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input'
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -42,9 +45,12 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    FormsModule,
     MatCardModule,
     MatIconModule,
     MatDividerModule,
+    MatButtonModule,
+    MatInputModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,
