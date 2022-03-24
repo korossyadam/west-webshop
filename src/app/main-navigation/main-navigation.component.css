@@ -71,12 +71,11 @@ body {
     margin-left: 2%;
 }
 
-.max-width {
-    overflow: hidden;
-    display: block;
-    margin: 0;
-    width: 100%;
-    background-color: #f02930;
+.carselect-button {
+    position: fixed;
+    top: 45px;
+    left: 29%;
+    padding: 5px 16px;
 }
 
 .search-icon {
