@@ -34,17 +34,17 @@
 }
 
 .car-type-button {
-	background-color: #ffffff;
+    background-color: #ffffff;
 	display: inline-block;
 	cursor: pointer;
 	color: #000000;
 	font-family: Arial;
 	font-size: 21px;
 	font-weight: bold;
-   padding: 8px;
-   text-decoration: none;
-   padding-left: 0px;
-   width: 100%;
+    padding: 8px;
+    text-decoration: none;
+    padding-left: 0px;
+    width: 100%;
 }
 
 .car-type-button:hover {

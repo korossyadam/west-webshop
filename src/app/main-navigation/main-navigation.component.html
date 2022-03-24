@@ -1,12 +1,13 @@
 
+<!-- Decoration shapes -->
 <div class="box-middle"></div>
 <div class="parallelogram-left"></div>
 <div class="parallelogram-right"></div>
 
+<!-- Logo -->
 <h2 class="logo"><span class="darkblue">WEST</span> ALKATRÉSZ</h2>
 
-
-
+<!-- Upper bar -->
 <div class="container">
     <div class="topnav fixed">
    
@@ -30,24 +31,24 @@
 
 <!-- Search bar in the middle -->
 <div class="fixed text">
+
+    <!-- Search bar -->
     <div style="font-size: 16px">
-        <!-- <input class="searchbar"  #inputText (input)="searchedText = inputText.value" maxlength="256" placeholder="Cikkszám, gyári szám.." autocomplete="off" [(ngModel)]="value"> -->
-
-
         <mat-form-field class="form-field" appearance="legacy">
             <mat-label>Termék keresése</mat-label>
-            <input matInput placeholder="Cikkszám, gyári szám.." autocomplete="off" [(ngModel)]="value">
+            <input matInput #inputText (input)="searchedText = inputText.value" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" [(ngModel)]="value">
 
             <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                 <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>
-
-        
     </div>
     
-  <mat-icon class ="search-icon" (click)="updatChildIf(); onSearch();">search</mat-icon>
-  <!-- <button class="search-button" (click)="updatChildIf(); onSearch();">Keresés</button> -->
+    <!-- Search button -->
+    <button mat-icon-button class="search-icon" color="warn" (click)="updatChildIf(); onSearch();">
+        <mat-icon>search</mat-icon>
+    </button>
+
 </div>
 
 
