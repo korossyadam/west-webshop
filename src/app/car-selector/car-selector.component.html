@@ -1,7 +1,7 @@
 
 <!-- Upper SideNav for searchbars -->
-<mat-sidenav-container hasBackdrop="true" class="upper-sidenav-container" (close)="closeSideNavs()">
-   <mat-sidenav class="upper-sidenav" mode="over" (click)="closeSideNavs()" #upperSideNav>
+<mat-sidenav-container hasBackdrop="true" class="upper-sidenav-container">
+   <mat-sidenav class="upper-sidenav" mode="over" disableClose="true" #upperSideNav>
       
       <!-- Searchbars -->
       <div class="upper-menu">
@@ -21,6 +21,8 @@
          </div>
       </div>
 
+      <div class="closing-side" (click)="closeSideNavs()"></div>
+
       <br>
       
    </mat-sidenav>
@@ -29,8 +31,8 @@
     <mat-sidenav-content>
 
         <!-- Lower SideNav for listElements -->
-        <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container" (close)="closeSideNavs()">
-            <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" (close)="closeSideNavs()" #lowerSideNav>
+        <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container">
+            <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" disableClose="true" #lowerSideNav>
 
                  <!-- *ngFor for every element in the list -->
                 <div class="lower-menu">
@@ -46,10 +48,13 @@
                     <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
                 </div>
 
+                
+
             </mat-sidenav>
 
             <!-- Actual main content -->
             <mat-sidenav-content>
+                
                 <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
             </mat-sidenav-content>
         </mat-sidenav-container>

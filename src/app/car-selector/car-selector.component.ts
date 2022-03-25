@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Chassis } from '../models/chassis.model';
 import { CarSelectorService } from '../services/car-selector.service';
 
 import * as fs from 'fs';
 import { Car } from '../models/car.model';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-car-selector',
@@ -12,6 +13,8 @@ import { MatSidenav } from '@angular/material/sidenav';
   styleUrls: ['./car-selector.component.css']
 })
 export class CarSelectorComponent implements OnInit {
+
+    subscription: Subscription;
 
     @ViewChild('upperSideNav') upperSideNav: MatSidenav;
     @ViewChild('lowerSideNav') lowerSideNav: MatSidenav;
@@ -39,6 +42,13 @@ export class CarSelectorComponent implements OnInit {
 
     constructor(private carSelectorService: CarSelectorService) {}
 
+    @HostListener('document:keyup', ['$event'])
+      handleKeyboardEvent(event: KeyboardEvent) { 
+        if(event.key == 'Escape'){
+          this.closeSideNavs();
+        }
+    }
+
     ngOnInit(): void {
         this.listElements = this.brands;
     }
@@ -49,7 +59,6 @@ export class CarSelectorComponent implements OnInit {
     }
 
     closeSideNavs(){
-        console.log("called");
         this.upperSideNav.close();
         this.lowerSideNav.close();
     }

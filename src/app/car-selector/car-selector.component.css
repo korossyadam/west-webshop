@@ -59,6 +59,15 @@
     top: 20px;
 }
 
+.closing-side {
+    position: fixed;
+    top: 0px;
+    left: 560px;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+
 .text-input {
 	position: absolute;
     top: 25%;
