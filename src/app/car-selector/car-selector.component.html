@@ -51,7 +51,7 @@
                 <div class="lower-menu">
                     <tbody>
                         <ng-container *ngFor="let element of listElements; let i = index">
-                            <tr><td *ngIf="stage < 1 && lastDecor != getNewDecor(element)" class="decor-row"><br>{{ lastDecor }}</td></tr>
+                            <tr><td *ngIf="stage < 2 && lastDecor != getNewDecor(element)" class="decor-row">{{ lastDecor }}</td></tr>
                             <tr><td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i" (click)="selectElements(element)">{{ element }}</a></td></tr>
                         </ng-container>
                     </tbody>
@@ -62,20 +62,15 @@
                     <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
                 </div>
 
-                
-
             </mat-sidenav>
 
             <!-- Actual main content -->
             <mat-sidenav-content>
-                
                 <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
             </mat-sidenav-content>
+
         </mat-sidenav-container>
 
-
-        
     </mat-sidenav-content> 
-
 </mat-sidenav-container>
 
