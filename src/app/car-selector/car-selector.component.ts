@@ -37,6 +37,7 @@ export class CarSelectorComponent implements OnInit {
     public obj1: Chassis[];
     public obj2: Car[];
     public stage: number = 0;
+    public lastDecor = '';
 
     public hoveredTextIndex = -1;
 
@@ -139,11 +140,9 @@ export class CarSelectorComponent implements OnInit {
   selectElements(selected: string): void {
     selected = selected.replace(/(\r\n|\n|\r)/gm, "");
 
-    console.log("called: " + selected);
-
+    // Chassis selection (stage 0 -> stage 1)
     if(this.stage == 0){
       this.carSelectorService.selectBrand(selected).subscribe(data => {
-        console.log(data.length);
         this.obj1 = data;
   
         this.listElements = [];
@@ -152,12 +151,13 @@ export class CarSelectorComponent implements OnInit {
           this.listElements[counter] = this.obj1[counter].name;
           counter += 1;
         }
-        console.log(selected);
+
         this.stage += 1;
       });
+    
+    // Engine selection (stage 1 -> stage 2)
     }else if(this.stage == 1){
       this.carSelectorService.selectChassis(selected).subscribe(data => {
-        console.log("length: " + data.length);
         this.obj2 = data;
   
         this.listElements = [];
@@ -166,11 +166,21 @@ export class CarSelectorComponent implements OnInit {
           this.listElements[counter] = this.obj2[counter].engine;
           counter += 1;
         }
-        console.log(selected);
+
         this.stage += 1;
       });
     }
     
+  }
+
+  getNewDecor(element: string): string {
+    if(this.stage == 0){
+      this.lastDecor = element.charAt(0);
+    }else {
+      this.lastDecor = element.split(' ')[0];
+    }
+
+    return this.lastDecor;
   }
 
 }

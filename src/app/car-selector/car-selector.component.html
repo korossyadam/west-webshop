@@ -3,18 +3,31 @@
 <mat-sidenav-container hasBackdrop="true" class="upper-sidenav-container">
    <mat-sidenav class="upper-sidenav" mode="over" disableClose="true" #upperSideNav>
       
-      <!-- Searchbars -->
+      <!-- Selectors -->
       <div class="upper-menu">
+
+         <!-- Brand select -->
          <div *ngIf="stage == 0">
+             <p class="main-label">Jármű kiválasztása</p>
             <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)"/>
          </div>
 
+         <!-- Chassis select -->
          <div *ngIf="stage == 1">
+            <button mat-icon-button class="back-icon">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <p class="main-label extra-push">Karosszéria kiválasztása</p>
             <input type="text" class="text-input"/>
             <input type="text" class="text-input"/>
          </div>
 
+         <!-- Engine select -->
          <div *ngIf="stage == 2">
+            <button mat-icon-button class="back-icon">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <p class="main-label extra-push">Motor kiválasztása</p>
             <input type="text" class="text-input"/>
             <input type="text" class="text-input"/>
             <input type="text" class="text-input"/>
@@ -37,9 +50,10 @@
                  <!-- *ngFor for every element in the list -->
                 <div class="lower-menu">
                     <tbody>
-                    <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
-                        <td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
-                    </tr>
+                        <ng-container *ngFor="let element of listElements; let i = index">
+                            <tr><td *ngIf="stage < 1 && lastDecor != getNewDecor(element)" class="decor-row"><br>{{ lastDecor }}</td></tr>
+                            <tr><td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i" (click)="selectElements(element)">{{ element }}</a></td></tr>
+                        </ng-container>
                     </tbody>
                 </div>
 

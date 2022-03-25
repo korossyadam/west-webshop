@@ -58,8 +58,9 @@
 
 .lower-menu {
     position: absolute;
-    width: 560px;
     top: 20px;
+    width: 560px;
+    margin-left: 50px;
 }
 
 .closing-side {
@@ -72,11 +73,38 @@
 
 .text-input {
 	position: absolute;
-    top: 25%;
+    top: 35%;
     left: 50%;
+    height: 45px;
     width: 90%;
-    margin-left: -45%;
-    font-size: 22px;
+    margin-left: -46%;
+    padding: 0px 5px;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.main-label {
+    position: fixed;
+    color: white;
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+    margin-left: 25px;
+}
+
+.extra-push {
+    margin-left: 60px;
+}
+
+.back-icon {
+    position: fixed;
+    color: white;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.vehicle-type-button {
+    position: absolute;
+    width: 112px;
 }
 
 .car-type-button {
@@ -86,11 +114,12 @@
 	color: #000000;
 	font-family: Arial;
 	font-size: 21px;
+    font-family: 'Roboto', sans-serif;
 	font-weight: bold;
     padding: 8px;
     text-decoration: none;
     padding-left: 0px;
-    width: 100%;
+    width: 400px;
 }
 
 .car-type-button:hover {
@@ -101,6 +130,12 @@
 .car-type-button:active {
 	position: relative;
 	top: 1px;
+}
+
+.decor-row {
+    font-size: 21px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #efefef;
 }
 
 .left-float {
