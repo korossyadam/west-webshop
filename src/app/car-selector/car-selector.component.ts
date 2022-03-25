@@ -13,7 +13,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class CarSelectorComponent implements OnInit {
 
-    @ViewChild('sidenav') sidenav: MatSidenav;
+    @ViewChild('upperSideNav') upperSideNav: MatSidenav;
+    @ViewChild('lowerSideNav') lowerSideNav: MatSidenav;
     
     public brands: string[] = ['ABARTH', 'ACURA', 'AIXAM', 
     'ALFA ROMEO', 'ANDORIA', 'ARO', 'ASTON MARTIN', 'AUDI', 'AUSTIN', 'AVIA',
@@ -43,7 +44,14 @@ export class CarSelectorComponent implements OnInit {
     }
 
     openSideNav(){
-        this.sidenav.toggle();
+        this.upperSideNav.toggle();
+        this.lowerSideNav.toggle();
+    }
+
+    closeSideNavs(){
+        console.log("called");
+        this.upperSideNav.close();
+        this.lowerSideNav.close();
     }
 
     reAddBrands(inputEvent: any): void {
@@ -83,7 +91,6 @@ export class CarSelectorComponent implements OnInit {
     
   }
   */
-
   
   addCars(): void {
     fetch('assets/cars.txt').then(response => response.text()).then(data => {

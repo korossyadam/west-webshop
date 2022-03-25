@@ -1,10 +1,10 @@
 
-<!-- Sidenav for vehicle search -->
-<mat-sidenav-container hasBackdrop="true" class="sidenav-container">
-   <mat-sidenav class="sidenav" mode="push" #sidenav>
+<!-- Upper SideNav for searchbars -->
+<mat-sidenav-container hasBackdrop="true" class="upper-sidenav-container" (close)="closeSideNavs()">
+   <mat-sidenav class="upper-sidenav" mode="over" (click)="closeSideNavs()" #upperSideNav>
       
       <!-- Searchbars -->
-      <div>
+      <div class="upper-menu">
          <div *ngIf="stage == 0">
             <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)"/>
          </div>
@@ -22,27 +22,40 @@
       </div>
 
       <br>
-
-      <!-- *ngFor for every element in the list -->
-      <div class = "inline">
-         <tbody>
-            <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
-               <td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
-
-            </tr>
-         </tbody>
-      </div>
-
-      <!-- Display hovered vehicle image -->
-      <div *ngIf="stage == 1" class = "inline">
-         <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
-      </div>
-
+      
    </mat-sidenav>
 
-   <!-- Main content -->
+   <!-- Upper SideNav main content -->
     <mat-sidenav-content>
-        <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
+
+        <!-- Lower SideNav for listElements -->
+        <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container" (close)="closeSideNavs()">
+            <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" (close)="closeSideNavs()" #lowerSideNav>
+
+                 <!-- *ngFor for every element in the list -->
+                <div class="lower-menu">
+                    <tbody>
+                    <tr *ngFor="let element of listElements; let i = index" (click)="selectElements(element)">
+                        <td><a class="car-type-button inline" (mouseover)="hoveredTextIndex = i">{{ element }}</a></td>
+                    </tr>
+                    </tbody>
+                </div>
+
+                <!-- Display hovered vehicle image -->
+                <div *ngIf="stage == 1" class = "inline">
+                    <img src="{{ obj1[hoveredTextIndex].imgurl }}" class = "img" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
+                </div>
+
+            </mat-sidenav>
+
+            <!-- Actual main content -->
+            <mat-sidenav-content>
+                <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+
+
+        
     </mat-sidenav-content> 
 
 </mat-sidenav-container>
