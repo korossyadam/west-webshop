@@ -7,18 +7,20 @@ export class Car {
     public brand: string;
     public chassis: string;
     public engine: string;
+    public engineCode: string;
     public kw: string;
     public hp: string;
     public displacement: string;
     public year: string;
     public fuel: string;
 
-    constructor(carIndex: number, chassisIndex: number, brand: string, chassis: string, engine: string, kw: string, hp: string, displacement: string, year: string, fuel: string){
+    constructor(carIndex: number, chassisIndex: number, brand: string, chassis: string, engine: string, engineCode: string, kw: string, hp: string, displacement: string, year: string, fuel: string){
         this.carIndex = carIndex;
         this.chassisIndex = chassisIndex;
         this.brand = brand;
         this.chassis = chassis;
         this.engine = engine;
+        this.engineCode = engineCode;
         this.kw = kw;
         this.hp = hp;
         this.displacement = displacement;

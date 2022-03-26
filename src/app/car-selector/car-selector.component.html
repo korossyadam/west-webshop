@@ -56,7 +56,7 @@
                 <div class="lower-menu">
                     <tbody>
                         <ng-container *ngFor="let element of listElements; let i = index">
-                            <tr><td *ngIf="stage < 2 && lastDecor != getNewDecor(element)" class="decor-row">{{ lastDecor }}</td></tr>
+                            <tr><td *ngIf="lastDecor != getNewDecor(element)" class="decor-row">{{ lastDecor }}</td></tr>
                             <tr><td><a id={{i}} class="car-type-button inline" (mouseover)="setHoveredIndex(i)" (click)="selectElements(element)">{{ element }}</a></td></tr>
 
                         </ng-container>

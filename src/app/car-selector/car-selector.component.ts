@@ -54,7 +54,6 @@ export class CarSelectorComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log("onitit");
         this.listElements = this.brands;
     }
 
@@ -113,7 +112,7 @@ export class CarSelectorComponent implements OnInit {
           this.listElements = [];
           var counter = 0;
           for(var objec of this.obj2){
-            this.listElements[counter] = this.obj2[counter].engine;
+            this.listElements[counter] = this.obj2[counter].engine + "\t\t" + this.obj2[counter].engineCode;
             counter += 1;
           }
 
@@ -162,66 +161,65 @@ export class CarSelectorComponent implements OnInit {
     this.imgCardStyle = {'position': 'absolute', 'left': '530px', 'top': + Math.min(imgCardHeight-73, 757) + 'px', 'width': '220px', 'height': '145px', 'z-index': '9999999'};
   }
 
-}
-
   /*
   addChassis(): void {
     fetch('assets/chassis.txt').then(response => response.text()).then(data => {
-      var index = 0;
-      var lines = data.split('\n');
-      while(index < 305){
-        var chassisIndex = lines[index];
-        var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
-        var name = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
-        var imgurl = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
-        var chassy = new Chassis(parseInt(chassisIndex), brand, name, imgurl);
-        console.log(chassy);
-        //this.networkProductService.add('NetworkProduct', Object.assign({}, new Product(uid,  this.HrefControl.value, 
+    var index = 0;
+    var lines = data.split('\n');
+    while(index < 1782){
+          var chassisIndex = lines[index];
+          var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
+          var name = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
+          var year = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
+          var imgurl = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
+          var chassy = new Chassis(parseInt(chassisIndex), brand, name, year, imgurl);
+          console.log(chassy);
 
-        this.carSelectorService.add('chassis', Object.assign({}, chassy));
-
-        index += 5;
-      }
+          this.carSelectorService.addChassis('chassis', Object.assign({}, chassy));
+          index += 6;
+        }
+        
+      });
       
-      //console.log(data);
-    });
-    
-  }
-  */
+    }
+    */
 
     /*
-  addCars(): void {
-    fetch('assets/cars.txt').then(response => response.text()).then(data => {
-      var index = 0;
-      var lines = data.split('\n');
-      while(index < 911){
-        var carIndex = lines[index];
-        var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
-        var chassisIndex = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
-        var chassis = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
-        var engine = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
-        var kw = engine.split(" ")[lines.length-3];
-        var hp = engine.split(" ")[lines.length-2];
-        var displacement = engine.split(" ")[lines.length-1];
-        var fuel = lines[index+5].replace(/(\r\n|\n|\r)/gm, "");
-        var year = "year";
+    addCars(): void {
+      fetch('assets/cars.txt').then(response => response.text()).then(data => {
+        var index = 0;
+        var lines = data.split('\n');
+        while(index < 45240){
+          var carIndex = lines[index];
+          var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
+          var chassisIndex = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
+          var chassis = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
+          var engine = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
+          var engineCode = lines[index+5].replace(/(\r\n|\n|\r)/gm, "");
+          var year = lines[index+6].replace(/(\r\n|\n|\r)/gm, "");
+          var kw = lines[index+7].replace(/(\r\n|\n|\r)/gm, "");
+          var hp = lines[index+8].replace(/(\r\n|\n|\r)/gm, "");
+          var displacement = lines[index+9].replace(/(\r\n|\n|\r)/gm, "");
+          var fuel = lines[index+10].replace(/(\r\n|\n|\r)/gm, "");
 
-
-        //var name = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
-        //var imgurl = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
-        //var chassy = new Chassis(parseInt(chassisIndex), brand, name, imgurl);
-        var car = new Car(parseInt(carIndex), parseInt(chassisIndex), brand, chassis, engine, kw, hp, displacement, year, fuel);
-        //console.log(chassy);
-        //this.networkProductService.add('NetworkProduct', Object.assign({}, new Product(uid,  this.HrefControl.value, 
-
-        this.carSelectorService.addCars('cars', Object.assign({}, car));
-
-        index += 7;
-      }
+          var car = new Car(parseInt(carIndex), parseInt(chassisIndex), brand, chassis, engine, engineCode, kw, hp, displacement, year, fuel);
+          console.log(car);
+  
+          this.carSelectorService.addCars('cars', Object.assign({}, car));
+          index += 12;
+        }
+        
+      });
       
-      //console.log(data);
-    });
-    
-    
-  }
+    }
+    */
+
+}
+
+  
+
+  
+
+    /*
+
   */
