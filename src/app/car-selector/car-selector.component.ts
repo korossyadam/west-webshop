@@ -62,12 +62,15 @@ export class CarSelectorComponent implements OnInit {
         this.upperSideNav.toggle();
         this.lowerSideNav.toggle();
         this.hoveredTextIndex = -1;
+        this.stage = 0;
+        this.listElements = this.brands;
     }
 
     // Closes both lower and upper sidenavs
     closeSideNavs(){
         this.upperSideNav.close();
         this.lowerSideNav.close();
+        this.hoveredTextIndex = -1;
     }
 
     // This method is called every time a character is typed into the brand search bar
@@ -149,9 +152,6 @@ export class CarSelectorComponent implements OnInit {
 
   // Change mat-card Y position depending on hovered listElement position
   setHoveredIndex(i: number): void {
-    if(this.stage < 1)
-      return;
-      
     this.hoveredTextIndex = i;
     
     const element = document.getElementById(this.hoveredTextIndex + '');

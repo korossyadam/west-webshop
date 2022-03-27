@@ -106,24 +106,16 @@
 }
 
 .car-type-button {
-    display: inline-block;
-    width: 500px;
+    display: inline-table;
+    width: 250px;
 	font-family: Arial;
-	font-size: 21px;
+	font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    text-decoration: none;
     background-color: #ffffff;
 	color: #000000;
-    margin-left: 8px;
-    padding: 10px 0px;
-    padding-left: 0px;
+    padding: 10px 25px;
     cursor: pointer;
     
-}
-
-.car-type-button:hover {
-   background-color: #1b2936;
-	color: #ffffff;
 }
 
 .car-type-button:active {
@@ -131,14 +123,36 @@
 	top: 1px;
 }
 
+.hovered {
+   background-color: #1b2936;
+	color: #ffffff;
+}
+
 .decor-row {
+    width: 500px;
     font-size: 24px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     background-color: #efefef;
+    color: #6e6e6e;
     padding-left: 10px;
+}
+
+
+.half-width {
+    width: 48%;
+    max-width: 48%;
+}
+
+.fifth-width {
+    width: 25%;
+    max-width: 25%;
 }
 
 .left-float {
 	float: left;
+}
+
+.right-float {
+    float: right;
 }

@@ -55,11 +55,55 @@
                  <!-- *ngFor for every element in the list -->
                 <div class="lower-menu">
                     <tbody>
-                        <ng-container *ngFor="let element of listElements; let i = index">
-                            <tr><td *ngIf="lastDecor != getNewDecor(element)" class="decor-row">{{ lastDecor }}</td></tr>
-                            <tr><td><a id={{i}} class="car-type-button inline" (mouseover)="setHoveredIndex(i)" (click)="selectElements(element)">{{ element }}</a></td></tr>
 
-                        </ng-container>
+                        <!-- Engine selector-->
+                        <div *ngIf="stage == 0">
+                            <ng-container *ngFor="let element of listElements; let i = index">
+                                <tr><td *ngIf="lastDecor != getNewDecor(element)" class="decor-row">{{ lastDecor }}</td></tr>
+                                <tr>
+                                    <td><a id={{i}} class="car-type-button" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(element)">{{ element }}</a></td>
+                                </tr>
+    
+                            </ng-container>
+                        </div>
+
+                        <!-- Chassis selector -->
+                        <div *ngIf="stage == 1">
+                            <ng-container *ngFor="let element of listElements; let i = index">
+                                <tr *ngIf="lastDecor != getNewDecor(element)">
+                                    <td class="decor-row half-width">{{ lastDecor }}</td>
+                                    <td class="decor-row half-width">{{ lastDecor }}</td>
+                                </tr>
+                                <tr>
+                                    <td><a id={{i}} class="car-type-button" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(element)">{{ element }}</a></td>
+                                    <td class="car-type-button right-float" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ obj1?.[i]?.year }}</td>
+                                </tr>
+    
+                            </ng-container>
+                        </div>
+
+                        <!-- Engine selector-->
+                        <div *ngIf="stage == 2">
+                            <ng-container *ngFor="let element of listElements; let i = index">
+                                <tr *ngIf="lastDecor != getNewDecor(element)">
+                                    <td class="decor-row fifth-width">{{ lastDecor }}</td>
+                                    <td class="decor-row fifth-width">{{ lastDecor }}</td>
+                                    <td class="decor-row fifth-width">{{ lastDecor }}</td>
+                                    <td class="decor-row fifth-width">{{ lastDecor }}</td>
+                                    <td class="decor-row fifth-width">{{ lastDecor }}</td>
+                                </tr>
+                                <tr>
+                                    <td><a id={{i}} class="car-type-button fifth-width inline-block"  [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(element)">{{ element }}</a></td>
+                                    <td class="car-type-button fifth-width inline-block" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ obj2?.[i]?.year }}</td>
+                                    <td class="car-type-button fifth-width inline-block" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ obj2?.[i]?.kw }}</td>
+                                    <td class="car-type-button fifth-width inline-block" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ obj2?.[i]?.hp }}</td>
+                                    <td class="car-type-button fifth-width inline-block" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ obj2?.[i]?.displacement }}</td>
+                                </tr>
+    
+                            </ng-container>
+                        </div>
+
+                        
                     </tbody>
                 </div>
 
