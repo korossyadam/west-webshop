@@ -7,10 +7,10 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
-  { path: 'main', component: HomeComponent },
-  //{ path: 'carsearch', component: CarSelectorComponent},
-  { path: 'profile', component: ProfileComponent },
-  { path: 'login', component: LoginComponent }
+    { path: '', redirectTo: '/main', pathMatch: 'full' },
+    { path: 'main', component: HomeComponent },
+    { path: 'profile', component: ProfileComponent },
+    { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({
