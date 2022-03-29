@@ -115,7 +115,7 @@ export class CarSelectorComponent implements OnInit {
           this.listElements = [];
           var counter = 0;
           for(var objec of this.obj2){
-            this.listElements[counter] = this.obj2[counter].engine + "\t\t" + this.obj2[counter].engineCode;
+            this.listElements[counter] = this.obj2[counter].engine;
             counter += 1;
           }
 
@@ -158,7 +158,7 @@ export class CarSelectorComponent implements OnInit {
     var offset = element!.getBoundingClientRect();
     var imgCardHeight = offset.top;
 
-    this.imgCardStyle = {'position': 'absolute', 'left': '530px', 'top': + Math.min(imgCardHeight-73, 757) + 'px', 'width': '220px', 'height': '145px', 'z-index': '9999999'};
+    this.imgCardStyle = {'position': 'absolute', 'left': '560px', 'top': + Math.min(imgCardHeight-73, 757) + 'px', 'width': '220px', 'height': '145px', 'z-index': '9999999'};
   }
 
   /*

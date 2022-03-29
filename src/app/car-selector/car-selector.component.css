@@ -50,16 +50,19 @@
     width: 560px;
     margin-right: 100px;
     margin-bottom: 180px;
-    padding: 10px;
     padding-right: 100px;
     background-color: white;
 }
 
 .lower-menu {
     position: absolute;
-    top: 20px;
     width: 560px;
     margin-left: 10px;
+}
+
+.framed {
+    padding: 10px;
+    top: 20px;
 }
 
 .closing-side {
@@ -106,14 +109,14 @@
 }
 
 .car-type-button {
-    display: inline-table;
-    width: 250px;
+    display: table-cell;
+    width: 500px;
 	font-family: Arial;
 	font-size: 14px;
     font-family: 'Roboto', sans-serif;
-    background-color: #ffffff;
 	color: #000000;
-    padding: 10px 25px;
+    padding: 10px;
+    margin: 5px;
     cursor: pointer;
     
 }
@@ -124,29 +127,80 @@
 }
 
 .hovered {
-   background-color: #1b2936;
-	color: #ffffff;
+    background-color: #1b2936;
+    color: #ffffff;
 }
 
 .decor-row {
     width: 500px;
-    font-size: 24px;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
     font-weight: bold;
     background-color: #efefef;
     color: #6e6e6e;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 10px;
+}
+
+.fixed_1 {
+    position: fixed;
+    top: 200px;
+    left: 20px;
+    padding-top: 10px;
+    padding-right: 418px;
+    margin: 0px;
+    padding-bottom: 9px;
+}
+
+.fixed_2 {
+    position: fixed;
+    top: 200px;
+    padding-top: 10px;
+    left: 119px;
+}
+
+.fixed_3 {
+    position: fixed;
+    top: 200px;
+    padding-top: 10px;
+    left: 256px;
+    padding-bottom: 9px;
+}
+
+.fixed_4 {
+    position: fixed;
+    top: 200px;
+    padding-top: 10px;
+    left: 361px;
+    padding-bottom: 9px;
+}
+
+.fixed_5 {
+    position: fixed;
+    top: 200px;
+    padding-top: 6px;
+    padding-right: 0px;
+    left: 461px;
+    background-color: transparent;
+}
+
+.engine-code {
+    font-size: 12px;
+    color: #6e6e6e;
 }
 
 
 .half-width {
-    width: 48%;
-    max-width: 48%;
+    width: 240px;
 }
 
 .fifth-width {
-    width: 25%;
-    max-width: 25%;
+    width: 82px;
+}
+
+.center {
+    text-align: center;
 }
 
 .left-float {
