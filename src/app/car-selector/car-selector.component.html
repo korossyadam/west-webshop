@@ -28,7 +28,7 @@
             <input type="text" class="text-input" placeholder="Pl. Civic, Astra, Golf, E46 stb." #type (input)="reAddChassis(type.value, year.value)"/>
 
             <!-- Year search input -->
-            <p class="label-small label-year">ÉV</p>
+            <p class="label-small year">ÉV</p>
             <input type="text" class="text-input-small year" placeholder="Pl. 2012" #year (input)="reAddChassis(type.value, year.value)"/>
 
          </div>
@@ -44,26 +44,30 @@
             <input type="text" class="text-input" placeholder="Pl. AVF, Z14XE, 939 A2.000 stb." #engine (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)"/>
 
             <!-- Year search input -->
-            <p class="label-small label-year">ÉV</p>
+            <p class="label-small year">ÉV</p>
             <input type="text" class="text-input-small year" placeholder="Pl. 2012" #year (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)"/>
 
             <!-- Fuel search input -->
-            <p class="label-small label-fuel">ÜZEMANYAG</p>
-            <select class="select-input-fuel" #fuel>
+            <p class="label-small fuel">ÜZEMANYAG</p>
+            <select class="select-input-fuel" #fuel (change)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)">
                 <option value="all">Összes</option>
-                <option value="benzin">Benzin</option>
-                <option value="dizel">Dízel</option>
-                <option value="hybrid">Hybrid</option>
-                <option value="elektromos">Elektromos</option>
-                <option value="benzin_gaz">Benzin/Gáz</option>
+                <option value="Benzin">Benzin</option>
+                <option value="Dízel">Dízel</option>
+                <option value="Benzin/elektromos">Elektromos - Benzin</option>
+                <option value="Dízel/elektromos">Elektromos - Dízel</option>
+                <option value="villamos">Elektromos</option>
+                <option value="Benzin/Földgáz (CNG)">Benzin - Földgáz (CNG)</option>
+                <option value="Benzin/Autógáz (LPG)">Benzin - Autógáz (LPG)</option>
+                <option value="Benzin/Etanol">Benzin - Etanol</option>
+                <option value="Etanol">Etanol</option>
             </select>
 
             <!-- Performance (KW) search input -->
-            <p class="label-small label-kw">KW</p>
+            <p class="label-small kw">KW</p>
             <input type="text" class="text-input-small kw" placeholder="Pl. 75" #kw (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)"/>
 
             <!-- Performance (HP) search input -->
-            <p class="label-small label-hp">LE</p>
+            <p class="label-small hp">LE</p>
             <input type="text" class="text-input-small hp" placeholder="Pl. 101" #hp (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)"/>
 
          </div>
@@ -121,9 +125,9 @@
                             <td class="decor-row fifth-width fixed_5">CM<sup>3</sup></td>
 
                             <div class="framed">
-                                <ng-container *ngFor="let element of listElements; let i = index">
+                                <ng-container *ngFor="let car of carsActive; let i = index">
                                 
-                                    <tr *ngIf="lastDecor != getNewDecor(element)">
+                                    <tr *ngIf="lastDecor != getNewDecor(car.engine)">
                                         <td class="decor-row fifth-width">{{ lastDecor }}</td>
                                         <td class="decor-row fifth-width"></td>
                                         <td class="decor-row fifth-width"></td>
@@ -131,7 +135,7 @@
                                         <td class="decor-row fifth-width"></td>
                                     </tr>
                                     <tr>
-                                        <td id={{i}} class="car-type-button fifth-width inline-block"  [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(element)">{{ element }}<span class="engine-code"><br>{{ carsActive?.[i]?.engineCode }}</span></td>
+                                        <td id={{i}} class="car-type-button fifth-width inline-block"  [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(car.engine)">{{ car.engine }}<span class="engine-code"><br>{{ carsActive?.[i]?.engineCode }}</span></td>
                                         <td class="car-type-button fifth-width inline-block" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.year }}</td>
                                         <td class="car-type-button fifth-width inline-block center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.kw }}</td>
                                         <td class="car-type-button fifth-width inline-block center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.hp }}</td>

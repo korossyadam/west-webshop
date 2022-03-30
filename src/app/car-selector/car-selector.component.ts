@@ -107,7 +107,6 @@ export class CarSelectorComponent implements OnInit {
             // Name check
             if(!name.toUpperCase().startsWith(type.toUpperCase()))
                 continue;
-            
                 
             // The year the chassis started being produced
             var yearStart = parseInt(yearRange.split("/")[0]);
@@ -126,10 +125,72 @@ export class CarSelectorComponent implements OnInit {
                 }
             }
         }
+
+        // Force change detection to avoid ERROR NG0100
+        this.cdr.detectChanges();
     }
 
     reAddCars(engine: string, year: string, kw: string, hp: string, fuel: string): void {
+        if((parseInt(year) < 1000 || parseInt(year) > 10000) && year != "")
+            return;
 
+        this.carsActive = [];
+        this.hoveredTextIndex = -1;
+        var counter = 0;
+
+        // Check for every car whether they should be displayed in the list
+        for(var i = 0; i < this.cars.length; i++){
+            var c: Car = this.cars[i]
+            
+            engine = engine.replace(/\s/g, "");
+            var yearRange = c.year;
+
+            // Engine Code check
+            var engineCodes = c.engineCode.split(",");
+            var exists = false;
+            for(var j = 0; j < engineCodes.length; j++){
+                engineCodes[j] = engineCodes[j].replace(/\s/g, "");
+                if(engineCodes[j].toUpperCase().startsWith(engine.toUpperCase()))
+                    exists = true;
+            }
+
+            // If none of the engine codes are present, skip this car
+            if(!exists)
+                continue;
+
+            // Performance check: KW - allow +-5 error
+            var carKw = c.kw;
+            if(kw != "" && (parseInt(carKw)-5 > parseInt(kw) || parseInt(carKw)+5 < parseInt(kw)))
+                continue;
+
+            // Performance check: HP - allow +-7 error
+            var carHp = c.hp;
+            if(hp != "" && (parseInt(carHp)-7 > parseInt(hp) || parseInt(carHp)+7 < parseInt(hp)))
+                continue;
+
+            if(fuel != "all" && c.fuel != fuel)
+                continue;
+                
+            // The year the car started being produced
+            var yearStart = parseInt(yearRange.split("/")[0]);
+
+            // This means the car is still being produced as of today
+            if(yearRange.split("-").length == 3){
+                if(yearStart <= parseInt(year) || year == ""){
+                    this.carsActive[counter] = c;
+                    counter += 1;
+                }
+            }else {
+                var yearEnd = parseInt(yearRange.split("/")[1].split(" ")[2]);
+                if((yearStart <= parseInt(year) && yearEnd >= parseInt(year)) || year == ""){
+                    this.carsActive[counter] = this.cars[i];
+                    counter += 1;
+                }
+            }
+        }
+
+        // Force change detection to avoid ERROR NG0100
+        this.cdr.detectChanges();
     }
 
     // This method calls carSelectorService to check for cars in searched brand
