@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class CarSelectorComponent implements OnInit {
 
+    // To access sidenavs from TS
     @ViewChild('upperSideNav') upperSideNav: MatSidenav;
     @ViewChild('lowerSideNav') lowerSideNav: MatSidenav;
     
@@ -31,23 +32,29 @@ export class CarSelectorComponent implements OnInit {
     'SUBARU', 'SUZUKI', 'TATA', 'TESLA', 'TOYOTA', 'TRABANT', 'UAZ', 'VOLVO', 'VW',
     'WARTBURG', 'ZASTAVA', 'ZAZ'];
 
+    // Query results are stored in these arrays
     public listElements: string[];
     public chassis: Chassis[];
     public chassisActive: Chassis[];
     public cars: Car[];
     public carsActive: Car[];
+
+    // Stage represents the stage of vehicle search, (ex. 1 means brand is already selected, chassis is not)
     public stage: number = 0;
+
+    // Decorative rows in list
     public lastSelectedBrand: string;
     public lastSelectedChassis: string;
     public lastDecor = '';
 
+    // Image of selected chassis
     public imgCardStyle = {'position': 'absolute', 'top': '50px', 'left': '500px', 'width': '150px', 'height': '200px', 'z-index': '9999999'};
     public imgCardHeight = 0;
-
     public hoveredTextIndex = -1;
 
     constructor(private carSelectorService: CarSelectorService, private cdr: ChangeDetectorRef) {}
 
+    // KeyBoardListener - we use this to close all sidenavs with ESCAPE
     @HostListener('document:keyup', ['$event'])
       handleKeyboardEvent(event: KeyboardEvent) { 
         if(event.key == 'Escape'){
@@ -89,6 +96,7 @@ export class CarSelectorComponent implements OnInit {
         }
     }
 
+    // This method is called every time a character is typed into the chassis search bar
     reAddChassis(type: string, year: string): void {
         if((parseInt(year) < 1000 || parseInt(year) > 10000) && year != "")
             return;
@@ -100,15 +108,17 @@ export class CarSelectorComponent implements OnInit {
         // Check for every chassis whether they should be displayed in the list
         for(var i = 0; i < this.chassis.length; i++){
             var c: Chassis = this.chassis[i];
+
+            // Remove all whitespaces to make search more accurate
             var name = c.name.replace(/\s/g, "");
             type = type.replace(/\s/g, "");
-            var yearRange = c.year;
 
             // Name check
             if(!name.toUpperCase().startsWith(type.toUpperCase()))
                 continue;
                 
             // The year the chassis started being produced
+            var yearRange = c.year;
             var yearStart = parseInt(yearRange.split("/")[0]);
 
             // This means the chassis is still being produced as of today
@@ -130,6 +140,7 @@ export class CarSelectorComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
+    // This method is called every time a character is typed into the engine code search bar
     reAddCars(engine: string, year: string, kw: string, hp: string, fuel: string): void {
         if((parseInt(year) < 1000 || parseInt(year) > 10000) && year != "")
             return;
@@ -142,8 +153,8 @@ export class CarSelectorComponent implements OnInit {
         for(var i = 0; i < this.cars.length; i++){
             var c: Car = this.cars[i]
             
+            // Remove all whitespaces to make search more accurate
             engine = engine.replace(/\s/g, "");
-            var yearRange = c.year;
 
             // Engine Code check
             var engineCodes = c.engineCode.split(",");
@@ -168,10 +179,12 @@ export class CarSelectorComponent implements OnInit {
             if(hp != "" && (parseInt(carHp)-7 > parseInt(hp) || parseInt(carHp)+7 < parseInt(hp)))
                 continue;
 
+            // Remove all cars with not appropriate fuel type, except when 'all' is selected
             if(fuel != "all" && c.fuel != fuel)
                 continue;
                 
             // The year the car started being produced
+            var yearRange = c.year;
             var yearStart = parseInt(yearRange.split("/")[0]);
 
             // This means the car is still being produced as of today

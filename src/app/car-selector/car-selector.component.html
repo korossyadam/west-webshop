@@ -19,12 +19,17 @@
 
          <!-- Chassis select -->
          <div *ngIf="stage == 1">
+
+            <!-- Back button -->
             <button mat-icon-button class="back-icon" (click)="back()">
                 <mat-icon>arrow_back_ios</mat-icon>
             </button>
 
-            <!-- Type search input -->
+            <!-- Main text label -->
             <p class="main-label extra-push">Karosszéria kiválasztása</p>
+
+            <!-- Type search input -->
+            
             <input type="text" class="text-input" placeholder="Pl. Civic, Astra, Golf, E46 stb." #type (input)="reAddChassis(type.value, year.value)"/>
 
             <!-- Year search input -->
@@ -35,9 +40,13 @@
 
          <!-- Engine select -->
          <div *ngIf="stage == 2">
+
+            <!-- Back button -->
             <button mat-icon-button class="back-icon" (click)="back()">
                 <mat-icon>arrow_back_ios</mat-icon>
             </button>
+
+            <!-- Main text label -->
             <p class="main-label extra-push">Motorkód kiválasztása</p>
 
             <!-- Engine code search input -->
@@ -73,6 +82,7 @@
          </div>
       </div>
 
+      <!-- This div represents the parts of webapp that is not the sidenav, therefore allowing closing the sidenav with a click -->
       <div class="closing-side" (click)="closeSideNavs()"></div>
 
       <br>
@@ -108,8 +118,8 @@
                                         <td class="decor-row half-width"></td>
                                     </tr>
                                     <tr>
-                                        <td><a id={{i}} class="car-type-button inline-block half-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(chassis.name)">{{ chassis.name }}</a></td>
-                                        <td class="car-type-button inline-block half-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(chassis.name)">{{ chassis.year }}</td>
+                                        <td><a id={{i}} class="car-type-button half-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(chassis.name)">{{ chassis.name }}</a></td>
+                                        <td class="car-type-button half-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(chassis.name)">{{ chassis.year }}</td>
                                     </tr>
         
                                 </ng-container>
@@ -135,11 +145,11 @@
                                         <td class="decor-row fifth-width"></td>
                                     </tr>
                                     <tr>
-                                        <td id={{i}} class="car-type-button fifth-width inline-block"  [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(car.engine)">{{ car.engine }}<span class="engine-code"><br>{{ carsActive?.[i]?.engineCode }}</span></td>
-                                        <td class="car-type-button fifth-width inline-block" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.year }}</td>
-                                        <td class="car-type-button fifth-width inline-block center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.kw }}</td>
-                                        <td class="car-type-button fifth-width inline-block center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.hp }}</td>
-                                        <td class="car-type-button fifth-width inline-block center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.displacement }}</td>
+                                        <td id={{i}} class="car-type-button fifth-width"  [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(car.engine)">{{ car.engine }}<span class="engine-code"><br>{{ carsActive?.[i]?.engineCode }}</span></td>
+                                        <td class="car-type-button fifth-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.year }}</td>
+                                        <td class="car-type-button fifth-width center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.kw }}</td>
+                                        <td class="car-type-button fifth-width center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.hp }}</td>
+                                        <td class="car-type-button fifth-width center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.displacement }}</td>
                                     </tr>
         
                                 </ng-container>
@@ -149,9 +159,8 @@
                     </tbody>
                 </div>
 
-                 
-
             </mat-sidenav>
+
             <!-- Actual main content -->
             <mat-sidenav-content>
                 <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
