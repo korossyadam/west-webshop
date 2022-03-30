@@ -76,21 +76,76 @@
 .text-input {
 	position: absolute;
     top: 35%;
-    left: 50%;
+    left: 23px;
     height: 45px;
-    width: 90%;
-    margin-left: -46%;
+    width: 500px;
     padding: 0px 5px;
-    font-size: 24px;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.text-input-small {
+    position: absolute;
+    top: 155px;
+    height: 30px;
+    width: 100px;
+    padding: 0px 5px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.year {
+    left: 23px;
+}
+
+.kw {
+    left: 288px;
+}
+
+.hp {
+    left: 421px;
+}
+
+.select-input-fuel {
+    position: absolute;
+    top: 155px;
+    left: 156px;
+    height: 34px;
+    width: 113px;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
 }
 
 .main-label {
     position: fixed;
     color: white;
-    font-size: 24px;
+    font-size: 22px;
     font-family: 'Roboto', sans-serif;
     margin-left: 25px;
+}
+
+.label-small {
+    position: absolute;
+    top: 122px;
+    color: white;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.label-year {
+    left: 23px;
+}
+
+.label-fuel {
+    left: 156px;
+}
+
+.label-kw {
+    left: 288px;
+}
+
+.label-hp {
+    left: 421px;
 }
 
 .extra-push {

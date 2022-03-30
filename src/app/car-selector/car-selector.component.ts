@@ -32,8 +32,10 @@ export class CarSelectorComponent implements OnInit {
     'WARTBURG', 'ZASTAVA', 'ZAZ'];
 
     public listElements: string[];
-    public obj1: Chassis[];
-    public obj2: Car[];
+    public chassis: Chassis[];
+    public chassisActive: Chassis[];
+    public cars: Car[];
+    public carsActive: Car[];
     public stage: number = 0;
     public lastSelectedBrand: string;
     public lastSelectedChassis: string;
@@ -87,6 +89,49 @@ export class CarSelectorComponent implements OnInit {
         }
     }
 
+    reAddChassis(type: string, year: string): void {
+        if((parseInt(year) < 1000 || parseInt(year) > 10000) && year != "")
+            return;
+
+        this.chassisActive = [];
+        this.hoveredTextIndex = -1;
+        var counter = 0;
+
+        // Check for every chassis whether they should be displayed in the list
+        for(var i = 0; i < this.chassis.length; i++){
+            var c: Chassis = this.chassis[i];
+            var name = c.name.replace(/\s/g, "");
+            type = type.replace(/\s/g, "");
+            var yearRange = c.year;
+
+            // Name check
+            if(!name.toUpperCase().startsWith(type.toUpperCase()))
+                continue;
+            
+                
+            // The year the chassis started being produced
+            var yearStart = parseInt(yearRange.split("/")[0]);
+
+            // This means the chassis is still being produced as of today
+            if(yearRange.split("-").length == 3){
+                if(yearStart <= parseInt(year) || year == ""){
+                    this.chassisActive[counter] = c;
+                    counter += 1;
+                }
+            }else {
+                var yearEnd = parseInt(yearRange.split("/")[1].split(" ")[2]);
+                if((yearStart <= parseInt(year) && yearEnd >= parseInt(year)) || year == ""){
+                    this.chassisActive[counter] = this.chassis[i];
+                    counter += 1;
+                }
+            }
+        }
+    }
+
+    reAddCars(engine: string, year: string, kw: string, hp: string, fuel: string): void {
+
+    }
+
     // This method calls carSelectorService to check for cars in searched brand
     selectElements(selected: string): void {
       selected = selected.replace(/(\r\n|\n|\r)/gm, "");
@@ -94,12 +139,13 @@ export class CarSelectorComponent implements OnInit {
       // Chassis selection (stage 0 -> stage 1)
       if(this.stage == 0){
         this.carSelectorService.selectBrand(selected).subscribe(data => {
-          this.obj1 = data;
+          this.chassis = data;
+          this.chassisActive = this.chassis;
   
           this.listElements = [];
           var counter = 0;
-          for(var objec of this.obj1){
-            this.listElements[counter] = this.obj1[counter].name;
+          for(var objec of this.chassis){
+            this.listElements[counter] = this.chassis[counter].name;
             counter += 1;
           }
 
@@ -110,12 +156,13 @@ export class CarSelectorComponent implements OnInit {
       // Engine selection (stage 1 -> stage 2)
       }else if(this.stage == 1){
         this.carSelectorService.selectChassis(selected).subscribe(data => {
-          this.obj2 = data;
+          this.cars = data;
+          this.carsActive = this.cars;
           
           this.listElements = [];
           var counter = 0;
-          for(var objec of this.obj2){
-            this.listElements[counter] = this.obj2[counter].engine;
+          for(var objec of this.cars){
+            this.listElements[counter] = this.cars[counter].engine;
             counter += 1;
           }
 
