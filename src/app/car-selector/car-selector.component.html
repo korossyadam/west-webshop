@@ -11,6 +11,11 @@
       <!-- Selectors -->
       <div class="upper-menu">
 
+        <!-- Close button -->
+        <button mat-icon-button class="close-icon" (click)="closeSideNavs()">
+            <mat-icon>close</mat-icon>
+        </button>
+
          <!-- Brand select -->
          <div *ngIf="stage == 0">
              <p class="main-label">Jármű kiválasztása</p>

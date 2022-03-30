@@ -125,6 +125,7 @@
     color: white;
     font-size: 22px;
     font-family: 'Roboto', sans-serif;
+    margin-top: 26px;
     margin-left: 25px;
 }
 
@@ -137,7 +138,14 @@
 }
 
 .extra-push {
-    margin-left: 60px;
+    margin-left: 55px;
+}
+
+.close-icon {
+    position: fixed;
+    color: #6e6e6e;
+    margin-top: 18px;
+    margin-left: 505px;
 }
 
 .back-icon {
