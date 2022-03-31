@@ -18,10 +18,14 @@
      
         <!-- Account -->
         <div class="login-text">
-           <mat-icon>perm_identity</mat-icon>
+           
            <div *ngIf="localStorageUser() == ''">
-              <a class="login-text"routerLink="/login">Bejelentkezés</a>
-              <a class="login-text"routerLink="/login">Regisztráció</a>
+               <a class="login-text"routerLink="/login">Bejelentkezés</a>
+               <a class="login-text"routerLink="/login">Regisztráció</a>
+           </div>
+           <div *ngIf="localStorageUser() != ''">
+                <mat-icon>perm_identity</mat-icon>
+                <a class="login-text" (click)="logOut()">Kijelentkezés</a>
            </div>
         </div>
      

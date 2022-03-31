@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ContentChild, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 import { ProductsComponent } from '../products/products.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-main-navigation',
@@ -19,7 +21,7 @@ export class MainNavigationComponent implements OnInit {
 
   isIf: boolean;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {}
 
@@ -45,6 +47,10 @@ export class MainNavigationComponent implements OnInit {
       }else{
          return '';
       }
+  }
+
+  logOut(): void {
+      this.authService.logout();
   }
 
 }
