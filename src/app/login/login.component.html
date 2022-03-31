@@ -1,18 +1,24 @@
 <br><br>
 
 <div *ngIf="!isSignedIn">
-    <h2>Bejelentkezés</h2>
-    <input type="text" #signinEmail/>
-    <input type="text" #signinPassword/>
-    <button (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+    <mat-card class="card card-login">
+        <h2>Bejelentkezés</h2>
+        <input type="text" #signinEmail/>
+        <input type="text" #signinPassword/>
+        <button (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+    </mat-card>
+    
 </div>
-<hr>
+
 <mat-divider [vertical]="true"></mat-divider>
+
 <div *ngIf="!isSignedIn">
-    <h2>Regisztráció</h2>
-    <input type="text" #signupEmail/>
-    <input type="text" #signupPassword/>
-    <button (click)="signUp(signupEmail.value, signupPassword.value)">Regisztráció</button>
+    <mat-card class="card card-signup">
+        <h2>Regisztráció</h2>
+        <input type="text" #signupEmail/>
+        <input type="text" #signupPassword/>
+        <button (click)="signUp(signupEmail.value, signupPassword.value)">Regisztráció</button>
+    </mat-card>
 </div>
 
 <app-profile *ngIf="isSignedIn" (isLogout)="handleLogout()"></app-profile>

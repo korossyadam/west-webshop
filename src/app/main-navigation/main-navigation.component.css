@@ -145,6 +145,10 @@ body {
     margin-left: -10%;
 }
 
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #f44336 !important;
+}
+
 ::ng-deep.mat-form-field-ripple {
     background-color: #f44336 !important;
 }
