@@ -3,7 +3,22 @@
 <div *ngIf="!isSignedIn">
     <mat-card class="card card-login">
         <h2>Bejelentkezés</h2>
-        <input type="text" #signinEmail/>
+
+        <!-- Form fields (LOGIN)-->
+        <div style="font-size: 16px">
+
+             <!-- Email -->
+            <mat-form-field class="form-field" appearance="legacy">
+                <mat-label>E-mail cím</mat-label>
+                <input matInput #signinEmail placeholder="nagy.attila@gmail.com" maxlength="64">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="legacy">
+                <mat-label>E-mail cím</mat-label>
+                <input matInput #signinEmail placeholder="nagy.attila@gmail.com" maxlength="64">
+            </mat-form-field>
+        </div>
+
         <input type="text" #signinPassword/>
         <button (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
     </mat-card>

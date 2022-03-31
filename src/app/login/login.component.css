@@ -14,10 +14,10 @@ body {
 }
 
 .card-login {
-    right: 20%;
+    left: 20%;
 }
 
 .card-signup {
-    left: 20%;
+    right: 20%;
 }
 
