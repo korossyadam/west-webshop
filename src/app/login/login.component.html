@@ -7,20 +7,43 @@
         <!-- Form fields (LOGIN)-->
         <div style="font-size: 16px">
 
-             <!-- Email -->
-            <mat-form-field class="form-field" appearance="legacy">
-                <mat-label>E-mail cím</mat-label>
-                <input matInput #signinEmail placeholder="nagy.attila@gmail.com" maxlength="64">
-            </mat-form-field>
+            <form [formGroup]="formGroup" novalidate>
 
-            <mat-form-field class="form-field" appearance="legacy">
-                <mat-label>E-mail cím</mat-label>
-                <input matInput #signinEmail placeholder="nagy.attila@gmail.com" maxlength="64">
-            </mat-form-field>
+               <!-- Email -->
+               <mat-form-field class="form-field" appearance="legacy">
+                  <mat-label>E-mail cím</mat-label>
+                  <input matInput #signinEmail placeholder="nagy.attila@gmail.com" maxlength="64" [formControl]="email" required>
+                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+               </mat-form-field>
+
+               <br>
+            
+                <!-- Password - 1 -->
+                <mat-form-field class="form-field" appearance="legacy">
+                    <mat-label>Jelszó</mat-label>
+                    <input matInput type="password" #signinPassword maxlength="64" formControlName="password" (input)="onPasswordInput()" required>
+                    <mat-error *ngIf="password?.hasError('required')">Kérlek add meg a jelszavad</mat-error>
+                    <mat-error *ngIf="password?.hasError('minlength')">A jelszónak minimum {{passwordMinimum}} karakterből kell állnia</mat-error>
+                </mat-form-field>
+
+                <br>
+
+                <!-- Password - 2 -->
+                <mat-form-field class="form-field" appearance="legacy">
+                    <mat-label>Jelszó újra</mat-label>
+                    <input matInput type="password" maxlength="64" formControlName="password2" (input)="onPasswordInput()" required>
+                    <mat-error *ngIf="password2?.hasError('required')">Kérlek ismételd meg a jelszavad</mat-error>
+                    <mat-error *ngIf="password2?.invalid && !password2?.hasError('required')">A jelszavak nem egyeznek meg</mat-error>
+                </mat-form-field>
+
+                <button mat-icon-button class="" color="warn" [disabled]="formGroup.invalid" (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+
+            </form>
+            
+
         </div>
 
-        <input type="text" #signinPassword/>
-        <button (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+        
     </mat-card>
     
 </div>
