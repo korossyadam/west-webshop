@@ -1,4 +1,11 @@
-<br><br>
+
+
+
+<div style="top: 0px;">
+   <h2>
+      AAAAAAAAAAAAAAAAAAAAAAAA
+   </h2>
+</div>
 
 <div *ngIf="!isSignedIn">
     <mat-card class="card card-login">
@@ -6,7 +13,6 @@
 
         <!-- Form fields (LOGIN)-->
         <div style="font-size: 16px">
-
             <form [formGroup]="formGroup" novalidate>
 
                <!-- Email -->
@@ -36,11 +42,10 @@
                     <mat-error *ngIf="password2?.invalid && !password2?.hasError('required')">A jelszavak nem egyeznek meg</mat-error>
                 </mat-form-field>
 
-                <button mat-icon-button class="" color="warn" [disabled]="formGroup.invalid" (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+                <!-- Login button -->
+                <button mat-raised-button class="" color="warn" [disabled]="formGroup.invalid" (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
 
             </form>
-            
-
         </div>
 
         

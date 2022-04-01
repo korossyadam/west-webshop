@@ -4,7 +4,7 @@
 }
 
 .bcg-image {
-    position: fixed;
+    position: absolute;
     clip-path: polygon(0% 0%, 100% 0%, 100% 96.5%, 90% 96.5%, 89.25% 100%, 10.75% 100%, 10% 96.5%, 0% 96.5%);
     top: 80px;
     left: 0px;

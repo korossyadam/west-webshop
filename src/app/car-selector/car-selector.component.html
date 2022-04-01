@@ -5,7 +5,7 @@
 </mat-card>
 
 <!-- Upper SideNav for searchbars -->
-<mat-sidenav-container hasBackdrop="true" class="upper-sidenav-container">
+<mat-sidenav-container hasBackdrop="false" class="upper-sidenav-container">
    <mat-sidenav class="upper-sidenav" mode="over" disableClose="true" #upperSideNav>
       
       <!-- Selectors -->
@@ -97,6 +97,10 @@
    <!-- Upper SideNav main content -->
     <mat-sidenav-content>
 
+      <div style="position: relative; top:200px">
+
+      </div>
+
         <!-- Lower SideNav for listElements -->
         <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container">
             <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" disableClose="true" #lowerSideNav>
@@ -168,6 +172,7 @@
 
             <!-- Actual main content -->
             <mat-sidenav-content>
+               <h2 style="position: absolute; top: 0px">aaaaaaaaaaaaaaaa</h2>
                 <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
             </mat-sidenav-content>
 

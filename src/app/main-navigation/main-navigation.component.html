@@ -57,9 +57,7 @@
 
 
 
-
 <!-- The routed views render in the <router-outlet>-->
-<br><br>
 <router-outlet *ngIf="!searchedSomething"></router-outlet>
 
 <app-products *ngIf="isIf || searchedSomething" [searchedText]="searchedText"></app-products>
