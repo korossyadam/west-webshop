@@ -9,41 +9,32 @@
 
 <div *ngIf="!isSignedIn">
     <mat-card class="card card-login">
-        <h2>Bejelentkezés</h2>
+        <h2 class="main-label">Bejelentkezés</h2>
 
-        <!-- Form fields (LOGIN)-->
-        <div style="font-size: 16px">
-            <form [formGroup]="formGroup" novalidate>
+        <!-- Form fields (LOGIN) -->
+        <div style="font-size: 18px">
+            <form [formGroup]="loginForm" novalidate>
 
-               <!-- Email -->
-               <mat-form-field class="form-field" appearance="legacy">
+               <mat-divider class="divider"></mat-divider>
+
+               <!-- Email (LOGIN) -->
+               <mat-form-field class="form-element top-push" appearance="outline">
                   <mat-label>E-mail cím</mat-label>
-                  <input matInput #signinEmail placeholder="nagy.attila@gmail.com" maxlength="64" [formControl]="email" required>
-                  <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-               </mat-form-field>
-
-               <br>
+                  <input matInput #loginEmail placeholder="nagy.attila@gmail.com" maxlength="64" formControlName="loginEmail" required>
+               </mat-form-field><br>
             
-                <!-- Password - 1 -->
-                <mat-form-field class="form-field" appearance="legacy">
+                <!-- Password (LOGIN) -->
+                <mat-form-field class="form-element" appearance="outline">
                     <mat-label>Jelszó</mat-label>
-                    <input matInput type="password" #signinPassword maxlength="64" formControlName="password" (input)="onPasswordInput()" required>
-                    <mat-error *ngIf="password?.hasError('required')">Kérlek add meg a jelszavad</mat-error>
-                    <mat-error *ngIf="password?.hasError('minlength')">A jelszónak minimum {{passwordMinimum}} karakterből kell állnia</mat-error>
-                </mat-form-field>
+                    <input matInput type="password" #loginPassword maxlength="64" formControlName="loginPassword" required>
+                </mat-form-field><br>
 
-                <br>
-
-                <!-- Password - 2 -->
-                <mat-form-field class="form-field" appearance="legacy">
-                    <mat-label>Jelszó újra</mat-label>
-                    <input matInput type="password" maxlength="64" formControlName="password2" (input)="onPasswordInput()" required>
-                    <mat-error *ngIf="password2?.hasError('required')">Kérlek ismételd meg a jelszavad</mat-error>
-                    <mat-error *ngIf="password2?.invalid && !password2?.hasError('required')">A jelszavak nem egyeznek meg</mat-error>
-                </mat-form-field>
+                <!-- Remember me (LOGIN) -->
+                <mat-checkbox class="side-push small-font" color="warn">Emlékezz rám</mat-checkbox><br><br>
 
                 <!-- Login button -->
-                <button mat-raised-button class="" color="warn" [disabled]="formGroup.invalid" (click)="signIn(signinEmail.value, signinPassword.value)">Bejelentkezés</button>
+                <button mat-raised-button class="side-push button" color="warn" (click)="login(loginEmail.value, loginPassword.value)">Bejelentkezés</button>
+                <mat-error *ngIf="loginError != ''" class="top-push side-push"> {{ loginError }}</mat-error>
 
             </form>
         </div>
@@ -53,14 +44,40 @@
     
 </div>
 
-<mat-divider [vertical]="true"></mat-divider>
-
 <div *ngIf="!isSignedIn">
     <mat-card class="card card-signup">
-        <h2>Regisztráció</h2>
-        <input type="text" #signupEmail/>
-        <input type="text" #signupPassword/>
-        <button (click)="signUp(signupEmail.value, signupPassword.value)">Regisztráció</button>
+      <h2 class="main-label">Regisztráció</h2>
+
+      <!-- Form fields (SIGN UP)-->
+      <div style="font-size: 18px">
+          <form [formGroup]="signUpForm" novalidate>
+
+             <mat-divider class="divider"></mat-divider>
+
+             <!-- Email (SIGN UP) -->
+             <mat-form-field class="form-element top-push" appearance="outline">
+                <mat-label>E-mail cím</mat-label>
+                <input matInput #signupEmail placeholder="nagy.attila@gmail.com" maxlength="64" formControlName="signUpEmail" required>
+             </mat-form-field><br>
+          
+              <!-- Password - 1 (SIGN UP) -->
+              <mat-form-field class="form-element" appearance="outline">
+                  <mat-label>Jelszó</mat-label>
+                  <input matInput type="password" #signupPassword maxlength="64" formControlName="signUpPassword" (input)="onPasswordInput()" required>
+              </mat-form-field><br>
+
+              <!-- Password - 2 (SIGN UP) -->
+              <mat-form-field class="form-element" appearance="outline">
+                  <mat-label>Jelszó újra</mat-label>
+                  <input matInput type="password" maxlength="64" formControlName="signUpPasswordAgain" (input)="onPasswordInput()" required>
+              </mat-form-field><br>
+
+              <!-- Sign Up button -->
+              <button mat-raised-button class="side-push button" color="warn" (click)="signUp(signupEmail.value, signupPassword.value)">Regisztráció</button>
+              <mat-error *ngIf="signUpError != ''" class="top-push side-push"> {{ signUpError }}</mat-error>
+
+          </form>
+      </div>
     </mat-card>
 </div>
 

@@ -13,6 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,6 +49,7 @@ import { HomeComponent } from './home/home.component';
     MatDividerModule,
     MatButtonModule,
     MatInputModule,
+    MatCheckboxModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,

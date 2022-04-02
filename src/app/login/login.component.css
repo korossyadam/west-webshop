@@ -8,10 +8,52 @@
 }
 
 .card-login {
-    left: 20%;
+    left: 25%;
 }
 
 .card-signup {
-    right: 20%;
+    right: 25%;
 }
 
+.main-label {
+   position: relative;
+   top: 10px;
+   left: 5%;
+}
+
+.mat-divider.mat-divider-horizontal {
+   left: 8%;
+   width: 84%;
+}
+
+.form-element {
+   left: 5%;
+   width: 90%;
+}
+
+.top-push {
+   margin-top: 30px;
+}
+
+.side-push {
+   margin-left: 5%;
+}
+
+.small-font {
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+}
+
+.button {
+   width: 40%;
+   font-size: 18px;
+   font-family: 'Roboto', sans-serif;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
+::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
