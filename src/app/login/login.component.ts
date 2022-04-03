@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
       });
       
       // Set Login flag to true
-      if(this.authService.isLoggedIn)
+      if(AuthService.isLoggedIn)
          this.isSignedIn = true;
    }
    
@@ -121,9 +121,9 @@ export class LoginComponent implements OnInit {
             this.signUpError = 'Hiba!: ' + err.code;
          }
       });
-
+      
       // Set Login flag to true
-      if(this.authService.isLoggedIn)
+      if(AuthService.isLoggedIn)
          this.isSignedIn = true;
    }
 
