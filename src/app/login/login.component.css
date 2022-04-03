@@ -1,18 +1,17 @@
-
 .card {
-    position: absolute;
-    width: 20%;
-    height: 50%;
-    top: 20%;
-    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.5);
+   position: absolute;
+   width: 20%;
+   height: 50%;
+   top: 20%;
+   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
 }
 
 .card-login {
-    left: 25%;
+   left: 25%;
 }
 
 .card-signup {
-    right: 25%;
+   right: 25%;
 }
 
 .main-label {
@@ -39,21 +38,72 @@
    margin-left: 5%;
 }
 
+.second-element {
+   position: relative;
+   top: -15px;
+}
+
+.third-element {
+   position: relative;
+   top: -30px;
+}
+
+.fourth-element {
+   position: relative;
+   top: -45px;
+}
+
+.last-name {
+   position: relative;
+   display: inline-block;
+   top: -15px;
+   left: 5%;
+   width: 43%;
+}
+
+.first-name {
+   position: relative;
+   display: inline-block;
+   top: -15px;
+   left: 9%;
+   width: 43%;
+}
+
 .small-font {
    font-size: 14px;
    font-family: 'Roboto', sans-serif;
 }
 
-.button {
+.checkbox {
+   position: relative;
+   top: -30px;
+}
+
+.button-left {
+   position: relative;
+   top: -40px;
    width: 40%;
    font-size: 18px;
    font-family: 'Roboto', sans-serif;
 }
 
-::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.4em 0px !important;}
-::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
+.button-right {
+   position: relative;
+   top: -55px;
+   width: 40%;
+   font-size: 18px;
+   font-family: 'Roboto', sans-serif;
+}
+
+::ng-deep .mat-form-field-flex>.mat-form-field-infix {
+   padding: 0.4em 0px !important;
+}
+
+::ng-deep .mat-form-field-label-wrapper {
+   top: -1.5em;
+}
 
 ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-    transform: translateY(-1.1em) scale(.75);
-    width: 133.33333%;
+   transform: translateY(-1.1em) scale(.75);
+   width: 133.33333%;
 }

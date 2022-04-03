@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
    public loginError = '';
    public signUpError = '';
 
+   // Login Flag
    public isSignedIn = false;
 
    constructor(private renderer: Renderer2, public authService: AuthService, private formBuilder: FormBuilder) {
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      if (localStorage.getItem('user') == null)
+      if(localStorage.getItem('user') == null)
          this.isSignedIn = false;
       else
          this.isSignedIn = true;
@@ -41,6 +42,8 @@ export class LoginComponent implements OnInit {
       // Sign Up Form Validators
       this.signUpForm = this.formBuilder.group({
          signUpEmail: ['', [Validators.required, Validators.email]],
+         lastName: ['', [Validators.required]],
+         firstName: ['', [Validators.required]],
          signUpPassword: ['', [Validators.required, Validators.minLength(this.passwordMinimum)]],
          signUpPasswordAgain: ['', [Validators.required]]
       }, { validator: passwordMatchValidator });
@@ -50,7 +53,7 @@ export class LoginComponent implements OnInit {
       this.renderer.setStyle(document.body, 'background-image', '');
    }
 
-   // Sign in
+   // Login
    async login(email: string, password: string) {
 
       // Check for errors
@@ -66,16 +69,27 @@ export class LoginComponent implements OnInit {
       // If any error is found, Login is cancelled
       if(this.loginError != '')
          return;
+      
+      // Check for any errors thrown by firebase-auth
+      await this.authService.signIn(email, password).catch(err => {
+         console.log("Login error: " + err.code);
 
-      await this.authService.signIn(email, password);
-
-      if (this.authService.isLoggedIn)
+         if(err.code == 'auth/user-not-found'){
+            this.loginError = 'A megadott felhasználó nem létezik!';
+         }else if(err.code == 'auth/wrong-password'){
+            this.loginError = 'Nem megfelelő jelszó!';
+         }else {
+            this.loginError = 'Hiba!: ' + err.code;
+         }
+      });
+      
+      // Set Login flag to true
+      if(this.authService.isLoggedIn)
          this.isSignedIn = true;
    }
-
-
+   
    // Sign up
-   async signUp(email: string, password: string) {
+   async signUp(email: string, password: string, lastName: string, firstName: string) {
 
       // Check for errors
       this.signUpError = '';
@@ -83,6 +97,8 @@ export class LoginComponent implements OnInit {
          this.signUpError = 'Kérlek add meg az e-mail címedet!';
       }else if(this.signUpForm?.get('signUpEmail')?.hasError('email')) {
          this.signUpError = 'Nem valós e-mail cím!';
+      }else if((this.signUpForm?.get('lastName')?.hasError('required')) || (this.signUpForm?.get('firstName')?.hasError('required'))) {
+         this.signUpError = 'Kérlek add meg a neved!';
       }else if(this.signUpForm?.get('signUpPassword')?.hasError('required')) {
          this.signUpError = 'Kérlek add meg a jelszavad!';
       }else if(this.signUpForm?.get('signUpPassword')?.hasError('minlength')) {
@@ -95,8 +111,18 @@ export class LoginComponent implements OnInit {
       if(this.signUpError != '')
          return;
 
-      await this.authService.signUp(email, password);
+      // Check for any errors thrown by firebase-auth
+      await this.authService.signUp(email, password).catch(err => {
+         console.log("Sign Up error: " + err.code);
 
+         if(err.code == 'auth/email-already-in-use'){
+            this.signUpError = 'Ez az e-mail cím már használatban van!';
+         }else {
+            this.signUpError = 'Hiba!: ' + err.code;
+         }
+      });
+
+      // Set Login flag to true
       if(this.authService.isLoggedIn)
          this.isSignedIn = true;
    }
