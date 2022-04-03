@@ -1,25 +1,136 @@
-html, body {
-   /* IE 10-11 didn't like using min-height */
-   height: 100%;
- }
- body {
-   display: flex;
-   flex-direction: column;
- }
- .content {
-   flex: 1 0 auto; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
-   padding: 20px;
- }
- .footer {
-   flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
-   padding: 20px;
- }
+.shadow {
+   box-shadow: 0px -8px 16px 0px rgba(0, 0, 0, 0.2);
+}
 
-.footer-bcg {
-   clip-path: polygon(0% 0%, 100% 0%, 100% 26%, 63% 26%, 62.25% 34%, 37.75% 34%, 37% 26%, 0% 26%);
-   position: fixed;
-   display: block;
-   background-color: blue;
-    height: 300px;
+.footer {
+   position: absolute;
+   left: 0px;
+   height: 250px;
    width: 100%;
+   background-color: #404040;
+   clip-path: polygon(0% 0%, 15% 0%, 16% 9%, 84% 9%, 85% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+.label-big {
+   position: absolute;
+   top: 40px;
+   font-size: 20px;
+   font-family: 'Roboto', sans-serif;
+   color: white;
+}
+
+.label-small {
+   position: absolute;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: #7a7a7a;
+}
+
+.data {
+   position: absolute;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: white;
+}
+
+.contact {
+   left: 16%;
+}
+
+.open {
+   left: 46%;
+}
+
+.information {
+   left: 79%;
+}
+
+.phone-label {
+   top: 100px;
+   left: 16%;
+}
+
+.phone {
+   top: 100px;
+   left: 20%;
+}
+
+.email-label {
+   top: 130px;
+   left: 16%;
+}
+
+.email {
+   top: 130px;
+   left: 20%;
+}
+
+.location-label {
+   top: 160px;
+   left: 16%;
+}
+
+.location {
+   top: 160px;
+   left: 20%;
+}
+
+.first-opening-label {
+   top: 100px;
+   left: 46%;
+}
+
+.first-opening {
+   top: 100px;
+   left: 51%;
+}
+
+.second-opening-label {
+   top: 130px;
+   left: 46%;
+}
+
+.second-opening {
+   top: 130px;
+   left: 51%;
+}
+
+.third-opening-label {
+   top: 160px;
+   left: 46%;
+}
+
+.third-opening {
+   top: 160px;
+   left: 51%;
+}
+
+.delivery {
+   position: absolute;
+   top: 100px;
+   left: 79%;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: #7a7a7a;
+}
+
+.delivery:hover {
+   color: white;
+}
+
+.return {
+   position: absolute;
+   top: 130px;
+   left: 79%;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: #7a7a7a;
+}
+
+.return:hover {
+   color: white;
 }
