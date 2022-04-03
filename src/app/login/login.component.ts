@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit {
          return;
 
       // Check for any errors thrown by firebase-auth
-      await this.authService.signUp(email, password).catch(err => {
+      await this.authService.signUp(email, password, lastName, firstName).catch(err => {
          console.log("Sign Up error: " + err.code);
 
          if(err.code == 'auth/email-already-in-use'){

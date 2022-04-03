@@ -53,4 +53,10 @@ export class MainNavigationComponent implements OnInit {
       this.authService.logout();
   }
 
+  getName(): string {
+     var lastName = localStorage.getItem('lastName');
+     var firstName = localStorage.getItem('firstName')
+     return lastName + ' ' + firstName;
+  }
+
 }

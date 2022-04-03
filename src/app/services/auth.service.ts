@@ -22,11 +22,13 @@ export class AuthService {
    }
 
    // FireBase SignUp
-   async signUp(email: string, password: string) {
+   async signUp(email: string, password: string, lastName: string, firstName: string) {
       await this.firebaseAuth.createUserWithEmailAndPassword(email, password)
          .then(res => {
             AuthService.isLoggedIn = true;
             localStorage.setItem('user', JSON.stringify(res.user));
+            localStorage.setItem('lastName', lastName);
+            localStorage.setItem('firstName', firstName);
             this.router.navigate(['main']);
          })
    }

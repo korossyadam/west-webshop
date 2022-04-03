@@ -1,4 +1,3 @@
-
 <!-- Decoration shapes -->
 <div class="box-middle"></div>
 <div class="parallelogram-left"></div>
@@ -9,53 +8,58 @@
 
 <!-- Upper bar -->
 <div class="container">
-    <div class="topnav fixed">
-   
-        <!-- Left Side -->
-        <a class="left-push menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
-        <a class="menu-option" [ngClass]="{'active': step === 2}" routerLink="/profile" (click)="searchedSomething = false; isIf = false; step = 2;">Profil</a>
-        <button class="carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
-     
-        <!-- Account -->
-        <div class="login-text">
-           
-           <div *ngIf="localStorageUser() == ''">
-               <a class="login-text"routerLink="/login">Bejelentkezés</a>
-               <a class="login-text"routerLink="/login">Regisztráció</a>
-           </div>
-           <div *ngIf="localStorageUser() != ''">
-                <mat-icon>perm_identity</mat-icon>
-                <a class="login-text" (click)="logOut()">Kijelentkezés</a>
-           </div>
-        </div>
-     
-     </div>
+   <div class="topnav fixed">
+
+      <!-- Left Side -->
+      <a class="left-push menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
+      <a class="menu-option" [ngClass]="{'active': step === 2}" routerLink="/profile" (click)="searchedSomething = false; isIf = false; step = 2;">Profil</a>
+      <button class="carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
+
+      <!-- Login buttons -->
+      <div *ngIf="localStorageUser() == ''">
+         <a class="login-text" routerLink="/login">Bejelentkezés</a>
+         <a class="login-text" routerLink="/login">Regisztráció</a>
+      </div>
+      <div *ngIf="localStorageUser() != ''">
+
+
+      </div>
+
+   </div>
 </div>
 
 
 <!-- Search bar in the middle -->
 <div class="fixed text">
 
-    <!-- Search bar -->
-    <div style="font-size: 16px">
-        <mat-form-field class="form-field" appearance="legacy">
-            <mat-label>Termék keresése</mat-label>
-            <input matInput #inputText (input)="searchedText = inputText.value" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" [(ngModel)]="value">
+   <!-- Search bar -->
+   <div style="font-size: 16px">
+      <mat-form-field class="form-field" appearance="legacy">
+         <mat-label>Termék keresése</mat-label>
+         <input matInput #inputText (input)="searchedText = inputText.value" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" [(ngModel)]="value">
 
-            <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-    </div>
-    
-    <!-- Search button -->
-    <button mat-icon-button class="search-icon" color="warn" (click)="updatChildIf(); onSearch();">
-        <mat-icon>search</mat-icon>
-    </button>
+         <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <mat-icon>close</mat-icon>
+         </button>
+      </mat-form-field>
+   </div>
+
+   <!-- Search button -->
+   <button mat-icon-button class="search-icon" color="warn" (click)="updatChildIf(); onSearch();">
+      <mat-icon>search</mat-icon>
+   </button>
 
 </div>
 
-
+<!-- Account -->
+<div *ngIf="localStorageUser() != ''" class="dropdown">
+   <button class="dropbtn"> {{getName()}} <mat-icon class="arrow">expand_more</mat-icon></button>
+   <div class="dropdown-content">
+      <a routerLink="/profile">Személyes adatok</a>
+      <a routerLink="/profile">Link 3</a>
+      <a routerLink="/login" (click)="logOut()">Kijelentkezés</a>
+   </div>
+</div>
 
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet *ngIf="!searchedSomething"></router-outlet>
