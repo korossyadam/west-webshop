@@ -11,8 +11,9 @@ export class AuthGuardService implements CanActivate {
    constructor(private router: Router) { }
 
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-      var isLoggedIn: boolean = AuthService.isLoggedIn;
-      console.log(isLoggedIn);
+      var isLoggedIn: boolean = false;
+      if(localStorage.getItem('user') != null)
+         isLoggedIn = true;
 
       if(isLoggedIn) {
          return true;
