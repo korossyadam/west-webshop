@@ -1,5 +1,5 @@
-
-html, body {
+html,
+body {
    overflow-x: hidden;
    width: 100%;
    max-width: 100%;
@@ -80,7 +80,7 @@ html, body {
 }
 
 .text-input {
-  position: absolute;
+   position: absolute;
    top: 35%;
    left: 23px;
    height: 45px;
@@ -115,7 +115,7 @@ html, body {
 }
 
 .fuel {
-   left: 156px;    
+   left: 156px;
 }
 
 .kw {
@@ -168,14 +168,14 @@ html, body {
 .car-type-button {
    display: table-cell;
    width: 500px;
-  font-family: Arial;
-  font-size: 14px;
+   font-family: Arial;
+   font-size: 14px;
    font-family: 'Roboto', sans-serif;
-  color: #000000;
+   color: #000000;
    padding: 10px;
    margin: 5px;
    cursor: pointer;
-   
+
 }
 
 .hovered {
@@ -242,7 +242,6 @@ html, body {
    color: #6e6e6e;
 }
 
-
 .half-width {
    width: 240px;
 }
@@ -256,7 +255,7 @@ html, body {
 }
 
 .left-float {
-  float: left;
+   float: left;
 }
 
 .right-float {
@@ -266,15 +265,13 @@ html, body {
 html, body {
    height: 100%;
    margin: 0;
- }
- .wrapper {
-   min-height: 100%;
- 
-   /* Equal to height of footer */
-   /* But also accounting for potential margin-bottom of last child */
-   margin-bottom: -50px;
- }
+}
 
- .push {
-   height: 200px;
- }
+.wrapper {
+   min-height: 100%;
+   margin-bottom: -50px;
+}
+
+.push {
+   height: 180px;
+}
