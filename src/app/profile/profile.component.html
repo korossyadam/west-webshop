@@ -1,3 +1,47 @@
-<!-- Left Side -->
-<a class="menu-option" [ngClass]="{'active': step === 0}" routerLink="/profile/data" (click)="step = 0;">Személyes adatok</a>
-<a class="menu-option second-push" [ngClass]="{'active': step === 2}" routerLink="/profile/orders" (click)="step = 1;">Rendelések</a>
+<mat-card class="menu-card">
+
+   <!-- Menu Label -->
+   <p class="main-label">Lehetőségek</p>
+   <mat-divider class="divider"></mat-divider>
+
+   <!-- Left Side -->
+   <a class="menu-option" [ngClass]="{'active': step === 0}" routerLink="/profile/data" (click)="step = 0;">Személyes adatok</a>
+   <div *ngIf="step == 0" class="selected-rectangle first-selected"></div>
+   <a class="menu-option second-push" [ngClass]="{'active': step === 1}" routerLink="/profile/orders" (click)="step = 1;">Rendelések</a>
+   <div *ngIf="step == 1" class="selected-rectangle second-selected"></div>
+
+</mat-card>
+
+<!-- Personal Data -->
+<div *ngIf="step == 0">
+   <mat-card class="data-card">
+
+       <!-- Personal Data Label -->
+      <p class="main-label">Személyes adatok</p>
+      <mat-divider class="divider"></mat-divider>
+
+      <!-- Email -->
+      <p class="email-label">EMAIL CÍM</p>
+      <input type="text" class="email-input" value="{{ getEmail() }}" disabled/>
+
+      <!-- Last Name -->
+      <p class="last-name-label">VEZETÉKNÉV</p>
+      <input type="text" class="last-name-input" value="{{ getLastName() }}" #lastName/>
+
+      <!-- First Name -->
+      <p class="first-name-label">KERESZTNÉV</p>
+      <input type="text" class="first-name-input" value="{{ getFirstName() }}" #firstName/>
+
+      <!-- Phone -->
+      <p class="phone-label">TELEFONSZÁM</p>
+      <input type="text" class="phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #phone/>
+
+   </mat-card>
+</div>
+
+<!-- Order -->
+<div *ngIf="step == 1">
+   <mat-card class="order-card">
+
+   </mat-card>
+</div>

@@ -20,6 +20,7 @@ export class AuthService {
          .then(res => {
             AuthService.isLoggedIn = true;
             localStorage.setItem('user', JSON.stringify(res.user));
+            localStorage.setItem('email', email);
             this.router.navigate(['main']);
 
             var user: User;
@@ -28,6 +29,7 @@ export class AuthService {
                user = data[0];
                localStorage.setItem('firstName', user.firstName);
                localStorage.setItem('lastName', user.lastName);
+               localStorage.setItem('phone', user.phone);
             })
 
          })
@@ -41,12 +43,13 @@ export class AuthService {
          .then(res => {
             AuthService.isLoggedIn = true;
             localStorage.setItem('user', JSON.stringify(res.user));
+            localStorage.setItem('email', email);
             localStorage.setItem('lastName', lastName);
             localStorage.setItem('firstName', firstName);
             this.router.navigate(['main']);
 
             // Attach first name and last name in a seperate collection
-            var user: User = new User(email, firstName, lastName);
+            var user: User = new User(email, firstName, lastName, '');
             this.afs.collection('users').doc(email).set(Object.assign({}, user));
 
          })
