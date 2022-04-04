@@ -1,0 +1,28 @@
+.menu-option {
+   position: absolute;
+   top: 20%;
+   float: left;
+   margin-top: 5px;
+   padding: 10px 25px;
+   font-size: 17px;
+   font-family: 'Roboto', sans-serif;
+   text-align: center;
+   text-decoration: none;
+   color: black;
+   border: 1px solid #F44336;
+}
+
+.menu-option:hover {
+   background-color: #dddddd;
+   color: #1b2936;
+}
+
+.menu-option a.active {
+   background-color: #f44336;
+   color: black;
+}
+
+.second-push {
+   position: relative;
+   top: 30px;
+}

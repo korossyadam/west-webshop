@@ -28,8 +28,7 @@ export class AuthService {
                user = data[0];
                localStorage.setItem('firstName', user.firstName);
                localStorage.setItem('lastName', user.lastName);
-             })
-
+            })
 
          })
    }
@@ -49,10 +48,8 @@ export class AuthService {
             // Attach first name and last name in a seperate collection
             var user: User = new User(email, firstName, lastName);
             this.afs.collection('users').doc(email).set(Object.assign({}, user));
-           
+
          })
-      
-      
 
    }
 
@@ -60,6 +57,8 @@ export class AuthService {
    logout() {
       AuthService.isLoggedIn = false;
       localStorage.removeItem('user');
+      localStorage.removeItem('firstName');
+      localStorage.removeItem('lastName');
    }
 
 }

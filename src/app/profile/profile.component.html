@@ -1,1 +1,3 @@
-<p>profile works!</p>
+<!-- Left Side -->
+<a class="menu-option" [ngClass]="{'active': step === 0}" routerLink="/profile/data" (click)="step = 0;">Személyes adatok</a>
+<a class="menu-option second-push" [ngClass]="{'active': step === 2}" routerLink="/profile/orders" (click)="step = 1;">Rendelések</a>

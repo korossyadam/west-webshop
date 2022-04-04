@@ -168,9 +168,9 @@
 }
 
 .dropdown {
-   position: absolute;
+   position: fixed;
    top: 44px;
-   left: 90%;
+   right: 0.5%;
    display: inline-block;
    z-index: 10;
 }
