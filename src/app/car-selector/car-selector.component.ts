@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import { Car } from '../models/car.model';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { first, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-car-selector',
@@ -212,7 +213,7 @@ export class CarSelectorComponent implements OnInit {
 
       // Chassis selection (stage 0 -> stage 1)
       if(this.stage == 0){
-        this.carSelectorService.selectBrand(selected).subscribe(data => {
+        this.carSelectorService.selectBrand(selected).pipe(first()).subscribe(data => {
           this.chassis = data;
           this.chassisActive = this.chassis;
   
@@ -229,7 +230,7 @@ export class CarSelectorComponent implements OnInit {
     
       // Engine selection (stage 1 -> stage 2)
       }else if(this.stage == 1){
-        this.carSelectorService.selectChassis(selected).subscribe(data => {
+        this.carSelectorService.selectChassis(selected).pipe(first()).subscribe(data => {
           this.cars = data;
           this.carsActive = this.cars;
           

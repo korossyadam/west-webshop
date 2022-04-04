@@ -19,6 +19,7 @@
    position: fixed;
    top: 30px;
    left: 0px;
+   z-index: 10;
 }
 
 .container {
@@ -171,6 +172,7 @@
    top: 44px;
    left: 90%;
    display: inline-block;
+   z-index: 10;
 }
 
 .dropdown-content {
