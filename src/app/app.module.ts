@@ -28,7 +28,6 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
-import { Order } from './models/order.model.ts/order.model.ts.component';
 
 
 @NgModule({
@@ -41,7 +40,6 @@ import { Order } from './models/order.model.ts/order.model.ts.component';
     ProfileComponent,
     HomeComponent,
     FooterComponent,
-    Order.Model.TsComponent
   ],
   imports: [
     BrowserModule,
