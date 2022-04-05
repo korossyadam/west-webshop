@@ -10,10 +10,16 @@
 <div class="container">
    <div class="topnav fixed">
 
-      <!-- Left Side -->
-      <a class="left-push menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a>
-      <a class="menu-option" [ngClass]="{'active': step === 2}" routerLink="/profile" (click)="searchedSomething = false; isIf = false; step = 2;">Profil</a>
+      <!-- Home Button -->
+      <!-- <a class="menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a> -->
+      <!-- <button mat-icon-button class="home-icon" color="warn" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;"> -->
+      <!--    <mat-icon><span class="material-icons-outlined"> -->
+      <!--       other_houses -->
+      <!--       </span></mat-icon> -->
+      <!-- </button> -->
+
       <button class="carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
+      <button class="offer-button" mat-raised-button (click)="onCarSelectorButtonClick()">Árajánlat kérése</button>
 
       <!-- Login buttons -->
       <div *ngIf="localStorageUser() == ''">
@@ -51,9 +57,48 @@
 
 </div>
 
+<!-- Home -->
+<div *ngIf="localStorageUser() != ''" class="dropdown menu-position">
+   <button class="dropbtn" (mouseover)="secondaryHover = -1">Főoldal<mat-icon class="arrow">expand_more</mat-icon></button>
+   <div class="dropdown-content">
+      <a routerLink="/main" (mouseover)="secondaryHover = 0">Főoldal</a>
+      <a routerLink="/main" (mouseover)="secondaryHover = 1">Méret szerinti keresők</a>
+      <a routerLink="/main" (mouseover)="secondaryHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+   </div>
+
+   <div *ngIf="secondaryHover == 2" class="dropdown-second">
+      <a href="https://www.motul.com/hu/hu/lubricants" target="_blank">Motul olajkereső</a>
+      <a href="https://www.mobil.co.uk/en-gb/product-selector/" target="_blank">Mobil 1 olajkereső</a>
+      <a href="https://applications.castrol.com/oilselector/hu_hu/c/search" target="_blank">Castrol olajkereső</a>
+      <a href="http://total-dnk.lubricantadvisor.com/default.aspx?lang=eng&br=elf" target="_blank">Total olajkereső</a>
+   </div>
+</div>
+
+<!-- Tools -->
+<div *ngIf="localStorageUser() != ''" class="dropdown tools-position">
+   <button class="dropbtn">Szerszámok<mat-icon class="arrow">expand_more</mat-icon></button>
+   <div class="dropdown-content">
+      <a routerLink="/profile">Kézi szerszámok</a>
+      <a routerLink="/profile">Elektromos szerszámok</a>
+      <a routerLink="/profile">Garázs berendezés</a>
+   </div>
+</div>
+
+<!-- Equipment -->
+<div *ngIf="localStorageUser() != ''" class="dropdown equipment-position">
+   <button class="dropbtn">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></button>
+   <div class="dropdown-content">
+      <a routerLink="/profile">Akkumulátor</a>
+      <a routerLink="/profile">Autóápolás</a>
+      <a routerLink="/profile">Beltér</a>
+      <a routerLink="/profile">Kültér</a>
+      <a routerLink="/profile">Folyadékok</a>
+   </div>
+</div>
+
 <!-- Account -->
-<div *ngIf="localStorageUser() != ''" class="dropdown">
-   <button class="dropbtn"> {{getName()}} <mat-icon class="arrow">expand_more</mat-icon></button>
+<div *ngIf="localStorageUser() != ''" class="dropdown profile-position">
+   <button class="dropbtn">{{ getName() }}<mat-icon class="arrow">expand_more</mat-icon></button>
    <div class="dropdown-content">
       <a routerLink="/profile">Személyes adatok</a>
       <a routerLink="/profile">Link 3</a>
@@ -65,4 +110,3 @@
 <router-outlet *ngIf="!searchedSomething"></router-outlet>
 
 <app-products *ngIf="isIf || searchedSomething" [searchedText]="searchedText"></app-products>
-
