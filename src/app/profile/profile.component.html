@@ -5,10 +5,12 @@
    <mat-divider class="divider"></mat-divider>
 
    <!-- Left Side -->
-   <a class="menu-option" [ngClass]="{'active': step === 0}" routerLink="/profile/data" (click)="step = 0;">Személyes adatok</a>
+   <a class="menu-option" [ngClass]="{'active': step === 0}" (click)="step = 0;">Személyes adatok</a>
    <div *ngIf="step == 0" class="selected-rectangle first-selected"></div>
-   <a class="menu-option second-push" [ngClass]="{'active': step === 1}" routerLink="/profile/orders" (click)="step = 1;">Rendelések</a>
+   <a class="menu-option second-push" [ngClass]="{'active': step === 1}" (click)="step = 1;">Garázs</a>
    <div *ngIf="step == 1" class="selected-rectangle second-selected"></div>
+   <a class="menu-option third-push" [ngClass]="{'active': step === 2}" (click)="step = 2;">Rendelések</a>
+   <div *ngIf="step == 2" class="selected-rectangle third-selected"></div>
 
 </mat-card>
 
@@ -39,8 +41,15 @@
    </mat-card>
 </div>
 
-<!-- Order -->
+<!-- Garage -->
 <div *ngIf="step == 1">
+   <mat-card class="garage-card">
+
+   </mat-card>
+</div>
+
+<!-- Order -->
+<div *ngIf="step == 2">
    <mat-card class="order-card">
 
    </mat-card>

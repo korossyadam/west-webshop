@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
 
    getPhone(): string {
       var phone = localStorage.getItem('phone');
-      if(phone != null)
+      if(phone != null && phone != 'undefined')
          return phone;
       else
          return '';
