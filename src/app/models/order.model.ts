@@ -1,6 +1,7 @@
 import * as internal from "stream";
 
 export class Order {
+   
    public price: number;
    public date: string;
    public productIds: string[];

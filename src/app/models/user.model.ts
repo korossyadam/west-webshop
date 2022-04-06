@@ -1,3 +1,4 @@
+import { Address } from "./address.model";
 
 export class User {
 
@@ -5,12 +6,16 @@ export class User {
    public firstName: string;
    public lastName: string;
    public phone: string;
+   public garage: number[];
+   public addresses: Address[];
 
-   constructor(email: string, firstName: string, lastName: string, phone: string) {
+   constructor(email: string, firstName: string, lastName: string, phone: string, garage: number[], addresses: Address[]) {
       this.email = email;
       this.firstName = firstName;
       this.lastName = lastName;
       this.phone = phone;
-
+      this.garage = garage;
+      this.addresses = addresses;
+      
    }
 }

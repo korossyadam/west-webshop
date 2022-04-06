@@ -1,6 +1,7 @@
 import * as internal from "stream";
 
 export class Address {
+   
    public name: string;
    public email: string;
    public phone: string;

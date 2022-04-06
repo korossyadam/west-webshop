@@ -49,7 +49,7 @@ export class AuthService {
             this.router.navigate(['main']);
 
             // Attach first name and last name in a seperate collection
-            var user: User = new User(email, firstName, lastName, '');
+            var user: User = new User(email, firstName, lastName, '', [], []);
             this.afs.collection('users').doc(email).set(Object.assign({}, user));
 
          })
