@@ -4,60 +4,69 @@ import { ProductsComponent } from '../products/products.component';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-main-navigation',
-  templateUrl: './main-navigation.component.html',
-  styleUrls: ['./main-navigation.component.css'],
+   selector: 'app-main-navigation',
+   templateUrl: './main-navigation.component.html',
+   styleUrls: ['./main-navigation.component.css'],
 })
 export class MainNavigationComponent implements OnInit {
 
-  public step: number = 0;
-  public secondaryHover: number = -1;
-  
-  @Output() carSelectClickedEvent = new EventEmitter<boolean>();
-  @ViewChild(ProductsComponent) child: ProductsComponent;
+   public step: number = 0;
+   public secondaryHover: number = -1;
 
-  value = "";
-  public searchedText: string;
-  public searchedSomething: boolean = false;
+   @Output() carSelectClickedEvent = new EventEmitter<boolean>();
+   @ViewChild(ProductsComponent) child: ProductsComponent;
 
-  isIf: boolean;
+   value = "";
+   public searchedText: string;
+   public searchedSomething: boolean = false;
 
-  constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) {}
+   isIf: boolean;
 
-  ngOnInit(): void {}
+   constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) { }
 
-  updatChildIf(): void {
-    this.isIf = !this.isIf;
-    this.changeDetectorRef.detectChanges();
-    console.log("child", this.child);
-    if(localStorage.getItem('user') == null){}
-  }
+   ngOnInit(): void { }
 
-  onSearch(): void {
-    this.searchedSomething = true;
-    this.child.search()
-  }
+   updatChildIf(): void {
+      this.isIf = !this.isIf;
+      this.changeDetectorRef.detectChanges();
+      console.log("child", this.child);
+      if (localStorage.getItem('user') == null) { }
+   }
 
-  onCarSelectorButtonClick(): void {
-   this.carSelectClickedEvent.emit(true);
-  }
-   
-   localStorageUser(): string {var currentUser = localStorage.getItem('user');
-      if(currentUser != null){
+   onSearch(): void {
+      this.searchedSomething = true;
+      this.child.search()
+   }
+
+   onCarSelectorButtonClick(): void {
+      this.carSelectClickedEvent.emit(true);
+   }
+
+   localStorageUser(): string {
+      var currentUser = localStorage.getItem('user');
+      if (currentUser != null) {
          return currentUser;
-      }else{
+      } else {
          return '';
       }
-  }
+   }
 
-  logOut(): void {
+   logOut(): void {
       this.authService.logout();
-  }
+   }
 
-  getName(): string {
-     var lastName = localStorage.getItem('lastName');
-     var firstName = localStorage.getItem('firstName')
-     return lastName + ' ' + firstName;
+   getName(): string {
+      var lastName = localStorage.getItem('lastName');
+      var firstName = localStorage.getItem('firstName')
+      return lastName + ' ' + firstName;
+   }
+
+   getEmail(): string {
+      var email = localStorage.getItem('email');
+      if (email != null)
+         return email;
+      else
+         return '';
   }
 
 }

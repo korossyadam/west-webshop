@@ -98,7 +98,7 @@
 
 <!-- Account -->
 <div *ngIf="localStorageUser() != ''" class="dropdown profile-position">
-   <button class="dropbtn">{{ getName() }}<mat-icon class="arrow">expand_more</mat-icon></button>
+   <button class="dropbtn">{{ getName() }}<mat-icon class="arrow">expand_more</mat-icon><br><span>{{ getEmail() }}</span></button>
    <div class="dropdown-content">
       <a routerLink="/profile">Személyes adatok</a>
       <a routerLink="/profile">Link 3</a>
