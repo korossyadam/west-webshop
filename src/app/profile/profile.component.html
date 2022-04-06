@@ -7,10 +7,18 @@
    <!-- Left Side -->
    <a class="menu-option" [ngClass]="{'active': step === 0}" (click)="step = 0;">Személyes adatok</a>
    <div *ngIf="step == 0" class="selected-rectangle first-selected"></div>
-   <a class="menu-option second-push" [ngClass]="{'active': step === 1}" (click)="step = 1;">Garázs</a>
+   <a class="menu-option second-push" [ngClass]="{'active': step === 1}" (click)="step = 1;">Címek kezelése</a>
    <div *ngIf="step == 1" class="selected-rectangle second-selected"></div>
-   <a class="menu-option third-push" [ngClass]="{'active': step === 2}" (click)="step = 2;">Rendelések</a>
+   <a class="menu-option third-push" [ngClass]="{'active': step === 2}" (click)="step = 2;">Garázs</a>
    <div *ngIf="step == 2" class="selected-rectangle third-selected"></div>
+   <a class="menu-option fourth-push" [ngClass]="{'active': step === 3}" (click)="step = 3;">Kívánságlista</a>
+   <div *ngIf="step == 3" class="selected-rectangle fourth-selected"></div>
+   <a class="menu-option fifth-push" [ngClass]="{'active': step === 4}" (click)="step = 4;">Árajánlatok</a>
+   <div *ngIf="step == 4" class="selected-rectangle fifth-selected"></div>
+   <a class="menu-option sixth-push" [ngClass]="{'active': step === 5}" (click)="step = 5;">Rendelések</a>
+   <div *ngIf="step == 5" class="selected-rectangle sixth-selected"></div>
+   <a class="menu-option seventh-push" [ngClass]="{'active': step === 6}" (click)="step = 6;">Kijelentkezés</a>
+   <div *ngIf="step == 6" class="selected-rectangle seventh-selected"></div>
 
 </mat-card>
 
@@ -18,31 +26,85 @@
 <div *ngIf="step == 0">
    <mat-card class="data-card">
 
-       <!-- Personal Data Label -->
+      <!-- Personal Data Label -->
       <p class="main-label">Személyes adatok</p>
       <mat-divider class="divider"></mat-divider>
 
       <!-- Email -->
-      <p class="email-label">EMAIL CÍM</p>
-      <input type="text" class="email-input" value="{{ getEmail() }}" disabled/>
+      <p class="label personal-email">EMAIL CÍM</p>
+      <input type="text" class="input personal-email-input" value="{{ getEmail() }}" disabled />
 
       <!-- Last Name -->
-      <p class="last-name-label">VEZETÉKNÉV</p>
-      <input type="text" class="last-name-input" value="{{ getLastName() }}" #lastName/>
+      <p class="label personal-last-name">VEZETÉKNÉV</p>
+      <input type="text" class="input personal-last-name-input" value="{{ getLastName() }}" #lastName />
 
       <!-- First Name -->
-      <p class="first-name-label">KERESZTNÉV</p>
-      <input type="text" class="first-name-input" value="{{ getFirstName() }}" #firstName/>
+      <p class="label personal-first-name">KERESZTNÉV</p>
+      <input type="text" class="input personal-first-name-input" value="{{ getFirstName() }}" #firstName />
 
       <!-- Phone -->
-      <p class="phone-label">TELEFONSZÁM</p>
-      <input type="text" class="phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #phone/>
+      <p class="label personal-phone">TELEFONSZÁM</p>
+      <input type="text" class="input personal-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #phone />
+
+   </mat-card>
+</div>
+
+<!-- Addresses -->
+<div *ngIf="step == 1 || step == 11">
+   <mat-card class="garage-card">
+
+      <!-- Addresses Label -->
+      <p class="main-label">Elmentett címek</p>
+      <mat-divider class="divider"></mat-divider>
+
+      <!-- List Addresses-->
+      <div *ngIf="step == 1">
+         <ng-container *ngFor="let address of currentUser.addresses; let i = index">
+            <tr>
+               <h2>{{ address.name }}</h2>
+            </tr>
+         </ng-container>
+
+         <button class="new-button" mat-raised-button color="warn" (click)="addNewAddress()">Új cím hozzáadása</button>
+      </div>
+
+      <div *ngIf="step == 11">
+         
+         <!-- Address Name -->
+         <p class="label address-name">CÍM NÉV</p>
+         <input type="text" class="address-name-input" placeholder="Otthon, Munkahely, stb." #addressName />
+
+         <!-- Address Email -->
+         <p class="label address-email">ÉRTESÍTÉSI EMAIL CÍM</p>
+         <input type="text" class="address-email-input" value="{{ getEmail() }}" #addressEmail />
+
+         <!-- Address Last Name -->
+         <p class="label address-last-name">VEZETÉKNÉV</p>
+         <input type="text" class="last-name-input" value="{{ getLastName() }}" #addressLastName />
+
+         <!-- Address First Name -->
+         <p class="label address-first-name">KERESZTNÉV</p>
+         <input type="text" class="first-name-input" value="{{ getFirstName() }}" #addressFirstName />
+
+         <!-- Address Company -->
+         <p class="label address-company">CÉG ADATOK<span class="optional"> (Nem kötelező)</span></p>
+         <input type="text" class="address-company-name-input" placeholder="Cég név" #addressCompanyName />
+         <input type="text" class="address-company-tax-input" placeholder="Adószám" #addressCompanyTax />
+
+         <!-- Phone -->
+         <p class="label address-phone">TELEFONSZÁM</p>
+         <input type="text" class="address-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #addressPhone />
+
+         <button class="save-button" mat-raised-button color="warn" (click)="saveAddress()">Cím mentése</button>
+      </div>
+
+
 
    </mat-card>
 </div>
 
 <!-- Garage -->
-<div *ngIf="step == 1">
+<div *ngIf="step == 5">
    <mat-card class="garage-card">
 
    </mat-card>

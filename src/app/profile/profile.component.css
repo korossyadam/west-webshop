@@ -92,6 +92,22 @@
    top: 145px;
 }
 
+.fourth-selected {
+   top: 185px;
+}
+
+.fifth-selected {
+   top: 225px;
+}
+
+.sixth-selected {
+   top: 265px;
+}
+
+.seventh-selected {
+   top: 305px;
+}
+
 .second-push {
    top: 100px;
 }
@@ -100,96 +116,81 @@
    top: 140px;
 }
 
-.email-label {
+.fourth-push {
+   top: 180px;
+}
+
+.fifth-push {
+   top: 220px;
+}
+
+.sixth-push {
+   top: 260px;
+}
+
+.seventh-push {
+   top: 300px;
+}
+
+.label {
    position: relative;
+   width: 260px;
+   height: 35px;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: #7a7a7a;
+}
+
+.personal-email {
    top: 10px;
    left: 10px;
-   width: 260px;
-   height: 35px;
-   font-size: 14px;
-   font-family: 'Roboto', sans-serif;
-   font-weight: bold;
-   color: #7a7a7a;
 }
 
-.email-input {
-   position: relative;
+.personal-last-name {
    top: -20px;
    left: 10px;
-   width: 260px;
-   height: 35px;
-   font-size: 17px;
-   font-family: 'Roboto', sans-serif;
 }
 
-.last-name-label {
-   position: relative;
-   top: -20px;
-   left: 10px;
-   width: 260px;
-   height: 35px;
-   font-size: 14px;
-   font-family: 'Roboto', sans-serif;
-   font-weight: bold;
-   color: #7a7a7a;
+.personal-first-name {
+   top: -122px;
+   left: 185px;
 }
 
-.last-name-input {
-   position: relative;
-   top: -50px;
+.personal-phone {
+   top: -100px;
    left: 10px;
-   width: 160px;
-   height: 35px;
+}
+
+.input {
+   position: relative;
+   width: 260px;
+   height: 30px;
    font-size: 17px;
    font-family: 'Roboto', sans-serif;
    background-color: #f8f8f8;
    border: 1px #ccc solid
 }
 
-.first-name-label {
-   position: absolute;
-   top: 130px;
-   left: 200px;
-   width: 260px;
-   height: 35px;
-   font-size: 14px;
-   font-family: 'Roboto', sans-serif;
-   font-weight: bold;
-   color: #7a7a7a;
+.personal-email-input {
+   top: -20px;
+   left: 10px;
 }
 
-.first-name-input {
-   position: absolute;
+.personal-last-name-input {
+   top: -50px;
+   left: 10px;
+   width: 160px;
+}
+
+.personal-first-name-input {
    top: 163px;
    left: 200px;
    width: 160px;
-   height: 35px;
-   font-size: 17px;
-   font-family: 'Roboto', sans-serif;
-   background-color: #f8f8f8;
-   border: 1px #ccc solid
 }
 
-.phone-label {
-   position: relative;
-   top: -50px;
-   left: 10px;
-   width: 260px;
-   height: 35px;
-   font-size: 14px;
-   font-family: 'Roboto', sans-serif;
-   font-weight: bold;
-   color: #7a7a7a;
-}
-
-.phone-input {
-   position: relative;
+.personal-phone-input {
    top: -80px;
    left: 10px;
    width: 160px;
-   height: 35px;
-   font-size: 17px;
-   font-family: 'Roboto', sans-serif;
-   background-color: #f8f8f8;
-   border: 1px #ccc solid
 }
