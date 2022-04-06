@@ -66,7 +66,7 @@
       <a routerLink="/main" (mouseover)="secondaryHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
    </div>
 
-   <div *ngIf="secondaryHover == 2" class="dropdown-second">
+   <div *ngIf="secondaryHover == 2" class="dropdown-horizontal">
       <a href="https://www.motul.com/hu/hu/lubricants" target="_blank">Motul olajkereső</a>
       <a href="https://www.mobil.co.uk/en-gb/product-selector/" target="_blank">Mobil 1 olajkereső</a>
       <a href="https://applications.castrol.com/oilselector/hu_hu/c/search" target="_blank">Castrol olajkereső</a>
@@ -98,7 +98,7 @@
 
 <!-- Account -->
 <div *ngIf="localStorageUser() != ''" class="dropdown profile-position">
-   <button class="dropbtn">{{ getName() }}<mat-icon class="arrow">expand_more</mat-icon><br><span>{{ getEmail() }}</span></button>
+   <button class="dropbtn user-name">{{ getName() }}<mat-icon class="arrow arrow-user">expand_more</mat-icon><br><span class="user-email">{{ getEmail() }}</span></button>
    <div class="dropdown-content">
       <a routerLink="/profile">Személyes adatok</a>
       <a routerLink="/profile">Link 3</a>

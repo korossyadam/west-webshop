@@ -168,11 +168,27 @@
    color: #9c9c9c;
 }
 
+.user-email {
+   display: inline-block;
+   width: 150px;
+   font-size: 13px;
+   font-family: 'Roboto', sans-serif;
+   white-space: nowrap;
+   overflow: hidden !important;
+   text-overflow: ellipsis;
+   color: #9c9c9c;
+}
+
 .arrow-expand {
    position: relative;
    top: 6px;
    left: 2px;
    color: #9c9c9c;
+}
+
+.arrow-user {
+   position: relative;
+   top: 6px;
 }
 
 .menu-position {
@@ -187,10 +203,8 @@
    left: 15%;
 }
 
-.profile-position {
-   right: 0.5%;
-}
 
+/* Dropdown button */
 .dropbtn {
    background-color: white;
    color: #333333;
@@ -205,6 +219,7 @@
    border: none;
 }
 
+/* Dropdown */
 .dropdown {
    position: fixed;
    top: 44px;
@@ -212,6 +227,7 @@
    z-index: 10;
 }
 
+/* Content of the dropdown */
 .dropdown-content {
    display: none;
    position: absolute;
@@ -221,6 +237,7 @@
    z-index: 1;
 }
 
+/* List-Elements of dropdown content */
 .dropdown-content a {
    color: #333333;
    padding: 12px 16px;
@@ -230,20 +247,24 @@
    cursor: pointer;
 }
 
+/* Dropdown content element background color change on hover */
 .dropdown-content a:hover {
    background-color: #ddd;
 }
 
+/* Set dropdown menu visible on hover */
 .dropdown:hover .dropdown-content {
    display: block;
 }
 
+/* Dropdown button background color change */
 .dropdown:hover .dropbtn {
    background-color: #dddddd;
    color: #333333;
 }
 
-.dropdown-second{
+/* Horizontal Dropdown */
+.dropdown-horizontal {
    display: none;
    position: relative;
    top: 105px;
@@ -254,7 +275,8 @@
    z-index: 1;
 }
 
-.dropdown-second a {
+/* Content of horizontal dropdown */
+.dropdown-horizontal a {
    color: #333333;
    padding: 12px 16px;
    font-family: 'Roboto', sans-serif;
@@ -263,20 +285,27 @@
    cursor: pointer;
 }
 
-.dropdown-second a:hover {
+/* Horizontal dropdown content element background color change on hover */
+.dropdown-horizontal a:hover {
    background-color: #ddd;
 }
 
-.dropdown:hover .dropdown-second {
+/* Set horizontal dropdown menu visible on hover */
+.dropdown:hover .dropdown-horizontal {
    display: block;
 }
 
-.dropdown:hover .dropbtn {
-   background-color: #dddddd;
-   color: #333333;
+.user-name {
+   width: 100%;
+   text-align: left;
+   padding: 0px 15px;
 }
 
-
+.profile-position {
+   position: absolute;
+   margin-top: -5px;
+   right: 0.5%;
+}
 
 ::ng-deep .mat-focused .mat-form-field-label {
    color: #f44336 !important;
