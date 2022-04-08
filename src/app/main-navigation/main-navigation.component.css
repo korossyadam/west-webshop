@@ -302,7 +302,7 @@
 }
 
 .profile-position {
-   position: absolute;
+   position: fixed;
    margin-top: -5px;
    right: 0.5%;
 }

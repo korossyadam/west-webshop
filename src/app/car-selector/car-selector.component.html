@@ -96,10 +96,6 @@
    <!-- Upper SideNav main content -->
    <mat-sidenav-content>
 
-      <div style="position: relative; top:200px">
-
-      </div>
-
       <!-- Lower SideNav for listElements -->
       <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container">
          <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" disableClose="true" #lowerSideNav>
@@ -171,13 +167,24 @@
 
          </mat-sidenav>
 
-         <!-- Actual main content -->
+         <!-- Actual main content with wrappers -->
          <mat-sidenav-content>
-            <div class="wrapper">
-               <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
-               <div class="push"></div>
+            <div class="main">
+
+               <!-- Push down scrollbar from top -->
+               <div class="pushed"></div>
+
+               <!-- Main Content -->
+               <div class="main">
+                  <div class="wrapper">
+                     <app-main-navigation (carSelectClickedEvent)="openSideNav()"></app-main-navigation>
+                     <div class="push"></div>
+                  </div>
+                  <app-footer></app-footer>
+               </div>
+
             </div>
-            <app-footer></app-footer>
+            
          </mat-sidenav-content>
 
       </mat-sidenav-container>

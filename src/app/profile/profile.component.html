@@ -72,30 +72,30 @@
          
          <!-- Address Name -->
          <p class="label address-name">CÍM NÉV</p>
-         <input type="text" class="address-name-input" placeholder="Otthon, Munkahely, stb." #addressName />
+         <input type="text" class="input address-name-input" placeholder="Otthon, Munkahely, stb." #addressName />
 
          <!-- Address Email -->
          <p class="label address-email">ÉRTESÍTÉSI EMAIL CÍM</p>
-         <input type="text" class="address-email-input" value="{{ getEmail() }}" #addressEmail />
+         <input type="text" class="input address-email-input" value="{{ getEmail() }}" #addressEmail />
 
          <!-- Address Last Name -->
          <p class="label address-last-name">VEZETÉKNÉV</p>
-         <input type="text" class="last-name-input" value="{{ getLastName() }}" #addressLastName />
+         <input type="text" class="input address-last-name-input" value="{{ getLastName() }}" #addressLastName />
 
          <!-- Address First Name -->
          <p class="label address-first-name">KERESZTNÉV</p>
-         <input type="text" class="first-name-input" value="{{ getFirstName() }}" #addressFirstName />
+         <input type="text" class="input address-first-name-input" value="{{ getFirstName() }}" #addressFirstName />
 
          <!-- Address Company -->
          <p class="label address-company">CÉG ADATOK<span class="optional"> (Nem kötelező)</span></p>
-         <input type="text" class="address-company-name-input" placeholder="Cég név" #addressCompanyName />
-         <input type="text" class="address-company-tax-input" placeholder="Adószám" #addressCompanyTax />
+         <input type="text" class="input address-company-name-input" placeholder="Cég név" #addressCompanyName />
+         <input type="text" class="input address-company-tax-input" placeholder="Adószám" #addressCompanyTax />
 
          <!-- Phone -->
          <p class="label address-phone">TELEFONSZÁM</p>
-         <input type="text" class="address-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #addressPhone />
+         <input type="text" class="input address-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #addressPhone />
 
-         <button class="save-button" mat-raised-button color="warn" (click)="saveAddress()">Cím mentése</button>
+         <button class="save-button" mat-raised-button color="warn" (click)="saveAddress(addressName.value, addressEmail.value, addressLastName.value, addressFirstName.value, addressCompanyName.value, addressCompanyTax.value, addressPhone.value)">Cím mentése</button>
       </div>
 
 

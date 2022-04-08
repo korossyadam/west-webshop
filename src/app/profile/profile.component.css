@@ -153,13 +153,28 @@
 }
 
 .personal-first-name {
-   top: -122px;
+   top: -117px;
    left: 185px;
 }
 
 .personal-phone {
-   top: -100px;
+   top: -147px;
    left: 10px;
+}
+
+.address-name {
+   top: 10px;
+   left: 10px;
+}
+
+.address-email {
+   top: -20px;
+   left: 10px;
+}
+
+.address-last-name {
+   top: -50px;
+   left:  10px;
 }
 
 .input {
@@ -184,13 +199,29 @@
 }
 
 .personal-first-name-input {
-   top: 163px;
-   left: 200px;
+   top: -147px;
+   left: 185px;
    width: 160px;
 }
 
 .personal-phone-input {
-   top: -80px;
+   top: -177px;
+   left: 10px;
+   width: 160px;
+}
+
+.address-name-input {
+   top: -20px;
+   left: 10px;
+}
+
+.address-email-input {
+   top: -50px;
+   left: 10px;
+}
+
+.address-last-name-input {
+   top: -50px;
    left: 10px;
    width: 160px;
 }

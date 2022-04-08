@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { first } from 'rxjs';
+import { Address } from '../models/address.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { ProfileService } from '../services/profile.service';
@@ -25,8 +26,14 @@ export class ProfileComponent implements OnInit {
       this.step = 11;
    }
 
-   saveAddress(): void {
+   saveAddress(name: string, email: string, lastName: string, firstName: string, companyName: string, companyTax: string, phone: string): void {
       this.step = 1;
+
+      var newAddress = new Address(name, email, '', '', '', '')
+
+      var newUser: User = this.currentUser;
+      var newAddresses: Address[] = this.currentUser.addresses;
+      newAddresses.push(newAddress);
    }
 
    getEmail(): string {
