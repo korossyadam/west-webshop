@@ -61,8 +61,8 @@
 <div *ngIf="localStorageUser() != ''" class="dropdown menu-position">
    <button class="dropbtn" (mouseover)="secondaryHover = -1">Főoldal<mat-icon class="arrow">expand_more</mat-icon></button>
    <div class="dropdown-content">
-      <a routerLink="/main" (mouseover)="secondaryHover = 0">Főoldal</a>
-      <a routerLink="/main" (mouseover)="secondaryHover = 1">Méret szerinti keresők</a>
+      <a routerLink="/main" (mouseover)="secondaryHover = 0">Főoldal<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/main" (mouseover)="secondaryHover = 1">Méret szerinti keresők<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
       <a routerLink="/main" (mouseover)="secondaryHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
    </div>
 
@@ -74,17 +74,38 @@
    </div>
 </div>
 
-<!-- Tools -->
+<!-- Equipment -->
 <div *ngIf="localStorageUser() != ''" class="dropdown tools-position">
-   <button class="dropbtn">Szerszámok<mat-icon class="arrow">expand_more</mat-icon></button>
+   <button class="dropbtn" (mouseover)="secondaryHover = -1">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></button>
+
+   <!-- Equipment: First list -->
    <div class="dropdown-content">
+      <a routerLink="/profile" (mouseover)="secondaryHover = 0">Szerszámok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="secondaryHover = 1">Garázs berendezések<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="secondaryHover = 2">Munkavédelmi kellékek<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+   </div>
+
+   <!-- Equipment: Second list -->
+   <div *ngIf="secondaryHover == 0" class="dropdown-horizontal">
       <a routerLink="/profile">Kézi szerszámok</a>
       <a routerLink="/profile">Elektromos szerszámok</a>
-      <a routerLink="/profile">Garázs berendezés</a>
+      <a routerLink="/profile">Pneumatikus szerszámok</a>
    </div>
+
+   <!-- Equipment: Second list -->
+   <div *ngIf="secondaryHover == 1" class="dropdown-horizontal">
+      <a routerLink="/profile">Garázs higiénia</a>
+      <a routerLink="/profile">Klíma szervízelése</a>
+   </div>
+
+   <div *ngIf="secondaryHover == 2" class="dropdown-horizontal">
+      <a routerLink="/profile">Ruházat</a>
+      <a routerLink="/profile">Biztonsági felszerelés</a>
+   </div>
+
 </div>
 
-<!-- Equipment -->
+<!-- Others -->
 <div *ngIf="localStorageUser() != ''" class="dropdown equipment-position">
    <button class="dropbtn">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></button>
    <div class="dropdown-content">
