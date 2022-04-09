@@ -59,14 +59,14 @@
 
 <!-- Home -->
 <div *ngIf="localStorageUser() != ''" class="dropdown menu-position">
-   <button class="dropbtn" (mouseover)="secondaryHover = -1">Főoldal<mat-icon class="arrow">expand_more</mat-icon></button>
+   <button class="dropbtn" (mouseover)="secondHover = -1">Főoldal<mat-icon class="arrow">expand_more</mat-icon></button>
    <div class="dropdown-content">
-      <a routerLink="/main" (mouseover)="secondaryHover = 0">Főoldal<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/main" (mouseover)="secondaryHover = 1">Méret szerinti keresők<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/main" (mouseover)="secondaryHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/main" (mouseover)="secondHover = 0">Főoldal<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/main" (mouseover)="secondHover = 1">Méret szerinti keresők<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/main" (mouseover)="secondHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
    </div>
 
-   <div *ngIf="secondaryHover == 2" class="dropdown-horizontal">
+   <div *ngIf="secondHover == 2" class="dropdown-horizontal">
       <a href="https://www.motul.com/hu/hu/lubricants" target="_blank">Motul olajkereső</a>
       <a href="https://www.mobil.co.uk/en-gb/product-selector/" target="_blank">Mobil 1 olajkereső</a>
       <a href="https://applications.castrol.com/oilselector/hu_hu/c/search" target="_blank">Castrol olajkereső</a>
@@ -76,31 +76,71 @@
 
 <!-- Equipment -->
 <div *ngIf="localStorageUser() != ''" class="dropdown tools-position">
-   <button class="dropbtn" (mouseover)="secondaryHover = -1">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></button>
+   <button class="dropbtn" (mouseover)="secondHover = -1">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></button>
 
    <!-- Equipment: First list -->
    <div class="dropdown-content">
-      <a routerLink="/profile" (mouseover)="secondaryHover = 0">Szerszámok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="secondaryHover = 1">Garázs berendezések<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="secondaryHover = 2">Munkavédelmi kellékek<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="secondHover = 0; thirdHover = -1">Szerszámok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="secondHover = 1; thirdHover = -1">Garázs berendezések<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="secondHover = 2; thirdHover = -1">Munkavédelmi kellékek<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="secondHover = 3; thirdHover = -1">Univerzális tartozékok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
    </div>
 
    <!-- Equipment: Second list -->
-   <div *ngIf="secondaryHover == 0" class="dropdown-horizontal">
+   <div *ngIf="secondHover == 0" class="dropdown-horizontal index-zero">
       <a routerLink="/profile">Kézi szerszámok</a>
       <a routerLink="/profile">Elektromos szerszámok</a>
       <a routerLink="/profile">Pneumatikus szerszámok</a>
+      <a routerLink="/profile">Mérőeszközök</a>
    </div>
 
-   <!-- Equipment: Second list -->
-   <div *ngIf="secondaryHover == 1" class="dropdown-horizontal">
-      <a routerLink="/profile">Garázs higiénia</a>
-      <a routerLink="/profile">Klíma szervízelése</a>
+   <div *ngIf="secondHover == 1" class="dropdown-horizontal index-one">
+      <a routerLink="/profile" (mouseover)="thirdHover = 0">Műhelyhigiénia<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="thirdHover = 1">Klíma szervíz<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="thirdHover = 2">Akkumulátor szervíz<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
    </div>
 
-   <div *ngIf="secondaryHover == 2" class="dropdown-horizontal">
+   <div *ngIf="secondHover == 2" class="dropdown-horizontal index-two">
       <a routerLink="/profile">Ruházat</a>
       <a routerLink="/profile">Biztonsági felszerelés</a>
+   </div>
+
+   <div *ngIf="secondHover == 3" class="dropdown-horizontal index-three">
+      <a routerLink="/profile" (mouseover)="thirdHover = 0">Alátétek és O-gyűrűk<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile" (mouseover)="thirdHover = 1">Biztosítékok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      <a routerLink="/profile">Csavaranyák</a>
+      <a routerLink="/profile">Gyorskötözők</a>
+      <a routerLink="/profile">Kábelvégek</a>
+      <a routerLink="/profile">Patentek</a>
+      <a routerLink="/profile">Menetjavítók</a>
+      <a routerLink="/profile">Rugók</a>
+      <a routerLink="/profile">Szorítóbilincsek</a>
+      <a routerLink="/profile">Sasszegek</a>
+      <a routerLink="/profile">Szegecsek</a>
+      <a routerLink="/profile">Szegecsanyák</a>
+   </div>
+
+   <div *ngIf="secondHover == 1 && thirdHover == 0" class="dropdown-horizontal horizontal-push-1 index-m-one">
+      <a routerLink="/profile">Kézhigiénia</a>
+      <a routerLink="/profile">Tisztítás</a>
+   </div>
+
+   <div *ngIf="secondHover == 1 && thirdHover == 2" class="dropdown-horizontal horizontal-push-1 index-m-one">
+      <a routerLink="/profile">Saruk</a>
+      <a routerLink="/profile">Töltők</a>
+      <a routerLink="/profile">Bikakábelek</a>
+      <a routerLink="/profile">Teszterek</a>
+      <a routerLink="/profile">Indítók</a>
+   </div>
+
+   <div *ngIf="secondHover == 3 && thirdHover == 0" class="dropdown-horizontal horizontal-push-1 index-m-seven">
+      <a routerLink="/profile">Alátétek</a>
+      <a routerLink="/profile">O-gyűrűk</a>
+   </div>
+
+   <div *ngIf="secondHover == 3 && thirdHover == 1" class="dropdown-horizontal horizontal-push-1 index-m-seven">
+      <a routerLink="/profile">Autós biztosítékok</a>
+      <a routerLink="/profile">Egyéb biztosítékok</a>
    </div>
 
 </div>

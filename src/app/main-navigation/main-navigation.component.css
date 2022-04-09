@@ -268,10 +268,9 @@
 .dropdown-horizontal {
    display: none;
    position: relative;
-   top: 105px;
    left: 222px;
    background-color: #f1f1f1;
-   min-width: 175px;
+   width: 222px;
    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
    z-index: 1;
 }
@@ -306,6 +305,46 @@
    position: fixed;
    margin-top: -5px;
    right: 0.5%;
+}
+
+.index-m-seven {
+   top: -301px;
+}
+
+.index-m-four {
+   top: -172px;
+}
+
+.index-m-three {
+   top: -129px;
+}
+
+.index-m-two {
+   top: -86px;
+}
+
+.index-m-one {
+   top: -43px;
+}
+
+.index-zero {
+   top: 0px;
+}
+
+.index-one {
+   top: 43px;
+}
+
+.index-two {
+   top: 86px;
+}
+
+.index-three {
+   top: 129px;
+}
+
+.horizontal-push-1 {
+   left: 444px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {

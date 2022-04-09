@@ -11,7 +11,8 @@ import { AuthService } from '../services/auth.service';
 export class MainNavigationComponent implements OnInit {
 
    public step: number = 0;
-   public secondaryHover: number = -1;
+   public secondHover: number = -1;
+   public thirdHover: number = -1;
 
    @Output() carSelectClickedEvent = new EventEmitter<boolean>();
    @ViewChild(ProductsComponent) child: ProductsComponent;
