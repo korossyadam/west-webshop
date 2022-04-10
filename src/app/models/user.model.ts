@@ -8,14 +8,16 @@ export class User {
    public phone: string;
    public garage: number[];
    public addresses: Address[];
+   public cart: string;
 
-   constructor(email: string, firstName: string, lastName: string, phone: string, garage: number[], addresses: Address[]) {
+   constructor(email: string, firstName: string, lastName: string, phone: string, garage: number[], addresses: Address[], cart: string) {
       this.email = email;
       this.firstName = firstName;
       this.lastName = lastName;
       this.phone = phone;
       this.garage = garage;
       this.addresses = addresses;
+      this.cart = cart;
       
    }
 }

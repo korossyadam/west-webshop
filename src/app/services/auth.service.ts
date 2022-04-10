@@ -30,6 +30,7 @@ export class AuthService {
                localStorage.setItem('firstName', user.firstName);
                localStorage.setItem('lastName', user.lastName);
                localStorage.setItem('phone', user.phone);
+               localStorage.setItem('cart', user.cart);
             })
 
          })
@@ -46,10 +47,11 @@ export class AuthService {
             localStorage.setItem('email', email);
             localStorage.setItem('lastName', lastName);
             localStorage.setItem('firstName', firstName);
+            localStorage.setItem('cart', '');
             this.router.navigate(['main']);
 
-            // Attach first name and last name in a seperate collection
-            var user: User = new User(email, firstName, lastName, '', [], []);
+            // Attach additional data in a seperate collection
+            var user: User = new User(email, firstName, lastName, '', [], [], '');
             this.afs.collection('users').doc(email).set(Object.assign({}, user));
 
          })
@@ -60,8 +62,10 @@ export class AuthService {
    logout() {
       AuthService.isLoggedIn = false;
       localStorage.removeItem('user');
+      localStorage.removeItem('email')
       localStorage.removeItem('firstName');
       localStorage.removeItem('lastName');
+      localStorage.removeItem('cart');
    }
 
 }

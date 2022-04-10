@@ -301,6 +301,122 @@
    padding: 0px 15px;
 }
 
+.cart-btn {
+   background-color: white;
+   color: #333333;
+   margin-top: 5px;
+   padding: 5px 20px;
+   padding-right: 35px;
+   font-size: 18px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   text-align: center;
+   text-decoration: none;
+   border: none;
+}
+
+.cart-btn:hover {
+   background-color: #dddddd;
+   color: #333333;
+   cursor: pointer;
+}
+
+.cart-icon {
+   position: relative;
+   top: 5px;
+}
+
+.cart-position {
+   position: fixed;
+   display: inline-block;
+   top: 44px;
+   right: 11%;
+   margin-top: -3px;
+   z-index: 11;
+}
+
+.cart-dropdown {
+   position: fixed;
+   top: 44px;
+   display: inline-block;
+   z-index: 10;
+}
+
+.cart-dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: white;
+   left: -150px;
+   width: 400px;
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+   z-index: 1;
+}
+
+.cart-dropdown:hover .cart-dropdown-content {
+   display: block;
+}
+
+.cart-dropdown:hover .cart-btn {
+   background-color: #dddddd;
+   color: #333333;
+}
+
+.cart-element-code {
+   position: absolute;
+   top: 25px;
+   left: 105px;
+   font-size: 16px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   text-decoration: none;
+   color: #333333;
+   height: 0px;
+}
+
+.cart-element-name {
+   position: absolute;
+   display: flex;
+   top: 50px;
+   left: 105px;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   text-decoration: none;
+   color: #9c9c9c;
+   height: 0px;
+}
+
+.cart-img {
+   height: 55px;
+   padding: 15px;
+}
+
+.delete-icon {
+   position: relative;
+   display: flex;
+   top: -75px;
+   left: 360px;
+   height: 0px;
+   line-height: 0px;
+}
+
+.cart-indicator {
+   position: relative;
+	display: inline-block;
+   top: -12px;
+   left: -95px;
+	background-color: #f44336;
+	border-radius: 3px;
+	border: 2px solid #f44336;
+	cursor: pointer;
+	font-size: 9px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+	color:#ffffff;
+	padding: 1px 1px;
+	text-decoration: none;
+}
+
 .profile-position {
    position: fixed;
    margin-top: -5px;

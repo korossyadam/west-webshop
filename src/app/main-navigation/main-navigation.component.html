@@ -157,6 +157,32 @@
    </div>
 </div>
 
+<!-- Cart -->
+<div *ngIf="localStorageUser() != ''" class="cart-dropdown cart-position">
+   <button class="cart-btn"><mat-icon class="cart-icon">shopping_cart</mat-icon>Kosár<mat-icon class="arrow">expand_more</mat-icon></button>
+   <button *ngIf="cartItems.length > 0" class="cart-indicator">{{ cartItems.length }}</button>
+   <div class="cart-dropdown-content">
+      <div *ngFor="let product of cartItems;">
+
+         <div style="position: relative">
+            <img src="{{ product.imgurl[0] }}" class="cart-img">
+            <a routerLink="/profile" class="cart-element-code">{{ product.partNumber }}</a>
+            <a routerLink="/profile" class="cart-element-name">{{ product.name }}</a>
+
+            <!-- Delete button -->
+            <button mat-icon-button class="delete-icon" (click)="deleteCartItem(0)">
+               <mat-icon>close</mat-icon>
+            </button>
+
+            <mat-divider class="divider"></mat-divider>
+         </div>
+
+         
+         
+      </div>
+   </div>
+</div>
+
 <!-- Account -->
 <div *ngIf="localStorageUser() != ''" class="dropdown profile-position">
    <button class="dropbtn user-name">{{ getName() }}<mat-icon class="arrow arrow-user">expand_more</mat-icon><br><span class="user-email">{{ getEmail() }}</span></button>
