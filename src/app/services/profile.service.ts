@@ -11,7 +11,7 @@ export class ProfileService {
 
    constructor(private afs: AngularFirestore, private db: AngularFireDatabase) { }
 
-   // Get current user
+   // Get current User
    getCurrentUser(): Observable<User[]> {
       return this.afs.collection('users', ref => {
          let query: CollectionReference | Query = ref;
@@ -19,5 +19,10 @@ export class ProfileService {
          //query = query.orderBy('name', 'asc');
          return query;
       }).valueChanges() as Observable<User[]>;
+   }
+
+   // Update current User
+   updateCurrentUser(newUser: User): void {
+      this.afs.doc('users/' + localStorage.getItem('email')).update(newUser);
    }
 }

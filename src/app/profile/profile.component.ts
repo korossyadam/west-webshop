@@ -26,16 +26,28 @@ export class ProfileComponent implements OnInit {
       this.step = 11;
    }
 
-   saveAddress(name: string, email: string, lastName: string, firstName: string, companyName: string, companyTax: string, phone: string): void {
+   // Add a new Address to current User
+   saveAddress(name: string, email: string, lastName: string, firstName: string, companyName: string, companyTax: string, phone: string, zip: string, city: string, street: string): void {
       this.step = 1;
 
-      var newAddress = new Address(name, email, '', '', '', '')
+      // Define new Address by input data
+      var newAddress = new Address(name, email, firstName, lastName, companyName, companyTax, phone, zip, city, street);
 
+      // Create a new User with old Users data
       var newUser: User = this.currentUser;
+
+      // Add new Address to Address[]
       var newAddresses: Address[] = this.currentUser.addresses;
       newAddresses.push(newAddress);
+
+      // Map custom objects into pure Javascript objects
+      const objects = newAddresses.map((obj)=> {return Object.assign({}, obj)});
+      newUser.addresses = objects;
+
+      this.profileService.updateCurrentUser(newUser);
    }
 
+   // Return Email from localStorage
    getEmail(): string {
       var email = localStorage.getItem('email');
       if (email != null)
@@ -44,6 +56,7 @@ export class ProfileComponent implements OnInit {
          return '';
    }
 
+   // Return LastName from localStorage
    getLastName(): string {
       var lastName = localStorage.getItem('lastName');
       if (lastName != null)
@@ -52,6 +65,7 @@ export class ProfileComponent implements OnInit {
          return '';
    }
 
+   // Return FirstName from localStorage
    getFirstName(): string {
       var firstName = localStorage.getItem('firstName');
       if (firstName != null)
@@ -60,6 +74,7 @@ export class ProfileComponent implements OnInit {
          return '';
    }
 
+   // Return Phone from localStorage
    getPhone(): string {
       var phone = localStorage.getItem('phone');
       if (phone != null && phone != 'undefined')

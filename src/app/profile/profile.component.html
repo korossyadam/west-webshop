@@ -68,8 +68,9 @@
          <button class="new-button" mat-raised-button color="warn" (click)="addNewAddress()">Új cím hozzáadása</button>
       </div>
 
+      <!-- Add new Address form -->
       <div *ngIf="step == 11">
-         
+
          <!-- Address Name -->
          <p class="label address-name">CÍM NÉV</p>
          <input type="text" class="input address-name-input" placeholder="Otthon, Munkahely, stb." #addressName />
@@ -91,14 +92,25 @@
          <input type="text" class="input address-company-name-input" placeholder="Cég név" #addressCompanyName />
          <input type="text" class="input address-company-tax-input" placeholder="Adószám" #addressCompanyTax />
 
-         <!-- Phone -->
+         <!-- Address Phone -->
          <p class="label address-phone">TELEFONSZÁM</p>
          <input type="text" class="input address-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #addressPhone />
 
-         <button class="save-button" mat-raised-button color="warn" (click)="saveAddress(addressName.value, addressEmail.value, addressLastName.value, addressFirstName.value, addressCompanyName.value, addressCompanyTax.value, addressPhone.value)">Cím mentése</button>
+         <!-- Address ZIP -->
+         <p class="label address-zip">IRÁNYÍTÓSZÁM</p>
+         <input type="text" class="input address-zip-input" placeholder="7100" #addressZip />
+
+         <!-- Address City -->
+         <p class="label address-city">TELEPÜLÉS</p>
+         <input type="text" class="input address-city-input" placeholder="Szekszárd" #addressCity />
+
+         <!-- Address City -->
+         <p class="label address-street">CÍM</p>
+         <input type="text" class="input address-street-input" placeholder="Páskum utca 2." #addressStreet />
+
+         <!-- Button to add new Address to currentUser -->
+         <button class="save-button" mat-raised-button color="warn" (click)="saveAddress(addressName.value, addressEmail.value, addressLastName.value, addressFirstName.value, addressCompanyName.value, addressCompanyTax.value, addressPhone.value, addressZip.value, addressCity.value, addressStreet.value)">Cím mentése</button>
       </div>
-
-
 
    </mat-card>
 </div>

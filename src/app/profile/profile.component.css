@@ -1,35 +1,35 @@
 .menu-card {
-   top: 180px;
+   top: 100px;
    left: 21%;
    width: 12%;
-   height: 500px;
+   height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
 }
 
 .data-card {
    position: absolute;
-   top: 180px;
+   top: 100px;
    left: 37%;
    width: 35%;
-   height: 500px;
+   height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
 }
 
 .order-card {
    position: absolute;
-   top: 180px;
+   top: 100px;
    left: 37%;
    width: 35%;
-   height: 500px;
+   height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
 }
 
 .garage-card {
    position: absolute;
-   top: 180px;
+   top: 100px;
    left: 37%;
    width: 35%;
-   height: 500px;
+   height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
 }
 
@@ -177,6 +177,36 @@
    left:  10px;
 }
 
+.address-first-name {
+   top: -147px;
+   left: 190px;
+}
+
+.address-company {
+   top: -177px;
+   left: 10px;
+}
+
+.address-phone {
+   top: -170px;
+   left: 10px;
+}
+
+.address-zip {
+   top: -200px;
+   left: 10px;
+}
+
+.address-city {
+   top: -297px;
+   left: 120px;
+}
+
+.address-street {
+   top: -395px;
+   left: 265px;
+}
+
 .input {
    position: relative;
    width: 260px;
@@ -221,7 +251,52 @@
 }
 
 .address-last-name-input {
-   top: -50px;
+   top: -80px;
    left: 10px;
    width: 160px;
+}
+
+.address-first-name-input {
+   top: -177px;
+   left: 190px;
+   width: 160px;
+}
+
+.address-company-name-input {
+   top: -207px;
+   left: 10px;
+}
+
+.address-company-tax-input {
+   top: -170px;
+   left: -255px;
+}
+
+.address-phone-input {
+   top: -200px;
+   left: 10px;
+   width: 160px;
+}
+
+.address-zip-input {
+   top: -230px;
+   left: 10px;
+   width: 95px;
+}
+
+.address-city-input {
+   top: -327px;
+   left: 120px;
+   width: 130px;
+}
+
+.address-street-input {
+   top: -424px;
+   left: 265px;
+   width: 180px;
+}
+
+.save-button {
+   top: -375px;
+   left: -175px;
 }
