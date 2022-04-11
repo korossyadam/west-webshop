@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { FooterComponent } from './footer/footer.component';
     ProfileComponent,
     HomeComponent,
     FooterComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
