@@ -14,6 +14,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -55,6 +56,7 @@ import { CartComponent } from './cart/cart.component';
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,

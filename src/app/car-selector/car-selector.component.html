@@ -100,7 +100,7 @@
       <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container">
          <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" disableClose="true" #lowerSideNav>
             <div class="lower-menu">
-               <tbody>
+               <tbody *ngIf="!loading">
 
                   <div class="framed">
                      <!-- Brand selector-->
@@ -140,7 +140,7 @@
                      <td class="decor-row fifth-width fixed_4">LE</td>
                      <td class="decor-row fifth-width fixed_5">CM<sup>3</sup></td>
 
-                     <div class="framed">
+                     <div class="framed" style="margin-top: 10px;">
                         <ng-container *ngFor="let car of carsActive; let i = index">
 
                            <tr *ngIf="lastDecor != getNewDecor(car.engine)">
@@ -151,8 +151,8 @@
                               <td class="decor-row fifth-width"></td>
                            </tr>
                            <tr>
-                              <td id={{i}} class="car-type-button fifth-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(car.engine)">{{ car.engine }}<span class="engine-code"><br>{{ carsActive?.[i]?.engineCode }}</span></td>
-                              <td class="car-type-button fifth-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.year }}</td>
+                              <td id={{i}} class="car-type-button engine-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)" (click)="selectElements(car.engine)">{{ car.engine }}<span class="engine-code"><br>{{ carsActive?.[i]?.engineCode }}</span></td>
+                              <td class="car-type-button year-width" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.year }}</td>
                               <td class="car-type-button fifth-width center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.kw }}</td>
                               <td class="car-type-button fifth-width center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.hp }}</td>
                               <td class="car-type-button fifth-width center" [ngClass]="{'hovered': hoveredTextIndex === i}" (mouseover)="setHoveredIndex(i)">{{ carsActive?.[i]?.displacement }}</td>
@@ -163,7 +163,15 @@
                   </div>
 
                </tbody>
+
+               <!-- Spinning loading screen -->
+               <mat-spinner *ngIf="loading" color="warn" class="spinner"></mat-spinner>
+
             </div>
+
+
+            
+
 
          </mat-sidenav>
 

@@ -4,3 +4,7 @@
 html, body{
     background-color: #ededed;
 }
+
+.mat-drawer-inner-container {
+   overflow-y: scroll !important;
+}

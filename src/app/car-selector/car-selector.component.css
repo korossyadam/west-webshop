@@ -31,7 +31,7 @@ body {
 
 .upper-menu {
    position: fixed;
-   background-color: #1b2936;
+   background-color: #333333;
    top: 0px;
    left: 0px;
    width: 560px;
@@ -60,7 +60,7 @@ body {
 }
 
 .lower-menu {
-   position: flex;
+   position: relative;
    width: 560px;
    max-width: 96%;
    margin-left: 10px;
@@ -150,7 +150,7 @@ body {
 .close-icon {
    position: fixed;
    color: #6e6e6e;
-   margin-top: 18px;
+   margin-top: 15px;
    margin-left: 505px;
 }
 
@@ -179,7 +179,7 @@ body {
 }
 
 .hovered {
-   background-color: #1b2936;
+   background-color: #333333;
    color: #ffffff;
 }
 
@@ -199,41 +199,41 @@ body {
    position: fixed;
    top: 200px;
    left: 20px;
-   padding-top: 10px;
-   padding-right: 418px;
+   padding-top: 7px;
+   padding-right: 409px;
+   padding-bottom: 6px;
    margin: 0px;
-   padding-bottom: 9px;
 }
 
 .fixed_2 {
    position: fixed;
    top: 200px;
-   padding-top: 10px;
-   left: 119px;
+   padding-top: 7px;
+   left: 117px;
 }
 
 .fixed_3 {
    position: fixed;
    top: 200px;
-   padding-top: 10px;
-   left: 256px;
-   padding-bottom: 9px;
+   padding-top: 7px;
+   left: 280px;
+   padding-bottom: 6px;
 }
 
 .fixed_4 {
    position: fixed;
    top: 200px;
-   padding-top: 10px;
-   left: 361px;
-   padding-bottom: 9px;
+   padding-top: 7px;
+   left: 371px;
+   padding-bottom: 6px;
 }
 
 .fixed_5 {
    position: fixed;
    top: 200px;
-   padding-top: 6px;
+   padding-top: 3px;
    padding-right: 0px;
-   left: 461px;
+   left: 455px;
    background-color: transparent;
 }
 
@@ -248,6 +248,15 @@ body {
 
 .fifth-width {
    width: 82px;
+}
+
+.engine-width {
+   width: 85px;
+}
+
+.year-width {
+   width: 120px;
+   white-space: nowrap;
 }
 
 .center {
@@ -296,3 +305,11 @@ html, body {
    top: 54px;
    bottom: 0;
 }
+
+.spinner {
+   position: absolute;
+   top: 100px;
+   left: 180px;
+
+}
+

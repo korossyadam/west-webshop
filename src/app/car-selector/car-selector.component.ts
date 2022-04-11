@@ -53,6 +53,8 @@ export class CarSelectorComponent implements OnInit {
    public imgCardHeight = 0;
    public hoveredTextIndex = -1;
 
+   public loading = false;
+
    constructor(private carSelectorService: CarSelectorService, private cdr: ChangeDetectorRef) { }
 
    // KeyBoardListener - we use this to close all sidenavs with ESCAPE
@@ -209,45 +211,56 @@ export class CarSelectorComponent implements OnInit {
 
    // This method calls carSelectorService to check for cars in searched brand
    selectElements(selected: string): void {
-      selected = selected.replace(/(\r\n|\n|\r)/gm, "");
-      this.hoveredTextIndex = -1;
+      this.loading = true;
 
-      // Chassis selection (stage 0 -> stage 1)
-      if (this.stage == 0) {
-         this.carSelectorService.selectBrand(selected).pipe(first()).subscribe(data => {
-            this.chassis = data;
-            this.chassisActive = this.chassis;
+      waitForElm('.mat-drawer-inner-container').then((elm) => {
+         
 
-            this.listElements = [];
-            var counter = 0;
-            for (var objec of this.chassis) {
-               this.listElements[counter] = this.chassis[counter].name;
-               counter += 1;
-            }
+         document.querySelectorAll('.mat-drawer-inner-container')[1]!.scrollTop = 0;
+         selected = selected.replace(/(\r\n|\n|\r)/gm, "");
+         this.hoveredTextIndex = -1;
 
-            console.log(this.chassisActive.length);
-
+         // Chassis selection (stage 0 -> stage 1)
+         if (this.stage == 0) {
             this.stage += 1;
-            this.lastSelectedBrand = selected;
-         });
 
-         // Engine selection (stage 1 -> stage 2)
-      } else if (this.stage == 1) {
-         this.carSelectorService.selectChassis(selected).pipe(first()).subscribe(data => {
-            this.cars = data;
-            this.carsActive = this.cars;
+            this.carSelectorService.selectBrand(selected).pipe(first()).subscribe(data => {
+               this.chassis = data;
+               this.chassisActive = this.chassis;
 
-            this.listElements = [];
-            var counter = 0;
-            for (var objec of this.cars) {
-               this.listElements[counter] = this.cars[counter].engine;
-               counter += 1;
-            }
+               this.listElements = [];
+               var counter = 0;
+               for (var objec of this.chassis) {
+                  this.listElements[counter] = this.chassis[counter].name;
+                  counter += 1;
+               }
 
+               this.lastSelectedBrand = selected;
+               this.loading = false;
+            });
+
+            // Engine selection (stage 1 -> stage 2)
+         } else if (this.stage == 1) {
             this.stage += 1;
-            this.lastSelectedChassis = selected;
-         });
-      }
+            this.carSelectorService.selectChassis(selected).pipe(first()).subscribe(data => {
+               this.cars = data;
+               this.carsActive = this.cars;
+
+               this.listElements = [];
+               var counter = 0;
+               for (var objec of this.cars) {
+                  this.listElements[counter] = this.cars[counter].engine;
+                  counter += 1;
+               }
+               
+               this.lastSelectedChassis = selected;
+               this.loading = false;
+            });
+         }
+
+         
+      });
+      
 
    }
 
@@ -355,6 +368,26 @@ export class CarSelectorComponent implements OnInit {
    }
    */
 
+}
+
+function waitForElm(selector: string) {
+   return new Promise(resolve => {
+       if (document.querySelector(selector)) {
+           return resolve(document.querySelector(selector));
+       }
+
+       const observer = new MutationObserver(mutations => {
+           if (document.querySelector(selector)) {
+               resolve(document.querySelector(selector));
+               observer.disconnect();
+           }
+       });
+
+       observer.observe(document.body, {
+           childList: true,
+           subtree: true
+       });
+   });
 }
 
 
