@@ -1,6 +1,7 @@
 <!-- Displayed selected vehicle image on top of everything-->
 <mat-card *ngIf="hoveredTextIndex != -1 && stage == 1" [ngStyle]="imgCardStyle">
-   <img src="{{ chassisActive[hoveredTextIndex].imgurl }}" alt="" onerror="this.src='https://www.bcm-institute.org/wp-content/uploads/2020/11/No-Image-Icon.png'">
+   <img *ngIf="chassisActive[hoveredTextIndex].imgurl != ''" src="{{ chassisActive[hoveredTextIndex].imgurl }}" alt="">
+   <mat-icon *ngIf="chassisActive[hoveredTextIndex].imgurl == ''" class="error-icon">image_not_supported</mat-icon>
 </mat-card>
 
 <!-- Upper SideNav for searchbars -->
@@ -98,7 +99,7 @@
 
       <!-- Lower SideNav for listElements -->
       <mat-sidenav-container hasBackdrop="true" class="lower-sidenav-container">
-         <mat-sidenav class="lower-sidenav" mode="over" (onClose)="closeSideNavs()" disableClose="true" #lowerSideNav>
+         <mat-sidenav class="lower-sidenav" [ngClass]="{'gray-background': loading}" mode="over" (onClose)="closeSideNavs()" disableClose="true" #lowerSideNav>
             <div class="lower-menu">
                <tbody *ngIf="!loading">
 
@@ -168,10 +169,6 @@
                <mat-spinner *ngIf="loading" color="warn" class="spinner"></mat-spinner>
 
             </div>
-
-
-            
-
 
          </mat-sidenav>
 

@@ -66,6 +66,10 @@ body {
    margin-left: 10px;
 }
 
+.gray-background {
+   background-color:#dedede;
+}
+
 .framed {
    padding: 10px;
    top: 20px;
@@ -160,6 +164,13 @@ body {
    margin: 20px;
 }
 
+.error-icon {
+   position: absolute;
+   top: 44%;
+   left: 45%;
+   transform: scale(5);
+}
+
 .vehicle-type-button {
    position: absolute;
    width: 112px;
@@ -251,7 +262,7 @@ body {
 }
 
 .engine-width {
-   width: 85px;
+   width: 120px;
 }
 
 .year-width {
@@ -285,12 +296,6 @@ html, body {
    height: 180px;
 }
 
-.whole {
-   overflow: hidden;
-   width: 100%;
-   height: 100%;
-}
-
 .pushed {
    overflow: auto;
    position: absolute;
@@ -308,7 +313,7 @@ html, body {
 
 .spinner {
    position: absolute;
-   top: 100px;
+   top: 200px;
    left: 180px;
 
 }
