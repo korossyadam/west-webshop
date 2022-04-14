@@ -1,0 +1,159 @@
+.container {
+   filter: drop-shadow(0px 0px 7px rgba(0, 0, 0, 0.8));
+}
+
+.bcg-image {
+   position: absolute;
+   clip-path: polygon(0% 0%, 100% 0%, 100% 96.5%, 90% 96.5%, 89.25% 100%, 10.75% 100%, 10% 96.5%, 0% 96.5%);
+   top: 0px;
+   left: 0px;
+   margin: 0;
+   padding: 0;
+   z-index: -999;
+}
+
+.main-label {
+   position: absolute;
+   top: 15px;
+   width: 100%;
+   margin: 0 auto;
+   text-align: center;
+   font-size: 36px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: #333333;
+}
+
+.white-bcg {
+   position: relative;
+   clip-path: polygon(0% 15%, 26.5% 15%, 29% 0%, 72% 0%, 74.5% 15%, 100% 15%, 100% 89.5%, 68% 89.5%, 66% 100%, 34% 100%, 32% 89.5%, 0% 89.5%);
+   top: 100px;
+   left: 50%;
+   width: 810px;
+   height: 215px;
+   margin-left: -405px;
+   background-color: white;
+}
+
+.small-bcg {
+   position: relative;
+   top: 150px;
+   left: 50%;
+   width: 640px;
+   height: 40px;
+   margin-left: -320px;
+   background-color: white;
+}
+
+.small-text1 {
+   position: absolute;
+   top: -10px;
+   left: 10px;
+   font-size: 19px;
+   font-family: 'Roboto', sans-serif;
+}
+
+.small-text2 {
+   position: absolute;
+   top: -10px;
+   left: 340px;
+   font-size: 19px;
+   font-family: 'Roboto', sans-serif;
+}
+
+.small-img {
+   position: absolute;
+   top: 0px;
+   left: 146px;
+   margin-top: 10px;
+}
+
+.bold {
+   color:#f44336;
+   font-weight: bold;
+}
+
+.label {
+   position: absolute;
+   top: 110px;
+   width: 100%;
+   margin: 0 auto;
+   text-align: center;
+   font-size: 36px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: bold;
+   color: white;
+}
+
+.voltage {
+   position: absolute;
+   top: 50px;
+   left: 20px;
+}
+
+.capacity {
+   position: absolute;
+   top: 50px;
+   left: 220px;
+   font-size: 16px;
+}
+
+.starter {
+   position: absolute;
+   top: 50px;
+   left: 420px;
+}
+
+.polarity {
+   position: absolute;
+   top: 50px;
+   left: 620px;
+}
+
+.length {
+   position: absolute;
+   top: 100px;
+   left: 140px;
+}
+
+.width {
+   position: absolute;
+   top: 100px;
+   left: 340px;
+}
+
+.height {
+   position: absolute;
+   top: 100px;
+   left: 540px;
+}
+
+.white {
+   color: white;
+}
+
+.form-field {
+   width: 175px;
+   font-family: 'Roboto', sans-serif;
+}
+
+.smaller {
+   width: 145px;
+}
+
+.mat-option {
+   height: 35px !important;
+}
+
+.search-button {
+   position: absolute;
+   top: 160px;
+   left: 50%;
+   width: 200px;
+   height: 40px;
+   margin-left: -100px;
+}
+
+::ng-deep .mat-select-panel {
+   max-height: 30vh !important;
+ }

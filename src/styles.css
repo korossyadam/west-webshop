@@ -8,3 +8,9 @@ html, body{
 .mat-drawer-inner-container {
    overflow-y: scroll !important;
 }
+
+.select-panel {
+   margin-top: 26px !important; 
+   margin-right: 20px !important;
+   right: 50px !important;
+}
