@@ -15,6 +15,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -59,6 +61,8 @@ import { BatteryComponent } from './battery/battery.component';
     MatInputModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
+    MatExpansionModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,

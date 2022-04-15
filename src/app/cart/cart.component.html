@@ -1,1 +1,88 @@
-<p>cart works!</p>
+<!-- Stepper on the left -->
+<mat-stepper class="stepper" [linear]="false" #stepper>
+
+   <!-- Check Products in Cart -->
+   <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+         <ng-template matStepLabel>Kosár áttekintése</ng-template>
+
+         <!-- Cart elements ngFor-->
+         <div *ngFor="let product of cartItems; trackBy: trackByIdentifier; let i = index">
+            <div style="position: relative">
+
+               <!-- Expansion Panel -->
+               <mat-accordion class="example-headers-align" multi>
+                  <mat-expansion-panel (opened)="openedItem(0)">
+
+                     <!-- Header -->
+                     <mat-expansion-panel-header class="header">
+                        <mat-panel-title>
+                           <!-- Product info -->
+                           <div class="img-bcg">
+                              <img src="{{ product.imgurl[i] }}" class="cart-img">
+                           </div>
+                           <a routerLink="/profile" class="cart-element-name">{{ product.partNumber }}</a>
+                           <a routerLink="/profile" class="cart-element-code">{{ product.name }}<span class="cart-element-brand">, {{ product.brand }}</span></a>
+                           <p class="cart-element-price">{{ product.price }}<span class="cart-element-amount">({{ cartItemsAmount[i] }} db)</span></p>
+
+                           <!-- Delete button -->
+                           <button mat-icon-button class="delete-icon" (click)="deleteCartItem(0)">
+                              <mat-icon>close</mat-icon>
+                           </button>
+
+                           <!-- Divider -->
+                           <mat-divider class="divider"></mat-divider>
+                        </mat-panel-title>
+                     </mat-expansion-panel-header>
+
+                     <!-- Hidden content: details, properties -->
+                     <p class="property-title">Részletek</p>
+                     <div *ngFor="let property of product.properties">
+                        <p class="property-text">{{ property }}</p>
+                     </div>
+
+                     <!-- Hidden content: factoryNumbers -->
+                     <div class="factory-numbers-position">
+                        <p class="factory-numbers-title">Gyári számok</p>
+                        <div *ngFor="let factoryNumber of product.factoryNumbers | slice:0:8;">
+                           <p class="factory-numbers-text">{{ factoryNumber }}</p>
+                        </div>
+                     </div>
+                     
+
+                  </mat-expansion-panel>
+               </mat-accordion>
+
+            </div>
+         </div>
+
+         <!-- Next Button-->
+         <button class="next-button" mat-raised-button color="warn" matStepperNext>Tovább</button>
+
+      </form>
+   </mat-step>
+
+   <!-- Select delivery info -->
+   <mat-step [stepControl]="secondFormGroup" label="Adatok kitöltése">
+      <form [formGroup]="secondFormGroup">
+         <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+         </mat-form-field>
+         <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+         </div>
+      </form>
+   </mat-step>
+
+   <!-- Confirm order -->
+   <mat-step>
+      <ng-template matStepLabel>Rendelés megerősítése</ng-template>
+      <p>You are now done.</p>
+      <div>
+         <button mat-button matStepperPrevious>Back</button>
+         <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+   </mat-step>
+</mat-stepper>
