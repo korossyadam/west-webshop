@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
@@ -9,10 +10,14 @@ import { ProductsService } from '../services/products.service';
    templateUrl: './cart.component.html',
    styleUrls: ['./cart.component.css']
 })
+
 export class CartComponent implements OnInit {
 
    firstFormGroup: FormGroup;
    secondFormGroup: FormGroup;
+
+   @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
+   dialogList: string[] = [];
 
    cartItems: Product[];
    cartItemsAmount: number[];
@@ -22,7 +27,7 @@ export class CartComponent implements OnInit {
 
    trackByIdentifier = (index: number, item: Product) => item.partNumber;
 
-   constructor(private productService: ProductsService, private _formBuilder: FormBuilder) { }
+   constructor(private productService: ProductsService, private _formBuilder: FormBuilder, public dialog: MatDialog) { }
 
    ngOnInit(): void {
       this.firstFormGroup = this._formBuilder.group({
@@ -91,13 +96,25 @@ export class CartComponent implements OnInit {
       if(this.isCartItemUpdated[index])
          return;
 
-      this.productService.getProduct('products', this.cartItems[index].partNumber).pipe(first()).subscribe(data => this.cartItems[index] = data[0]);
+      this.productService.getProduct('products', this.cartItems[index].partNumber).pipe(first()).subscribe(data => {
+         this.cartItems[index] = data[0];  
+         this.dialogList = this.cartItems[index].factoryNumbers});
+         
       this.isCartItemUpdated[index] = true;
    }
 
    deleteCartItem(index: number): void {
 
    }
+
+   openDialog() {
+      const myTempDialog = this.dialog.open(this.dialogRef, { data: this.dialogList });
+      myTempDialog.afterClosed().subscribe((res) => {
+  
+        // Data back from dialog
+        console.log({ res });
+      });
+    }
 
    formatPriceToString(total: number): string {
       var returnString = '';

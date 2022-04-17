@@ -190,7 +190,7 @@
 .cart-img {
    height: 90px;
    padding: 10px;
-   padding-left: 5px;
+   padding-left: 0px;
    padding-right: 5px;
 }
 
@@ -259,6 +259,32 @@
    font-family: 'Roboto', sans-serif;
    font-weight: 500;
    margin: 0;
+}
+
+.factory-numbers-btn {
+   position: relative;
+   top: 10px;
+   font-size: 13px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   background-color: #333333;
+   color: white;
+}
+
+.dialog-title {
+   font-size: 18px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+}
+
+.dialog-text {
+   position: relative;
+   left: -10px;
+   font-size: 14px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   margin-top: 0px;
+   margin-bottom: 2px;
 }
 
 .next-button {

@@ -47,7 +47,12 @@
                         <div *ngFor="let factoryNumber of product.factoryNumbers | slice:0:8;">
                            <p class="factory-numbers-text">{{ factoryNumber }}</p>
                         </div>
+                        
+                        <!-- Show all factoryNumbers if numbers exceed max amount -->
+                        <button *ngIf="product.factoryNumbers.length > 8" class="factory-numbers-btn" mat-button (click)="openDialog()">Összes gyári szám megtekintése</button>
                      </div>
+
+                     
                      
 
                   </mat-expansion-panel>
@@ -86,3 +91,12 @@
       </div>
    </mat-step>
 </mat-stepper>
+
+
+<ng-template #dialogRef let-mydata>
+   <p class="dialog-title">Gyári számok:</p>
+   <ul *ngIf="mydata">
+     <li *ngFor="let item of mydata" class="dialog-text">{{item}}</li>
+   </ul>
+   <button class="factory-numbers-btn" mat-button mat-dialog-close>Vissza</button>
+ </ng-template>
