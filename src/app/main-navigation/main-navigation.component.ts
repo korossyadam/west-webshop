@@ -35,10 +35,11 @@ export class MainNavigationComponent implements OnInit {
       this.cartItems = [];
       this.cartItemsAmount = [];
 
-      var parts: string[] = localStorage.getItem('cart')?.split('/')!;
+      var localStorageCart = localStorage.getItem('cart');
+      var parts: string[] = localStorageCart?.split('/')!;
 
       var total = 0;
-      if (parts[0] != 'undefined') {
+      if (parts[0] != 'undefined' && localStorageCart !== '') {
 
          for (var i = 0; i < parts.length; i++) {
             var attributes = parts[i].split('!');

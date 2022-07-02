@@ -5,13 +5,20 @@
    width: 20%;
    margin-left: -10%;
    font-size: 30px;
-   font-family: 'Audiowide', cursive;
+   /* font-family: 'Audiowide', cursive; */
+   font-family: 'Black Ops One', cursive;
+   font-weight: 400;
    text-align: center;
    color: #333333;
    z-index: 9999;
 }
 
-.darkblue {
+.no-href-decoration {
+   color: #333333;
+   text-decoration: none;
+}
+
+.orange {
    color: #f44336;
 }
 
@@ -68,16 +75,16 @@
 
 .carselect-button {
    position: fixed;
-   top: 45px;
+   top: 47px;
    left: 29%;
-   padding: 5px 16px;
+   padding: 3px 16px;
 }
 
 .offer-button {
    position: fixed;
-   top: 45px;
+   top: 47px;
    left: 62.95%;
-   padding: 5px 26px;
+   padding: 3px 26px;
    background-color: #333333;
    color: white;
 }

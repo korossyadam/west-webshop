@@ -164,6 +164,10 @@ body {
    margin: 20px;
 }
 
+.vehicle-img-container {
+   text-align: center;
+}
+
 .error-icon {
    position: absolute;
    top: 44%;

@@ -18,6 +18,11 @@ export class CarSelectorService {
       return this.afs.collection("chassis", ref => ref.where("brand", "==", searchedText).orderBy("name", "asc")).valueChanges() as Observable<Chassis[]>;
    }
 
+   // Get Chassis by Brand
+   getAllChassis(): Observable<Chassis[]> {
+      return this.afs.collection("chassis", ref => ref.orderBy("name", "asc")).valueChanges() as Observable<Chassis[]>;
+   }
+
    // Get Cars by Chassis
    selectChassis(searchedText: string): Observable<Car[]> {
       return this.afs.collection("cars", ref => ref.where("chassis", "==", searchedText).orderBy("engine", "asc")).valueChanges() as Observable<Car[]>;
@@ -38,8 +43,4 @@ export class CarSelectorService {
       await this.afs.collection(collectionName).doc(uid).set(data);
       return uid;
    }
-
-
-
-
 }

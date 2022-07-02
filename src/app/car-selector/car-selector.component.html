@@ -1,7 +1,7 @@
 <!-- Displayed selected vehicle image on top of everything-->
 <mat-card *ngIf="hoveredTextIndex != -1 && stage == 1" [ngStyle]="imgCardStyle">
-   <img *ngIf="chassisActive[hoveredTextIndex].imgurl != ''" src="{{ chassisActive[hoveredTextIndex].imgurl }}" alt="">
-   <mat-icon *ngIf="chassisActive[hoveredTextIndex].imgurl == ''" class="error-icon">image_not_supported</mat-icon>
+   <img *ngIf="chassisActive[hoveredTextIndex].hasImg == true" src="https://storage.googleapis.com/west-webshop.appspot.com/{{ chassisActive[hoveredTextIndex].chassisIndex }}.png" alt="">
+   <mat-icon *ngIf="chassisActive[hoveredTextIndex].hasImg == false" class="error-icon">image_not_supported</mat-icon>
 </mat-card>
 
 <!-- Upper SideNav for searchbars -->
