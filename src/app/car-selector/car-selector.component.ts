@@ -362,7 +362,6 @@ export class CarSelectorComponent implements OnInit {
       for(let i = 0; i < urls.length; i++) {
          var img = new Image();
          img.src = urls[i];
-         console.log(urls[i]);
       }
   }
 

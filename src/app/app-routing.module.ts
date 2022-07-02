@@ -6,6 +6,7 @@ import { CarSelectorComponent } from './car-selector/car-selector.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { OfferComponent } from './offer/offer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
@@ -15,7 +16,8 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
     { path: 'login', component: LoginComponent },
     { path: 'cart', component: CartComponent },
-    { path: 'battery', component: BatteryComponent }
+    { path: 'battery', component: BatteryComponent },
+    { path: 'offer', component: OfferComponent }
 ];
 
 @NgModule({

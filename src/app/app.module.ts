@@ -34,6 +34,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { BatteryComponent } from './battery/battery.component';
+import { OfferComponent } from './offer/offer.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { BatteryComponent } from './battery/battery.component';
     FooterComponent,
     CartComponent,
     BatteryComponent,
+    OfferComponent,
   ],
   imports: [
     BrowserModule,

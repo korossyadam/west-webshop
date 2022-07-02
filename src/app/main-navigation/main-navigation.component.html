@@ -4,7 +4,7 @@
 <div class="parallelogram-right"></div>
 
 <!-- Logo -->
-<h2 class="logo"><a class="no-href-decoration" href="main"><span class="orange">WEST</span> ALKATRÉSZ</a></h2>
+<h2 class="logo"><a class="no-href-decoration" routerLink="/main"><span class="orange">WEST</span> ALKATRÉSZ</a></h2>
 
 <!-- Upper bar -->
 <div class="container">
@@ -19,7 +19,7 @@
       <!-- </button> -->
 
       <button class="carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
-      <button class="offer-button" mat-raised-button (click)="onCarSelectorButtonClick()">Árajánlat kérése</button>
+      <button class="offer-button" mat-raised-button routerLink="/offer">Árajánlat kérése</button>
 
       <!-- Login buttons -->
       <div *ngIf="localStorageUser() == ''">
@@ -27,7 +27,6 @@
          <a class="login-text" routerLink="/login">Regisztráció</a>
       </div>
       <div *ngIf="localStorageUser() != ''">
-
 
       </div>
 
