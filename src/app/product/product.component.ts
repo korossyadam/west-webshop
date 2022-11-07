@@ -28,11 +28,13 @@ export class ProductComponent implements OnInit {
     this.productsService.getProduct(this.currentProductId).subscribe(data => {
       this.currentProduct = data[0];
 
+      // Fill up properties array
       for (let i = 0; i < this.currentProduct.properties.length; i++) {
         this.propertyTypes[i] = this.currentProduct.properties[i].split('*')[0];
         this.propertyValues[i] = this.currentProduct.properties[i].split('*')[1];
       }
 
+      // Fill up factory numbers array
       for (let i = 0; i < this.currentProduct.factoryNumbers.length; i++) {
         this.factoryNumberCodes[i] = this.currentProduct.factoryNumbers[i].split('*')[0];
         this.factoryNumberBrands[i] = this.currentProduct.factoryNumbers[i].split('*')[1];
@@ -42,6 +44,10 @@ export class ProductComponent implements OnInit {
     this.displayedInformation = 0;
   }
 
+  /**
+   * Increments the cart button value by 1
+   * Does not increment if incremented value would be higher than the avaible product stock
+   */
   incrementInputValue(): void {
     let element = (<HTMLInputElement> document.getElementById('amount-input'));
     if (parseInt(element.value) >= 7)
@@ -50,6 +56,10 @@ export class ProductComponent implements OnInit {
     element.value = (parseInt(element.value) + 1).toString();
   }
 
+  /**
+   * Decrements the cart button value by 1
+   * Does not decrement if decremented value would be lower than 1
+   */
   decrementInputValue(): void {
     let element = (<HTMLInputElement> document.getElementById('amount-input'));
     if (parseInt(element.value) <= 1)
@@ -58,6 +68,13 @@ export class ProductComponent implements OnInit {
     element.value = (parseInt(element.value) - 1).toString();
   }
 
+  /**
+   * Adds a tax to a net price
+   * Ex.: 1000 => 1270
+   * 
+   * @param originalPrice The net price to add the tax to (string)
+   * @returns A price with the tax added (string)
+   */
   addTaxToPrice(originalPrice: string): string {
     return (parseInt(originalPrice)*1.27).toString();
   }
@@ -87,6 +104,11 @@ export class ProductComponent implements OnInit {
     return returnString;
   }
 
+  /**
+   * Changes the displayed specification 
+   * 
+   * @param newState 
+   */
   changeInformationDisplay(newState: number): void {
     this.displayedInformation = newState;
   }

@@ -1,10 +1,12 @@
 <!-- Product container-->
 <mat-card class="product-container">
 
+   <!-- Product image -->
    <div class="product-img-container">
       <img class="product-img" src="{{ currentProduct.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}">
    </div>
 
+   <!-- Product info-->
    <div class="product-info-container">
       <p class="product-part-number">{{ currentProduct.partNumber }}</p>
       <p class="product-name">{{ currentProduct.name }}</p>
@@ -16,7 +18,6 @@
             <mat-icon class="non-returnable-icon">error</mat-icon>Ez a termék nem adható vissza.
          </span>
       </div>
-
    </div>
 
 </mat-card>
@@ -36,6 +37,7 @@
       <span class="price-info">Elérhető mennyiség:</span><span class="product-net-price">7</span>
    </div>
 
+   <!-- Add to Cart section-->
    <div class="cart-container">
       <div class="amount-container">
          <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
@@ -53,7 +55,7 @@
 <!-- Specification container -->
 <mat-card class="specification-container">
 
-
+   <!-- Property and Factory Numbers buttons -->
    <div class="buttons-container">
       <div class="buttons-inner-container">
          <div class="info-button button-properties" [ngClass]="{'info-button-selected': displayedInformation == 0}" (click)="changeInformationDisplay(0)">Tulajdonságok</div>
@@ -65,8 +67,8 @@
    <div *ngIf="displayedInformation == 0">
       <table class="properties-table" rules="all">
          <ng-container >
-            <tr *ngFor="let factoryTypes of propertyTypes; let i = index;">
-               <td class="properties-table-row properties-first-column">{{ factoryTypes }}</td>
+            <tr *ngFor="let propertyTypes of propertyTypes; let i = index;">
+               <td class="properties-table-row properties-first-column">{{ propertyTypes }}</td>
                <td class="properties-table-row properties-second-column">{{ propertyValues[i] }}</td>
             </tr>
          </ng-container>
@@ -76,15 +78,13 @@
    <!-- Information: factory numbers-->
    <div *ngIf="displayedInformation == 1">
       <table class="factory-numbers-table">
-         <ng-container *ngFor="let factoryNumber of factoryNumberCodes; let i = index;">
+         <ng-container *ngFor="let factoryNumberCode of factoryNumberCodes; let i = index;">
             <tr>
-               <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumber }}</td>
+               <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumberCode }}</td>
                <td class="factory-numbers-table-row factory-numbers-second-column">{{ factoryNumberBrands[i] }}</td>
             </tr>
          </ng-container>
       </table>
-
-
    </div>
 
 </mat-card>
