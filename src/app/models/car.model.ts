@@ -1,8 +1,6 @@
-import * as internal from "stream";
-
 export class Car {
 
-   public carIndex: number;
+   public carIndex: string;
    public chassisIndex: number;
    public brand: string;
    public chassis: string;
@@ -13,8 +11,9 @@ export class Car {
    public displacement: string;
    public year: string;
    public fuel: string;
+   public productLengths: string[];
 
-   constructor(carIndex: number, chassisIndex: number, brand: string, chassis: string, engine: string, engineCode: string, kw: string, hp: string, displacement: string, year: string, fuel: string) {
+   constructor(carIndex: string, chassisIndex: number, brand: string, chassis: string, engine: string, engineCode: string, kw: string, hp: string, displacement: string, year: string, fuel: string) {
       this.carIndex = carIndex;
       this.chassisIndex = chassisIndex;
       this.brand = brand;
