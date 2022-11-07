@@ -1,0 +1,90 @@
+<!-- Product container-->
+<mat-card class="product-container">
+
+   <div class="product-img-container">
+      <img class="product-img" src="{{ currentProduct.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}">
+   </div>
+
+   <div class="product-info-container">
+      <p class="product-part-number">{{ currentProduct.partNumber }}</p>
+      <p class="product-name">{{ currentProduct.name }}</p>
+      <p>{{ currentProduct.brand }}</p>
+      <p class="product-description">{{ currentProduct.description }}</p>
+
+      <div *ngIf="!currentProduct.canBeReturned">
+         <span class="non-returnable-text">
+            <mat-icon class="non-returnable-icon">error</mat-icon>Ez a termék nem adható vissza.
+         </span>
+      </div>
+
+   </div>
+
+</mat-card>
+
+<!-- Price container -->
+<mat-card class="price-container">
+
+   <div class="info-row">
+      <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTaxToPrice(currentProduct.price)) }}</span>
+   </div>
+
+   <div class="info-row">
+      <span class="price-info">Nettó ár:</span><span class="product-net-price">{{ formatPriceToString(currentProduct.price) }}</span>
+   </div>
+
+   <div class="info-row">
+      <span class="price-info">Elérhető mennyiség:</span><span class="product-net-price">7</span>
+   </div>
+
+   <div class="cart-container">
+      <div class="amount-container">
+         <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
+         <input id="amount-input" class="amount-input" type="text" value="1">
+         <div class="amount-button input-positive" (click)="incrementInputValue()">+</div>
+      </div>
+      
+      <div class="cart-button-container">
+         <button mat-raised-button class="cart-button">Kosárba rakás</button>
+      </div>
+   </div>
+   
+</mat-card>
+
+<!-- Specification container -->
+<mat-card class="specification-container">
+
+
+   <div class="buttons-container">
+      <div class="buttons-inner-container">
+         <div class="info-button button-properties" [ngClass]="{'info-button-selected': displayedInformation == 0}" (click)="changeInformationDisplay(0)">Tulajdonságok</div>
+         <div class="info-button button-factory-numbers" [ngClass]="{'info-button-selected': displayedInformation == 1}" (click)="changeInformationDisplay(1)">Gyári számok</div>
+      </div>
+   </div>
+
+   <!-- Information: properties -->
+   <div *ngIf="displayedInformation == 0">
+      <table class="properties-table" rules="all">
+         <ng-container >
+            <tr *ngFor="let factoryTypes of propertyTypes; let i = index;">
+               <td class="properties-table-row properties-first-column">{{ factoryTypes }}</td>
+               <td class="properties-table-row properties-second-column">{{ propertyValues[i] }}</td>
+            </tr>
+         </ng-container>
+      </table>
+   </div>
+
+   <!-- Information: factory numbers-->
+   <div *ngIf="displayedInformation == 1">
+      <table class="factory-numbers-table">
+         <ng-container *ngFor="let factoryNumber of factoryNumberCodes; let i = index;">
+            <tr>
+               <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumber }}</td>
+               <td class="factory-numbers-table-row factory-numbers-second-column">{{ factoryNumberBrands[i] }}</td>
+            </tr>
+         </ng-container>
+      </table>
+
+
+   </div>
+
+</mat-card>

@@ -1,0 +1,259 @@
+p,
+span,
+div,
+input {
+   font-family: 'Roboto', sans-serif;
+}
+
+.product-container {
+   position: relative;
+   top: 60px;
+   left: 10%;
+   width: 1100px;
+   height: 280px;
+}
+
+.specification-container {
+   position: relative;
+   top: 90px;
+   left: 10%;
+   width: 1100px;
+   height: fit-content;
+}
+
+.product-img-container {
+   margin-top: 10px;
+   margin: 10px;
+   width: fit-content;
+   height: 255px;
+   border: 1px solid rgba(0, 0, 0, 0.12);
+   float: left;
+}
+
+.product-img {
+   max-width: 100%;
+   height: 100%;
+   cursor: pointer;
+}
+
+.product-info-container {
+   margin-top: -10px;
+}
+
+.product-part-number {
+   font-size: 20px;
+   font-weight: 700;
+   margin: 0;
+}
+
+.product-name {
+   color: #666666;
+   font-size: 14px;
+   margin: 0;
+}
+
+.product-description {
+   color: #888888;
+   font-size: 12px;
+   margin: 0;
+}
+
+.non-returnable-icon {
+   position: relative;
+   top: 7px;
+   transform: scale(0.75);
+   margin-top: 10px;
+}
+
+.non-returnable-text {
+   color: #7b0d03;
+   font-size: 12px;
+}
+
+.price-container {
+   position: absolute;
+   top: 60px;
+   right: 10%;
+   width: 300px;
+   height: 600px;
+   padding: 20px;
+}
+
+.info-row {
+   display: table;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+   height: 40px;
+   width: 100%;
+}
+
+.info-row span {
+   display: table-cell;
+   vertical-align: middle;
+   width: 50%;
+}
+
+.price-info {
+   font-size: 14px;
+   color: #666666;
+}
+
+.product-final-price {
+   font-size: 24px;
+   font-weight: 500;
+   text-align: right;
+}
+
+.product-net-price {
+   text-align: right;
+}
+
+.cart-container {
+   margin-top: 20px;
+}
+
+.amount-container {
+   width: 100px;
+   float: left;
+   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.amount-button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 20px;
+   height: 25px;
+   background-color: #ebebeb;
+   text-align: center;
+   padding: 5px 2px;
+   font-size: 20px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 400;
+   color: rgba(0, 0, 0, 0.50);
+   user-select: none;
+}
+
+.input-negative {
+   float: left;
+   font-size: 26px;
+}
+
+.input-positive {
+   float: right;
+}
+
+.amount-button:hover {
+   color: rgba(0, 0, 0, 0.20);
+   cursor: pointer;
+   transition: 0.2s;
+}
+
+.amount-input {
+   width: 48px;
+   height: 25px;
+   font-size: 20px;
+   background-color: #ebebeb;
+   border: none;
+   padding: 5px 2px;
+   text-align: center;
+   color: rgba(0, 0, 0, 0.80);
+}
+
+.amount-input:focus {
+   outline: none;
+}
+
+.cart-button-container {
+   float: right;
+   width: 180px;
+}
+
+.cart-button {
+   width: 100%;
+   background-color: #f44336;
+   color: white;
+}
+
+.buttons-container {
+   margin-top: -16px !important;
+   margin-left: -16px;
+   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+   height: 40px;
+   width: calc(100% + 32px);
+}
+
+.buttons-inner-container {
+   width: 300px;
+   height: 100%;
+   margin: 0 auto;
+   text-align: center;
+}
+
+.info-button {
+   height: 100%;
+   line-height: 40px;
+   width: 50%;
+   font-weight: 500;
+}
+
+.info-button-selected {
+   box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   border-bottom: 2px solid #f44336;
+}
+
+.button-properties {
+   float: left;
+}
+
+.button-factory-numbers {
+   float: right;
+}
+
+.button-properties:hover,
+.button-factory-numbers:hover {
+   background-color: #f0f0f0;
+   cursor: pointer;
+}
+
+.properties-table {
+   width: 100%;
+   border: 1px solid rgba(0, 0, 0, 0.12);
+   margin-top: 10px;
+}
+
+.properties-table-row {
+   padding: 10px 5px;
+   font-size: 13px;
+   color: #666666;
+}
+
+.properties-first-column {
+   width: 20%;
+   text-align: right;
+}
+
+.properties-second-column {
+   width: 80%;
+   color: #222222;
+   font-weight: 500;
+}
+
+.factory-numbers-table {
+   margin-top: 10px;
+   width: 100%;
+}
+
+.factory-numbers-table-row {
+   padding: 2px 0px;
+   font-size: 15px;
+}
+
+.factory-numbers-first-column {
+   width: 30%;
+}
+
+.factory-numbers-second-column {
+   width: 470%;
+}
