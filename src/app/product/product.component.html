@@ -1,55 +1,75 @@
 <!-- Product container-->
 <mat-card class="product-container">
+   <div *ngIf="currentProduct">
+      <div *ngIf="currentProduct.imgurls.length > 1" class="image-selector-container">
+         <div *ngFor="let imageUrl of currentProduct.imgurls; let i = index;">
+            <img [src]="sanitize(imageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="small-img" [ngClass]="{'selected-img': selectedImageIndex == i}" (click)="changeDisplayedImage(imageUrl, i)">
+         </div>
+      </div>
 
-   <!-- Product image -->
-   <div class="product-img-container">
-      <img class="product-img" src="{{ currentProduct.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}">
-   </div>
+      <!-- Product image -->
+      <div class="product-img-container">
+         <img class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
+      </div>
 
-   <!-- Product info-->
-   <div class="product-info-container">
-      <p class="product-part-number">{{ currentProduct.partNumber }}</p>
-      <p class="product-name">{{ currentProduct.name }}</p>
-      <p>{{ currentProduct.brand }}</p>
-      <p class="product-description">{{ currentProduct.description }}</p>
+      <!-- Product info-->
+      <div class="product-info-container">
+         <p class="product-part-number">{{ currentProduct.partNumber }}</p>
+         <p class="product-name">{{ currentProduct.name }}</p>
+         <p>{{ currentProduct.brand }}</p>
+         <p class="product-description">{{ currentProduct.description }}</p>
 
-      <div *ngIf="!currentProduct.canBeReturned">
-         <span class="non-returnable-text">
-            <mat-icon class="non-returnable-icon">error</mat-icon>Ez a termék nem adható vissza.
-         </span>
+         <div *ngIf="!currentProduct.canBeReturned">
+            <span class="non-returnable-text">
+               <mat-icon class="non-returnable-icon">error</mat-icon>Ez a termék nem adható vissza.
+            </span>
+         </div>
       </div>
    </div>
-
 </mat-card>
 
 <!-- Price container -->
 <mat-card class="price-container">
 
-   <div class="info-row">
-      <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTaxToPrice(currentProduct.price)) }}</span>
-   </div>
-
-   <div class="info-row">
-      <span class="price-info">Nettó ár:</span><span class="product-net-price">{{ formatPriceToString(currentProduct.price) }}</span>
-   </div>
-
-   <div class="info-row">
-      <span class="price-info">Elérhető mennyiség:</span><span class="product-net-price">7</span>
-   </div>
-
-   <!-- Add to Cart section-->
-   <div class="cart-container">
-      <div class="amount-container">
-         <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
-         <input id="amount-input" class="amount-input" type="text" value="1">
-         <div class="amount-button input-positive" (click)="incrementInputValue()">+</div>
+   <div *ngIf="currentProduct">
+      <div class="info-row">
+         <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTaxToPrice(currentProduct.price)) }}</span>
       </div>
-      
-      <div class="cart-button-container">
-         <button mat-raised-button class="cart-button">Kosárba rakás</button>
+
+      <div class="info-row">
+         <span class="price-info">Nettó ár:</span><span class="product-net-price">{{ formatPriceToString(currentProduct.price) }}</span>
+      </div>
+
+      <div class="info-row">
+         <span class="price-info">Elérhető mennyiség:</span><span class="product-net-price">7</span>
+      </div>
+
+      <!-- Add to Cart section-->
+      <div class="cart-container">
+         <div class="amount-container">
+            <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
+            <input id="amount-input" class="amount-input" type="text" value="1">
+            <div class="amount-button input-positive" (click)="incrementInputValue()">+</div>
+         </div>
+
+         <div class="cart-button-container">
+            <button mat-raised-button class="cart-button">Kosárba rakás</button>
+         </div>
+
+         <!-- Add to Favorites section -->
+         <div>
+            <span class="favorite-text">
+               <mat-icon class="favorite-icon">favorite</mat-icon>Kívánságlistához adás
+            </span>
+         </div>
+
+         <div class="question-section">
+            <p>Kérdésed van a termékkel kapcsolatban? Tedd fel bátran itt!</p>
+         </div>
+
       </div>
    </div>
-   
+
 </mat-card>
 
 <!-- Specification container -->
@@ -66,7 +86,7 @@
    <!-- Information: properties -->
    <div *ngIf="displayedInformation == 0">
       <table class="properties-table" rules="all">
-         <ng-container >
+         <ng-container>
             <tr *ngFor="let propertyTypes of propertyTypes; let i = index;">
                <td class="properties-table-row properties-first-column">{{ propertyTypes }}</td>
                <td class="properties-table-row properties-second-column">{{ propertyValues[i] }}</td>
@@ -88,3 +108,10 @@
    </div>
 
 </mat-card>
+
+<div *ngIf="currentProduct" id="imageModal" class="modal">
+   <mat-icon class="modal-white-icon modal-close-icon" (click)="closeImageModal()">close</mat-icon>
+   <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex > 0" class="modal-white-icon modal-arrow-icon" (click)="previousModalImage()">arrow_back_ios</mat-icon>
+   <img [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="modal-img">
+   <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex+1 < currentProduct.imgurls.length" class="modal-white-icon modal-arrow-icon" (click)="nextModalImage()">arrow_forward_ios</mat-icon>
+</div>

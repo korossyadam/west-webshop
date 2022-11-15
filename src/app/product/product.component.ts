@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -18,15 +19,23 @@ export class ProductComponent implements OnInit {
   public factoryNumberCodes: string[] = [];
   public factoryNumberBrands: string[] = [];
 
+  // Product image variables
+  public selectedImageUrl: string;
+  public selectedImageIndex: number;
+
   // What information to display
   public displayedInformation: number;
 
-  constructor(private route: ActivatedRoute, private productsService: ProductsService) { }
+  constructor(private route: ActivatedRoute, private productsService: ProductsService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.currentProductId = this.route.snapshot.paramMap.get('partNumber');
     this.productsService.getProduct(this.currentProductId).subscribe(data => {
       this.currentProduct = data[0];
+
+      // Set default visible product image
+      this.selectedImageUrl = this.currentProduct.imgurls[0];
+      this.selectedImageIndex = 0;
 
       // Fill up properties array
       for (let i = 0; i < this.currentProduct.properties.length; i++) {
@@ -45,11 +54,56 @@ export class ProductComponent implements OnInit {
   }
 
   /**
+   * Change displayed image URL to the clicked image URL
+   * @param url The url of the image we want to display
+   * @param index The index of the image in the current products imgurls[] array
+   */
+  changeDisplayedImage(url: string, index: number): void {
+    this.selectedImageUrl = url.replace('[', '').replace(']', '').replace('/t_t100x100v2', '');
+    this.selectedImageIndex = index;
+  }
+
+  /**
+   * Gets called when user clicks on the product image
+   * Opens up an enlarged version of the image in a modal
+   */
+  openImageModal(): void {
+    let imageModal = document.getElementById('imageModal');
+    imageModal.style.display = 'flex';
+  }
+
+  /**
+   * Closes the modal
+   */
+  closeImageModal(): void {
+    let imageModal = document.getElementById('imageModal');
+    imageModal.style.display = 'none';
+  }
+
+  /**
+   * Goes to previous product image in the modal
+   * Validation happens inside template
+   */
+  previousModalImage(): void {
+    this.selectedImageIndex -= 1;
+    this.selectedImageUrl = this.currentProduct.imgurls[this.selectedImageIndex];
+  }
+
+  /**
+   * Goes to next product image in the modal
+   * Validation happens inside template
+   */
+  nextModalImage(): void {
+    this.selectedImageIndex += 1;
+    this.selectedImageUrl = this.currentProduct.imgurls[this.selectedImageIndex];
+  }
+
+  /**
    * Increments the cart button value by 1
    * Does not increment if incremented value would be higher than the avaible product stock
    */
   incrementInputValue(): void {
-    let element = (<HTMLInputElement> document.getElementById('amount-input'));
+    let element = (<HTMLInputElement>document.getElementById('amount-input'));
     if (parseInt(element.value) >= 7)
       return;
 
@@ -61,7 +115,7 @@ export class ProductComponent implements OnInit {
    * Does not decrement if decremented value would be lower than 1
    */
   decrementInputValue(): void {
-    let element = (<HTMLInputElement> document.getElementById('amount-input'));
+    let element = (<HTMLInputElement>document.getElementById('amount-input'));
     if (parseInt(element.value) <= 1)
       return;
 
@@ -76,7 +130,7 @@ export class ProductComponent implements OnInit {
    * @returns A price with the tax added (string)
    */
   addTaxToPrice(originalPrice: string): string {
-    return (parseInt(originalPrice)*1.27).toString();
+    return (parseInt(originalPrice) * 1.27).toString();
   }
 
   /**
@@ -111,6 +165,15 @@ export class ProductComponent implements OnInit {
    */
   changeInformationDisplay(newState: number): void {
     this.displayedInformation = newState;
+  }
+
+  /**
+   * Call this function on any URL that does not get display due to security error
+   * @param url The URL to sanitize
+   * @returns Sanitized URL
+   */
+  sanitize(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
 }
