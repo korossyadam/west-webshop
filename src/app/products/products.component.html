@@ -1,38 +1,71 @@
-<mat-card>
-    <mat-card-title>Firebase adatok</mat-card-title>
-    <table>
-      <!-- Oszlopok -->
-      <thead>
-        <tr>
-          <th>Cikkszám</th>
-          <th>Név</th>
-          <th>Nettó beszerzési ár</th>
-          <th>IMG URL</th>
+<div class="container">
+  <table class="table">
+
+    <!-- Table head -->
+    <thead>
+      <tr>
+        <th class="image-column"></th>
+        <th>Megnevezés</th>
+        <th>Gyártmány</th>
+        <th>Ár</th>
+        <th>Készlet</th>
+        <th class="order-column">Rendelés</th>
+        <th class="action-column">Egyéb</th>
       </tr>
-      </thead>
+    </thead>
 
-      <!-- Sorok -->
-      <tbody>
-        <!-- <tr *ngFor="let product of products" (click)="setSelectedID(product);"> -->
-        <tr *ngFor="let product of products">
-          <td>{{ product.partNumber }}</td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.imgurl }}</td>
-          <!-- <td><mat-form-field>
-            <mat-select [disabled]="disableSelect.value">
-              <mat-option *ngFor="let ref of product.ref_user" [value]="ref" disabled>{{ref}}</mat-option>
-            </mat-select>
-          </mat-form-field></td>
-          <td><mat-form-field>
-            <mat-select [disabled]="disableSelect.value">
-              <mat-option *ngFor="let ref of product.ref_outOfBucketCounter" [value]="ref" disabled>{{ref}}</mat-option>
-            </mat-select>
-          </mat-form-field></td> -->
-        </tr>
-      </tbody>
+    <!-- Table body -->
+    <tbody>
+      <tr *ngFor="let product of products">
 
-      <button mat-raised-button color="warn" (click)="search()">Search</button>
+        <!-- Product image -->
+        <td>
+          <div class="product-img-container">
+            <img class="product-img" src="{{ product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}" [routerLink]="['/product', product.partNumber]">
+          </div>
+        </td>
 
-    </table>
-  </mat-card>
+        <!-- Product number and name-->
+        <td>
+          <div class="name-container">
+            <p class="product-partnumber" [routerLink]="['/product', product.partNumber]">{{ product.partNumber }}</p>
+            <p class="product-name">{{ product.name }}</p>
+          </div>
+        </td>
+
+        <!-- Product brand-->
+        <td>{{ product.brand }}</td>
+
+        <!-- Product price -->
+        <td class="price-container">
+          <p class="final-price">{{ formatPriceToString(addTax(product.price)) }}</p>
+          <p class="net-price">{{ formatPriceToString(product.price) }} + áfa</p>
+        </td>
+        
+        <!-- Product stock -->
+        <td>
+          <p *ngIf="true" class="in-stock">Raktáron ({{ product.stock }})</p>
+          <p *ngIf="false" class="out-stock">Nincs raktáron</p>
+        </td>
+
+        <!-- Quantity input and cart button -->
+        <td>
+          <div class="amount-container">
+            <div class="amount-button input-negative" (click)="decrementInputValue(product.partNumber)">-</div>
+            <input [id]="product.partNumber" class="amount-input" type="number" value="1" #quantity>
+            <div class="amount-button input-positive" (click)="incrementInputValue(product.partNumber)">+</div>
+          </div>
+          
+          <button mat-raised-button class="cart-button" (click)="addToCart(product)">Kosárba</button>
+        </td>
+
+        <!-- Other buttons -->
+        <td class="extra-button-container">
+          <p class="extra-button">Kívánságlistához adás</p>
+          <p class="extra-button">Kérdésem van a termékkel kapcsolatban</p>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
