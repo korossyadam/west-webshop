@@ -1,5 +1,9 @@
 <!-- Product container-->
 <mat-card class="product-container">
+
+   <!-- Back button -->
+   <p class="back-button" (click)="navigateBack()">Vissza</p>  
+
    <div *ngIf="currentProduct">
       <div *ngIf="currentProduct.imgurls.length > 1" class="image-selector-container">
          <div *ngFor="let imageUrl of currentProduct.imgurls; let i = index;">
@@ -33,7 +37,7 @@
 
    <div *ngIf="currentProduct">
       <div class="info-row">
-         <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTaxToPrice(currentProduct.price)) }}</span>
+         <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTax(currentProduct.price)) }}</span>
       </div>
 
       <div class="info-row">
@@ -46,14 +50,15 @@
 
       <!-- Add to Cart section-->
       <div class="cart-container">
+
          <div class="amount-container">
             <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
-            <input id="amount-input" class="amount-input" type="text" value="1">
+            <input id="amount-input" class="amount-input" type="number" value="1" #quantity>
             <div class="amount-button input-positive" (click)="incrementInputValue()">+</div>
          </div>
 
          <div class="cart-button-container">
-            <button mat-raised-button class="cart-button">Kosárba rakás</button>
+            <button mat-raised-button class="cart-button" (click)="addToCart(quantity.value)">Kosárba rakás</button>
          </div>
 
          <!-- Add to Favorites section -->

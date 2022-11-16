@@ -14,8 +14,9 @@ export class ProductsComponent implements OnInit {
    @Input() searchedText = '';
    public products: Product[] = [];
 
-   // Static function to add tax to price
+   // Static functions
    addTax = Utils.addTaxToPrice;
+   formatPriceToString = Utils.formatPriceToString;
 
    constructor(private route: ActivatedRoute, private productService: ProductsService) { }
 
@@ -81,30 +82,5 @@ export class ProductsComponent implements OnInit {
 
    Utils.addProductToCart(productToAdd, parseInt(quantity));
  }
-
-   /**
-    * Converts price strings to a prettier format
-    * Ex.: 51274 => 51 274 Ft
-    *      926 => 926 Ft
-    *      295672 => 295 672 Ft
-    * 
-    * @param totalString The price to format
-    * @returns The formatted string
-    */
-   formatPriceToString(totalString: string): string {
-      var returnString = '';
-
-      let total = parseInt(totalString);
-      if (total < 999)
-         returnString = total + ' Ft';
-      else if (total < 9999)
-         returnString = total.toString().substring(0, 1) + ' ' + total.toString().substring(1, total.toString().length) + ' Ft';
-      else if (total < 99999)
-         returnString = total.toString().substring(0, 2) + ' ' + total.toString().substring(2, total.toString().length) + ' Ft';
-      else if (total < 999999)
-         returnString = total.toString().substring(0, 3) + ' ' + total.toString().substring(3, total.toString().length) + ' Ft';
-
-      return returnString;
-   }
 
 }

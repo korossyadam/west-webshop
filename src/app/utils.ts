@@ -2,7 +2,7 @@ import { Product } from "./models/product.model";
 
 export class Utils {
 
-   constructor() {}
+   constructor() { }
 
    /**
     * Adds a Product to the cart
@@ -33,8 +33,8 @@ export class Utils {
             productToAdd['quantity'] = quantity;
             currentCart.push(productToAdd);
          }
-         
-      // Product is already in cart, just add quantity to alreadyInCartQuantity
+
+         // Product is already in cart, just add quantity to alreadyInCartQuantity
       } else {
          let quantityAlreadyInCart = currentCart[inCartIndex].quantity;
          if (productToAdd.stock >= quantityAlreadyInCart + quantity || true) { // remove || true
@@ -52,8 +52,43 @@ export class Utils {
    * @param originalPrice The net price to add the tax to (string)
    * @returns A price with the tax added (string)
    */
-  public static addTaxToPrice(originalPrice: string): string {
-   return (parseInt(originalPrice) * 1.27).toString();
+   public static addTaxToPrice(originalPrice: string): string {
+      return (parseInt(originalPrice) * 1.27).toString();
+   }
+
+   /**
+    * Converts price strings to a prettier format
+    * Ex.: 51274 => 51 274 Ft
+    *      926 => 926 Ft
+    *      295672 => 295 672 Ft
+    * 
+    * @param priceToFormat The price to format
+    * @returns The formatted string
+    */
+  public static formatPriceToString(priceToFormat: string | number): string {
+   let returnString = '';
+
+   // Parse to number
+   let total = 0;
+   if (typeof priceToFormat == 'number') {
+      total = priceToFormat;
+   } else {
+      total = parseInt(priceToFormat);
+   }
+
+   // Put whitespaces between numbers depending on price length
+   if (total < 999)
+     returnString = total + ' Ft';
+   else if (total < 9999)
+     returnString = total.toString().substring(0, 1) + ' ' + total.toString().substring(1, total.toString().length) + ' Ft';
+   else if (total < 99999)
+     returnString = total.toString().substring(0, 2) + ' ' + total.toString().substring(2, total.toString().length) + ' Ft';
+   else if (total < 999999)
+     returnString = total.toString().substring(0, 3) + ' ' + total.toString().substring(3, total.toString().length) + ' Ft';
+
+   return returnString;
  }
+
+
 
 }

@@ -132,54 +132,9 @@ input {
 
 .amount-container {
    width: 100px;
+   height: 36px;
    float: left;
-   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
-}
-
-.amount-button {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   width: 20px;
-   height: 25px;
-   background-color: #ebebeb;
-   text-align: center;
-   padding: 5px 2px;
    font-size: 20px;
-   font-family: 'Roboto', sans-serif;
-   font-weight: 400;
-   color: rgba(0, 0, 0, 0.50);
-   user-select: none;
-}
-
-.input-negative {
-   float: left;
-   font-size: 26px;
-}
-
-.input-positive {
-   float: right;
-}
-
-.amount-button:hover {
-   color: rgba(0, 0, 0, 0.20);
-   cursor: pointer;
-   transition: 0.2s;
-}
-
-.amount-input {
-   width: 48px;
-   height: 25px;
-   font-size: 20px;
-   background-color: #ebebeb;
-   border: none;
-   padding: 5px 2px;
-   text-align: center;
-   color: rgba(0, 0, 0, 0.80);
-}
-
-.amount-input:focus {
-   outline: none;
 }
 
 .cart-button-container {
