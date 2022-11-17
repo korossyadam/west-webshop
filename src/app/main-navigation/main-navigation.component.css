@@ -5,9 +5,8 @@
    width: 20%;
    margin-left: -10%;
    font-size: 30px;
-   /* font-family: 'Audiowide', cursive; */
-   font-family: 'Black Ops One', cursive;
-   font-weight: 400;
+   font-family: 'Audiowide', cursive;
+   font-weight: 500;
    text-align: center;
    color: #333333;
    z-index: 9999;
@@ -49,23 +48,6 @@
    background-color: white;
    height: 300px;
    width: 100%;
-}
-
-.menu-option {
-   position: fixed;
-   left: 2%;
-   top: 44px;
-   padding: 10px 25px;
-   margin-top: 3px;
-   font-size: 19px;
-   font-family: 'Roboto', sans-serif;
-   text-align: center;
-   text-decoration: none;
-   color: black;
-}
-
-.menu-option:hover {
-   background-color: #dddddd;
 }
 
 .topnav a.active {
@@ -131,6 +113,7 @@
    transform: skew(-30deg);
    background: #333333;
    z-index: 15;
+   border-bottom-right-radius: 3px;
 }
 
 .parallelogram-right {
@@ -142,6 +125,7 @@
    transform: skew(30deg);
    background: #333333;
    z-index: 15;
+   border-bottom-left-radius: 3px;
 }
 
 .box-middle {
@@ -199,25 +183,13 @@
    top: 6px;
 }
 
-.menu-position {
-   left: 1%;
-}
-
-.tools-position {
-   left: 7%;
-}
-
-.equipment-position {
-   left: 18%;
-}
 
 
-/* Dropdown button */
+/* Old navigation styles, needs to be deleted */
 .dropbtn {
    background-color: white;
-   color: #333333;
-   margin-top: 5px;
-   padding: 10px 20px;
+   color: #222222;
+   margin-top: 14px;
    padding-right: 35px;
    font-size: 16px;
    font-family: 'Roboto', sans-serif;
@@ -225,27 +197,30 @@
    text-align: center;
    text-decoration: none;
    border: none;
+   cursor: pointer;
 }
 
-/* Dropdown */
-.dropdown {
+.dropdown-container {
    position: fixed;
-   top: 44px;
    display: inline-block;
+   top: 44px;
    z-index: 10;
 }
 
-/* Content of the dropdown */
 .dropdown-content {
-   display: none;
    position: absolute;
-   background-color: #f1f1f1;
+   display: none;
    width: 222px;
+   margin-top: -16px;
+   background-color: white;
+   color: #222222;
+   font-size: 16px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
    z-index: 1;
 }
 
-/* List-Elements of dropdown content */
 .dropdown-content a {
    color: #333333;
    padding: 12px 16px;
@@ -255,23 +230,23 @@
    cursor: pointer;
 }
 
-/* Dropdown content element background color change on hover */
 .dropdown-content a:hover {
-   background-color: #ddd;
+   background-color: rgb(236, 236, 236);
 }
 
-/* Set dropdown menu visible on hover */
-.dropdown:hover .dropdown-content {
+.dropbtn:hover,
+.dropdown-content:hover~.dropbtn {
+   color: red;
+}
+
+.dropbtn:hover .dropdown-content {
    display: block;
 }
 
-/* Dropdown button background color change */
-.dropdown:hover .dropbtn {
-   background-color: #dddddd;
-   color: #333333;
+.dropdown-content:hover {
+   display: block;
 }
 
-/* Horizontal Dropdown */
 .dropdown-horizontal {
    display: none;
    position: relative;
@@ -282,7 +257,6 @@
    z-index: 1;
 }
 
-/* Content of horizontal dropdown */
 .dropdown-horizontal a {
    color: #333333;
    padding: 12px 16px;
@@ -290,17 +264,109 @@
    text-decoration: none;
    display: block;
    cursor: pointer;
+   transition: 0.25s;
 }
 
-/* Horizontal dropdown content element background color change on hover */
 .dropdown-horizontal a:hover {
    background-color: #ddd;
 }
 
-/* Set horizontal dropdown menu visible on hover */
-.dropdown:hover .dropdown-horizontal {
+.dropbtn:hover .dropdown-horizontal {
    display: block;
+   transition: 0.25s;
 }
+
+
+
+
+
+
+/* New navigation styles, needs more work */
+.nav-container {
+   position: fixed;
+   top: 5px;
+   z-index: 9999999;
+}
+
+nav {
+   margin: 50px 0;
+   background-color: white;
+}
+
+nav ul {
+   padding: 0;
+   margin: 0;
+   list-style: none;
+   position: relative;
+}
+
+nav ul div {
+   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 1);
+}
+
+nav ul li {
+   display: inline-block;
+   background-color: #E64A19;
+   margin-left: 40px;
+}
+
+nav a {
+   display: block;
+   padding: 0 10px;
+   padding-right: 25px;
+   color: #111111;
+   font-size: 16px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   line-height: 30px;
+   text-decoration: none;
+}
+
+nav a:hover {
+   background-color: #d2d2d2;
+}
+
+/* Hide Dropdowns by Default */
+nav ul ul {
+   position: absolute;
+   top: 30px;
+   visibility: hidden;
+   opacity: 0;
+   transition: visibility 0s, opacity 0.2s linear;
+}
+
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+   visibility: visible;
+  opacity: 1;
+}
+
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+   position: relative;
+   display: list-item;
+   width: 250px;
+   float: none;
+   margin-left: 0px;
+}
+
+/* Second, Third and more Tiers	*/
+nav ul ul ul div {
+   position: relative;
+   left: 250px;
+   top: -30px;
+   z-index: 1;
+}
+
+.arrow {
+   color: black !important;
+}
+
+
+
+
+
+
 
 .user-name {
    width: 100%;
@@ -363,7 +429,7 @@
    position: absolute;
    width: 370px;
    height: 115px;
-   background-color:#333333;
+   background-color: #333333;
    box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.5);
    z-index: -999999999;
 }
@@ -376,7 +442,7 @@
    font-family: 'Roboto', sans-serif;
    font-weight: 500;
    text-decoration: none;
-   color:#7a7a7a;
+   color: #7a7a7a;
    height: 0px;
 }
 
@@ -504,65 +570,25 @@
 
 .cart-indicator {
    position: relative;
-	display: inline-block;
+   display: inline-block;
    top: -12px;
    left: -95px;
-	background-color: #f44336;
-	border-radius: 3px;
-	border: 2px solid #f44336;
-	cursor: pointer;
-	font-size: 9px;
+   background-color: #f44336;
+   border-radius: 3px;
+   border: 2px solid #f44336;
+   cursor: pointer;
+   font-size: 9px;
    font-family: 'Roboto', sans-serif;
    font-weight: 500;
-	color:#ffffff;
-	padding: 1px 1px;
-	text-decoration: none;
+   color: #ffffff;
+   padding: 1px 1px;
+   text-decoration: none;
 }
 
 .profile-position {
    position: fixed;
    margin-top: -5px;
    right: 0.5%;
-}
-
-.index-m-seven {
-   top: -301px;
-}
-
-.index-m-four {
-   top: -172px;
-}
-
-.index-m-three {
-   top: -129px;
-}
-
-.index-m-two {
-   top: -86px;
-}
-
-.index-m-one {
-   top: -43px;
-}
-
-.index-zero {
-   top: 0px;
-}
-
-.index-one {
-   top: 43px;
-}
-
-.index-two {
-   top: 86px;
-}
-
-.index-three {
-   top: 129px;
-}
-
-.horizontal-push-1 {
-   left: 444px;
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {

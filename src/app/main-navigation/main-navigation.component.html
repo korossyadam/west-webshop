@@ -34,6 +34,138 @@
 </div>
 
 
+
+
+<!-- 
+<div *ngIf="localStorageUser() != ''" class="dropdown-container menu-position">
+   <div class="dropbtn" (mouseover)="secondHover = -1">
+      Főoldal
+      <mat-icon class="arrow">expand_more</mat-icon>
+
+      <div class="dropdown-content">
+         <a routerLink="/main" (mouseover)="secondHover = 0">Főoldal<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+         <a routerLink="/main" (mouseover)="secondHover = 1">Méret szerinti keresők<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+         <a routerLink="/main" (mouseover)="secondHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+      </div>
+
+   </div>
+
+   
+
+   <div *ngIf="secondHover == 2" class="dropdown-horizontal">
+      <a href="https://www.motul.com/hu/hu/lubricants" target="_blank">Motul olajkereső</a>
+      <a href="https://www.mobil.co.uk/en-gb/product-selector/" target="_blank">Mobil 1 olajkereső</a>
+      <a href="https://applications.castrol.com/oilselector/hu_hu/c/search" target="_blank">Castrol olajkereső</a>
+      <a href="http://total-dnk.lubricantadvisor.com/default.aspx?lang=eng&br=elf" target="_blank">Total olajkereső</a>
+   </div>
+</div>-->
+
+
+<div class="nav-container">
+   <nav>
+      <ul>
+         <li><a href="#">Home</a></li>
+
+         <li><a href="#">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></a>
+            <!-- First Tier Drop Down -->
+            <ul>
+               <div>
+                  <li><a href="#">Szerszámok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
+                     <ul>
+                        <div>
+                           <li><a href="#">Kézi szerszámok</a></li>
+                           <li><a href="#">Elektromos szerszámok</a></li>
+                           <li><a href="#">Elektromos szerszámok</a></li>
+                           <li><a href="#">Mérőeszközök</a></li>
+                        </div>
+                     </ul>
+                  </li>
+                  <li><a href="#">Garázs berendezések</a>
+                     <ul>
+                        <div>
+                           <li><a href="#">Műhelyhigiénia</a>
+                              <ul>
+                                 <div>
+                                    <li><a href="#">Kézhigiénia</a></li>
+                                    <li><a href="#">Tisztítás</a></li>
+                                 </div>
+
+                              </ul>
+                           </li>
+                           <li><a href="#">Klímaszervíz</a></li>
+                           <li><a href="#">Akkumulátor szervíz</a>
+                              <ul>
+                                 <div>
+                                    <li><a href="#">Saruk</a></li>
+                                    <li><a href="#">Töltők</a></li>
+                                    <li><a href="#">Bikakábelek</a></li>
+                                    <li><a href="#">Teszterek</a></li>
+                                    <li><a href="#">Indítók</a></li>
+                                 </div>
+                              </ul>
+                           </li>
+                        </div>
+                     </ul>
+                  </li>
+                  <li><a href="#">Munkavédelmi kellékek</a>
+                     <ul>
+                        <div>
+                           <li><a href="#">Ruházat</a></li>
+                           <li><a href="#">Biztonsági felszerelés</a></li>
+                        </div>
+                     </ul>
+                  </li>
+                  <li><a href="#">Univerzális tartozékok</a>
+                     <ul>
+                        <div>
+                           <li><a href="#">Alátétek és O-gyűrűk</a>
+                              <ul>
+                                 <div>
+                                    <li><a href="#">Alátétek</a></li>
+                                    <li><a href="#">O-gyűrűk</a></li>
+                                 </div>
+                              </ul>
+                           </li>
+                           <li><a href="#">Biztosítékok</a>
+                              <ul>
+                                 <div>
+                                    <li><a href="#">Autós biztosítékok</a></li>
+                                    <li><a href="#">Egyéb biztosítékok</a></li>
+                                 </div>
+                              </ul>
+                           </li>
+                           <li><a href="#">Csavaranyák</a></li>
+                           <li><a href="#">Gyorskötözők</a></li>
+                           <li><a href="#">Kábelvégek</a></li>
+                           <li><a href="#">Patentek</a></li>
+                           <li><a href="#">Menetjavítók</a></li>
+                           <li><a href="#">Rugók</a></li>
+                           <li><a href="#">Szorítóbilincsek</a></li>
+                           <li><a href="#">Sasszegek</a></li>
+                           <li><a href="#">Szegecsek</a></li>
+                           <li><a href="#">Szegecsanyák</a></li>
+                        </div>
+                     </ul>
+                  </li>
+               </div>
+            </ul>
+         </li>
+
+         <li><a href="#">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
+            <!-- First Tier Drop Down -->
+            <ul>
+               <li><a href="#">Akkumulátor</a></li>
+               <li><a href="#">Autóápolás</a></li>
+               <li><a href="#">Beltér</a></li>
+               <li><a href="#">Kültér</a></li>
+               <li><a href="#">Folyadékok</a></li>
+            </ul>
+         </li>
+
+      </ul>
+   </nav>
+</div>
+
 <!-- Search bar in the middle -->
 <div class="fixed text">
 
@@ -50,115 +182,17 @@
    </div>
 
    <!-- Search button -->
-   <button mat-icon-button class="search-icon" color="warn" (click)="updatChildIf(); onSearch();">
+   <button mat-icon-button class="search-icon" color="warn">
       <mat-icon>search</mat-icon>
    </button>
 
 </div>
 
-<!-- Home -->
-<div *ngIf="localStorageUser() != ''" class="dropdown menu-position">
-   <button class="dropbtn" (mouseover)="secondHover = -1">Főoldal<mat-icon class="arrow">expand_more</mat-icon></button>
-   <div class="dropdown-content">
-      <a routerLink="/main" (mouseover)="secondHover = 0">Főoldal<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/main" (mouseover)="secondHover = 1">Méret szerinti keresők<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/main" (mouseover)="secondHover = 2">Katalógusok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-   </div>
-
-   <div *ngIf="secondHover == 2" class="dropdown-horizontal">
-      <a href="https://www.motul.com/hu/hu/lubricants" target="_blank">Motul olajkereső</a>
-      <a href="https://www.mobil.co.uk/en-gb/product-selector/" target="_blank">Mobil 1 olajkereső</a>
-      <a href="https://applications.castrol.com/oilselector/hu_hu/c/search" target="_blank">Castrol olajkereső</a>
-      <a href="http://total-dnk.lubricantadvisor.com/default.aspx?lang=eng&br=elf" target="_blank">Total olajkereső</a>
-   </div>
-</div>
-
-<!-- Equipment -->
-<div *ngIf="localStorageUser() != ''" class="dropdown tools-position">
-   <button class="dropbtn" (mouseover)="secondHover = -1">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></button>
-
-   <!-- Equipment: First list -->
-   <div class="dropdown-content">
-      <a routerLink="/profile" (mouseover)="secondHover = 0; thirdHover = -1">Szerszámok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="secondHover = 1; thirdHover = -1">Garázs berendezések<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="secondHover = 2; thirdHover = -1">Munkavédelmi kellékek<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="secondHover = 3; thirdHover = -1">Univerzális tartozékok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-   </div>
-
-   <!-- Equipment: Second list -->
-   <div *ngIf="secondHover == 0" class="dropdown-horizontal index-zero">
-      <a routerLink="/profile">Kézi szerszámok</a>
-      <a routerLink="/profile">Elektromos szerszámok</a>
-      <a routerLink="/profile">Pneumatikus szerszámok</a>
-      <a routerLink="/profile">Mérőeszközök</a>
-   </div>
-
-   <div *ngIf="secondHover == 1" class="dropdown-horizontal index-one">
-      <a routerLink="/profile" (mouseover)="thirdHover = 0">Műhelyhigiénia<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="thirdHover = 1">Klíma szervíz<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="thirdHover = 2">Akkumulátor szervíz<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-   </div>
-
-   <div *ngIf="secondHover == 2" class="dropdown-horizontal index-two">
-      <a routerLink="/profile">Ruházat</a>
-      <a routerLink="/profile">Biztonsági felszerelés</a>
-   </div>
-
-   <div *ngIf="secondHover == 3" class="dropdown-horizontal index-three">
-      <a routerLink="/profile" (mouseover)="thirdHover = 0">Alátétek és O-gyűrűk<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile" (mouseover)="thirdHover = 1">Biztosítékok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-      <a routerLink="/profile">Csavaranyák</a>
-      <a routerLink="/profile">Gyorskötözők</a>
-      <a routerLink="/profile">Kábelvégek</a>
-      <a routerLink="/profile">Patentek</a>
-      <a routerLink="/profile">Menetjavítók</a>
-      <a routerLink="/profile">Rugók</a>
-      <a routerLink="/profile">Szorítóbilincsek</a>
-      <a routerLink="/profile">Sasszegek</a>
-      <a routerLink="/profile">Szegecsek</a>
-      <a routerLink="/profile">Szegecsanyák</a>
-   </div>
-
-   <div *ngIf="secondHover == 1 && thirdHover == 0" class="dropdown-horizontal horizontal-push-1 index-m-one">
-      <a routerLink="/profile">Kézhigiénia</a>
-      <a routerLink="/profile">Tisztítás</a>
-   </div>
-
-   <div *ngIf="secondHover == 1 && thirdHover == 2" class="dropdown-horizontal horizontal-push-1 index-m-one">
-      <a routerLink="/profile">Saruk</a>
-      <a routerLink="/profile">Töltők</a>
-      <a routerLink="/profile">Bikakábelek</a>
-      <a routerLink="/profile">Teszterek</a>
-      <a routerLink="/profile">Indítók</a>
-   </div>
-
-   <div *ngIf="secondHover == 3 && thirdHover == 0" class="dropdown-horizontal horizontal-push-1 index-m-seven">
-      <a routerLink="/profile">Alátétek</a>
-      <a routerLink="/profile">O-gyűrűk</a>
-   </div>
-
-   <div *ngIf="secondHover == 3 && thirdHover == 1" class="dropdown-horizontal horizontal-push-1 index-m-seven">
-      <a routerLink="/profile">Autós biztosítékok</a>
-      <a routerLink="/profile">Egyéb biztosítékok</a>
-   </div>
-
-</div>
-
-<!-- Others -->
-<div *ngIf="localStorageUser() != ''" class="dropdown equipment-position">
-   <button class="dropbtn">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></button>
-   <div class="dropdown-content">
-      <a routerLink="/battery">Akkumulátor</a>
-      <a routerLink="/profile">Autóápolás</a>
-      <a routerLink="/profile">Beltér</a>
-      <a routerLink="/profile">Kültér</a>
-      <a routerLink="/profile">Folyadékok</a>
-   </div>
-</div>
-
 <!-- Cart -->
 <div *ngIf="localStorageUser() != ''" class="cart-dropdown cart-position">
-   <button class="cart-btn"><mat-icon class="cart-icon">shopping_cart</mat-icon>Kosár<mat-icon class="arrow">expand_more</mat-icon></button>
+   <button class="cart-btn">
+      <mat-icon class="cart-icon">shopping_cart</mat-icon>Kosár<mat-icon class="arrow">expand_more</mat-icon>
+   </button>
    <button *ngIf="cartItems.length > 0" class="cart-indicator">{{ cartItems.length }}</button>
    <div class="cart-dropdown-content">
 
@@ -168,7 +202,7 @@
 
             <!-- Product info -->
             <div class="img-bcg">
-               <img src="{{ product.imgurl[0] }}" class="cart-img">
+               <img src="{{ product.imgurls[0] }}" class="cart-img">
             </div>
             <a routerLink="/profile" class="cart-element-name">{{ product.partNumber }}</a>
             <a routerLink="/profile" class="cart-element-code">{{ product.name }}<span class="cart-element-brand">, {{ product.brand }}</span></a>
@@ -193,11 +227,11 @@
 
          <button class="checkout-button" mat-raised-button color="white" routerLink="cart">Kosár megtekintése</button>
          <button class="order-button" mat-raised-button color="warn" routerLink="cart">Megrendelés</button>
-         
+
       </div>
 
    </div>
-   
+
 </div>
 
 <!-- Account -->
@@ -211,6 +245,4 @@
 </div>
 
 <!-- The routed views render in the <router-outlet>-->
-<router-outlet *ngIf="!searchedSomething"></router-outlet>
-
-<app-products *ngIf="isIf || searchedSomething" [searchedText]="searchedText"></app-products>
+<router-outlet></router-outlet>

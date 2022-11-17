@@ -1,10 +1,18 @@
-<div style="max-width: 1920px;">
-    <img src="assets/blurred5.png" style="max-width:100%;" class="bcg-image"/>
+<div class="container">
+    <div style="max-width: 1920px;">
+        <img src="assets/blurred5.png" style="max-width:100%;" class="bcg-image" />
+    </div>
+
+    <div class="text-container">
+        <p class="main-label">Válaszd ki egyszerűen autód típusát</p>
+        <p class="smaller-label">Vagy bízd ránk, és kérj árajánlatot 1 munkanapon belül</p>
+
+        <div class="buttons-container">
+            <button class="main-button carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
+            <button class="main-button offer-button" mat-raised-button color="warn" (click)="onOfferButtonClick()">Árajánlat kérése</button>
+        </div>
+    </div>
+
 </div>
 
-<p class="main-label">Válaszd ki egyszerűen autód típusát</p>
-<p class="smaller-label">Vagy bízd ránk, és kérj árajánlatot 1 munkanapon belül</p>
-
-<button class="carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
-<button class="offer-button" mat-raised-button color="warn" (click)="onOfferButtonClick()">Árajánlat kérése</button>
-
+<app-featured></app-featured>
