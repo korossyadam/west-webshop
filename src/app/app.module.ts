@@ -18,6 +18,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,6 +38,9 @@ import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { BatteryComponent } from './battery/battery.component';
 import { OfferComponent } from './offer/offer.component';
+import { CarComponent } from './car/car.component';
+import { ProductComponent } from './product/product.component';
+import { FeaturedComponent } from './featured/featured.component';
 
 
 @NgModule({
@@ -50,6 +56,9 @@ import { OfferComponent } from './offer/offer.component';
     CartComponent,
     BatteryComponent,
     OfferComponent,
+    CarComponent,
+    ProductComponent,
+    FeaturedComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +76,9 @@ import { OfferComponent } from './offer/offer.component';
     MatStepperModule,
     MatExpansionModule,
     MatDialogModule,
+    MatTreeModule,
+    MatProgressBarModule,
+    MatRadioModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,
