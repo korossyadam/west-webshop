@@ -1,0 +1,49 @@
+.main-category-container {
+   position: relative;
+   max-width: 540px;
+   height: fit-content;
+}
+
+.main-category-inner-container {
+   overflow: hidden;
+   max-height: 210px;
+   border-radius: 2px;
+}
+
+/* experimental 
+.main-category-inner-container::before {
+   border-radius: 3px;
+   z-index: -1;
+   position: absolute;
+   content: "";
+   display: block;
+   width: 100%;
+   height: 100%;
+   left: 0;
+   top: 0;
+   box-sizing: border-box;
+   background: linear-gradient(to right, rgba(26, 26, 26, .98) 25%, rgba(26, 26, 26, 0) 90%);
+}
+*/
+
+.category-title-container {
+   position: absolute;
+   z-index: 10;
+   background-color: orange;
+   color: white;
+}
+
+.main-category-img {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   filter: blur(0px);
+   cursor: pointer;
+   transition: 0.45s;
+}
+
+.main-category-img:hover {
+   transform: scale(1.03);
+   filter: blur(3px);
+   transition: 0.45s;
+}
