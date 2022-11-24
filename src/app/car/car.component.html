@@ -1,0 +1,43 @@
+<div class="content-container">
+
+   <!-- This section contains data about the current Car -->
+   <div *ngIf="currentCar" class="car-container">
+      <img class="car-img" src="https://storage.googleapis.com/west-webshop.appspot.com/{{ currentCar.chassisIndex }}.png" alt="">
+      <p>{{ currentCar.brand }}</p>
+      <p>{{ currentCar.chassis }}</p>
+      <p>{{ currentCar.engine }} ({{ currentCar.hp }}LE)</p>
+      <mat-divider></mat-divider>
+      <div class="car-info">
+         <p>Gyártási év: <span>{{ currentCar.year }}</span></p>
+         <p>Teljesítmény [LE]: <span>{{ currentCar.hp }}</span></p>
+         <p>Teljesítmény [KW]: <span>{{ currentCar.kw }}</span></p>
+         <p>Hengerűrtartalom: <span>{{ currentCar.displacement }}</span></p>
+         <p>Motorkódok: <span>{{ currentCar.engineCode }}</span></p>
+         <p>Üzemanyag: <span>{{ currentCar.fuel }}</span></p>
+      </div>
+
+      <button mat-raised-button>JÁRMŰ MENTÉSE</button>
+   </div>
+
+   <!-- This section contains the parts -->
+   <div class="parts-container">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+         <!-- This is the tree node template for leaf nodes -->
+         <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="node">
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <button mat-icon-button disabled></button>
+            <a [routerLink]="['/products', node.name]" (click)="saveQueriedProducts()">{{node.name}} {{node.amount}}</a>
+         </mat-tree-node>
+         <!-- This is the tree node template for expandable nodes -->
+         <mat-tree-node class="node main-node" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle (click)="getProducts(node)">
+            <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name">
+               <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+               </mat-icon>
+            </button>
+            {{node.name}} {{node.amount}}
+         </mat-tree-node>
+      </mat-tree>
+   </div>
+
+</div>

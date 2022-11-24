@@ -1,0 +1,47 @@
+.content-container {
+   position: relative;
+   top: 90px;
+   margin: 0 auto;
+   width: 75%;
+}
+
+.car-container {
+   width: 25%;
+   text-align: center;
+   float: left;
+}
+
+.car-container p {
+   text-align: left;
+   font-size: 15px;
+   color: #444444;
+}
+
+.parts-container {
+   position: absolute;
+   left: 28%;
+   width: 72%;
+   height: 800px;
+   border-left: 1px solid rgba(0, 0, 0, 0.12);
+   float: right;
+}
+
+.car-img {
+   width: 350px;
+}
+
+.car-info span {
+   float: right;
+}
+
+.node {
+   min-height: 30px;
+}
+
+.main-node {
+   cursor: pointer;
+}
+
+.main-node:hover {
+   background-color: aliceblue;
+}
