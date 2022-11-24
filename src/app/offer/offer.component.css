@@ -1,0 +1,101 @@
+.content-container {
+   width: 1200px;
+   margin: 0 auto;
+   margin-top: 60px;
+}
+
+.title {
+   font-size: 28px;
+   text-align: center;
+}
+
+.half-container {
+   display: block;
+   overflow: auto;
+}
+
+.half-container input {
+   width: 44%;
+}
+
+.half-container input:nth-child(2) {
+   width: 18%;
+}
+
+.half-container select {
+   width: 25%;
+   float: right;
+   height: 39px;
+}
+
+.half-container input:nth-child(5) {
+   float: right;
+}
+
+.half-container input:nth-child(6) {
+   width: calc(94% + 3px);
+}
+
+.section-title {
+   color: #444444;
+   font-size: 20px;
+   margin-left: 10px;
+   font-weight: 500;
+   line-height: 10%;
+}
+
+.checkbox-container {
+   margin: 20px;
+   width: 600px;
+}
+
+.tip-container {
+   float: left;
+   color: #888888;
+   font-size: 16px;
+   margin-left: 40px;
+}
+
+.checkbox-container mat-checkbox {
+   float: left;
+}
+
+.input-email {
+   width: 20%;
+   float: right;
+   margin: 0 10px 0 0;
+}
+
+.send-button {
+   float: right;
+   margin: 0 15px 0 0;
+}
+
+textarea {
+   height: 90px;
+}
+
+.bold {
+   font-weight: 600;
+}
+
+/* To avoid turning placeholders upper case */
+::-webkit-input-placeholder {
+   text-transform: none;
+}
+
+:-moz-placeholder {
+   text-transform: none;
+}
+
+::-moz-placeholder {
+   text-transform: none;
+}
+
+:-ms-input-placeholder {
+   text-transform: none;
+}
+
+::placeholder {
+   text-transform: none;
+}
