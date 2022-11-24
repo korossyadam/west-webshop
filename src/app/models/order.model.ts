@@ -1,25 +1,45 @@
-import * as internal from "stream";
+export interface ShippingAddress {
+   name: string;
+   email: string;
+   phoneNumber: string;
+   address: string;
+   comment?: string
+}
+
+export interface BillingAddress {
+   name: string;
+   address: string;
+   taxNumber?: string;
+}
+
+export interface OrderedProduct {
+   partNumber: string;
+   name: string;
+   price: number;
+   quantity: number;
+   imgurl: string;
+}
 
 export class Order {
-   
-   public price: number;
-   public date: string;
-   public productIds: string[];
-   public productNames: string[];
-   public productPrices: number[];
-   public productQuantities: number[];
-   public shippingAddressId: string;
-   public billingAddressId: string;
+   public userId: string;
+   public deliveryPrice: number;
+   public totalPrice: number;
+   public date: Date;
+   public orderedProducts: OrderedProduct[];
+   public shippingAddress: ShippingAddress;
+   public billingAddress: BillingAddress;
+   public shippingMethod: string;
+   public paymentMethod: string;
 
-   public constructor(price: number, date: string, productIds: string[], productNames: string[], productPrices: number[], productQuantities: number[], shippingAddressId: string, billingAddressId: string) {
-      this.price = price;
+   public constructor(userId: string, date: Date, deliveryPrice: number, totalPrice: number, orderedProducts: OrderedProduct[], shippingAddress: ShippingAddress, billingAddress: BillingAddress, shippingMethod: string, paymentMethod: string) {
+      this.userId = userId;
       this.date = date;
-      this.productIds = productIds;
-      this.productNames = productNames;
-      this.productPrices = productPrices;
-      this.productQuantities = productQuantities;
-      this.shippingAddressId = shippingAddressId;
-      this.billingAddressId = billingAddressId;
-      
+      this.deliveryPrice = deliveryPrice;
+      this.totalPrice = totalPrice;
+      this.orderedProducts = orderedProducts;
+      this.shippingAddress = shippingAddress;
+      this.billingAddress = billingAddress;
+      this.shippingMethod = shippingMethod;
+      this.paymentMethod = paymentMethod;
    }
 }
