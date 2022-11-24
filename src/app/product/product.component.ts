@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Location } from '@angular/common';
-import { Utils } from '../utils';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-product',
@@ -14,8 +13,9 @@ import { Utils } from '../utils';
 export class ProductComponent implements OnInit {
 
   // Static functions
-  addTax = Utils.addTaxToPrice;
-  formatPriceToString = Utils.formatPriceToString;
+  addTax = this.utilsService.addTaxToPrice;
+  formatPriceToString = this.utilsService.formatPriceToString;
+  sanitize = this.utilsService.sanitize;
 
   // Keeps track of product that we want to show
   public currentProductId: string;
@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
   // What information to display
   public displayedInformation: number;
 
-  constructor(private route: ActivatedRoute, private productsService: ProductsService, private sanitizer: DomSanitizer, private _location: Location) { }
+  constructor(private route: ActivatedRoute, private utilsService: UtilsService, private productsService: ProductsService, private _location: Location) { }
 
   ngOnInit(): void {
     this.currentProductId = this.route.snapshot.paramMap.get('partNumber');
@@ -137,7 +137,7 @@ export class ProductComponent implements OnInit {
    * @param quantity The amount of products to add to cart (validated later)
    */
   addToCart(quantity: string): void {
-    Utils.addProductToCart(this.currentProduct, parseInt(quantity));
+    this.utilsService.addProductToCart(this.currentProduct, parseInt(quantity));
   }
 
   /**
@@ -147,15 +147,6 @@ export class ProductComponent implements OnInit {
    */
   changeInformationDisplay(newState: number): void {
     this.displayedInformation = newState;
-  }
-
-  /**
-   * Call this function on any URL that does not get display due to security error
-   * @param url The URL to sanitize
-   * @returns Sanitized URL
-   */
-  sanitize(url: string): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
 }
