@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
-import { ProductsService } from '../services/products.service';
-import { Utils } from '../utils';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
    selector: 'app-products',
@@ -15,10 +14,10 @@ export class ProductsComponent implements OnInit {
    public products: Product[] = [];
 
    // Static functions
-   addTax = Utils.addTaxToPrice;
-   formatPriceToString = Utils.formatPriceToString;
+   addTax = this.utilsService.addTaxToPrice;
+   formatPriceToString = this.utilsService.formatPriceToString;
 
-   constructor(private route: ActivatedRoute, private productService: ProductsService) { }
+   constructor(private route: ActivatedRoute, private utilsService: UtilsService) { }
 
    /**
     * On init, check if there is a URL parameter specifying a product category
@@ -30,7 +29,6 @@ export class ProductsComponent implements OnInit {
       let searchedCategory = this.route.snapshot.paramMap.get('category');
       if (searchedCategory) {
          let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
-         console.log(productsString);
 
          for (let i = 0; i < productsString.length; i++) {
             let productParts = productsString[i].split('!');
@@ -80,7 +78,7 @@ export class ProductsComponent implements OnInit {
    let quantityInput = (document.getElementById(productToAdd.partNumber) as HTMLInputElement);
    let quantity = quantityInput.value;
 
-   Utils.addProductToCart(productToAdd, parseInt(quantity));
+   this.utilsService.addProductToCart(productToAdd, parseInt(quantity));
  }
 
 }

@@ -60,7 +60,7 @@
 
 .fullscreen-button-container:hover {
    background-color: #f3f3f3;
-   color: orange;
+   color: var(--color-primary);
    transition: 0.25s;
 }
 
