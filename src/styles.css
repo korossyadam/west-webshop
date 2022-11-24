@@ -1,16 +1,152 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-html, body{
-    background-color: #ededed;
-}
-
 .mat-drawer-inner-container {
    overflow-y: scroll !important;
 }
 
 .select-panel {
-   margin-top: 26px !important; 
+   margin-top: 26px !important;
    margin-right: 20px !important;
    right: 50px !important;
+}
+
+/* Global back button */
+.back-button {
+   font-size: 16px;
+   color: #444444;
+   cursor: pointer;
+   position: absolute;
+   top: -30px;
+   left: 0px;
+}
+
+.back-button:hover {
+   color: #f44336;
+}
+
+.amount-input:focus {
+   outline: none;
+}
+
+/* Disable pointer events on expansion panel bodies */
+span.mat-expansion-indicator {
+   pointer-events: visiblefill !important;
+}
+
+mat-expansion-panel-header {
+   pointer-events: none;
+}
+
+/* Hide arrows on input type="number" tags */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+
+input[type=number] {
+   -moz-appearance: textfield;
+}
+
+/* Global styling for input fields */
+input, textarea, select {
+   width: calc(100% - 50px);
+   height: 36px;
+   background: #f5f5f5;
+   border: 0.1rem solid #e0e0e0;
+   border-top: 0.1rem solid #b5b5b5;
+   border-bottom: 0.1rem solid transparent;
+   border-radius: 0rem;
+   box-shadow: inset 0rem 0.1rem 0.2rem -0.1rem #b5b5b5;
+   color: #515151;
+   font-size: 16px;
+   font-weight: 400;
+   padding: 0px 25px;
+   margin: 8px;
+}
+
+input:focus, textarea:focus {
+   outline-color: var(--color-primary);
+}
+
+textarea {
+   font-style: italic;
+   padding-right: 0;
+   padding-top: 5px;
+   resize: none;
+}
+
+textarea::placeholder {
+   color: rgba(0, 0, 0, 0.42);
+   font-family: 'Titillium Web', sans-serif;
+   font-style: italic;
+}
+
+mat-checkbox {
+   margin-left: 8px;
+}
+
+button {
+   border-radius: 2px !important;
+}
+
+/* Custom amount selector styles */
+.amount-container {
+   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.amount-button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 20%;
+   height: 100%;
+   background-color: #ebebeb;
+   text-align: center;
+   font-size: 20px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 400;
+   color: rgba(0, 0, 0, 0.50);
+   user-select: none;
+   transition: 0.25s;
+}
+
+.input-negative {
+   float: left;
+   font-size: 26px;
+}
+
+.input-positive {
+   float: right;
+}
+
+.amount-button:hover {
+   color: rgba(0, 0, 0, 0.20);
+   cursor: pointer;
+   transition: 0.2s;
+}
+
+.amount-input {
+   width: 60%;
+   height: 100%;
+   background-color: #ebebeb;
+   padding: 0;
+   margin: 0;
+   border: none;
+   font-size: inherit;
+   text-align: center;
+   color: rgba(0, 0, 0, 0.80);
+   border-left: none;
+   border-right: none;
+   box-shadow: none;
+}
+
+/* Basic global styles */
+* {
+   font-family: 'Titillium Web', sans-serif;
+}
+
+::selection {
+   background-color: #cfcfcf;
 }
