@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -79,6 +80,7 @@ import { FeaturedComponent } from './featured/featured.component';
     MatTreeModule,
     MatProgressBarModule,
     MatRadioModule,
+    MatTabsModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,
