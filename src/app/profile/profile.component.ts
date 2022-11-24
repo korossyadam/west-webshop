@@ -1,9 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { first } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { first, Timestamp } from 'rxjs';
 import { Address } from '../models/address.model';
+import { Order } from '../models/order.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { ProfileService } from '../services/profile.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
    selector: 'app-profile',
@@ -12,18 +15,27 @@ import { ProfileService } from '../services/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
+   // Static functions
+   addTax = this.utilsService.addTaxToPrice;
+   formatPriceToString = this.utilsService.formatPriceToString;
+   sanitize = this.utilsService.sanitize;
+
+   @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
+
    public currentUser: User;
 
    public step: number = 0;
 
-   constructor(public profileService: ProfileService) { }
+   public orders: Order[];
+
+   constructor(private utilsService: UtilsService, private profileService: ProfileService, private dialog: MatDialog) { }
 
    ngOnInit(): void {
       this.profileService.getCurrentUser().pipe(first()).subscribe(data => this.currentUser = data[0]);
-   }
 
-   addNewAddress(): void {
-      this.step = 11;
+      this.profileService.getCurrentUserOrders().subscribe(data => {
+         this.orders = data;
+      });
    }
 
    // Add a new Address to current User
@@ -41,48 +53,18 @@ export class ProfileComponent implements OnInit {
       newAddresses.push(newAddress);
 
       // Map custom objects into pure Javascript objects
-      const objects = newAddresses.map((obj)=> {return Object.assign({}, obj)});
+      const objects = newAddresses.map((obj) => { return Object.assign({}, obj); });
       newUser.addresses = objects;
 
       this.profileService.updateCurrentUser(newUser);
    }
 
-   // Return Email from localStorage
-   getEmail(): string {
-      var email = localStorage.getItem('email');
-      if (email != null)
-         return email;
-      else
-         return '';
+   openDialog(orderToOpen: Order) {
+      this.dialog.open(this.dialogRef, { data: orderToOpen, width: '1000px' });
    }
 
-   // Return LastName from localStorage
-   getLastName(): string {
-      var lastName = localStorage.getItem('lastName');
-      if (lastName != null)
-         return lastName;
-      else
-         return '';
+   timestampToDate(timestamp: any): Date {
+      return timestamp.toDate();
    }
-
-   // Return FirstName from localStorage
-   getFirstName(): string {
-      var firstName = localStorage.getItem('firstName');
-      if (firstName != null)
-         return firstName;
-      else
-         return '';
-   }
-
-   // Return Phone from localStorage
-   getPhone(): string {
-      var phone = localStorage.getItem('phone');
-      if (phone != null && phone != 'undefined')
-         return phone;
-      else
-         return '';
-   }
-
-
 
 }

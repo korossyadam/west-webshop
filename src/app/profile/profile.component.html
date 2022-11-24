@@ -1,130 +1,174 @@
-<mat-card class="menu-card">
+<div class="content-container">
 
-   <!-- Menu Label -->
-   <p class="main-label">Lehetőségek</p>
-   <mat-divider class="divider"></mat-divider>
 
-   <!-- Left Side -->
-   <a class="menu-option" [ngClass]="{'active': step === 0}" (click)="step = 0;">Személyes adatok</a>
-   <div *ngIf="step == 0" class="selected-rectangle first-selected"></div>
-   <a class="menu-option second-push" [ngClass]="{'active': step === 1}" (click)="step = 1;">Címek kezelése</a>
-   <div *ngIf="step == 1" class="selected-rectangle second-selected"></div>
-   <a class="menu-option third-push" [ngClass]="{'active': step === 2}" (click)="step = 2;">Garázs</a>
-   <div *ngIf="step == 2" class="selected-rectangle third-selected"></div>
-   <a class="menu-option fourth-push" [ngClass]="{'active': step === 3}" (click)="step = 3;">Kívánságlista</a>
-   <div *ngIf="step == 3" class="selected-rectangle fourth-selected"></div>
-   <a class="menu-option fifth-push" [ngClass]="{'active': step === 4}" (click)="step = 4;">Árajánlatok</a>
-   <div *ngIf="step == 4" class="selected-rectangle fifth-selected"></div>
-   <a class="menu-option sixth-push" [ngClass]="{'active': step === 5}" (click)="step = 5;">Rendelések</a>
-   <div *ngIf="step == 5" class="selected-rectangle sixth-selected"></div>
-   <a class="menu-option seventh-push" [ngClass]="{'active': step === 6}" (click)="step = 6;">Kijelentkezés</a>
-   <div *ngIf="step == 6" class="selected-rectangle seventh-selected"></div>
+   <mat-card class="menu-card">
 
-</mat-card>
-
-<!-- Personal Data -->
-<div *ngIf="step == 0">
-   <mat-card class="data-card">
-
-      <!-- Personal Data Label -->
-      <p class="main-label">Személyes adatok</p>
+      <!-- Menu Label -->
+      <p class="card-title">Lehetőségek</p>
       <mat-divider class="divider"></mat-divider>
 
-      <!-- Email -->
-      <p class="label personal-email">EMAIL CÍM</p>
-      <input type="text" class="input personal-email-input" value="{{ getEmail() }}" disabled />
-
-      <!-- Last Name -->
-      <p class="label personal-last-name">VEZETÉKNÉV</p>
-      <input type="text" class="input personal-last-name-input" value="{{ getLastName() }}" #lastName />
-
-      <!-- First Name -->
-      <p class="label personal-first-name">KERESZTNÉV</p>
-      <input type="text" class="input personal-first-name-input" value="{{ getFirstName() }}" #firstName />
-
-      <!-- Phone -->
-      <p class="label personal-phone">TELEFONSZÁM</p>
-      <input type="text" class="input personal-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #phone />
+      <!-- Menu options -->
+      <div class="options-container">
+         <p class="menu-option" [ngClass]="{'active': step == 0}" (click)="step = 0;">Személyes adatok</p>
+         <p class="menu-option" [ngClass]="{'active': step == 1}" (click)="step = 1;">Címek kezelése</p>
+         <p class="menu-option" [ngClass]="{'active': step == 2}" (click)="step = 2;">Garázs</p>
+         <p class="menu-option" [ngClass]="{'active': step == 3}" (click)="step = 3;">Kívánságlista</p>
+         <p class="menu-option" [ngClass]="{'active': step == 4}" (click)="step = 4;">Árajánlatok</p>
+         <p class="menu-option" [ngClass]="{'active': step == 5}" (click)="step = 5;">Rendelések</p>
+         <p class="menu-option" [ngClass]="{'active': step == 6}" (click)="step = 6;">Kijelentkezés</p>
+      </div>
 
    </mat-card>
+
+
+
+   <mat-card class="main-card">
+
+      <!-- Personal data section -->
+      <div *ngIf="step == 0">
+         <p class="card-title">Személyes adatok</p>
+         <mat-divider></mat-divider>
+
+         <div class="dashboard-container">
+            <p>Név</p>
+            <input placeholder="Példa Név">
+            <p>E-mail cím</p>
+            <input placeholder="pelda@gmail.com">
+            <p>Telefonszám</p>
+            <input placeholder="+36 30 123 4567">
+            <br>
+
+            <button mat-raised-button color="primary" class="save-button">Adatok mentése</button>
+         </div>
+      </div>
+
+      <!-- Orders section -->
+      <div *ngIf="step == 5">
+         <p class="card-title">Rendeléseid</p>
+         <mat-divider></mat-divider>
+
+         <div class="dashboard-container">
+            <table class="table">
+               <thead>
+                  <th>Dátum</th>
+                  <th>Ár</th>
+               </thead>
+
+               <tbody>
+                  <tr *ngFor="let order of orders">
+                     <td>{{ timestampToDate(order.date).toLocaleString() }}</td>
+                     <td>{{ order.totalPrice }}</td>
+                     <td>
+                        <button mat-raised-button color="primary" (click)="openDialog(order)">Részletek</button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+
+   </mat-card>
+
+
 </div>
 
-<!-- Addresses -->
-<div *ngIf="step == 1 || step == 11">
-   <mat-card class="garage-card">
 
-      <!-- Addresses Label -->
-      <p class="main-label">Elmentett címek</p>
-      <mat-divider class="divider"></mat-divider>
+<ng-template #dialogRef let-order>
+   <p class="dialog-title">Rendelés: {{ timestampToDate(order.date).toLocaleString() }}</p>
+   <div *ngIf="order">
 
-      <!-- List Addresses-->
-      <div *ngIf="step == 1">
-         <ng-container *ngFor="let address of currentUser.addresses; let i = index">
-            <tr>
-               <h2>{{ address.name }}</h2>
+      <!-- List all products in the Order-->
+      <table class="table">
+         <thead>
+            <th>Kép</th>
+            <th>Megnevezés</th>
+            <th>Mennyiség</th>
+            <th class="center">Ár</th>
+         </thead>
+
+         <tbody>
+            <tr *ngFor="let product of order.orderedProducts">
+
+               <td class="image-column">
+                  <img [src]="sanitize(product.imgurl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="product-img">
+               </td>
+
+               <td class="info-column">
+                  <div class="info-container">
+                     <p [routerLink]="['/product', product.partNumber]" class="part-number" mat-dialog-close>{{ product.partNumber }}</p>
+                     <p class="name">{{ product.name }}</p>
+                     <p class="brand">{{ product.brand }}</p>
+                  </div>
+               </td>
+
+               <td class="amount-column">
+                  <p>{{ product.quantity }} db.</p>
+               </td>
+
+               <td class="price-column">
+                  <div class="price-container">
+                     <p class="price">{{ formatPriceToString(addTax(product.price)) }}</p>
+                     <p class="net-price">({{ formatPriceToString(product.price) }} + 27% ÁFA)</p>
+                  </div>
+               </td>
+
             </tr>
-         </ng-container>
 
-         <button class="new-button" mat-raised-button color="warn" (click)="addNewAddress()">Új cím hozzáadása</button>
+            <tr class="total-row">
+               <td></td>
+               <td></td>
+               <td></td>
+               <td class="price-column total-column">
+                  <div class="price-container">
+                     <p>Szállítás: {{ formatPriceToString(order.deliveryPrice) }}</p>
+                     <p>Végösszeg: {{ formatPriceToString(addTax(order.totalPrice)) }}</p>
+                     
+                  </div>
+               </td>
+            </tr>
+
+         </tbody>
+      </table>
+
+      <mat-divider></mat-divider>
+
+      <!-- Other information about the Order-->
+      <div>
+         <div class="quarter-container">
+            <p class="quarter-title">Alap adatok</p>
+            <div class="quarter-text-container">
+               <p>{{ order.shippingAddress.name }}</p>
+               <p>{{ order.shippingAddress.email }}</p>
+               <p>{{ order.shippingAddress.phoneNumber }}</p>
+               <p>{{ order.shippingAddress.address }}</p>
+               <p *ngIf="order.shippingAddress.comment">{{ order.shippingAddress.comment }}</p>
+            </div>
+         </div>
+
+         <div class="quarter-container">
+            <p class="quarter-title">Számlázási adatok</p>
+            <div class="quarter-text-container">
+               <p>{{ order.billingAddress.name }}</p>
+               <p>{{ order.billingAddress.address }}</p>
+               <p *ngIf="order.billingAddress.taxNumber">{{ order.billingAddress.taxNumber }}</p>
+            </div>
+         </div>
+
+         <div class="quarter-container">
+            <p class="quarter-title">Átvétel</p>
+            <div class="quarter-text-container">
+               <p>Házhozszállítás</p>
+            </div>
+         </div>
+
+         <div class="quarter-container">
+            <p class="quarter-title">Fizetés</p>
+            <div class="quarter-text-container">
+               <p>Utánvét</p>
+            </div>
+         </div>
       </div>
 
-      <!-- Add new Address form -->
-      <div *ngIf="step == 11">
-
-         <!-- Address Name -->
-         <p class="label address-name">CÍM NÉV</p>
-         <input type="text" class="input address-name-input" placeholder="Otthon, Munkahely, stb." #addressName />
-
-         <!-- Address Email -->
-         <p class="label address-email">ÉRTESÍTÉSI EMAIL CÍM</p>
-         <input type="text" class="input address-email-input" value="{{ getEmail() }}" #addressEmail />
-
-         <!-- Address Last Name -->
-         <p class="label address-last-name">VEZETÉKNÉV</p>
-         <input type="text" class="input address-last-name-input" value="{{ getLastName() }}" #addressLastName />
-
-         <!-- Address First Name -->
-         <p class="label address-first-name">KERESZTNÉV</p>
-         <input type="text" class="input address-first-name-input" value="{{ getFirstName() }}" #addressFirstName />
-
-         <!-- Address Company -->
-         <p class="label address-company">CÉG ADATOK<span class="optional"> (Nem kötelező)</span></p>
-         <input type="text" class="input address-company-name-input" placeholder="Cég név" #addressCompanyName />
-         <input type="text" class="input address-company-tax-input" placeholder="Adószám" #addressCompanyTax />
-
-         <!-- Address Phone -->
-         <p class="label address-phone">TELEFONSZÁM</p>
-         <input type="text" class="input address-phone-input" placeholder="+36301234567" value="{{ getPhone() }}" #addressPhone />
-
-         <!-- Address ZIP -->
-         <p class="label address-zip">IRÁNYÍTÓSZÁM</p>
-         <input type="text" class="input address-zip-input" placeholder="7100" #addressZip />
-
-         <!-- Address City -->
-         <p class="label address-city">TELEPÜLÉS</p>
-         <input type="text" class="input address-city-input" placeholder="Szekszárd" #addressCity />
-
-         <!-- Address City -->
-         <p class="label address-street">CÍM</p>
-         <input type="text" class="input address-street-input" placeholder="Páskum utca 2." #addressStreet />
-
-         <!-- Button to add new Address to currentUser -->
-         <button class="save-button" mat-raised-button color="warn" (click)="saveAddress(addressName.value, addressEmail.value, addressLastName.value, addressFirstName.value, addressCompanyName.value, addressCompanyTax.value, addressPhone.value, addressZip.value, addressCity.value, addressStreet.value)">Cím mentése</button>
-      </div>
-
-   </mat-card>
-</div>
-
-<!-- Garage -->
-<div *ngIf="step == 5">
-   <mat-card class="garage-card">
-
-   </mat-card>
-</div>
-
-<!-- Order -->
-<div *ngIf="step == 2">
-   <mat-card class="order-card">
-
-   </mat-card>
-</div>
+   </div>
+   <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
+</ng-template>
