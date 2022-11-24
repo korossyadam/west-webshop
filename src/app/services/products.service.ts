@@ -18,15 +18,14 @@ export class ProductsService {
   search(collectionName: string, searchedText: string): Observable<Product[]> {
     return this.afs.collection(collectionName, ref  => {
       let query: CollectionReference | Query = ref;
-      query = query.where('partNumber', '==', searchedText);
-      //query = query.orderBy('name', 'asc');
+      query = query.where('carIndexes', 'array-contains', '28251').limit(15);
       return query;
     }).valueChanges() as Observable<Product[]>;
   }
 
   // Get exactly one Product
-  getProduct(collectionName: string, searchedText: string): Observable<Product[]> {
-   return this.afs.collection(collectionName, ref  => {
+  getProduct(searchedText: string): Observable<Product[]> {
+   return this.afs.collection('products', ref  => {
      let query: CollectionReference | Query = ref;
      query = query.where('partNumber', '==', searchedText).limit(1);
      return query;
