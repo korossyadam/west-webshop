@@ -1,89 +1,95 @@
 <div class="content-container">
-
-   <!-- Text above -->
-   <div>
-      <p class="title">Árajánlat</p>
-      <p>Kérj tőlünk árajánlatot, és 1 munkanapon belül választ kaphatsz.</p>
-      <p>Töltsd ki az alábbi mezőket a forgalmi engedélyed, illetve a legjobb tudásod alapján. <span class="bold">Az alvázszám tudatában a többi mező kitöltése nem kötelező</span>, de ajánlott. 
-         Ezután válaszd ki az ajánlat típusát (egyedi, olajcsere, stb.). Az árajánlat kérése után semmilyen kötelezettséged nem keletkezik.</p>
+   <div class="content-inner-container">
+      <!-- Text above -->
       <div>
+         <p class="title">Árajánlat</p>
+         <p>Kérj tőlünk árajánlatot, és 1 munkanapon belül választ kaphatsz.</p>
+         <p>Töltsd ki az alábbi mezőket a forgalmi engedélyed, illetve a legjobb tudásod alapján. <span class="bold">Az alvázszám tudatában a többi mező kitöltése nem kötelező</span>, de ajánlott.
+            Ezután válaszd ki az ajánlat típusát (egyedi, olajcsere, stb.). Az árajánlat kérése után semmilyen kötelezettséged nem keletkezik.</p>
+         <div>
 
-         <div class="half-container">
-            <input placeholder="Gyártmány, modell">
-            <input placeholder="Évjárat">
-            <select>
-               <option style="display:none;" selected>Klímaberendezés</option>
-               <option>Klímás autó</option>
-               <option>Nem klímás autó</option>
-            </select>
-            <input placeholder="Motorkód, teljesítmény (lóerő, kw)">
-            <input placeholder="Karosszéria (szedán, kombi, hatchback)">
-            <input placeholder="Alvázszám (17 karakter)" maxlength="17" style="text-transform:uppercase">
+            <div class="half-container">
+               <input placeholder="Gyártmány, modell">
+               <input placeholder="Évjárat">
+               <select>
+                  <option style="display:none;" selected>Klímaberendezés</option>
+                  <option>Klímás autó</option>
+                  <option>Nem klímás autó</option>
+               </select>
+               <input placeholder="Motorkód, teljesítmény (lóerő, kw)">
+               <input placeholder="Karosszéria (szedán, kombi, hatchback)">
+               <input placeholder="Alvázszám (17 karakter)" maxlength="17" style="text-transform:uppercase">
+            </div>
+
          </div>
-
       </div>
+
+      <!-- Tabs -->
+      <mat-tab-group>
+
+         <!-- Custom offer -->
+         <mat-tab label="Egyedi ajánlat">
+            <textarea matInput placeholder="Itt tudod kifejteni milyen alkatrészekre szeretnél árajánlatot kapni, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
+         </mat-tab>
+
+         <!-- Offer for oil change -->
+         <mat-tab label="Olajcsere">
+
+            <p class="section-title">Olajcsere alkatrészek</p>
+            <div class="checkbox-container">
+               <mat-checkbox [checked]="true">Motorolaj</mat-checkbox><br>
+               <mat-checkbox [checked]="true">Olajszűrő</mat-checkbox><br>
+               <mat-checkbox [checked]="true">Olajleeresztő csavar</mat-checkbox>
+               <div class="tip-container">Sok esetben tartozik hozzá a tömítés is.</div><br>
+               <mat-checkbox [checked]="true">Olajleeresztő csavar tömítés</mat-checkbox><br>
+               <mat-checkbox>Levegőszűrő</mat-checkbox>
+               <div class="tip-container">Ajánlott cserélni olajcsere alkalmával.</div><br>
+               <mat-checkbox>Üzemanyagszűrő</mat-checkbox>
+               <div class="tip-container">Dízeles autókon szokás cserélni olajcsere alkalmával.</div><br>
+               <mat-checkbox>Pollenszűrő</mat-checkbox><br>
+            </div>
+
+            <p class="section-title">Olajcsere kiegészítők</p>
+            <div class="checkbox-container">
+               <mat-checkbox>Olajleeresztő csavar szerszám</mat-checkbox><br>
+               <mat-checkbox>Olajszűrő szerszám</mat-checkbox><br>
+               <mat-checkbox>Motorolaj felfogó tál</mat-checkbox><br>
+               <mat-checkbox>Motorolaj adalék</mat-checkbox><br>
+            </div>
+
+            <p class="section-title">Üzenet</p>
+            <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
+         </mat-tab>
+
+         <!-- Offer for brake service -->
+         <mat-tab label="Fékszervíz">
+
+            <p class="section-title">Fékszervíz alkatrészek</p>
+            <div class="checkbox-container">
+               <mat-checkbox>Első féktárcsa</mat-checkbox>
+               <div class="tip-container">Vagy fékdob</div><br>
+               <mat-checkbox>Hátsó féktárcsa</mat-checkbox>
+               <div class="tip-container">Vagy fékdob</div><br>
+               <mat-checkbox>Első fékbetét készlet</mat-checkbox>
+               <div class="tip-container">Vagy fékpofa készlet</div><br>
+               <mat-checkbox>Hátsó fékbetét készlet</mat-checkbox>
+               <div class="tip-container">Vagy fékpofa készlet</div><br>
+               <mat-checkbox>Kopásérzékelő</mat-checkbox><br>
+            </div>
+
+            <p class="section-title">Fékszervíz kiegészítők</p>
+            <div class="checkbox-container">
+               <mat-checkbox>Féktisztító spray</mat-checkbox><br>
+            </div>
+
+            <p class="section-title">Üzenet</p>
+            <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
+         </mat-tab>
+
+      </mat-tab-group>
+
+      <button class="send-button" mat-raised-button color="primary">Árajánlat kérése</button>
+      <input class="input-email" placeholder="E-mail cím amin elérünk">
    </div>
 
-   <!-- Tabs -->
-   <mat-tab-group>
-
-      <!-- Custom offer -->
-      <mat-tab label="Egyedi ajánlat">
-         <textarea matInput placeholder="Itt tudod kifejteni milyen alkatrészekre szeretnél árajánlatot kapni, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
-      </mat-tab>
-
-      <!-- Offer for oil change -->
-      <mat-tab label="Olajcsere">
-
-         <p class="section-title">Olajcsere alkatrészek</p>
-         <div class="checkbox-container">
-            <mat-checkbox [checked]="true">Motorolaj</mat-checkbox><br>
-            <mat-checkbox [checked]="true">Olajszűrő</mat-checkbox><br>
-            <mat-checkbox [checked]="true">Olajleeresztő csavar</mat-checkbox><div class="tip-container">Sok esetben tartozik hozzá a tömítés is.</div><br>
-            <mat-checkbox [checked]="true">Olajleeresztő csavar tömítés</mat-checkbox><br>
-            <mat-checkbox>Levegőszűrő</mat-checkbox><div class="tip-container">Ajánlott cserélni olajcsere alkalmával.</div><br>
-            <mat-checkbox>Üzemanyagszűrő</mat-checkbox><div class="tip-container">Dízeles autókon szokás cserélni olajcsere alkalmával.</div><br>
-            <mat-checkbox>Pollenszűrő</mat-checkbox><br>
-         </div>
-
-         <p class="section-title">Olajcsere kiegészítők</p>
-         <div class="checkbox-container">
-            <mat-checkbox>Olajleeresztő csavar szerszám</mat-checkbox><br>
-            <mat-checkbox>Olajszűrő szerszám</mat-checkbox><br>
-            <mat-checkbox>Motorolaj felfogó tál</mat-checkbox><br>
-            <mat-checkbox>Motorolaj adalék</mat-checkbox><br>
-         </div>
-         
-         <p class="section-title">Üzenet</p>
-         <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
-      </mat-tab>
-      
-      <!-- Offer for brake service -->
-      <mat-tab label="Fékszervíz">
-
-         <p class="section-title">Fékszervíz alkatrészek</p>
-         <div class="checkbox-container">
-            <mat-checkbox>Első féktárcsa</mat-checkbox><div class="tip-container">Vagy fékdob</div><br>
-            <mat-checkbox>Hátsó féktárcsa</mat-checkbox><div class="tip-container">Vagy fékdob</div><br>
-            <mat-checkbox>Első fékbetét készlet</mat-checkbox><div class="tip-container">Vagy fékpofa készlet</div><br>
-            <mat-checkbox>Hátsó fékbetét készlet</mat-checkbox><div class="tip-container">Vagy fékpofa készlet</div><br>
-            <mat-checkbox>Kopásérzékelő</mat-checkbox><br>
-         </div>
-
-         <p class="section-title">Fékszervíz kiegészítők</p>
-         <div class="checkbox-container">
-            <mat-checkbox>Féktisztító spray</mat-checkbox><br>
-         </div>
-
-         <p class="section-title">Üzenet</p>
-         <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
-      </mat-tab>
-
-    </mat-tab-group>
-
-    <button class="send-button" mat-raised-button color="primary">Árajánlat kérése</button>
-    <input class="input-email" placeholder="E-mail cím amin elérünk">
-
-
 </div>
-
