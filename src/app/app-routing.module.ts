@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BatteryComponent } from './battery/battery.component';
 import { CarComponent } from './car/car.component';
 import { CartComponent } from './cart/cart.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { OfferComponent } from './offer/offer.component';
