@@ -299,9 +299,9 @@ html, body {
 .main {
    overflow: auto;
    position: absolute;
-   width: 100%;
-   top: 54px;
+   top: 0;
    bottom: 0;
+   width: 100%;
 }
 
 .spinner {
