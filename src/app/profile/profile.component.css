@@ -1,20 +1,25 @@
 .content-container {
-   width: 1200px;
+   position: absolute;
+   width: 100%;
    margin: 0 auto;
-   margin-top: 100px;
+}
+
+.content-inner-container {
+   width: 800px;
+   margin: 0 auto;
+   margin-top: 50px;
 }
 
 .menu-card {
    position: relative;
-   left: 21%;
-   width: 18%;
+   width: 24%;
    height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
    float: left;
 }
 
 .main-card {
-   width: 50%;
+   width: 65%;
    height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
    float: right;

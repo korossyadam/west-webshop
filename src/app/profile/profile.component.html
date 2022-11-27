@@ -1,78 +1,78 @@
 <div class="content-container">
+   <div class="content-inner-container">
 
+      <!-- Menu card on the left -->
+      <mat-card class="menu-card">
 
-   <mat-card class="menu-card">
+         <!-- Menu Label -->
+         <p class="card-title">Lehetőségek</p>
+         <mat-divider class="divider"></mat-divider>
 
-      <!-- Menu Label -->
-      <p class="card-title">Lehetőségek</p>
-      <mat-divider class="divider"></mat-divider>
-
-      <!-- Menu options -->
-      <div class="options-container">
-         <p class="menu-option" [ngClass]="{'active': step == 0}" (click)="step = 0;">Személyes adatok</p>
-         <p class="menu-option" [ngClass]="{'active': step == 1}" (click)="step = 1;">Címek kezelése</p>
-         <p class="menu-option" [ngClass]="{'active': step == 2}" (click)="step = 2;">Garázs</p>
-         <p class="menu-option" [ngClass]="{'active': step == 3}" (click)="step = 3;">Kívánságlista</p>
-         <p class="menu-option" [ngClass]="{'active': step == 4}" (click)="step = 4;">Árajánlatok</p>
-         <p class="menu-option" [ngClass]="{'active': step == 5}" (click)="step = 5;">Rendelések</p>
-         <p class="menu-option" [ngClass]="{'active': step == 6}" (click)="step = 6;">Kijelentkezés</p>
-      </div>
-
-   </mat-card>
-
-
-
-   <mat-card class="main-card">
-
-      <!-- Personal data section -->
-      <div *ngIf="step == 0">
-         <p class="card-title">Személyes adatok</p>
-         <mat-divider></mat-divider>
-
-         <div class="dashboard-container">
-            <p>Név</p>
-            <input placeholder="Példa Név">
-            <p>E-mail cím</p>
-            <input placeholder="pelda@gmail.com">
-            <p>Telefonszám</p>
-            <input placeholder="+36 30 123 4567">
-            <br>
-
-            <button mat-raised-button color="primary" class="save-button">Adatok mentése</button>
+         <!-- Menu options -->
+         <div class="options-container">
+            <p class="menu-option" [ngClass]="{'active': step == 0}" (click)="step = 0;">Személyes adatok</p>
+            <p class="menu-option" [ngClass]="{'active': step == 1}" (click)="step = 1;">Címek kezelése</p>
+            <p class="menu-option" [ngClass]="{'active': step == 2}" (click)="step = 2;">Garázs</p>
+            <p class="menu-option" [ngClass]="{'active': step == 3}" (click)="step = 3;">Kívánságlista</p>
+            <p class="menu-option" [ngClass]="{'active': step == 4}" (click)="step = 4;">Árajánlatok</p>
+            <p class="menu-option" [ngClass]="{'active': step == 5}" (click)="step = 5;">Rendelések</p>
+            <p class="menu-option" [ngClass]="{'active': step == 6}" (click)="step = 6;">Kijelentkezés</p>
          </div>
-      </div>
 
-      <!-- Orders section -->
-      <div *ngIf="step == 5">
-         <p class="card-title">Rendeléseid</p>
-         <mat-divider></mat-divider>
+      </mat-card>
 
-         <div class="dashboard-container">
-            <table class="table">
-               <thead>
-                  <th>Dátum</th>
-                  <th>Ár</th>
-               </thead>
+      <!-- Card on the right -->
+      <mat-card class="main-card">
 
-               <tbody>
-                  <tr *ngFor="let order of orders">
-                     <td>{{ timestampToDate(order.date).toLocaleString() }}</td>
-                     <td>{{ order.totalPrice }}</td>
-                     <td>
-                        <button mat-raised-button color="primary" (click)="openDialog(order)">Részletek</button>
-                     </td>
-                  </tr>
-               </tbody>
-            </table>
+         <!-- Personal data section -->
+         <div *ngIf="step == 0">
+            <p class="card-title">Személyes adatok</p>
+            <mat-divider></mat-divider>
+
+            <div class="dashboard-container">
+               <p>Név</p>
+               <input placeholder="Példa Név">
+               <p>E-mail cím</p>
+               <input placeholder="pelda@gmail.com">
+               <p>Telefonszám</p>
+               <input placeholder="+36 30 123 4567">
+               <br>
+
+               <button mat-raised-button color="primary" class="save-button">Adatok mentése</button>
+            </div>
          </div>
-      </div>
 
-   </mat-card>
+         <!-- Orders section -->
+         <div *ngIf="step == 5">
+            <p class="card-title">Rendeléseid</p>
+            <mat-divider></mat-divider>
 
+            <div class="dashboard-container">
+               <table class="table">
+                  <thead>
+                     <th>Dátum</th>
+                     <th>Ár</th>
+                  </thead>
 
+                  <tbody>
+                     <tr *ngFor="let order of orders">
+                        <td>{{ timestampToDate(order.date).toLocaleString() }}</td>
+                        <td>{{ order.totalPrice }}</td>
+                        <td>
+                           <button mat-raised-button color="primary" (click)="openDialog(order)">Részletek</button>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+
+      </mat-card>
+
+   </div>
 </div>
 
-
+<!-- Dialog that opens when inspecting an Order -->
 <ng-template #dialogRef let-order>
    <p class="dialog-title">Rendelés: {{ timestampToDate(order.date).toLocaleString() }}</p>
    <div *ngIf="order">
@@ -122,7 +122,7 @@
                   <div class="price-container">
                      <p>Szállítás: {{ formatPriceToString(order.deliveryPrice) }}</p>
                      <p>Végösszeg: {{ formatPriceToString(addTax(order.totalPrice)) }}</p>
-                     
+
                   </div>
                </td>
             </tr>
