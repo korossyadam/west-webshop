@@ -1,36 +1,241 @@
-<!-- Decoration shapes -->
-<div class="box-middle"></div>
-<div class="parallelogram-left"></div>
-<div class="parallelogram-right"></div>
-
-<!-- Logo -->
-<h2 class="logo"><a class="no-href-decoration" routerLink="/main"><span class="orange">WEST</span> ALKATRÉSZ</a></h2>
-
-<!-- Upper bar -->
 <div class="container">
-   <div class="topnav fixed">
+   <div class="inner-container">
 
-      <!-- Home Button -->
-      <!-- <a class="menu-option" [ngClass]="{'active': step === 0}" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;">Főoldal</a> -->
-      <!-- <button mat-icon-button class="home-icon" color="warn" routerLink="/main" (click)="searchedSomething = false; isIf = false; step = 0;"> -->
-      <!--    <mat-icon><span class="material-icons-outlined"> -->
-      <!--       other_houses -->
-      <!--       </span></mat-icon> -->
-      <!-- </button> -->
+      <!-- Top left and top right parallelograms -->
+      <div class="parallelogram parallelogram-left"></div>
+      <div class="parallelogram parallelogram-right"></div>
 
-      <button class="carselect-button" mat-raised-button color="warn" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
-      <button class="offer-button" mat-raised-button routerLink="/offer">Árajánlat kérése</button>
+      <!-- Clickable logo -->
+      <h2 class="logo" routerLink="/main"><span class="primary">WEST</span> ALKATRÉSZ</h2>
 
-      <!-- Login buttons -->
-      <div *ngIf="localStorageUser() == ''">
-         <a class="login-text" routerLink="/login">Bejelentkezés</a>
-         <a class="login-text" routerLink="/login">Regisztráció</a>
+      <!-- Search field -->
+      <div class="search-container">
+         <div class="search-inner-container">
+            <input class="search-field" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off">
+
+            <button mat-raised-button class="search-button" color="primary">
+               <mat-icon>search</mat-icon>
+            </button>
+         </div>
       </div>
-      <div *ngIf="localStorageUser() != ''">
 
+      <!-- 2 buttons -->
+      <div class="buttons-container">
+         <div class="buttons-inner-container">
+            <button class="button carselect-button" mat-raised-button color="primary" (click)="onCarSelectorButtonClick()">Jármű kiválasztása</button>
+            <button class="button offer-button" mat-raised-button routerLink="/offer">Árajánlat kérése</button>
+         </div>
       </div>
+
+      <!-- Navigation options on the left -->
+      <div class="nav-container">
+         <nav>
+            <ul>
+               <li><a routerLink="/main">Főoldal</a></li>
+
+               <li><a routerLink="/categories">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></a>
+                  <ul>
+                     <div>
+                        <li><a routerLink="/categories">Szerszámok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                           <ul>
+                              <div>
+                                 <li><a routerLink="/categories">Kézi szerszámok</a></li>
+                                 <li><a routerLink="/categories">Elektromos szerszámok</a></li>
+                                 <li><a routerLink="/categories">Elektromos szerszámok</a></li>
+                                 <li><a routerLink="/categories">Mérőeszközök</a></li>
+                              </div>
+                           </ul>
+                        </li>
+                        <li><a routerLink="/categories">Garázs berendezések<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                           <ul>
+                              <div>
+                                 <li><a routerLink="/categories">Műhelyhigiénia<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                    <ul>
+                                       <div>
+                                          <li><a routerLink="/categories">Kézhigiénia</a></li>
+                                          <li><a routerLink="/categories">Tisztítás</a></li>
+                                       </div>
+
+                                    </ul>
+                                 </li>
+                                 <li><a routerLink="/categories">Klímaszervíz</a></li>
+                                 <li><a routerLink="/categories">Akkumulátor szervíz<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                    <ul>
+                                       <div>
+                                          <li><a routerLink="/categories">Saruk</a></li>
+                                          <li><a routerLink="/categories">Töltők</a></li>
+                                          <li><a routerLink="/categories">Bikakábelek</a></li>
+                                          <li><a routerLink="/categories">Teszterek</a></li>
+                                          <li><a routerLink="/categories">Indítók</a></li>
+                                       </div>
+                                    </ul>
+                                 </li>
+                              </div>
+                           </ul>
+                        </li>
+                        <li><a routerLink="/categories">Munkavédelmi kellékek<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                           <ul>
+                              <div>
+                                 <li><a routerLink="/categories">Ruházat</a></li>
+                                 <li><a routerLink="/categories">Biztonsági felszerelés</a></li>
+                              </div>
+                           </ul>
+                        </li>
+                        <li><a routerLink="/categories">Univerzális tartozékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                           <ul>
+                              <div>
+                                 <li><a routerLink="/categories">Alátétek és O-gyűrűk<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                    <ul>
+                                       <div>
+                                          <li><a routerLink="/categories">Alátétek</a></li>
+                                          <li><a routerLink="/categories">O-gyűrűk</a></li>
+                                       </div>
+                                    </ul>
+                                 </li>
+                                 <li><a routerLink="/categories">Biztosítékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                    <ul>
+                                       <div>
+                                          <li><a routerLink="/categories">Autós biztosítékok</a></li>
+                                          <li><a routerLink="/categories">Egyéb biztosítékok</a></li>
+                                       </div>
+                                    </ul>
+                                 </li>
+                                 <li><a routerLink="/categories">Csavaranyák</a></li>
+                                 <li><a routerLink="/categories">Gyorskötözők</a></li>
+                                 <li><a routerLink="/categories">Kábelvégek</a></li>
+                                 <li><a routerLink="/categories">Patentek</a></li>
+                                 <li><a routerLink="/categories">Menetjavítók</a></li>
+                                 <li><a routerLink="/categories">Rugók</a></li>
+                                 <li><a routerLink="/categories">Szorítóbilincsek</a></li>
+                                 <li><a routerLink="/categories">Sasszegek</a></li>
+                                 <li><a routerLink="/categories">Szegecsek</a></li>
+                                 <li><a routerLink="/categories">Szegecsanyák</a></li>
+                              </div>
+                           </ul>
+                        </li>
+                     </div>
+                  </ul>
+               </li>
+
+               <li><a routerLink="/categories">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
+                  <ul>
+                     <div>
+                        <li><a routerLink="/categories">Akkumulátor</a></li>
+                        <li><a routerLink="/categories">Autóápolás</a></li>
+                        <li><a routerLink="/categories">Beltér</a></li>
+                        <li><a routerLink="/categories">Kültér</a></li>
+                        <li><a routerLink="/categories">Folyadékok</a></li>
+                     </div>
+                  </ul>
+               </li>
+
+            </ul>
+         </nav>
+      </div>
+
+      <!-- Account -->
+      <div *ngIf="localStorageUser() != ''" class="profile-container">
+         <nav>
+            <ul>
+               <li><a class="profile-name">{{ getName() }}<mat-icon class="profile-arrow">expand_more</mat-icon><br><span class="profile-email">{{ getEmail() }}</span></a>
+                  <ul>
+                     <div>
+                        <li>
+                           <a routerLink="/profile">Személyes adatok</a>
+                           <a routerLink="/profile">Link 3</a>
+                           <a routerLink="/login" (click)="logOut()">Kijelentkezés</a>
+                        </li>
+                     </div>
+                  </ul>
+               </li>
+            </ul>
+
+         </nav>
+      </div>
+
+
+      <!-- Account -->
+      <div *ngIf="localStorageUser() != ''" class="cart-container">
+         <nav>
+            <ul>
+               <li>
+                  <a class="cart-text">
+                     <mat-icon class="cart-icon">shopping_cart</mat-icon>Kosár
+                     <mat-icon class="arrow">expand_more</mat-icon>
+                     <div *ngIf="cartItems.length > 0" class="cart-indicator">
+                        <p class="cart-indicator-text">{{ cartItems.length }}</p>
+                     </div>
+                  </a>
+                  <ul>
+                     <div class="cart-content-container">
+
+                        <!-- Cart elements ngFor-->
+                        <div *ngFor="let product of cartItems; let i = index">
+                           <div class="cart-product-container">
+
+                              <!-- Product info -->
+                              <div class="img-container">
+                                 <img [src]="sanitize(product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="cart-img">
+                              </div>
+
+                              <div class="cart-product-info-container">
+                                 <p routerLink="/profile" class="cart-element-name">{{ product.name }}<span class="cart-element-brand"> {{ product.brand }}</span></p>
+                                 <p routerLink="/profile" class="cart-element-code">{{ product.partNumber }}</p>
+                                 <p class="cart-element-price">{{ formatPriceToString(addTax(product.price)) }}
+                                    <span class="cart-element-amount">({{ product.quantity }} db)</span>
+                                 </p>
+
+
+                              </div>
+
+                              <!-- Delete button -->
+                              <button mat-icon-button class="delete-icon" (click)="deleteCartItem(0)">
+                                 <mat-icon>close</mat-icon>
+                              </button>
+
+
+                              <!-- Divider -->
+                              <mat-divider class="divider"></mat-divider>
+
+                           </div>
+                        </div>
+
+                        <!-- Subtotal -->
+                        <div class="total-container">
+
+                           <p class="net-price">Nettó ár: {{ subtotalNet }}</p>
+                           <p class="actual-price">Bruttó ár: <span class="">{{ subtotal }}</span></p>
+
+                           <button class="checkout-button" mat-raised-button color="white" routerLink="cart">Kosár megtekintése</button>
+                           <button class="order-button" mat-raised-button color="primary" routerLink="cart">Megrendelés</button>
+
+                        </div>
+
+                     </div>
+                  </ul>
+               </li>
+            </ul>
+
+         </nav>
+      </div>
+
+
 
    </div>
+
+   <div class="trapezoid"></div>
+
+</div>
+
+
+
+<!-- Login buttons -->
+<div *ngIf="localStorageUser() == ''">
+   <a class="login-text" routerLink="/login">Bejelentkezés</a>
+   <a class="login-text" routerLink="/login">Regisztráció</a>
+</div>
+<div *ngIf="localStorageUser() != ''">
+
 </div>
 
 
@@ -61,188 +266,18 @@
 </div>-->
 
 
-<div class="nav-container">
-   <nav>
-      <ul>
-         <li><a href="#">Home</a></li>
 
-         <li><a href="#">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></a>
-            <!-- First Tier Drop Down -->
-            <ul>
-               <div>
-                  <li><a href="#">Szerszámok<mat-icon class="arrow-expand">chevron_right</mat-icon></a>
-                     <ul>
-                        <div>
-                           <li><a href="#">Kézi szerszámok</a></li>
-                           <li><a href="#">Elektromos szerszámok</a></li>
-                           <li><a href="#">Elektromos szerszámok</a></li>
-                           <li><a href="#">Mérőeszközök</a></li>
-                        </div>
-                     </ul>
-                  </li>
-                  <li><a href="#">Garázs berendezések</a>
-                     <ul>
-                        <div>
-                           <li><a href="#">Műhelyhigiénia</a>
-                              <ul>
-                                 <div>
-                                    <li><a href="#">Kézhigiénia</a></li>
-                                    <li><a href="#">Tisztítás</a></li>
-                                 </div>
 
-                              </ul>
-                           </li>
-                           <li><a href="#">Klímaszervíz</a></li>
-                           <li><a href="#">Akkumulátor szervíz</a>
-                              <ul>
-                                 <div>
-                                    <li><a href="#">Saruk</a></li>
-                                    <li><a href="#">Töltők</a></li>
-                                    <li><a href="#">Bikakábelek</a></li>
-                                    <li><a href="#">Teszterek</a></li>
-                                    <li><a href="#">Indítók</a></li>
-                                 </div>
-                              </ul>
-                           </li>
-                        </div>
-                     </ul>
-                  </li>
-                  <li><a href="#">Munkavédelmi kellékek</a>
-                     <ul>
-                        <div>
-                           <li><a href="#">Ruházat</a></li>
-                           <li><a href="#">Biztonsági felszerelés</a></li>
-                        </div>
-                     </ul>
-                  </li>
-                  <li><a href="#">Univerzális tartozékok</a>
-                     <ul>
-                        <div>
-                           <li><a href="#">Alátétek és O-gyűrűk</a>
-                              <ul>
-                                 <div>
-                                    <li><a href="#">Alátétek</a></li>
-                                    <li><a href="#">O-gyűrűk</a></li>
-                                 </div>
-                              </ul>
-                           </li>
-                           <li><a href="#">Biztosítékok</a>
-                              <ul>
-                                 <div>
-                                    <li><a href="#">Autós biztosítékok</a></li>
-                                    <li><a href="#">Egyéb biztosítékok</a></li>
-                                 </div>
-                              </ul>
-                           </li>
-                           <li><a href="#">Csavaranyák</a></li>
-                           <li><a href="#">Gyorskötözők</a></li>
-                           <li><a href="#">Kábelvégek</a></li>
-                           <li><a href="#">Patentek</a></li>
-                           <li><a href="#">Menetjavítók</a></li>
-                           <li><a href="#">Rugók</a></li>
-                           <li><a href="#">Szorítóbilincsek</a></li>
-                           <li><a href="#">Sasszegek</a></li>
-                           <li><a href="#">Szegecsek</a></li>
-                           <li><a href="#">Szegecsanyák</a></li>
-                        </div>
-                     </ul>
-                  </li>
-               </div>
-            </ul>
-         </li>
+<button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+   <mat-icon>close</mat-icon>
+</button>
 
-         <li><a href="#">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
-            <!-- First Tier Drop Down -->
-            <ul>
-               <li><a href="#">Akkumulátor</a></li>
-               <li><a href="#">Autóápolás</a></li>
-               <li><a href="#">Beltér</a></li>
-               <li><a href="#">Kültér</a></li>
-               <li><a href="#">Folyadékok</a></li>
-            </ul>
-         </li>
 
-      </ul>
-   </nav>
-</div>
 
-<!-- Search bar in the middle -->
-<div class="fixed text">
 
-   <!-- Search bar -->
-   <div style="font-size: 16px">
-      <mat-form-field class="form-field" appearance="legacy">
-         <mat-label>Termék keresése</mat-label>
-         <input matInput #inputText (input)="searchedText = inputText.value" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" [(ngModel)]="value">
-
-         <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-            <mat-icon>close</mat-icon>
-         </button>
-      </mat-form-field>
-   </div>
-
-   <!-- Search button -->
-   <button mat-icon-button class="search-icon" color="warn">
-      <mat-icon>search</mat-icon>
-   </button>
-
-</div>
-
-<!-- Cart -->
-<div *ngIf="localStorageUser() != ''" class="cart-dropdown cart-position">
-   <button class="cart-btn">
-      <mat-icon class="cart-icon">shopping_cart</mat-icon>Kosár<mat-icon class="arrow">expand_more</mat-icon>
-   </button>
-   <button *ngIf="cartItems.length > 0" class="cart-indicator">{{ cartItems.length }}</button>
-   <div class="cart-dropdown-content">
-
-      <!-- Cart elements ngFor-->
-      <div *ngFor="let product of cartItems; let i = index">
-         <div style="position: relative">
-
-            <!-- Product info -->
-            <div class="img-bcg">
-               <img src="{{ product.imgurls[0] }}" class="cart-img">
-            </div>
-            <a routerLink="/profile" class="cart-element-name">{{ product.partNumber }}</a>
-            <a routerLink="/profile" class="cart-element-code">{{ product.name }}<span class="cart-element-brand">, {{ product.brand }}</span></a>
-            <p class="cart-element-price">{{ product.price }}<span class="cart-element-amount">({{ cartItemsAmount[i] }} db)</span></p>
-
-            <!-- Delete button -->
-            <button mat-icon-button class="delete-icon" (click)="deleteCartItem(0)">
-               <mat-icon>close</mat-icon>
-            </button>
-
-            <!-- Divider -->
-            <mat-divider class="divider"></mat-divider>
-
-         </div>
-      </div>
-
-      <!-- Subtotal -->
-      <div class="subtotal">
-
-         <p class="net-price">Nettó ár: {{ subtotalNet }}</p>
-         <p class="actual-price">Bruttó ár: <span class="orange">{{ subtotal }}</span></p>
-
-         <button class="checkout-button" mat-raised-button color="white" routerLink="cart">Kosár megtekintése</button>
-         <button class="order-button" mat-raised-button color="warn" routerLink="cart">Megrendelés</button>
-
-      </div>
-
-   </div>
-
-</div>
-
-<!-- Account -->
-<div *ngIf="localStorageUser() != ''" class="dropdown profile-position">
-   <button class="dropbtn user-name">{{ getName() }}<mat-icon class="arrow arrow-user">expand_more</mat-icon><br><span class="user-email">{{ getEmail() }}</span></button>
-   <div class="dropdown-content">
-      <a routerLink="/profile">Személyes adatok</a>
-      <a routerLink="/profile">Link 3</a>
-      <a routerLink="/login" (click)="logOut()">Kijelentkezés</a>
-   </div>
-</div>
 
 <!-- The routed views render in the <router-outlet>-->
-<router-outlet></router-outlet>
+
+<div class="router-outlet-container">
+   <router-outlet></router-outlet>
+</div>

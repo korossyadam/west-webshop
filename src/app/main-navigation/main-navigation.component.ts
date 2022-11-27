@@ -1,7 +1,5 @@
-import { ChangeDetectorRef, Component, ContentChild, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Product } from '../models/product.model';
-import { ProductsComponent } from '../products/products.component';
 import { AuthService } from '../services/auth.service';
 import { UtilsService } from '../services/utils.service';
 
@@ -16,14 +14,15 @@ export class MainNavigationComponent implements OnInit {
    //@ViewChild(ProductsComponent) child: ProductsComponent;
 
    // Static functions
+   addTax = this.utilsService.addTaxToPrice;
+   formatPriceToString = this.utilsService.formatPriceToString;
    sanitize = this.utilsService.sanitize;
 
    public step: number = 0;
    public secondHover: number = -1;
    public thirdHover: number = -1;
 
-   cartItems: Product[];
-   cartItemsAmount: number[];
+   public cartItems = [];
    subtotal: string = '';
    subtotalNet: string = '';
 
@@ -36,7 +35,9 @@ export class MainNavigationComponent implements OnInit {
 
    ngOnInit(): void {
       this.cartItems = [];
-      this.cartItemsAmount = [];
+
+      this.fillCart();
+
       /*
       var localStorageCart = localStorage.getItem('cart');
 
@@ -90,6 +91,19 @@ export class MainNavigationComponent implements OnInit {
 
    }
 
+   /**
+    * Populates cartItems array from localStorage
+    */
+   fillCart(): void {
+      this.cartItems = [];
+
+      let localStorageCart = localStorage.getItem('cart');
+      if(localStorageCart) {
+         this.cartItems = JSON.parse(localStorageCart);
+      }
+
+   }
+
    /*
    updatChildIf(): void {
       this.isIf = !this.isIf;
@@ -113,7 +127,7 @@ export class MainNavigationComponent implements OnInit {
 
    localStorageUser(): string {
       var currentUser = localStorage.getItem('user');
-      if (currentUser != null) {
+      if(currentUser != null) {
          return currentUser;
       } else {
          return '';
@@ -132,7 +146,7 @@ export class MainNavigationComponent implements OnInit {
 
    getEmail(): string {
       var email = localStorage.getItem('email');
-      if (email != null)
+      if(email != null)
          return email;
       else
          return '';
