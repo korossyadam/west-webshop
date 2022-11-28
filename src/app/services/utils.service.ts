@@ -121,6 +121,57 @@ export class UtilsService {
     } else {
       this._snackBar.open(message, action, { duration: time });
     }
+  };
+
+  /**
+    * Gets the name of the guest from browser storage
+    * 
+    * @returns Previously saved guest name
+    */
+  getName(): string {
+    let sessionName = sessionStorage.getItem('name');
+    let localName = localStorage.getItem('name');
+    if (sessionName != null) {
+      return sessionName;
+    } else if (localName != null) {
+      return localName;
+    } else {
+      return '';
+    }
+  }
+
+  /**
+   * Gets the email of the guest from browser storage
+   * 
+   * @returns Previously saved guest email
+   */
+  getEmail(): string {
+    let sessionEmail = sessionStorage.getItem('email');
+    let localEmail = localStorage.getItem('email');
+    if (sessionEmail != null) {
+      return sessionEmail;
+    } else if (localEmail != null) {
+      return localEmail;
+    } else {
+      return '';
+    }
+  }
+
+  /**
+   * Gets the phone number of the guest from browser storage
+   * 
+   * @returns Previously saved guest phone number
+   */
+  getPhoneNumber(): string {
+    let sessionPhone = sessionStorage.getItem('phone');
+    let localPhone = localStorage.getItem('phone');
+    if (sessionPhone != null) {
+      return sessionPhone;
+    } else if (localPhone != null) {
+      return localPhone;
+    } else {
+      return '';
+    }
   }
 
 }
