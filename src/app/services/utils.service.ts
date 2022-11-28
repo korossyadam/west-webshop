@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { Product } from "../models/product.model";
 
@@ -7,7 +8,7 @@ import { Product } from "../models/product.model";
 })
 export class UtilsService {
 
-  constructor(public sanitizer: DomSanitizer) { }
+  constructor(public sanitizer: DomSanitizer, private _snackBar: MatSnackBar) { }
 
   /**
    * Adds a Product to the cart
@@ -105,5 +106,21 @@ export class UtilsService {
   sanitize = (url: string): SafeUrl => {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   };
+
+  /**
+    * Open a small dialog at the bottom of the screen
+    * Mostly used to give feedbacks of various actions
+    * 
+    * @param message Text on the left of the dialog
+    * @param action Button on the right of the dialog, closes the dialog
+    * @param time Optional parameter, the time in miliseconds in which the dialog will close. If not provided, the dialog will not close.
+    */
+  openSnackBar = (message: string, action: string, time?: number): void => {
+    if (time == undefined) {
+      this._snackBar.open(message, action);
+    } else {
+      this._snackBar.open(message, action, { duration: time });
+    }
+  }
 
 }
