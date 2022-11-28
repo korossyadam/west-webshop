@@ -141,8 +141,12 @@
                   <ul>
                      <div>
                         <li>
-                           <a routerLink="/profile">Személyes adatok</a>
-                           <a routerLink="/profile">Link 3</a>
+                           <a [routerLink]="['/profile', 0]">Személyes adatok</a>
+                           <a [routerLink]="['/profile', 1]">Rendelések</a>
+                           <a [routerLink]="['/profile', 2]">Cím módosítása</a>
+                           <a [routerLink]="['/profile', 3]">Kívánságlista</a>
+                           <a [routerLink]="['/profile', 4]">Árajánlatok</a>
+                           <a [routerLink]="['/profile', 5]">Garázs</a>
                            <a routerLink="/login" (click)="logOut()">Kijelentkezés</a>
                         </li>
                      </div>

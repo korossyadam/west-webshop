@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { first, Timestamp } from 'rxjs';
 import { Address } from '../models/address.model';
 import { Order } from '../models/order.model';
@@ -19,6 +20,9 @@ export class ProfileComponent implements OnInit {
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    sanitize = this.utilsService.sanitize;
+   getName = this.utilsService.getName;
+   getEmail = this.utilsService.getEmail;
+   getPhoneNumber = this.utilsService.getPhoneNumber;
 
    @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
 
@@ -28,14 +32,20 @@ export class ProfileComponent implements OnInit {
 
    public orders: Order[];
 
-   constructor(private utilsService: UtilsService, private profileService: ProfileService, private dialog: MatDialog) { }
+   constructor(private utilsService: UtilsService, private route: ActivatedRoute, private profileService: ProfileService, private dialog: MatDialog) { }
 
    ngOnInit(): void {
+      this.step = parseInt(this.route.snapshot.paramMap.get('tab'));
+
       this.profileService.getCurrentUser().pipe(first()).subscribe(data => this.currentUser = data[0]);
 
       this.profileService.getCurrentUserOrders().subscribe(data => {
          this.orders = data;
       });
+   }
+
+   updateBasicUserInfo(name: string, email: string, phoneNumber: string): void {
+
    }
 
    // Add a new Address to current User
@@ -49,12 +59,12 @@ export class ProfileComponent implements OnInit {
       var newUser: User = this.currentUser;
 
       // Add new Address to Address[]
-      var newAddresses: Address[] = this.currentUser.addresses;
-      newAddresses.push(newAddress);
+      //var newAddresses: Address = this.currentUser.address;
+      //newAddresses.push(newAddress);
 
       // Map custom objects into pure Javascript objects
-      const objects = newAddresses.map((obj) => { return Object.assign({}, obj); });
-      newUser.addresses = objects;
+      //const objects = newAddresses.map((obj) => { return Object.assign({}, obj); });
+      //newUser.addresses = objects;
 
       this.profileService.updateCurrentUser(newUser);
    }

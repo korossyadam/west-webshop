@@ -131,9 +131,9 @@ export class UtilsService {
   getName(): string {
     let sessionName = sessionStorage.getItem('name');
     let localName = localStorage.getItem('name');
-    if (sessionName != null) {
+    if (sessionName) {
       return sessionName;
-    } else if (localName != null) {
+    } else if (localName) {
       return localName;
     } else {
       return '';
@@ -148,9 +148,9 @@ export class UtilsService {
   getEmail(): string {
     let sessionEmail = sessionStorage.getItem('email');
     let localEmail = localStorage.getItem('email');
-    if (sessionEmail != null) {
+    if (sessionEmail) {
       return sessionEmail;
-    } else if (localEmail != null) {
+    } else if (localEmail) {
       return localEmail;
     } else {
       return '';
@@ -165,9 +165,9 @@ export class UtilsService {
   getPhoneNumber(): string {
     let sessionPhone = sessionStorage.getItem('phone');
     let localPhone = localStorage.getItem('phone');
-    if (sessionPhone != null) {
+    if (sessionPhone) {
       return sessionPhone;
-    } else if (localPhone != null) {
+    } else if (localPhone) {
       return localPhone;
     } else {
       return '';

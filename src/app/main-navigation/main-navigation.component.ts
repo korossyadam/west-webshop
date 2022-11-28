@@ -76,15 +76,6 @@ export class MainNavigationComponent implements OnInit {
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
    }
 
-   localStorageUser(): string {
-      var currentUser = localStorage.getItem('user');
-      if(currentUser != null) {
-         return currentUser;
-      } else {
-         return '';
-      }
-   }
-
    logOut(): void {
       this.authService.logout();
    }
