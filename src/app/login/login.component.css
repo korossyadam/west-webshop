@@ -1,109 +1,148 @@
+.login-container {
+   position: relative;
+   width: 1000px;
+   height: 450px;
+   margin: 0 auto;
+   margin-bottom: 130px;
+}
+
 .card {
-   position: absolute;
-   width: 20%;
-   height: 50%;
    top: 20%;
-   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
+   width: 400px;
+   height: 100%;
+   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
 .card-login {
-   left: 25%;
+   float: left;
 }
 
 .card-signup {
-   right: 25%;
+   float: right;
 }
 
 .main-label {
    position: relative;
    top: 10px;
    left: 5%;
+   color: #444444;
 }
 
 .mat-divider.mat-divider-horizontal {
-   left: 8%;
-   width: 84%;
+   width: calc(100% - 60px);
+   margin-top: -10px;
+   margin-left: 30px;
 }
 
-.form-element {
-   left: 5%;
-   width: 90%;
+.form-container {
+   margin: 0px 15px;
 }
 
-.top-push {
-   margin-top: 30px;
+.last-name-input {
+   width: 33%;
+   float: left;
 }
 
-.side-push {
-   margin-left: 5%;
-}
-
-.second-element {
-   position: relative;
-   top: -15px;
-}
-
-.third-element {
-   position: relative;
-   top: -30px;
-}
-
-.fourth-element {
-   position: relative;
-   top: -45px;
-}
-
-.last-name {
-   position: relative;
-   display: inline-block;
-   top: -15px;
-   left: 5%;
-   width: 43%;
-}
-
-.first-name {
-   position: relative;
-   display: inline-block;
-   top: -15px;
-   left: 9%;
-   width: 43%;
-}
-
-.small-font {
-   font-size: 14px;
-   font-family: 'Roboto', sans-serif;
+.first-name-input {
+   width: 33%;
+   float: right;
+   margin-right: -2px;
 }
 
 .checkbox {
-   position: relative;
-   top: -30px;
+   margin-left: 0px;
 }
 
-.button-left {
-   position: relative;
-   top: -40px;
-   width: 40%;
-   font-size: 18px;
-   font-family: 'Roboto', sans-serif;
+.button {
+   margin-top: 10px;
+   width: 130px;
 }
 
-.button-right {
-   position: relative;
-   top: -55px;
-   width: 40%;
-   font-size: 18px;
-   font-family: 'Roboto', sans-serif;
+.error-text {
+   display: block;
+   margin-top: 10px;
+   margin-left: 0;
+   font-size: 16px;
 }
 
-::ng-deep .mat-form-field-flex>.mat-form-field-infix {
-   padding: 0.4em 0px !important;
+.spinner-container {
+   position: absolute;
+   top: 100px;
+   left: 0;
+   font-family: arial;
+   font-size: 24px;
+   width: 100%;
+   height: 200px;
+   /* Center vertically and horizontally */
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
-::ng-deep .mat-form-field-label-wrapper {
-   top: -1.5em;
+.spinner {
+   width: 200px;
 }
 
-::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
-   transform: translateY(-1.1em) scale(.75);
-   width: 133.33333%;
+input {
+   margin-left: 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px rgb(236, 236, 236) inset !important;
+}
+
+@media screen and (max-width: 1000px) {
+   .login-container {
+      width: 90%;
+   }
+
+   .card {
+      width: 45%;
+   }
+}
+
+@media screen and (max-width: 800px) {
+   .login-container {
+      width: 95%;
+   }
+
+   .card-login {
+      width: 35%;
+   }
+
+   .card-signup {
+      width: 52%;
+   }
+}
+
+@media screen and (max-width: 600px) {
+   .login-container {
+      top: -50px;
+      width: 400px;
+      margin-bottom: 390px;
+   }
+
+   .card-login {
+      width: 100%;
+      height: 300px;
+      margin: 0 auto;
+   }
+
+   .card-signup {
+      top: 460px;
+      left: 0;
+      width: 100%;
+      height: 390px;
+      margin: 0 auto;
+   }
+}
+
+@media screen and (max-width: 500px) {
+   .login-container {
+      left: -16px;
+      width: 88%;
+   }
 }

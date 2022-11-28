@@ -45,6 +45,7 @@
 
 .logo {
    font-size: 30px;
+   font-weight: 500;
    text-align: center;
    color: #333333;
    margin: 0;
@@ -100,12 +101,6 @@
    background-color: #333333;
    margin-right: 13px;
    float: right;
-}
-
-.arrow {
-   position: fixed;
-   top: 57px;
-   color: #9c9c9c;
 }
 
 .profile-email {
@@ -209,8 +204,9 @@ nav ul ul ul div {
 }
 
 .arrow {
-   margin-top: -3px;
-   color: #111111;
+   position: fixed;
+   top: 54px;
+   color: #333333;
 }
 
 .arrow-horizontal {
@@ -218,7 +214,7 @@ nav ul ul ul div {
    top: 2px;
    right: 0px;
    float: right;
-   color: #111111;
+   color: #333333;
 }
 
 .nav-container nav ul ul {
@@ -457,6 +453,7 @@ nav ul ul ul div {
    padding: 3px 15px;
    cursor: pointer;
    transition: 0.25s;
+   user-select: none;
 }
 
 .login-button:hover {

@@ -16,7 +16,9 @@ export class MainNavigationComponent implements OnInit {
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    sanitize = this.utilsService.sanitize;
-
+   getName = this.utilsService.getName;
+   getEmail = this.utilsService.getEmail;
+   
    public cartItems = [];
    public total: number;
 
@@ -85,20 +87,6 @@ export class MainNavigationComponent implements OnInit {
 
    logOut(): void {
       this.authService.logout();
-   }
-
-   getName(): string {
-      var lastName = localStorage.getItem('lastName');
-      var firstName = localStorage.getItem('firstName');
-      return lastName + ' ' + firstName;
-   }
-
-   getEmail(): string {
-      var email = localStorage.getItem('email');
-      if(email != null)
-         return email;
-      else
-         return '';
    }
 
 }

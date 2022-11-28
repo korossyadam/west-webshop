@@ -1,80 +1,79 @@
-<div *ngIf="!isSignedIn">
+<div class="login-container">
+
+   <!-- Login section -->
    <mat-card class="card card-login">
       <h2 class="main-label">Bejelentkezés</h2>
+      <mat-divider class="divider"></mat-divider>
 
       <!-- Form fields (LOGIN) -->
-      <div style="font-size: 18px">
+      <div class="form-container">
          <form [formGroup]="loginForm" novalidate>
+            <div *ngIf="!loginLoading">
 
-            <mat-divider class="divider"></mat-divider>
+               <!-- Email -->
+               <input type="email" #loginEmail placeholder="E-mail cím" maxlength="64" formControlName="loginEmail" required>
 
-            <!-- Email (LOGIN) -->
-            <mat-form-field class="form-element top-push" appearance="outline">
-               <mat-label>E-mail cím</mat-label>
-               <input matInput #loginEmail placeholder="nagy.attila@gmail.com" maxlength="64" formControlName="loginEmail" required>
-            </mat-form-field>
+               <!-- Password -->
+               <input type="password" #loginPassword placeholder="Jelszó" maxlength="64" formControlName="loginPassword" required>
 
-            <!-- Password (LOGIN) -->
-            <mat-form-field class="form-element second-element" appearance="outline">
-               <mat-label>Jelszó</mat-label>
-               <input matInput type="password" #loginPassword maxlength="64" formControlName="loginPassword" required>
-            </mat-form-field>
+               <!-- Remember me -->
+               <mat-checkbox class="checkbox" color="accent" #rememberMe>Emlékezz rám</mat-checkbox><br>
 
-            <!-- Remember me (LOGIN) -->
-            <mat-checkbox class="side-push small-font checkbox" color="warn">Emlékezz rám</mat-checkbox><br><br>
+               <!-- Login button -->
+               <button mat-raised-button class="button" color="primary" (click)="login(loginEmail.value, loginPassword.value, rememberMe.checked)">Bejelentkezés</button>
 
-            <!-- Login button -->
-            <button mat-raised-button type="button" class="side-push button-left" color="warn" (click)="login(loginEmail.value, loginPassword.value)">Bejelentkezés</button>
-            <mat-error *ngIf="loginError != ''" class="top-push side-push"> {{ loginError }} </mat-error>
+               <!-- Error message -->
+               <mat-error *ngIf="loginError != ''" class="error-text">{{ loginError }}</mat-error>
+            </div>
+
+            <!-- Loading spinner -->
+            <div *ngIf="loginLoading" class="spinner-container">
+               <mat-spinner class="spinner" color="primary"></mat-spinner>
+            </div>
 
          </form>
       </div>
    </mat-card>
 
+   <!-- Sign Up section -->
    <mat-card class="card card-signup">
       <h2 class="main-label">Regisztráció</h2>
+      <mat-divider class="divider"></mat-divider>
 
       <!-- Form fields (SIGN UP)-->
-      <div style="font-size: 18px">
-         <form [formGroup]="signUpForm" novalidate>
+      <div class="form-container">
+         <form [formGroup]="signUpForm" autocomplete="off" novalidate>
+            <div *ngIf="!signUpLoading">
 
-            <mat-divider class="divider"></mat-divider>
+               <!-- Email -->
+               <input type="email" #signupEmail placeholder="E-mail cím" maxlength="64" formControlName="signUpEmail" required>
 
-            <!-- Email (SIGN UP) -->
-            <mat-form-field class="form-element top-push" appearance="outline">
-               <mat-label>E-mail cím</mat-label>
-               <input matInput #signupEmail placeholder="nagy.attila@gmail.com" maxlength="64" formControlName="signUpEmail" required>
-            </mat-form-field>
+               <!-- Last Name -->
+               <input type="text" class="last-name-input" #lastName placeholder="Vezetéknév" maxlength="64" formControlName="lastName" autocomplete="off" required>
 
-            <!-- Last Name (SIGN UP) -->
-            <mat-form-field class="last-name" appearance="outline">
-               <mat-label>Vezetéknév</mat-label>
-               <input matInput type="text" #lastName maxlength="64" formControlName="lastName" required>
-            </mat-form-field>
+               <!-- First Name -->
+               <input type="text" class="first-name-input" #firstName placeholder="Keresztnév" maxlength="64" formControlName="firstName" onfocus="this.removeAttribute('readonly');" readonly required>
 
-            <!-- First Name (SIGN UP) -->
-            <mat-form-field class="first-name" appearance="outline">
-               <mat-label>Keresztnév</mat-label>
-               <input matInput type="text" #firstName maxlength="64" formControlName="firstName" required>
-            </mat-form-field>
+               <!-- Password - 1 -->
+               <input type="password" #signupPassword placeholder="Jelszó" maxlength="64" formControlName="signUpPassword" (input)="onPasswordInput()" required>
 
-            <!-- Password - 1 (SIGN UP) -->
-            <mat-form-field class="form-element third-element" appearance="outline">
-               <mat-label>Jelszó</mat-label>
-               <input matInput type="password" #signupPassword maxlength="64" formControlName="signUpPassword" (input)="onPasswordInput()" required>
-            </mat-form-field>
+               <!-- Password - 2 -->
+               <input type="password" maxlength="64" placeholder="Jelszó újra" formControlName="signUpPasswordAgain" (input)="onPasswordInput()" required>
 
-            <!-- Password - 2 (SIGN UP) -->
-            <mat-form-field class="form-element fourth-element" appearance="outline">
-               <mat-label>Jelszó újra</mat-label>
-               <input matInput type="password" maxlength="64" formControlName="signUpPasswordAgain" (input)="onPasswordInput()" required>
-            </mat-form-field>
+               <!-- Sign Up button -->
+               <button mat-raised-button class="button" color="primary" (click)="signUp(signupEmail.value, signupPassword.value, lastName.value, firstName.value)">Regisztráció</button><br>
 
-            <!-- Sign Up button -->
-            <button mat-raised-button type="button" class="side-push button-right" color="warn" (click)="signUp(signupEmail.value, signupPassword.value, lastName.value, firstName.value)">Regisztráció</button>
-            <mat-error *ngIf="signUpError != ''" class="top-push side-push"> {{ signUpError }} </mat-error>
+               <!-- Error message -->
+               <mat-error *ngIf="signUpError != ''" class="error-text">{{ signUpError }}</mat-error>
+            </div>
+
+            <!-- Loading spinner -->
+            <div *ngIf="signUpLoading" class="spinner-container">
+               <mat-spinner class="spinner" color="primary"></mat-spinner>
+            </div>
 
          </form>
       </div>
    </mat-card>
+
 </div>

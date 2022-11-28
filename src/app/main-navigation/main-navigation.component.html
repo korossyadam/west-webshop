@@ -134,7 +134,7 @@
       </div>
 
       <!-- Account -->
-      <div *ngIf="localStorageUser() != ''" class="profile-container">
+      <div *ngIf="getName() != ''" class="profile-container">
          <nav>
             <ul>
                <li><a class="profile-name">{{ getName() }}<mat-icon class="profile-arrow">expand_more</mat-icon><br><span class="profile-email">{{ getEmail() }}</span></a>
@@ -154,7 +154,7 @@
       </div>
       
       <!-- Cart -->
-      <div *ngIf="localStorageUser() != ''" class="cart-container">
+      <div *ngIf="getName() != ''" class="cart-container">
          <nav>
             <ul>
                <li>
@@ -225,7 +225,7 @@
       </div>
 
       <!-- Login buttons -->
-      <div *ngIf="localStorageUser() == ''" class="login-buttons-container">
+      <div *ngIf="getName() == ''" class="login-buttons-container">
          <span class="login-button" routerLink="/login">Bejelentkezés</span>
          <span class="login-button" routerLink="/login">Regisztráció</span>
       </div>

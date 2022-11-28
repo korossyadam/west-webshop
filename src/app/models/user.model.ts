@@ -1,23 +1,22 @@
-import { Address } from "./address.model";
+
+export interface Address {
+   partNumber: string;
+   name: string;
+   price: number;
+   quantity: number;
+   imgurl: string;
+}
 
 export class User {
-
    public email: string;
-   public firstName: string;
-   public lastName: string;
-   public phone: string;
+   public name: string;
+   public phoneNumber: string;
    public garage: number[];
-   public addresses: Address[];
+   public address: Address;
    public cart: string;
 
-   constructor(email: string, firstName: string, lastName: string, phone: string, garage: number[], addresses: Address[], cart: string) {
+   constructor(email: string, name: string) {
       this.email = email;
-      this.firstName = firstName;
-      this.lastName = lastName;
-      this.phone = phone;
-      this.garage = garage;
-      this.addresses = addresses;
-      this.cart = cart;
-      
+      this.name = name;
    }
 }
