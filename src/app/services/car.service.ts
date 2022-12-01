@@ -24,8 +24,6 @@ export class CarService {
 
   // Get Products
   getProducts(carIndex: string, partCategory: string): Observable<Product[]> {
-    //console.log(carIndex);
-    //console.log(partCategory);
     return this.afs.collection("products", ref => ref.where("carIndexes", "array-contains", carIndex.toString()).where('secondCategory', '==', partCategory).orderBy('price', 'asc').limit(10)).valueChanges() as Observable<Product[]>;
   }
 
