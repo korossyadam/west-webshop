@@ -50,7 +50,7 @@ input[type=number] {
 }
 
 /* Global styling for input fields */
-input, textarea, select {
+input:not([type='file']), textarea, select {
    width: calc(100% - 50px);
    height: 36px;
    background: #f5f5f5;

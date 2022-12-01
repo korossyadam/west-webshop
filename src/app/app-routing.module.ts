@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { BatteryComponent } from './battery/battery.component';
 import { CarComponent } from './car/car.component';
 import { CartComponent } from './cart/cart.component';
@@ -15,7 +16,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'profile/:tab', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
   { path: 'battery', component: BatteryComponent },
@@ -23,7 +24,10 @@ const routes: Routes = [
   { path: 'car/:index', component: CarComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:category', component: ProductsComponent },
-  { path: 'product/:partNumber', component: ProductComponent }
+  { path: 'products/:searchedCategory', component: ProductsComponent },
+  { path: 'product/:partNumber', component: ProductComponent },
+  { path: 'categories', component: CategoriesComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 @NgModule({

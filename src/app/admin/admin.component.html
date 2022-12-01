@@ -1,0 +1,55 @@
+
+<div class="content-container">
+   <div class="content-inner-container">
+      <button mat-raised-button color="primary" (click)="openNewProductDialog()">Új termék hozzáadása</button>
+   </div>
+</div>
+
+<!-- Dialog that opens when inspecting an Order -->
+<ng-template #dialogRef let-order>
+   <p class="dialog-title">Új termék hozzáadása</p>
+   <input placeholder="Cikkszám" #partNumber>
+   <input placeholder="Név" #name>
+   <input placeholder="Leírás" #description>
+   <input placeholder="Márka" #brand>
+   <input placeholder="Nettó ár" #price>
+   <input placeholder="Raktár mennyisége" #stock>
+   <select #specialCategory>
+      <option value="-1">Nincs</option>
+      <option value="0">Egyéb termékek / Autóápolás / Tisztítás</option>
+      <option value="1">Egyéb termékek / Autóápolás / Kefék, törlőkendők</option>
+      <option value="2">Egyéb termékek / Autóápolás / Motorblokk tisztítás</option>
+      <option value="3">Egyéb termékek / Autóápolás / Felni tisztítás</option>
+      <option value="4">Egyéb termékek / Autóápolás / Polírozás</option>
+      <option value="5">Egyéb termékek / Beltér / Üléshuzatok</option>
+      <option value="6">Egyéb termékek / Beltér / Kormányvédők</option>
+      <option value="7">Egyéb termékek / Beltér / Autószőnyegek</option>
+      <option value="8">Egyéb termékek / Beltér / Szivargyújtó</option>
+      <option value="9">Egyéb termékek / Beltér / Illatósítók</option>
+      <option value="10">Egyéb termékek / Beltér / Belső ventilátorok</option>
+      <option value="11">Egyéb termékek / Kültér / Ablaktörlő lapátok</option>
+      <option value="12">Egyéb termékek / Kültér / Lámpák / Hátsó lámpák</option>
+      <option value="13">Egyéb termékek / Kültér / Lámpák / Gumilámpák / Izzós</option>
+      <option value="14">Egyéb termékek / Kültér / Lámpák / Gumilámpák / LED-es</option>
+      <option value="15">Egyéb termékek / Kültér / Lámpák / Helyzetjelzők / Izzós</option>
+      <option value="16">Egyéb termékek / Kültér / Lámpák / Helyzetjelzők / LED-es</option>
+      <option value="17">Egyéb termékek / Kültér / Lámpák / Munkalámpák / Izzós</option>
+      <option value="18">Egyéb termékek / Kültér / Lámpák / Munkalámpák / LED-es</option>
+      <option value="19">Egyéb termékek / Kültér / Lámpák / Megkülönböztető lámpák / Izzós</option>
+      <option value="20">Egyéb termékek / Kültér / Lámpák / Megkülönböztető lámpák / LED-es</option>
+      <option value="21">Egyéb termékek / Kültér / Dísztárcsák</option>
+      <option value="22">Egyéb termékek / Kültér / Tanksapkák</option>
+      <option value="23">Egyéb termékek / Kültér / Rendszámtábla tartók</option>
+      <option value="24">Egyéb termékek / Kültér / Fényvisszaverők</option>
+      <option value="25">Egyéb termékek / Folyadékok / Motorolaj</option>
+      <option value="26">Egyéb termékek / Folyadékok / Hajtómű olaj</option>
+      <option value="27">Egyéb termékek / Folyadékok / Hidraulika olaj</option>
+      <option value="28">Egyéb termékek / Folyadékok / Fagyálló</option>
+      <option value="29">Egyéb termékek / Folyadékok / Ablakmosó folyadék / Nyári</option>
+      <option value="30">Egyéb termékek / Folyadékok / Ablakmosó folyadék / Téli</option>
+   </select>
+   <mat-checkbox [checked]="true" #returnable>Visszaküldhető</mat-checkbox><br>
+   <input type="file" multiple (change)="onFileChange($event)" #images><br>
+   <button mat-raised-button color="primary" (click)="addNewProduct(partNumber.value, name.value, description.value, specialCategory.value, brand.value, price.value, stock.value, returnable.checked, images.value)">Termék feltöltése</button>
+   <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
+</ng-template>
