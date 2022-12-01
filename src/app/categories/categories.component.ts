@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesComponent implements OnInit {
 
+  public selectedCategoryIndex: number;
+
   constructor() { }
 
   ngOnInit(): void {
