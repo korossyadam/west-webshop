@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
+import { ProductsService } from '../services/products.service';
 import { UtilsService } from '../services/utils.service';
 
 @Component({
@@ -16,8 +17,9 @@ export class ProductsComponent implements OnInit {
    // Static functions
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
+   showSnackBar = this.utilsService.openSnackBar;
 
-   constructor(private route: ActivatedRoute, private utilsService: UtilsService) { }
+   constructor(private route: ActivatedRoute, private utilsService: UtilsService, private productsService: ProductsService) { }
 
    /**
     * On init, check if there is a URL parameter specifying a product category
@@ -27,6 +29,8 @@ export class ProductsComponent implements OnInit {
     */
    ngOnInit(): void {
       let searchedCategory = this.route.snapshot.paramMap.get('category');
+      let clickedCategory = this.route.snapshot.paramMap.get('specialCategory');
+
       if (searchedCategory) {
          let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
 
@@ -38,11 +42,15 @@ export class ProductsComponent implements OnInit {
             let price = productParts[3];
             let brand = productParts[4];
 
-            let newProduct = new Product(partNumber, name, '', [], brand, price, [], [], 0, true, [imgurl], []);
+            let newProduct = new Product(partNumber, name, '', [], 0, brand, price, [], [], 0, true, [imgurl], []);
             this.products.push(newProduct);
          }
-
+      } else if (clickedCategory) {
+         this.productsService.getProductsBySpecialCategory(parseInt(searchedCategory)).subscribe(data => {
+            this.products = data;
+         })
       }
+      
    }
 
    /**
@@ -74,11 +82,24 @@ export class ProductsComponent implements OnInit {
    * Gets the value of quantity input with unique ID
    * @param productToAdd The Product to add to cart
    */
-  addToCart(productToAdd: Product): void {
-   let quantityInput = (document.getElementById(productToAdd.partNumber) as HTMLInputElement);
-   let quantity = quantityInput.value;
+   addToCart(productToAdd: Product): void {
+      let quantityInput = (document.getElementById(productToAdd.partNumber) as HTMLInputElement);
+      let quantity = quantityInput.value;
 
-   this.utilsService.addProductToCart(productToAdd, parseInt(quantity));
- }
+      this.utilsService.addProductToCart(productToAdd, parseInt(quantity));
+      this.utilsService.openSnackBar('Termék sikeresen a kosárhoz adva!', 'Bezárás', 4000);
+   }
+
+   /**
+    * Adds a Product to wishlist
+    * On Promise resolve, show a snackbar as feedback
+    * 
+    * @param productToAdd The Product to add to wishlist
+    */
+   addToWishList(productToAdd: Product): void {
+      this.productsService.addToWishList(productToAdd).then(res => {
+         this.showSnackBar('A termék a kívánságlistádhoz lett adva!', 'Bezárás', 4000);
+      });
+   }
 
 }

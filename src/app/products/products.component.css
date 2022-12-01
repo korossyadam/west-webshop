@@ -86,7 +86,7 @@ th {
 }
 
 .final-price {
-   color: #f44336;
+   color: var(--color-primary);
    font-weight: 500;
 }
 
@@ -110,7 +110,7 @@ th {
 }
 
 .cart-button {
-   background-color: #f44336;
+   background-color: var(--color-primary);
    color: white;
    padding: 0px 25px;
    line-height: 32px;
@@ -128,6 +128,6 @@ th {
 }
 
 .extra-button:hover {
-   color: #f44336;
+   color: var(--color-primary);
    transition: 0.25s;
 }

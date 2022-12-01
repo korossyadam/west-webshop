@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { first, Timestamp } from 'rxjs';
 import { Address } from '../models/address.model';
 import { Order } from '../models/order.model';
+import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
 import { AuthService } from '../services/auth.service';
 import { ProfileService } from '../services/profile.service';
@@ -46,6 +47,10 @@ export class ProfileComponent implements OnInit {
 
    updateBasicUserInfo(name: string, email: string, phoneNumber: string): void {
 
+   }
+
+   removeWishListProduct(productToRemove: Product): void {
+      
    }
 
    // Add a new Address to current User

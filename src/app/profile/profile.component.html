@@ -67,6 +67,30 @@
             </div>
          </div>
 
+         <!-- Wish list section -->
+         <div *ngIf="step == 3">
+            <p class="card-title">Kívánságlista</p>
+            <mat-divider></mat-divider>
+
+            <table class="wishlist-table">
+               <tbody>
+                  <tr *ngFor="let product of currentUser.wishList; let i = index;" class="wishlist-row">
+                     <div class="wishlist-product-info-container" [routerLink]="['/product', product.partNumber]">
+                        <td>{{ i }}.</td>
+                        <td>{{ product.partNumber }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.brand }}</td>
+                     </div>
+                     <td>
+                        <mat-icon class="wishlist-delete-icon" (click)="removeWishListProduct(product)">close</mat-icon>
+                        <mat-divider></mat-divider>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+
+         </div>
+
       </mat-card>
 
    </div>
