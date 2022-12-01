@@ -124,6 +124,26 @@ export class UtilsService {
   };
 
   /**
+   * Gets the database ID of the user from browser storage
+   * User ID is not stored directly, but rather as user_token
+   * user_token needs to be decoded before returning
+   * 
+   * @returns The decoded user_token, which is user ID
+   */
+  getUserId(): string {
+    let sessionToken = sessionStorage.getItem('user_token');
+    let localToken = localStorage.getItem('user_token');
+    let userId = '';
+    if (sessionToken != null) {
+      userId = JSON.parse(atob(sessionToken.split('.')[1]))['user_id'];
+    } else if (localToken != null) {
+      userId = JSON.parse(atob(localToken.split('.')[1]))['user_id'];
+    }
+
+    return userId;
+  }
+
+  /**
     * Gets the name of the guest from browser storage
     * 
     * @returns Previously saved guest name
