@@ -5,6 +5,7 @@ export class Product {
    public description: string;
    public categories: string[];
    public secondCategory: string;
+   public specialCategory: number;
    public brand: string;
    public price: string;
    public properties: string[];
@@ -14,11 +15,12 @@ export class Product {
    public imgurls: string[];
    public carIndexes: string[];
 
-   constructor(partNumber: string, name: string, description: string, categories: string[], brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[], carIndexes: string[]) {
+   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategory: number, brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[], carIndexes: string[]) {
       this.partNumber = partNumber;
       this.name = name;
       this.description = description;
       this.categories = categories;
+      this.specialCategory = specialCategory;
       this.brand = brand;
       this.price = price;
       this.properties = properties;

@@ -20,18 +20,18 @@ export class FeaturedComponent implements OnInit {
   ngOnInit(): void {
     //placeholder
     this.featuredProducts = [];
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/l9zklzftkza3nolgqzvi.jpg'], []));
-    this.featuredProducts.push(new Product('MMT A174 031', 'Krokodil emelő 2T', '', [], 'TRW MOTO', '17440', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/esncqlncnstg09dy9ogo.jpg'], []));
-    this.featuredProducts.push(new Product('TX-2952', 'Féktisztító spray', '', [], 'TEXTAR', '1040', [], [], 0, true, ['https://s13emagst.akamaized.net/products/29907/29906825/images/res_e0e628ebd6f21a555a5eace1067a88ce.jpg'], []));
-    this.featuredProducts.push(new Product('YT-0208', 'Racsnis kulcs készlet', '', [], 'YATO', '11960', [], [], 0, true, ['https://pic.autopartner.dev/tecpic//9920/yt-0208.jpg'], []));
-    this.featuredProducts.push(new Product('FE177203', 'Izzó 12V H4', '', [], 'MAXGEAR', '495', [], [], 0, true, ['https://pic.autopartner.dev/tecpic//AP_ZDJECIA/AX/78-0008_1_large.jpg'], []));
-    this.featuredProducts.push(new Product('YT-3851', 'Gyertyakulcs 16mm', '', [], 'YATO', '520', [], [], 0, true, ['https://yatoszerszam.hu/image/cache/catalog/image/catalog/images/yt-3851-481x481.jpg'], []));
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/efovlcrjdnklahzfb1lv.jpg'], []));
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/l9zklzftkza3nolgqzvi.jpg'], []));
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/kuifjprbm2zo01jplhay.jpg'], []));
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/kuifjprbm2zo01jplhay.jpg'], []));
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/kuifjprbm2zo01jplhay.jpg'], []));
-    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/qax8FuBskpZ25Fa7AVSU3AQ4TXALvNb2.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/l9zklzftkza3nolgqzvi.jpg'], []));
+    this.featuredProducts.push(new Product('MMT A174 031', 'Krokodil emelő 2T', '', [], 0, 'TRW MOTO', '17440', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/esncqlncnstg09dy9ogo.jpg'], []));
+    this.featuredProducts.push(new Product('TX-2952', 'Féktisztító spray', '', [], 0, 'TEXTAR', '1040', [], [], 0, true, ['https://s13emagst.akamaized.net/products/29907/29906825/images/res_e0e628ebd6f21a555a5eace1067a88ce.jpg'], []));
+    this.featuredProducts.push(new Product('YT-0208', 'Racsnis kulcs készlet', '', [], 0, 'YATO', '11960', [], [], 0, true, ['https://pic.autopartner.dev/tecpic//9920/yt-0208.jpg'], []));
+    this.featuredProducts.push(new Product('FE177203', 'Izzó 12V H4', '', [], 0, 'MAXGEAR', '495', [], [], 0, true, ['https://pic.autopartner.dev/tecpic//AP_ZDJECIA/AX/78-0008_1_large.jpg'], []));
+    this.featuredProducts.push(new Product('YT-3851', 'Gyertyakulcs 16mm', '', [], 0, 'YATO', '520', [], [], 0, true, ['https://yatoszerszam.hu/image/cache/catalog/image/catalog/images/yt-3851-481x481.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/efovlcrjdnklahzfb1lv.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/l9zklzftkza3nolgqzvi.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/kuifjprbm2zo01jplhay.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/kuifjprbm2zo01jplhay.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/kuifjprbm2zo01jplhay.jpg'], []));
+    this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/qax8FuBskpZ25Fa7AVSU3AQ4TXALvNb2.jpg'], []));
   }
 
   /**
