@@ -39,10 +39,12 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
 import { BatteryComponent } from './battery/battery.component';
+import { CategoriesComponent } from './categories/categories.component';
 import { OfferComponent } from './offer/offer.component';
 import { CarComponent } from './car/car.component';
 import { ProductComponent } from './product/product.component';
 import { FeaturedComponent } from './featured/featured.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -61,6 +63,8 @@ import { FeaturedComponent } from './featured/featured.component';
     CarComponent,
     ProductComponent,
     FeaturedComponent,
+    CategoriesComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
