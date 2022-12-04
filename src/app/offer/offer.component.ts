@@ -39,6 +39,7 @@ export class OfferComponent implements OnInit {
    */
   createOffer(message: string, email: string, additionalParams: string[]): void {
 
+    // Loop through checkboxes and add them to end of the 'message'
     if (additionalParams.length > 0) {
       message += ' EGYÉB TERMÉKEK: ';
 
