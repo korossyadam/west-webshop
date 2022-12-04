@@ -1,7 +1,6 @@
 import { Product } from "../product.model";
 
 export class Battery extends Product {
-
    public voltage: number;
    public capacity: number;
    public starterCurrent: number;

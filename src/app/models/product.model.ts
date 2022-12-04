@@ -1,5 +1,4 @@
 export class Product {
-
    public partNumber: string;
    public name: string;
    public description: string;

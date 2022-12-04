@@ -1,7 +1,6 @@
 import { Product } from "../product.model";
 
 export class Exhaust extends Product {
-   
    public diameter: number;
    public thickness: number;
    public length: number;

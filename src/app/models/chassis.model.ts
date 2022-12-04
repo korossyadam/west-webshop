@@ -1,7 +1,4 @@
-import * as internal from "stream";
-
 export class Chassis {
-
    public chassisIndex: number;
    public brand: string;
    public name: string;

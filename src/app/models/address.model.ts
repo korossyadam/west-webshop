@@ -1,5 +1,3 @@
-
-
 export class Address {
    public zipcode: string;
    public city: string;

@@ -1,5 +1,4 @@
 export class Car {
-
    public carIndex: string;
    public chassisIndex: number;
    public brand: string;
