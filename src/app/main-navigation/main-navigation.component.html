@@ -19,9 +19,9 @@
       <!-- Search field -->
       <div class="search-container">
          <div class="search-inner-container">
-            <input class="search-field" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off">
+            <input class="search-field" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" #searchField>
 
-            <button mat-raised-button class="search-button" color="primary">
+            <button mat-raised-button class="search-button" color="primary" (click)="searchForProduct(searchField.value)">
                <mat-icon>search</mat-icon>
             </button>
          </div>

@@ -63,7 +63,7 @@ th {
 }
 
 .product-partnumber:hover {
-   color: #f44336;
+   color: var(--color-primary);
    transition: 0.25s;
 }
 

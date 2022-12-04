@@ -30,6 +30,9 @@ export class ProductsComponent implements OnInit {
    ngOnInit(): void {
       let searchedCategory = this.route.snapshot.paramMap.get('category');
       let clickedCategory = this.route.snapshot.paramMap.get('specialCategory');
+      let searchedPartNumber = this.route.snapshot.paramMap.get('partNumber');
+
+      console.log(searchedPartNumber);
 
       if (searchedCategory) {
          let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
@@ -47,6 +50,10 @@ export class ProductsComponent implements OnInit {
          }
       } else if (clickedCategory) {
          this.productsService.getProductsBySpecialCategory(parseInt(searchedCategory)).subscribe(data => {
+            this.products = data;
+         })
+      } else if (searchedPartNumber) {
+         this.productsService.search(searchedPartNumber).subscribe(data => {
             this.products = data;
          })
       }

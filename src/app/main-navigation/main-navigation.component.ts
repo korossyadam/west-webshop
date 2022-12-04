@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Product } from '../models/product.model';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UtilsService } from '../services/utils.service';
 
@@ -18,13 +18,14 @@ export class MainNavigationComponent implements OnInit {
    sanitize = this.utilsService.sanitize;
    getName = this.utilsService.getName;
    getEmail = this.utilsService.getEmail;
+   showSnackBar = this.utilsService.openSnackBar;
    
    public cartItems = [];
    public total: number;
 
    public searchedText: string;
 
-   constructor(private utilsService: UtilsService, private authService: AuthService) { }
+   constructor(private utilsService: UtilsService, private authService: AuthService, private route: Router) { }
 
    ngOnInit(): void {
       this.fillCart();
@@ -74,6 +75,16 @@ export class MainNavigationComponent implements OnInit {
       this.calculateTotal();
 
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
+   }
+
+   searchForProduct(searchedText): void {
+      const minimumLength = 3;
+
+      if (searchedText.length <= minimumLength) {
+         this.showSnackBar('A keresett szövegnek minimum ' + minimumLength + ' karakternek kell lennie!', 'Bezárás', 4000);
+      } else {
+         this.route.navigateByUrl('/products;partNumber=' + searchedText);
+      }
    }
 
    logOut(): void {
