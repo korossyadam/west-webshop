@@ -182,6 +182,18 @@
    padding: 0px 40px;
 }
 
+/* Address styles */
+.input-left {
+   float: left;
+   width: 30%;
+}
+
+.input-right {
+   float: right;
+   width: 70%;
+}
+
+/* Wishlist styles */
 .wishlist-table {
    width: 90%;
    padding: 20px;

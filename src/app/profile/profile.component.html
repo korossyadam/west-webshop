@@ -30,15 +30,15 @@
             <mat-divider></mat-divider>
 
             <div class="dashboard-container">
+               <p>E-mail cím</p>
+               <input placeholder="pelda@gmail.com" [value]="getEmail()" disabled>
                <p>Név</p>
                <input placeholder="Példa Név" [value]="getName()" #name>
-               <p>E-mail cím</p>
-               <input placeholder="pelda@gmail.com" [value]="getEmail()" #email>
                <p>Telefonszám</p>
                <input placeholder="+36 30 123 4567" [value]="getPhoneNumber()" #phone>
                <br>
 
-               <button mat-raised-button color="primary" class="save-button" (click)="updateBasicUserInfo(name.value, email.value, phone.value)">Adatok mentése</button>
+               <button mat-raised-button color="primary" class="save-button" (click)="updateBasicUserInfo(name.value, phone.value)">Adatok mentése</button>
             </div>
          </div>
 
@@ -48,7 +48,9 @@
             <mat-divider></mat-divider>
 
             <div class="dashboard-container">
-               <table class="table">
+
+               <!-- Order table if there are any orders -->
+               <table *ngIf="currentUser && orders.length > 0" class="table">
                   <thead>
                      <th>Dátum</th>
                      <th>Ár</th>
@@ -64,6 +66,37 @@
                      </tr>
                   </tbody>
                </table>
+
+               <!-- No orders yet text -->
+               <div>
+                  Nincsen korábbi rendelésed.
+               </div>
+            </div>
+         </div>
+
+         <!-- Wish list section -->
+         <div *ngIf="step == 2">
+            <p class="card-title">Cím módosítása</p>
+            <mat-divider></mat-divider>
+
+            <div class="dashboard-container">
+               <div class="input-left">
+                  <p>Irányítószám</p>
+                  <input placeholder="7100" [value]="getZip()" #zip>
+               </div>
+
+               <div class="input-right">
+                  <p>Település</p>
+                  <input placeholder="Szekszárd" [value]="getCity()" #city>
+               </div>
+
+               <p>Utca, házszám</p>
+               <input placeholder="Példa utca 12." [value]="getStreet()" #street>
+               <p>Adószám (ha van)</p>
+               <input placeholder="21428942-2-17" [value]="getTaxNumber()" #taxNumber>
+               <br>
+
+               <button mat-raised-button color="primary" class="save-button" (click)="updateUserAddress(zip.value, city.value, street.value, taxNumber.value)">Adatok mentése</button>
             </div>
          </div>
 
@@ -72,22 +105,31 @@
             <p class="card-title">Kívánságlista</p>
             <mat-divider></mat-divider>
 
-            <table class="wishlist-table">
-               <tbody>
-                  <tr *ngFor="let product of currentUser.wishList; let i = index;" class="wishlist-row">
-                     <div class="wishlist-product-info-container" [routerLink]="['/product', product.partNumber]">
-                        <td>{{ i }}.</td>
-                        <td>{{ product.partNumber }}</td>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.brand }}</td>
-                     </div>
-                     <td>
-                        <mat-icon class="wishlist-delete-icon" (click)="removeWishListProduct(product)">close</mat-icon>
-                        <mat-divider></mat-divider>
-                     </td>
-                  </tr>
-               </tbody>
-            </table>
+            <div class="dashboard-container">
+
+               <table *ngIf="currentUser && currentUser.wishList.length > 0" class="wishlist-table">
+                  <tbody>
+                     <tr *ngFor="let product of currentUser.wishList; let i = index;" class="wishlist-row">
+                        <div class="wishlist-product-info-container" [routerLink]="['/product', product.partNumber]">
+                           <td>{{ (i+1) }}.</td>
+                           <td>{{ product.partNumber }}</td>
+                           <td>{{ product.name }}</td>
+                           <td>{{ product.brand }}</td>
+                        </div>
+                        <td>
+                           <mat-icon class="wishlist-delete-icon" (click)="removeWishListProduct(product)">close</mat-icon>
+                           <mat-divider></mat-divider>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+
+               <!-- No wishlist yet text -->
+               <div>
+                  Nincsen terméked a kívánságlistádban.
+               </div>
+
+            </div>
 
          </div>
 

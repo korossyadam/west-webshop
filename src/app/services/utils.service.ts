@@ -194,4 +194,72 @@ export class UtilsService {
     }
   }
 
+  /**
+  * Gets the zip code of the guest from browser storage
+  * 
+  * @returns Previously saved guest zip code
+  */
+  getZip(): string {
+    let sessionZip = sessionStorage.getItem('zip');
+    let localZip = localStorage.getItem('zip');
+    if (sessionZip) {
+      return sessionZip;
+    } else if (localZip) {
+      return localZip;
+    } else {
+      return '';
+    }
+  }
+
+  /**
+  * Gets the city of the guest from browser storage
+  * 
+  * @returns Previously saved guest city
+  */
+  getCity(): string {
+    let sessionCity = sessionStorage.getItem('city');
+    let localCity = localStorage.getItem('city');
+    if (sessionCity) {
+      return sessionCity;
+    } else if (localCity) {
+      return localCity;
+    } else {
+      return '';
+    }
+  }
+
+  /**
+  * Gets the street of the guest from browser storage
+  * 
+  * @returns Previously saved guest street
+  */
+  getStreet(): string {
+    let sessionStreet = sessionStorage.getItem('street');
+    let localStreet = localStorage.getItem('street');
+    if (sessionStreet) {
+      return sessionStreet;
+    } else if (localStreet) {
+      return localStreet;
+    } else {
+      return '';
+    }
+  }
+
+  /**
+  * Gets the tax number of the guest from browser storage
+  * 
+  * @returns Previously saved guest tax number
+  */
+  getTaxNumber(): string {
+    let sessionTaxNumber = sessionStorage.getItem('taxnumber');
+    let localTaxNumber = localStorage.getItem('taxnumber');
+    if (sessionTaxNumber) {
+      return sessionTaxNumber;
+    } else if (localTaxNumber) {
+      return localTaxNumber;
+    } else {
+      return '';
+    }
+  }
+
 }
