@@ -5,6 +5,82 @@
 }
 
 .content-inner-container {
-   width: 1200px;
+   width: 1600px;
    margin: 0 auto;
+   margin-top: 50px;
+}
+
+.dialog-title {
+   font-size: 20px;
+   font-weight: 600;
+   margin-top: 0;
+   margin-bottom: -3px;
+}
+
+.dialog-divider {
+   margin-bottom: 15px;
+}
+
+.dialog-close-button {
+   float: left;
+}
+
+.dialog-ok-button {
+   float: right;
+}
+
+input, textarea, select {
+   margin-left: 0;
+}
+
+select {
+   width: 100%;
+}
+
+input[type='file'] {
+   margin: 15px 0px;
+}
+
+/* Offer styles */
+.offer-card {
+   float: right;
+   width: 1000px;
+   height: 500px;
+}
+
+.datepicker-container {
+   float: left;
+}
+
+.offer-input-container {
+   float: left;
+   margin-left: 15px;
+}
+
+.offer-query-button {
+   margin-left: 9px;
+   width: 120px;
+}
+
+.offer-table {
+   float: left;
+   margin-top: 20px;
+   width: 100%;
+}
+
+.offer-row {
+   margin: 4px 0px;
+}
+
+.underlined {
+   text-decoration: underline;
+}
+
+.offer-card input {
+   width: 100% !important;
+   height: auto !important;
+   margin: 0 !important;
+   padding: 0 !important;
+   border: none !important;
+   box-shadow: none !important;
 }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { first, Timestamp } from 'rxjs';
 import { Address } from '../models/address.model';
+import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
@@ -30,11 +31,16 @@ export class ProfileComponent implements OnInit {
    getPhoneNumber = this.utilsService.getPhoneNumber;
    showSnackBar = this.utilsService.openSnackBar;
 
-   @ViewChild('dialogRef') dialogRef!: TemplateRef<any>;
+   // References to openable dialogues
+   @ViewChild('orderDialogRef') orderDialogRef!: TemplateRef<any>;
+   @ViewChild('offerOriginalDialogRef') offerOriginalDialogRef!: TemplateRef<any>;
+   @ViewChild('offerAnsweredDialogRef') offerAnsweredDialogRef!: TemplateRef<any>;
 
    public currentUser: User;
    public orders: Order[];
+   public offers: Offer[];
 
+   // This variable keeps track of which window we currently have open
    public step: number = 0;
 
    constructor(private utilsService: UtilsService, private route: ActivatedRoute, private profileService: ProfileService, private dialog: MatDialog) { }
@@ -44,9 +50,16 @@ export class ProfileComponent implements OnInit {
 
       this.profileService.getCurrentUser().pipe(first()).subscribe(data => this.currentUser = data[0]);
 
+      // Query for Orders
       this.profileService.getCurrentUserOrders().subscribe(data => {
          this.orders = data;
       });
+
+      // Query for Offers
+      this.profileService.getCurrentUserOffers().subscribe(data => {
+         this.offers = data;
+      });
+
    }
 
    /**
@@ -95,36 +108,39 @@ export class ProfileComponent implements OnInit {
       });
    }
 
-   // Add a new Address to current User
-   saveAddress(name: string, email: string, lastName: string, firstName: string, companyName: string, companyTax: string, phone: string, zip: string, city: string, street: string): void {
-      this.step = 1;
-
-      // Define new Address by input data
-      //var newAddress = new Address(name, email, firstName, lastName, companyName, companyTax, phone, zip, city, street);
-
-      // Create a new User with old Users data
-      var newUser: User = this.currentUser;
-
-      // Add new Address to Address[]
-      //var newAddresses: Address = this.currentUser.address;
-      //newAddresses.push(newAddress);
-
-      // Map custom objects into pure Javascript objects
-      //const objects = newAddresses.map((obj) => { return Object.assign({}, obj); });
-      //newUser.addresses = objects;
-
-      //this.profileService.updateCurrentUser(newUser);
-   }
-
    /**
     * Opens up the Order dialog
     * 
     * @param orderToOpen The Order whose data we need to display
     */
-   openDialog(orderToOpen: Order) {
-      this.dialog.open(this.dialogRef, { data: orderToOpen, width: '1000px' });
+   openOrderDialog(orderToOpen: Order) {
+      this.dialog.open(this.orderDialogRef, { data: orderToOpen, width: '1000px' });
    }
 
+   /**
+    * Opens up the Offer dialog, with original question
+    * 
+    * @param offerToOpen The Offer whose data we need to display
+    */
+    openOriginalOfferDialog(offerToOpen: Offer) {
+      this.dialog.open(this.offerOriginalDialogRef, { data: offerToOpen, width: '1000px' });
+   }
+
+   /**
+    * Opens up the Offer dialog, with answer
+    * 
+    * @param offerToOpen The Offer whose data we need to display
+    */
+    openAnsweredOfferDialog(offerToOpen: Offer) {
+      this.dialog.open(this.offerAnsweredDialogRef, { data: offerToOpen, width: '1000px' });
+   }
+
+   /**
+    * Converts a Firebase Timestamp object to a more readable Date object
+    * 
+    * @param timestamp The Timestamp to convert
+    * @returns The Date object
+    */
    timestampToDate(timestamp: any): Date {
       return timestamp.toDate();
    }

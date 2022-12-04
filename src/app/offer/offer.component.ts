@@ -58,7 +58,7 @@ export class OfferComponent implements OnInit {
     }
 
     // Create the Offer
-    let offer: Offer = new Offer(this.getUserId(), this.brand, this.year, this.ac, this.engine, this.chassis, this.vin, message, email);
+    let offer: Offer = new Offer(this.getUserId(), this.brand, this.year, this.ac, this.engine, this.chassis, this.vin, message, email, new Date());
     this.offerService.createNewOffer(Object.assign({}, offer)).then(res => {
       this.showSnackBar('Árajánlat sikeresen létrehozva!', 'Bezárás', 4000);
 

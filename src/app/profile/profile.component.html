@@ -59,22 +59,22 @@
                   <tbody>
                      <tr *ngFor="let order of orders">
                         <td>{{ timestampToDate(order.date).toLocaleString() }}</td>
-                        <td>{{ order.totalPrice }}</td>
+                        <td>{{ formatPriceToString(addTax(order.totalPrice)) }}</td>
                         <td>
-                           <button mat-raised-button color="primary" (click)="openDialog(order)">Részletek</button>
+                           <button mat-raised-button color="primary" (click)="openOrderDialog(order)">Részletek</button>
                         </td>
                      </tr>
                   </tbody>
                </table>
 
                <!-- No orders yet text -->
-               <div>
+               <div *ngIf="currentUser && orders.length < 1">
                   Nincsen korábbi rendelésed.
                </div>
             </div>
          </div>
 
-         <!-- Wish list section -->
+         <!-- Address section -->
          <div *ngIf="step == 2">
             <p class="card-title">Cím módosítása</p>
             <mat-divider></mat-divider>
@@ -125,21 +125,56 @@
                </table>
 
                <!-- No wishlist yet text -->
-               <div>
+               <div *ngIf="currentUser && currentUser.wishList.length < 1">
                   Nincsen terméked a kívánságlistádban.
                </div>
 
             </div>
-
          </div>
 
+         <!-- Offers section -->
+         <div *ngIf="step == 4">
+            <p class="card-title">Árajánlatok</p>
+            <mat-divider></mat-divider>
+
+            <div class="dashboard-container">
+
+               <!-- Offer table if there are any offers -->
+               <table *ngIf="offers && offers.length > 0" class="table">
+                  <thead>
+                     <th>Dátum</th>
+                     <th>Státusz</th>
+                  </thead>
+
+                  <tbody>
+                     <tr *ngFor="let offer of offers">
+                        <td>{{ timestampToDate(offer.date).toLocaleString() }}</td>
+                        <td *ngIf="offer.answered" class="offer-answered">Megválaszolva</td>
+                        <td *ngIf="!offer.answered" class="offer-pending">Feldolgozás alatt</td>
+                        <td>
+                           <button mat-raised-button color="primary" (click)="openOriginalOfferDialog(offer)">Eredeti üzenet</button>
+                        </td>
+                        <td *ngIf="offer.answered">
+                           <button mat-raised-button color="primary" (click)="openAnsweredOfferDialog(offer)">Válasz üzenet</button>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+
+               <!-- No orders yet text -->
+               <div *ngIf="offers && offers.length < 1">
+                  Még nem kértél árajánlatot.
+               </div>
+            </div>
+
+         </div>
       </mat-card>
 
    </div>
 </div>
 
 <!-- Dialog that opens when inspecting an Order -->
-<ng-template #dialogRef let-order>
+<ng-template #orderDialogRef let-order>
    <p class="dialog-title">Rendelés: {{ timestampToDate(order.date).toLocaleString() }}</p>
    <div *ngIf="order">
 
@@ -188,7 +223,6 @@
                   <div class="price-container">
                      <p>Szállítás: {{ formatPriceToString(order.deliveryPrice) }}</p>
                      <p>Végösszeg: {{ formatPriceToString(addTax(order.totalPrice)) }}</p>
-
                   </div>
                </td>
             </tr>
@@ -237,4 +271,22 @@
 
    </div>
    <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
+</ng-template>
+
+<!-- Dialog that opens when inspecting an Offer's original question -->
+<ng-template #offerOriginalDialogRef let-offer>
+   <p class="dialog-title">Árajánlat: {{ timestampToDate(offer.date).toLocaleString() }}</p>
+   <div *ngIf="offer">
+      <p>{{ offer.message }}</p>
+      <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
+   </div>
+</ng-template>
+
+<!-- Dialog that opens when inspecting an Offer's original question -->
+<ng-template #offerAnsweredDialogRef let-offer>
+   <p class="dialog-title">Árajánlat: {{ timestampToDate(offer.date).toLocaleString() }}</p>
+   <div *ngIf="offer">
+      <p>{{ offer.answer }}</p>
+      <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
+   </div>
 </ng-template>

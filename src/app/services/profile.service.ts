@@ -4,6 +4,7 @@ import { AngularFirestore, CollectionReference, Query } from '@angular/fire/comp
 import { arrayRemove } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { Address } from '../models/address.model';
+import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
@@ -51,6 +52,15 @@ export class ProfileService {
          query = query.where('userId', '==', this.getUserId());
          return query;
       }).valueChanges() as Observable<Order[]>;
+   }
+
+   // Get Offers
+   getCurrentUserOffers(): Observable<Offer[]> {
+      return this.afs.collection('offers', ref => {
+         let query: CollectionReference | Query = ref;
+         query = query.where('userId', '==', this.getUserId());
+         return query;
+      }).valueChanges() as Observable<Offer[]>;
    }
 
    removeFromWishList(product: Product): Promise<void> {

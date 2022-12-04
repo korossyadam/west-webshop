@@ -234,6 +234,17 @@
    transition: 0.25s;
 }
 
+/* Offer styles */
+.offer-answered {
+   color: green;
+   font-weight: 600;
+}
+
+.offer-pending {
+   color: var(--color-primary);
+   font-weight: 600;
+}
+
 .center {
    text-align: center;
 }

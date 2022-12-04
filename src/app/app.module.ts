@@ -23,10 +23,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -86,7 +89,10 @@ import { AdminComponent } from './admin/admin.component';
     MatProgressBarModule,
     MatRadioModule,
     MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatSnackBarModule,
+    MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,

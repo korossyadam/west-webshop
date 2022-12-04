@@ -1,13 +1,78 @@
-
 <div class="content-container">
    <div class="content-inner-container">
       <button mat-raised-button color="primary" (click)="openNewProductDialog()">Új termék hozzáadása</button>
+
+      <!-- Offers section -->
+      <mat-card class="offer-card">
+         <p>Árajánlat kérések</p>
+
+         <!-- Date picker -->
+         <mat-form-field appearance="fill" class="datepicker-container" color="primary">
+            <mat-label>Keresési intervallum</mat-label>
+            <mat-date-range-input [formGroup]="offerRange" [rangePicker]="appointmentPicker">
+               <input matStartDate formControlName="start" placeholder="Start date">
+               <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="appointmentPicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #appointmentPicker></mat-date-range-picker>
+
+            <mat-error *ngIf="offerRange.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+            <mat-error *ngIf="offerRange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+         </mat-form-field>
+
+         <!-- Checkbox and query button -->
+         <div class="offer-input-container">
+            <div>
+               <mat-checkbox #unAnswered>Csak válaszolatlanok</mat-checkbox>
+            </div>
+            <button mat-raised-button class="offer-query-button" color="primary" (click)="queryForOffers(offerRange.value['start'], offerRange.value['end'], unAnswered.checked)">Lekérdezés</button>
+         </div>
+
+         <!-- Offer table -->
+         <table mat-table [dataSource]="offers" class="offer-table">
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+               <th mat-header-cell *matHeaderCellDef>Dátum</th>
+               <td mat-cell *matCellDef="let element">{{ element.date.toDate().toLocaleString() }}</td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+               <th mat-header-cell *matHeaderCellDef>E-mail cím</th>
+               <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+
+            <!-- Answered Column -->
+            <ng-container matColumnDef="answered">
+               <th mat-header-cell *matHeaderCellDef>Státusz</th>
+               <td mat-cell *matCellDef="let element">{{ getAnsweredState(element.answered) }}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+               <th mat-header-cell *matHeaderCellDef>Megnyitás</th>
+               <td mat-cell *matCellDef="let element">
+                  <button mat-raised-button color="primary" (click)="openOfferDialog(element)">Megnyitás</button>
+               </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="offerColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: offerColumns;"></tr>
+         </table>
+
+      </mat-card>
+
    </div>
 </div>
 
-<!-- Dialog that opens when inspecting an Order -->
-<ng-template #dialogRef let-order>
+<!-- Dialog that opens when we want to upload a new Product -->
+<ng-template #newProductDialogRef>
    <p class="dialog-title">Új termék hozzáadása</p>
+   <mat-divider class="dialog-divider"></mat-divider>
+
+   <!-- Body -->
    <input placeholder="Cikkszám" #partNumber>
    <input placeholder="Név" #name>
    <input placeholder="Leírás" #description>
@@ -50,6 +115,28 @@
    </select>
    <mat-checkbox [checked]="true" #returnable>Visszaküldhető</mat-checkbox><br>
    <input type="file" multiple (change)="onFileChange($event)" #images><br>
-   <button mat-raised-button color="primary" (click)="addNewProduct(partNumber.value, name.value, description.value, specialCategory.value, brand.value, price.value, stock.value, returnable.checked, images.value)">Termék feltöltése</button>
+
+   <!-- Buttons -->
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
+   <button mat-raised-button class="dialog-ok-button" color="primary" (click)="addNewProduct(partNumber.value, name.value, description.value, specialCategory.value, brand.value, price.value, stock.value, returnable.checked)">Termék feltöltése</button>
+</ng-template>
+
+<!-- Dialog that opens when we want to answer an Offer -->
+<ng-template #offerDialogRef let-offer>
+   <p class="dialog-title">Válaszadás egy árajánlatra</p>
+   <mat-divider class="dialog-divider"></mat-divider>
+
+   <!-- Body -->
+   <p class="offer-row"><span class="underlined">Gyártmány:</span> {{ offer.brand }}</p>
+   <p class="offer-row"><span class="underlined">Évjárat:</span> {{ offer.year }}</p>
+   <p class="offer-row"><span class="underlined">Motor:</span> {{ offer.engine }}</p>
+   <p class="offer-row"><span class="underlined">Karosszéria:</span> {{ offer.chassis }}</p>
+   <p class="offer-row"><span class="underlined">Klímaberendezés:</span> {{ offer.ac }}</p>
+   <p class="offer-row"><span class="underlined">Alvázszám:</span> {{ offer.vin }}</p>
+   <p class="offer-row"><span class="underlined">Üzenet:</span> {{ offer.message }}</p>
+   <textarea placeholder="Válaszüzenet..." #answer></textarea>
+
+   <!-- Buttons -->
+   <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
+   <button mat-raised-button class="dialog-ok-button" color="primary" mat-dialog-close (click)="answerOffer(offer, answer.value)">Válaszadás</button>
 </ng-template>
