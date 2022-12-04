@@ -50,7 +50,7 @@
             <div class="dashboard-container">
 
                <!-- Order table if there are any orders -->
-               <table *ngIf="currentUser && orders.length > 0" class="table">
+               <table *ngIf="currentUser && orders && orders.length > 0" class="table">
                   <thead>
                      <th>Dátum</th>
                      <th>Ár</th>
