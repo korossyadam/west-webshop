@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { off } from 'process';
+import { Offer } from '../models/offer.model';
+import { OfferService } from '../services/offer.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-offer',
@@ -7,9 +12,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OfferComponent implements OnInit {
 
-  constructor() { }
+  // Static functions
+  getEmail = this.utilsService.getEmail;
+  getUserId = this.utilsService.getUserId;
+  showSnackBar = this.utilsService.openSnackBar;
+
+  // ngModels
+  public brand: string = '';
+  public year: string = '';
+  public ac: string = '';
+  public engine: string = '';
+  public chassis: string = '';
+  public vin: string = '';
+
+  constructor(private utilsService: UtilsService, private offerService: OfferService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  /**
+   * Creates a new Offer
+   * 
+   * @param message The general message the user typed in
+   * @param email The e-mail which the user wants to be notified at, can be empty, in which case default e-mail is used
+   * @param additionalParams An array of strings, consists of products that the user checked in with checkboxes
+   */
+  createOffer(message: string, email: string, additionalParams: string[]): void {
+
+    if (additionalParams.length > 0) {
+      message += ' EGYÉB TERMÉKEK: ';
+
+      for (let i = 0; i < additionalParams.length; i++) {
+        if (additionalParams[i] != '') {
+          message += additionalParams[i] + ', ';
+        }
+      }
+
+      message = message.slice(0, -2);
+    }
+
+    // If user did not enter an e-mail, default e-mail address is used
+    if (email == '') {
+      email = this.getEmail();
+    }
+
+    // Create the Offer
+    let offer: Offer = new Offer(this.getUserId(), this.brand, this.year, this.ac, this.engine, this.chassis, this.vin, message, email);
+    this.offerService.createNewOffer(Object.assign({}, offer)).then(res => {
+      this.showSnackBar('Árajánlat sikeresen létrehozva!', 'Bezárás', 4000);
+
+      // Navigate to 'offers' screen on profile component
+      this.router.navigate(['profile/4']);
+    });
   }
 
 }

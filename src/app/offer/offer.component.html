@@ -1,5 +1,6 @@
 <div class="content-container">
    <div class="content-inner-container">
+
       <!-- Text above -->
       <div>
          <p class="title">Árajánlat</p>
@@ -9,16 +10,16 @@
          <div>
 
             <div class="half-container">
-               <input placeholder="Gyártmány, modell">
-               <input placeholder="Évjárat">
-               <select>
+               <input placeholder="Gyártmány, modell" [(ngModel)]="brand">
+               <input placeholder="Évjárat" [(ngModel)]="year">
+               <select [(ngModel)]="ac">
                   <option style="display:none;" selected>Klímaberendezés</option>
                   <option>Klímás autó</option>
                   <option>Nem klímás autó</option>
                </select>
-               <input placeholder="Motorkód, teljesítmény (lóerő, kw)">
-               <input placeholder="Karosszéria (szedán, kombi, hatchback)">
-               <input placeholder="Alvázszám (17 karakter)" maxlength="17" style="text-transform:uppercase">
+               <input placeholder="Motorkód, teljesítmény (lóerő, kw)" [(ngModel)]="engine">
+               <input placeholder="Karosszéria (szedán, kombi, hatchback)" [(ngModel)]="chassis">
+               <input placeholder="Alvázszám (17 karakter)" maxlength="17" style="text-transform:uppercase" [(ngModel)]="vin">
             </div>
 
          </div>
@@ -29,67 +30,97 @@
 
          <!-- Custom offer -->
          <mat-tab label="Egyedi ajánlat">
-            <textarea matInput placeholder="Itt tudod kifejteni milyen alkatrészekre szeretnél árajánlatot kapni, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
+            <textarea matInput placeholder="Itt tudod kifejteni milyen alkatrészekre szeretnél árajánlatot kapni, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz." #defaultMessage></textarea>
+
+            <button class="send-button" mat-raised-button color="primary" (click)="createOffer(defaultMessage.value, defaultEmail.value, [])">Árajánlat kérése</button>
+            <input class="input-email" placeholder="E-mail cím amin elérünk" #defaultEmail>
          </mat-tab>
 
          <!-- Offer for oil change -->
          <mat-tab label="Olajcsere">
 
+            <!-- Oil change main parts -->
             <p class="section-title">Olajcsere alkatrészek</p>
             <div class="checkbox-container">
-               <mat-checkbox [checked]="true">Motorolaj</mat-checkbox><br>
-               <mat-checkbox [checked]="true">Olajszűrő</mat-checkbox><br>
-               <mat-checkbox [checked]="true">Olajleeresztő csavar</mat-checkbox>
+               <mat-checkbox [checked]="true" #oil>Motorolaj</mat-checkbox><br>
+               <mat-checkbox [checked]="true" #oilFilter>Olajszűrő</mat-checkbox><br>
+               <mat-checkbox [checked]="true" #drainPlug>Olajleeresztő csavar</mat-checkbox>
                <div class="tip-container">Sok esetben tartozik hozzá a tömítés is.</div><br>
-               <mat-checkbox [checked]="true">Olajleeresztő csavar tömítés</mat-checkbox><br>
-               <mat-checkbox>Levegőszűrő</mat-checkbox>
+               <mat-checkbox [checked]="true" #drainPlugGasket>Olajleeresztő csavar tömítés</mat-checkbox><br>
+               <mat-checkbox #airFilter>Levegőszűrő</mat-checkbox>
                <div class="tip-container">Ajánlott cserélni olajcsere alkalmával.</div><br>
-               <mat-checkbox>Üzemanyagszűrő</mat-checkbox>
+               <mat-checkbox #fuelFilter>Üzemanyagszűrő</mat-checkbox>
                <div class="tip-container">Dízeles autókon szokás cserélni olajcsere alkalmával.</div><br>
-               <mat-checkbox>Pollenszűrő</mat-checkbox><br>
+               <mat-checkbox #cabinFilter>Pollenszűrő</mat-checkbox><br>
             </div>
 
+            <!-- Oil change misc parts -->
             <p class="section-title">Olajcsere kiegészítők</p>
             <div class="checkbox-container">
-               <mat-checkbox>Olajleeresztő csavar szerszám</mat-checkbox><br>
-               <mat-checkbox>Olajszűrő szerszám</mat-checkbox><br>
-               <mat-checkbox>Motorolaj felfogó tál</mat-checkbox><br>
-               <mat-checkbox>Motorolaj adalék</mat-checkbox><br>
+               <mat-checkbox #oilDrainWrench>Olajleeresztő csavar szerszám</mat-checkbox><br>
+               <mat-checkbox #oilFilterTool>Olajszűrő szerszám</mat-checkbox><br>
+               <mat-checkbox #oilPan>Motorolaj felfogó tál</mat-checkbox><br>
+               <mat-checkbox #oilAdditive>Motorolaj adalék</mat-checkbox><br>
             </div>
 
             <p class="section-title">Üzenet</p>
-            <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
+            <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz." #oilMessage></textarea>
+            
+            <!-- Create oil change offer button -->
+            <button class="send-button" mat-raised-button color="primary" (click)="createOffer(oilMessage.value, oilEmail.value, [
+               oil.checked ? 'Motorolaj' : '',
+               oilFilter.checked ? 'Olajszűrő' : '',
+               drainPlug.checked ? 'Olajleeresztő csavar tömítés' : '',
+               airFilter.checked ? 'Levegőszűrő' : '',
+               fuelFilter.checked ? 'Üzemanyagszűrő' : '',
+               cabinFilter.checked ? 'Pollenszűrő' : '',
+               oilDrainWrench.checked ? 'Olajleeresztő csavar szerszám' : '',
+               oilFilterTool.checked ? 'Olajszűrő szerszám' : '',
+               oilPan.checked ? 'Motorolaj felfogó tál' : '',
+               oilAdditive.checked ? 'Motorolaj adalék' : '',
+            ])">Árajánlat kérése</button>
+            <input class="input-email" placeholder="E-mail cím amin elérünk" #oilEmail>
          </mat-tab>
 
          <!-- Offer for brake service -->
          <mat-tab label="Fékszervíz">
 
+            <!-- Brake service main parts -->
             <p class="section-title">Fékszervíz alkatrészek</p>
             <div class="checkbox-container">
-               <mat-checkbox>Első féktárcsa</mat-checkbox>
+               <mat-checkbox #frontDisc>Első féktárcsa</mat-checkbox>
                <div class="tip-container">Vagy fékdob</div><br>
-               <mat-checkbox>Hátsó féktárcsa</mat-checkbox>
+               <mat-checkbox #rearDisc>Hátsó féktárcsa</mat-checkbox>
                <div class="tip-container">Vagy fékdob</div><br>
-               <mat-checkbox>Első fékbetét készlet</mat-checkbox>
+               <mat-checkbox #frontPads>Első fékbetét készlet</mat-checkbox>
                <div class="tip-container">Vagy fékpofa készlet</div><br>
-               <mat-checkbox>Hátsó fékbetét készlet</mat-checkbox>
+               <mat-checkbox #rearPads>Hátsó fékbetét készlet</mat-checkbox>
                <div class="tip-container">Vagy fékpofa készlet</div><br>
-               <mat-checkbox>Kopásérzékelő</mat-checkbox><br>
+               <mat-checkbox #brakeSensor>Kopásérzékelő</mat-checkbox><br>
             </div>
 
+            <!-- Brake service misc parts -->
             <p class="section-title">Fékszervíz kiegészítők</p>
             <div class="checkbox-container">
-               <mat-checkbox>Féktisztító spray</mat-checkbox><br>
+               <mat-checkbox #brakeCleaner>Féktisztító spray</mat-checkbox><br>
             </div>
 
             <p class="section-title">Üzenet</p>
-            <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz."></textarea>
+            <textarea matInput placeholder="Itt tudod kifejteni milyen egyéb alkatrészekre szeretnél árajánlatot kapni a bejelölteken kívűl, illetve egyéb megjegyzést tudsz tenni az árajánlatodhoz." #brakeMessage></textarea>
+
+            <!-- Create brake service offer button -->
+            <button class="send-button" mat-raised-button color="primary" (click)="createOffer(brakeMessage.value, brakeEmail.value, [
+               frontDisc.checked ? 'Első féktárcsa' : '',
+               rearDisc.checked ? 'Hátsó féktárcsa' : '',
+               frontPads.checked ? 'Első fékbetét készlet' : '',
+               rearPads.checked ? 'Hátsó fékbetét készlet' : '',
+               brakeSensor.checked ? 'Kopásérzékelő' : '',
+               brakeCleaner.checked ? 'Féktisztító spray' : '',
+            ])">Árajánlat kérése</button>
+            <input class="input-email" placeholder="E-mail cím amin elérünk" #brakeEmail>
          </mat-tab>
 
       </mat-tab-group>
 
-      <button class="send-button" mat-raised-button color="primary">Árajánlat kérése</button>
-      <input class="input-email" placeholder="E-mail cím amin elérünk">
    </div>
-
 </div>
