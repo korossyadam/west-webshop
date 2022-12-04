@@ -22,6 +22,7 @@ export class CartComponent implements OnInit {
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    sanitize = this.utilsService.sanitize;
+   getUserId = this.utilsService.getUserId;
    showSnackBar = this.utilsService.openSnackBar;
 
    public cartItems = [];
@@ -248,7 +249,7 @@ export class CartComponent implements OnInit {
       // Re-calculate total price
       this.calculateTotal();
 
-      let newOrder: Order = new Order('45hDYsjPsfXoT8X3JTF0Ekps7O32', new Date(), this.deliveryPrice, this.total, orderedProducts, shippingAddress, billingAddress, shippingMethod, paymentMethod);
+      let newOrder: Order = new Order(this.getUserId(), new Date(), this.deliveryPrice, this.total, orderedProducts, shippingAddress, billingAddress, shippingMethod, paymentMethod);
 
       this.cartService.addOrder(Object.assign({}, newOrder)).then(res => {
          this.showSnackBar('Sikeres rendelés!', 'Bezárás', 5000);
