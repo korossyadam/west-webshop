@@ -166,8 +166,51 @@
                   Még nem kértél árajánlatot.
                </div>
             </div>
+         </div>
+
+         <!-- Garage section -->
+         <div *ngIf="step == 5">
+            <p class="card-title">Garázs</p>
+            <mat-divider></mat-divider>
+
+            <div class="dashboard-container">
+
+               <!-- Cars table if there are any cars -->
+               <table *ngIf="cars && cars.length > 0" class="table">
+                  <tbody>
+                     <tr *ngFor="let car of cars; let i = index;" class="car-row">
+                        <div class="garage-car-container" [routerLink]="['/car', car.carIndex]">
+                           <td>{{ (i+1) }}.</td>
+                           <td>{{ car.brand }}</td>
+                           <td>{{ car.chassis }}</td>
+                           <td>{{ car.year }}</td>
+                           <td>{{ car.engine }}</td>
+                           <td>{{ car.engineCode }}</td>
+                        </div>
+                        <td>
+                           <mat-icon class="garage-delete-icon" (click)="removeGarageCar(car)">close</mat-icon>
+                           <mat-divider></mat-divider>
+                        </td>
+                  </tbody>
+               </table>
+
+               <!-- No cars yet text -->
+               <div *ngIf="cars && cars.length < 1">
+                  Még nem raktál autót a garázsba.
+               </div>
+            </div>
 
          </div>
+
+         <!-- Logout section -->
+         <div *ngIf="step == 6">
+            <p class="card-title">Biztosan ki szeretnél jelentkezni?</p>
+            <mat-divider></mat-divider>
+
+            <button mat-raised-button color="warn" class="logout-button">Kijelentkezés</button>
+
+         </div>
+
       </mat-card>
 
    </div>

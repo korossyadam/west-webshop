@@ -5,21 +5,21 @@
 }
 
 .content-inner-container {
-   width: 800px;
+   width: 940px;
    margin: 0 auto;
    margin-top: 50px;
 }
 
 .menu-card {
    position: relative;
-   width: 24%;
+   width: 20%;
    height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
    float: left;
 }
 
 .main-card {
-   width: 65%;
+   width: 70%;
    height: 540px;
    box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.5);
    float: right;
@@ -160,7 +160,7 @@
 
 .quarter-container {
    width: 44%;
-   height: 50%;
+   max-height: 98px;
    float: left;
    margin: 20px;
    text-align: center;
@@ -243,6 +243,35 @@
 .offer-pending {
    color: var(--color-primary);
    font-weight: 600;
+}
+
+/* Garage styles */
+.garage-car-container {
+   display: table;
+   width: 100%;
+}
+
+.garage-car-container:hover > td {
+   cursor: pointer;
+   color: var(--color-primary);
+   transition: 0.25s;
+}
+
+.garage-delete-icon {
+   color: #444444;
+   transition: 0.25s;
+}
+
+.garage-delete-icon:hover {
+   cursor: pointer;
+   color: var(--color-primary);
+   transition: 0.25s;
+}
+
+/* Logout styles */
+.logout-button {
+   margin-top: 15px;
+   width: 140px;
 }
 
 .center {

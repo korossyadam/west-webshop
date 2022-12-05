@@ -4,6 +4,7 @@ import { AngularFirestore, CollectionReference, Query } from '@angular/fire/comp
 import { arrayRemove } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { Address } from '../models/address.model';
+import { Car } from '../models/car.model';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
@@ -21,13 +22,8 @@ export class ProfileService {
    constructor(private utilsService: UtilsService, private afs: AngularFirestore, private db: AngularFireDatabase) { }
 
    // Get current User
-   getCurrentUser(): Observable<User[]> {
-      return this.afs.collection('users', ref => {
-         let query: CollectionReference | Query = ref;
-         query = query.where('email', '==', localStorage.getItem('email'));
-         //query = query.orderBy('name', 'asc');
-         return query;
-      }).valueChanges() as Observable<User[]>;
+   getCurrentUser() {
+      return this.afs.doc('users/' + this.getUserId()).valueChanges();
    }
 
    // Update current User basic data
@@ -65,7 +61,21 @@ export class ProfileService {
 
    removeFromWishList(product: Product): Promise<void> {
       return this.afs.doc('users/' + this.getUserId()).update({
-        wishList: arrayRemove(Object.assign({}, product))
+         wishList: arrayRemove(Object.assign({}, product))
       });
-    }
+   }
+
+   removeFromGarage(carIndex: number): Promise<void> {
+      return this.afs.doc('users/' + this.getUserId()).update({
+         garage: arrayRemove(carIndex)
+      });
+   }
+
+   getCar(carIndex: number): Observable<Car[]> {
+      return this.afs.collection('cars', ref => {
+         let query: CollectionReference | Query = ref;
+         query = query.where('carIndex', '==', carIndex);
+         return query;
+      }).valueChanges() as Observable<Car[]>;
+   }
 }

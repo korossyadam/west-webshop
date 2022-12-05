@@ -172,7 +172,7 @@ export class CartComponent implements OnInit {
     */
    showInvoiceFields(): void {
       let container = <HTMLInputElement>document.getElementsByClassName('invoice-container')[0];
-      container.style.height = '138px';
+      container.style.height = '160px';
    }
 
    /**
@@ -185,7 +185,7 @@ export class CartComponent implements OnInit {
       let container = <HTMLInputElement>document.getElementsByClassName('invoice-container')[0];
 
       if (!event.checked) {
-         container.style.height = '138px';
+         container.style.height = '160px';
       } else {
          container.style.height = '0px';
       }

@@ -17,6 +17,10 @@
    color: #444444;
 }
 
+.garage-button {
+   width: 60%;
+}
+
 .parts-container {
    position: absolute;
    left: 28%;

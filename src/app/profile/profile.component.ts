@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { first, Timestamp } from 'rxjs';
 import { Address } from '../models/address.model';
+import { Car } from '../models/car.model';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
@@ -39,6 +40,7 @@ export class ProfileComponent implements OnInit {
    public currentUser: User;
    public orders: Order[];
    public offers: Offer[];
+   public cars: Car[] = [];
 
    // This variable keeps track of which window we currently have open
    public step: number = 0;
@@ -48,7 +50,16 @@ export class ProfileComponent implements OnInit {
    ngOnInit(): void {
       this.step = parseInt(this.route.snapshot.paramMap.get('tab'));
 
-      this.profileService.getCurrentUser().pipe(first()).subscribe(data => this.currentUser = data[0]);
+      this.profileService.getCurrentUser().subscribe(data => {
+         this.currentUser = data as User;
+
+         // Query for Cars
+         for (let i = 0; i < this.currentUser.garage.length; i++) {
+            this.profileService.getCar(this.currentUser.garage[i]).pipe(first()).subscribe(data => {
+               this.cars.push(data[0]);
+            });
+         }
+      });
 
       // Query for Orders
       this.profileService.getCurrentUserOrders().subscribe(data => {
@@ -86,7 +97,7 @@ export class ProfileComponent implements OnInit {
       let newAddress: Address = new Address(zip, city, street, taxNumber);
       this.profileService.updateCurrentUserAddress(Object.assign({}, newAddress)).then(res => {
          this.showSnackBar('Sikeres adatváltoztatás!', 'Bezárás', 4000);
-      })
+      });
    }
 
    /**
@@ -97,14 +108,30 @@ export class ProfileComponent implements OnInit {
     */
    removeWishListProduct(productToRemove: Product): void {
       this.profileService.removeFromWishList(productToRemove).then(res => {
-         
+
          // Remove the product from wishlist locally
-         const index = this.currentUser.wishList.indexOf(productToRemove, 0);
-         if (index > -1) {
-            this.currentUser.wishList.splice(index, 1);
-         }
+         window.location.reload();
 
          this.showSnackBar('Termék sikeresen eltávolítva!', 'Bezárás', 4000);
+      });
+   }
+
+   /**
+    * Removes a Car from the current user's garage
+    * Removes it from the database and if successful, removes it from the local variable
+    * 
+    * @param productToRemove The Car to remove
+    */
+    removeGarageCar(carToRemove: Car): void {
+      this.profileService.removeFromGarage(parseInt(carToRemove.carIndex)).then(res => {
+
+         // Remove the product from wishlist locally
+         const index = this.cars.indexOf(carToRemove, 0);
+         if (index > -1) {
+            this.cars.splice(index, 1);
+         }
+
+         this.showSnackBar('Autó sikeresen eltávolítva!', 'Bezárás', 4000);
       });
    }
 
@@ -122,7 +149,7 @@ export class ProfileComponent implements OnInit {
     * 
     * @param offerToOpen The Offer whose data we need to display
     */
-    openOriginalOfferDialog(offerToOpen: Offer) {
+   openOriginalOfferDialog(offerToOpen: Offer) {
       this.dialog.open(this.offerOriginalDialogRef, { data: offerToOpen, width: '1000px' });
    }
 
@@ -131,7 +158,7 @@ export class ProfileComponent implements OnInit {
     * 
     * @param offerToOpen The Offer whose data we need to display
     */
-    openAnsweredOfferDialog(offerToOpen: Offer) {
+   openAnsweredOfferDialog(offerToOpen: Offer) {
       this.dialog.open(this.offerAnsweredDialogRef, { data: offerToOpen, width: '1000px' });
    }
 
