@@ -282,26 +282,14 @@ html, body {
 
 .wrapper {
    min-height: 100%;
-   margin-bottom: -50px;
-}
-
-.push {
-   height: 180px;
-}
-
-.pushed {
-   overflow: auto;
-   position: absolute;
-   width: 100%;
-   height: 54px;
+   margin-bottom: 150px;
 }
 
 .main {
-   overflow: auto;
-   position: absolute;
    top: 0;
    bottom: 0;
    width: 100%;
+   overflow: hidden;
 }
 
 .spinner {
@@ -309,4 +297,3 @@ html, body {
    top: 200px;
    left: 180px;
 }
-

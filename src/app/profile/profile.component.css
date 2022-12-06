@@ -1,5 +1,4 @@
 .content-container {
-   position: absolute;
    width: 100%;
    margin: 0 auto;
 }
@@ -8,6 +7,8 @@
    width: 940px;
    margin: 0 auto;
    margin-top: 50px;
+   padding: 15px;
+   overflow: hidden;
 }
 
 .menu-card {
@@ -204,20 +205,20 @@
    width: 100%;
 }
 
-.wishlist-product-info-container > td {
+.wishlist-product-info-container>td {
    width: 25%;
 }
 
-.wishlist-product-info-container > td:first-child {
+.wishlist-product-info-container>td:first-child {
    width: 7%;
 }
 
-.wishlist-product-info-container > td { 
+.wishlist-product-info-container>td {
    color: #444444;
    transition: 0.25s;
 }
 
-.wishlist-product-info-container:hover > td {
+.wishlist-product-info-container:hover>td {
    cursor: pointer;
    color: var(--color-primary);
    transition: 0.25s;
@@ -251,7 +252,7 @@
    width: 100%;
 }
 
-.garage-car-container:hover > td {
+.garage-car-container:hover>td {
    cursor: pointer;
    color: var(--color-primary);
    transition: 0.25s;

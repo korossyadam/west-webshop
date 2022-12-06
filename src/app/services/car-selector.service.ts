@@ -5,6 +5,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Chassis } from '../models/chassis.model';
 import { Car } from '../models/car.model';
+import { deleteField, FieldValue } from 'firebase/firestore';
+import { Product } from '../models/product.model';
 
 @Injectable({
    providedIn: 'root'
@@ -43,4 +45,31 @@ export class CarSelectorService {
       await this.afs.collection(collectionName).doc(uid).set(data);
       return uid;
    }
+
+   // Upload Data
+   async addProduct(data: Product): Promise<void> {
+      const uid = this.afs.createId();
+      return this.afs.collection('products').doc(uid).set(data);
+   }
+   
+
+   modifyQuantity(line: string) {
+      let parts: string[] = line.split(';');
+      let index = parts[0];
+
+      let fields: string[] = [];
+      for (let i = 1; i < parts.length; i++) {
+         fields.push(parts[i].split(' ')[0] + '*' + parts[i].split(' ')[1]);
+      }
+      //console.log(fields);
+      //console.log(index);
+      this.afs.collection("cars", ref => ref.where('carIndex', '==', parseInt(index))).get().subscribe(data => {
+         let id = data.docs[0].id;
+         this.afs.collection('cars').doc(id).update({
+            productLengths: fields,
+            productLenghts: deleteField(),
+         }).then(res => console.log(id + ' finished'));
+      });
+   }
+
 }

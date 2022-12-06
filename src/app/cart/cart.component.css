@@ -1,6 +1,6 @@
 .content-container {
-   position: absolute;
    width: 100%;
+   min-height: 500px;
    margin: 0 auto;
 }
 
