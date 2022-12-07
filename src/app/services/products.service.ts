@@ -39,7 +39,7 @@ export class ProductsService {
   getProductsBySpecialCategory(specialCategory: number): Observable<Product[]> {
     return this.afs.collection('products', ref => {
       let query: CollectionReference | Query = ref;
-      query = query.where('specialCategory', '==', specialCategory).limit(10);
+      query = query.where('specialCategory', '==', specialCategory).orderBy('name').limit(10);
       return query;
     }).valueChanges() as Observable<Product[]>;
   }

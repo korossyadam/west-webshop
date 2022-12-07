@@ -5,6 +5,7 @@ import { BatteryComponent } from './battery/battery.component';
 import { CarComponent } from './car/car.component';
 import { CartComponent } from './cart/cart.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { Categories2Component } from './categories2/categories2.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { OfferComponent } from './offer/offer.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'products/:searchedCategory', component: ProductsComponent },
   { path: 'product/:partNumber', component: ProductComponent },
   { path: 'categories', component: CategoriesComponent },
+  { path: 'categories2', component: Categories2Component },
   { path: 'admin', component: AdminComponent },
 ];
 

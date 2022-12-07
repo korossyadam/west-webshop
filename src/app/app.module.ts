@@ -48,6 +48,7 @@ import { CarComponent } from './car/car.component';
 import { ProductComponent } from './product/product.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { AdminComponent } from './admin/admin.component';
+import { Categories2Component } from './categories2/categories2.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { AdminComponent } from './admin/admin.component';
     FeaturedComponent,
     CategoriesComponent,
     AdminComponent,
+    Categories2Component,
   ],
   imports: [
     BrowserModule,

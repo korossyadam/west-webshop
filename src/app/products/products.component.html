@@ -1,6 +1,6 @@
 <div class="content-container">
   <div class="content-inner-container">
-    
+
     <table class="table">
 
       <!-- Table head -->
@@ -48,7 +48,7 @@
           <td>
             <div *ngIf="product.stock > 0">
               <p *ngIf="product.stock > 5" class="in-stock">Raktáron (5+)</p>
-              <p *ngIf="product.stock <= 0" class="in-stock">Raktáron ({{ product.stock }})</p>
+              <p *ngIf="product.stock <= 5" class="in-stock">Raktáron ({{ product.stock }})</p>
             </div>
             <p *ngIf="product.stock <= 0" class="out-of-stock">Nincs raktáron</p>
           </td>

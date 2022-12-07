@@ -1,0 +1,120 @@
+
+<div class="content-container">
+
+   <table class="table">
+      <tbody>
+         <tr>
+
+            <td>
+               <div class="main-category-container" (click)="selectedCategoryIndex = 0">
+                  <div class="main-category-inner-container">
+                     <div class="category-title-container">
+                        <p>AUTÓÁPOLÁS</p>
+                     </div>
+                     <img src="https://media.istockphoto.com/id/1140002222/photo/worker-cleaning-car-dashboard.jpg?s=612x612&w=0&k=20&c=oetLRXaID_kC8vZwgqSOtJRjjZYXwLn93q8PsJJFnOA=" class="main-category-img">
+                     <div class="shadow"></div>
+                  </div>
+               </div>
+            </td>
+
+            <td>
+               <div class="main-category-container" (click)="selectedCategoryIndex = 1">
+                  <div class="main-category-inner-container">
+                     <div class="category-title-container">
+                        <p>BELTÉR</p>
+                     </div>
+                     
+                     <img src="https://images.unsplash.com/photo-1471174617910-3e9c04f58ff5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHw%3D&w=1000&q=80" style="position: relative; top: -50px;"  class="main-category-img">
+                     <div class="shadow"></div>
+                  </div>
+               </div>
+            </td>
+
+            <td>
+               <div class="main-category-container" (click)="selectedCategoryIndex = 2">
+                  <div class="main-category-inner-container">
+                     <div class="category-title-container">
+                        <p>KÜLTÉR</p>
+                     </div>
+                     
+                     <img src="https://m.media-amazon.com/images/I/71M76Xs2K1L.jpg" style="position: relative; top: -80px;" class="main-category-img">
+                     <div class="shadow"></div>
+                  </div>
+               </div>
+            </td>
+
+            <td>
+               <div class="main-category-container" (click)="selectedCategoryIndex = 3">
+                  <div class="main-category-inner-container">
+                     <div class="category-title-container">
+                        <p>FOLYADÉKOK</p>
+                     </div>
+                     
+                     <img src="https://img5.goodfon.com/wallpaper/nbig/b/65/maslo-motor-dvigatel-zhidkost.jpg" class="main-category-img">
+                     <div class="shadow"></div>
+                  </div>
+               </div>
+            </td>
+
+         </tr>
+      </tbody>
+   </table>
+
+   
+
+   <div>
+
+      <!-- Car care -->
+      <mat-card *ngIf="selectedCategoryIndex == 0" class="categories-container">
+         <ul>
+            <li>Ablaktisztítás</li>
+            <li>Kefék törlőkendők</li>
+            <li>Motorblokk tisztítás</li>
+            <li>Felni tisztítás</li>
+            <li>Polírozás</li>
+         </ul>
+      </mat-card>
+
+      <!-- Interior -->
+      <mat-card *ngIf="selectedCategoryIndex == 1" class="categories-container">
+         <ul>
+            <li>Üléshuzatok</li>
+            <li>Kormányvédők</li>
+            <li>Autószőnyegek</li>
+            <li>Szivargyújtó</li>
+            <li>Illatosítók</li>
+            <li>Belső ventilátorok</li>
+         </ul>
+      </mat-card>
+
+      <!-- Exterior -->
+      <mat-card *ngIf="selectedCategoryIndex == 2" class="categories-container">
+         <ul>
+            <li>Ablaktörlő lapátok</li>
+            <li>Hátsó lámpák</li>
+            <li>Gumilámpák, izzós</li>
+            <li>Gumilámpák, LED</li>
+            <li>Helyzetjelzők izzós</li>
+            <li>Helyzetjelzők, LED</li>
+            <li>Munkalámpák, izzós</li>
+            <li>Munkalámpák, LED</li>
+            <li>Megkülönböztető lámpák, izzós</li>
+            <li>Megkülönböztető lámpák, LED</li>
+         </ul>
+      </mat-card>
+
+      <!-- Fluids -->
+      <mat-card *ngIf="selectedCategoryIndex == 3" class="categories-container">
+         <ul>
+            <li>Motorolaj</li>
+            <li>Hajtómű olaj</li>
+            <li>Hidraulika olaj</li>
+            <li>Fagyálló</li>
+            <li>Nyári ablakmosó folyadék</li>
+            <li>Téli ablakmosó folyadék</li>
+         </ul>
+      </mat-card>
+
+   </div>
+
+</div>

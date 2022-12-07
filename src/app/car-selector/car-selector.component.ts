@@ -420,9 +420,9 @@ export class CarSelectorComponent implements OnInit {
    
    addProducts(): void {
       fetch('assets/products.txt').then(response => response.text()).then(data => {
-         var index = 10296;
+         var index = 257010;
          var lines = data.split('\n');
-         while (index < 257000) {
+         while (index < 396123) {
 
             let partNumber = lines[index].replace(/(\r\n|\n|\r)/gm, "");
             let categories = lines[index + 1].replace(/(\r\n|\n|\r)/gm, "").split('*');
@@ -469,6 +469,11 @@ export class CarSelectorComponent implements OnInit {
             let factoryNumbers = lines[index + 9].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
             let returnable = lines[index + 10].replace(/(\r\n|\n|\r)/gm, "").toLowerCase() == 'true';
             let carIndexes = lines[index + 11].replace(/(\r\n|\n|\r)/gm, "").replace(' ', '').split(',');
+
+            for (let i = 0; i < factoryNumbers.length; i++) {
+               if (factoryNumbers[i])
+               factoryNumbers[i] = factoryNumbers[i].trim();
+            }
 
             for (let i = 0; i < carIndexes.length; i++) {
                if (carIndexes[i])

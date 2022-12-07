@@ -39,10 +39,9 @@
                         <li><a routerLink="/categories">Szerszámok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Kézi szerszámok</a></li>
-                                 <li><a routerLink="/categories">Elektromos szerszámok</a></li>
-                                 <li><a routerLink="/categories">Elektromos szerszámok</a></li>
-                                 <li><a routerLink="/categories">Mérőeszközök</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 29 }]">Kézi szerszámok</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 30 }]">Elektromos szerszámok</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 32 }]">Mérőeszközök</a></li>
                               </div>
                            </ul>
                         </li>
@@ -52,14 +51,15 @@
                                  <li><a routerLink="/categories">Műhelyhigiénia<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
-                                          <li><a routerLink="/categories">Kézhigiénia</a></li>
-                                          <li><a routerLink="/categories">Tisztítás</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 31 }]">Kézhigiénia</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 33 }]">Tisztítás</a></li>
                                        </div>
 
                                     </ul>
                                  </li>
-                                 <li><a routerLink="/categories">Klímaszervíz</a></li>
-                                 <li><a routerLink="/categories">Akkumulátor szervíz<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['products', { specialCategory: 34 }]">Klímaszervíz</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 35 }]">Akkumulátor szervíz<!--<mat-icon class="arrow-horizontal">chevron_right</mat-icon>--></a>
+                                    <!--
                                     <ul>
                                        <div>
                                           <li><a routerLink="/categories">Saruk</a></li>
@@ -68,7 +68,7 @@
                                           <li><a routerLink="/categories">Teszterek</a></li>
                                           <li><a routerLink="/categories">Indítók</a></li>
                                        </div>
-                                    </ul>
+                                    </ul>-->
                                  </li>
                               </div>
                            </ul>
@@ -76,8 +76,8 @@
                         <li><a routerLink="/categories">Munkavédelmi kellékek<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Ruházat</a></li>
-                                 <li><a routerLink="/categories">Biztonsági felszerelés</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 36 }]">Ruházat</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 37 }]">Biztonsági felszerelés</a></li>
                               </div>
                            </ul>
                         </li>
@@ -87,21 +87,23 @@
                                  <li><a routerLink="/categories">Alátétek és O-gyűrűk<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
-                                          <li><a routerLink="/categories">Alátétek</a></li>
-                                          <li><a routerLink="/categories">O-gyűrűk</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 38 }]">Alátétek</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 39 }]">O-gyűrűk</a></li>
                                        </div>
                                     </ul>
                                  </li>
-                                 <li><a routerLink="/categories">Biztosítékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['products', { specialCategory: 40 }]">Biztosítékok<!--<mat-icon class="arrow-horizontal">chevron_right</mat-icon>--></a>
+                                    <!--
                                     <ul>
                                        <div>
                                           <li><a routerLink="/categories">Autós biztosítékok</a></li>
                                           <li><a routerLink="/categories">Egyéb biztosítékok</a></li>
                                        </div>
-                                    </ul>
+                                    </ul>-->
                                  </li>
-                                 <li><a routerLink="/categories">Csavaranyák</a></li>
-                                 <li><a routerLink="/categories">Gyorskötözők</a></li>
+                                 <!--<li><a routerLink="/categories">Csavaranyák</a></li>-->
+                                 <li><a [routerLink]="['products', { specialCategory: 41 }]">Gyorskötözők</a></li>
+                                 <!--
                                  <li><a routerLink="/categories">Kábelvégek</a></li>
                                  <li><a routerLink="/categories">Patentek</a></li>
                                  <li><a routerLink="/categories">Menetjavítók</a></li>
@@ -109,7 +111,7 @@
                                  <li><a routerLink="/categories">Szorítóbilincsek</a></li>
                                  <li><a routerLink="/categories">Sasszegek</a></li>
                                  <li><a routerLink="/categories">Szegecsek</a></li>
-                                 <li><a routerLink="/categories">Szegecsanyák</a></li>
+                                 <li><a routerLink="/categories">Szegecsanyák</a></li>-->
                               </div>
                            </ul>
                         </li>
@@ -117,95 +119,92 @@
                   </ul>
                </li>
 
-               <li><a routerLink="/categories">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
+               <li><a routerLink="/categories2">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
                   <ul>
                      <div>
-                        <li><a routerLink="/categories">Akkumulátor</a></li>
-                        <li><a routerLink="/categories">Autóápolás<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a routerLink="/categories2">Autóápolás<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                         <ul>
                            <div>
                               <li><a [routerLink]="['products', { specialCategory: 0 }]">Ablaktisztítás</a></li>
-                              <li><a routerLink="/categories">Kefék, törlőkendők</a></li>
-                              <li><a routerLink="/categories">Motorblokk tisztítás</a></li>
-                              <li><a routerLink="/categories">Felni tisztítás</a></li>
-                              <li><a routerLink="/categories">Polírozás</a></li>
+                              <li><a [routerLink]="['products', { specialCategory: 1 }]">Kefék, törlőkendők</a></li>
+                              <li><a [routerLink]="['products', { specialCategory: 2 }]">Motorblokk tisztítás</a></li>
+                              <li><a [routerLink]="['products', { specialCategory: 3 }]">Felni tisztítás</a></li>
+                              <li><a [routerLink]="['products', { specialCategory: 4 }]">Polírozás</a></li>
                            </div>
                         </ul>
                      </li>
-                        <li><a routerLink="/categories">Beltér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a routerLink="/categories2">Beltér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Üléshuzatok</a></li>
-                                 <li><a routerLink="/categories">Kormányvédők</a></li>
-                                 <li><a routerLink="/categories">Autószőnyegek</a></li>
-                                 <li><a routerLink="/categories">Szivargyújtó</a></li>
-                                 <li><a routerLink="/categories">Illatósítók</a></li>
-                                 <li><a routerLink="/categories">Belső ventilátorok</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 5 }]">Üléshuzatok</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 6 }]">Kormányvédők</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 7 }]">Autószőnyegek</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 8 }]">Szivargyújtó</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 9 }]">Illatósítók</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 10 }]">Belső ventilátorok</a></li>
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories">Kültér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a routerLink="/categories2">Kültér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Ablaktörlő lapátok</a></li>
-                                 <li><a routerLink="/categories">Lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['products', { specialCategory: 11 }]">Ablaktörlő lapátok</a></li>
+                                 <li><a routerLink="/categories2">Lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
-                                          <li><a routerLink="/categories">Hátsó lámpák</a></li>
-                                          <li><a routerLink="/categories">Gumilámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a [routerLink]="['products', { specialCategory: 12 }]">Hátsó lámpák</a></li>
+                                          <li><a routerLink="/categories2">Gumilámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
-                                                   <li><a routerLink="/categories">Izzós</a></li>
-                                                   <li><a routerLink="/categories">LED-es</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 13 }]">Izzós</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 14 }]">LED-es</a></li>
                                                 </div>
                                              </ul>
                                           </li>
-                                          <li><a routerLink="/categories">Helyzetjelzők<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a routerLink="/categories2">Helyzetjelzők<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
-                                                   <li><a routerLink="/categories">Izzós</a></li>
-                                                   <li><a routerLink="/categories">LED-es</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 15 }]">Izzós</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 16 }]">LED-es</a></li>
                                                 </div>
                                              </ul>
                                           </li>
-                                          <li><a routerLink="/categories">Munkalámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a routerLink="/categories2">Munkalámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
-                                                   <li><a routerLink="/categories">Izzós</a></li>
-                                                   <li><a routerLink="/categories">LED-es</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 17 }]">Izzós</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 18 }]">LED-es</a></li>
                                                 </div>
                                              </ul>
                                           </li>
-                                          <li><a routerLink="/categories">Megkülönböztető lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a routerLink="/categories2">Megkülönböztető lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
-                                                   <li><a routerLink="/categories">Izzós</a></li>
-                                                   <li><a routerLink="/categories">LED-es</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 19 }]">Izzós</a></li>
+                                                   <li><a [routerLink]="['products', { specialCategory: 20 }]">LED-es</a></li>
                                                 </div>
                                              </ul>
                                           </li>
                                        </div>
                                     </ul>
                                  </li>
-                                 <li><a routerLink="/categories">Dísztárcsák</a></li>
-                                 <li><a routerLink="/categories">Tanksapkák</a></li>
-                                 <li><a routerLink="/categories">Rendszámtábla tartók</a></li>
-                                 <li><a routerLink="/categories">Fényvisszaverők</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 21 }]">Dísztárcsák</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 22 }]">Tanksapkák</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 23 }]">Rendszámtábla tartók</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 24 }]">Fényvisszaverők</a></li>
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories">Folyadékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a routerLink="/categories2">Folyadékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Motorolaj</a></li>
-                                 <li><a routerLink="/categories">Hajtómű olaj</a></li>
-                                 <li><a routerLink="/categories">Hidraulika olaj</a></li>
-                                 <li><a routerLink="/categories">Fagyálló</a></li>
-                                 <li><a routerLink="/categories">Ablakmosó folyadék<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['products', { specialCategory: 25 }]">Hajtómű olaj</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 26 }]">Fagyálló</a></li>
+                                 <li><a routerLink="/categories2">Ablakmosó folyadék<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
-                                          <li><a routerLink="/categories">Nyári ablakmosó folyadék</a></li>
-                                          <li><a routerLink="/categories">Téli ablakmosó folyadék</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 27 }]">Nyári ablakmosó folyadék</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 28 }]">Téli ablakmosó folyadék</a></li>
                                        </div>
                                     </ul>
                                  </li>

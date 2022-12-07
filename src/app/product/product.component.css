@@ -1,18 +1,32 @@
+.content-container {
+   width: 100%;
+   min-height: 590px;
+   margin: 0 auto;
+}
+
+.content-inner-container {
+   width: 1550px;
+   margin: 0 auto;
+   margin-top: 10px;
+   padding: 55px;
+   overflow: hidden;
+}
+
 .product-container {
-   position: relative;
-   top: 60px;
-   left: 10%;
    width: 1100px;
    height: 260px;
    padding: 20px;
+   margin-left: 0;
+   float: left;
 }
 
 .specification-container {
-   position: relative;
-   top: 90px;
-   left: 10%;
    width: 1100px;
-   height: fit-content;
+   padding-bottom: 50px;
+   margin-top: 30px;
+   margin-bottom: 40px;
+   padding: 16px 20px;
+   float: left;
 }
 
 .image-selector-container {
@@ -83,9 +97,7 @@
 }
 
 .price-container {
-   position: absolute;
-   top: 60px;
-   right: 10%;
+   float: right;
    width: 300px;
    height: 300px;
    padding: 20px;
@@ -178,10 +190,10 @@
 
 .buttons-container {
    margin-top: -16px !important;
-   margin-left: -16px;
+   margin-left: -20px;
    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
    height: 40px;
-   width: calc(100% + 32px);
+   width: calc(100% + 40px);
 }
 
 .buttons-inner-container {

@@ -1,118 +1,126 @@
-<!-- Product container-->
-<mat-card class="product-container">
+<div class="content-container">
+   <div class="content-inner-container">
 
-   <!-- Back button -->
-   <p class="back-button" (click)="navigateBack()">Vissza</p>  
+      <!-- Product container-->
+      <mat-card class="product-container">
 
-   <div *ngIf="currentProduct">
-      <div *ngIf="currentProduct.imgurls.length > 1" class="image-selector-container">
-         <div *ngFor="let imageUrl of currentProduct.imgurls; let i = index;">
-            <img [src]="sanitize(imageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="small-img" [ngClass]="{'selected-img': selectedImageIndex == i}" (click)="changeDisplayedImage(imageUrl, i)">
+         <!-- Back button -->
+         <p class="back-button" (click)="navigateBack()">Vissza</p>
+
+         <div *ngIf="currentProduct">
+            <div *ngIf="currentProduct.imgurls.length > 1" class="image-selector-container">
+               <div *ngFor="let imageUrl of currentProduct.imgurls; let i = index;">
+                  <img [src]="sanitize(imageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="small-img" [ngClass]="{'selected-img': selectedImageIndex == i}" (click)="changeDisplayedImage(imageUrl, i)">
+               </div>
+            </div>
+
+            <!-- Product image -->
+            <div class="product-img-container">
+               <img class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
+            </div>
+
+            <!-- Product info-->
+            <div class="product-info-container">
+               <p class="product-part-number">{{ currentProduct.partNumber }}</p>
+               <p class="product-name">{{ currentProduct.name }}</p>
+               <p>{{ currentProduct.brand }}</p>
+               <p class="product-description">{{ currentProduct.description }}</p>
+
+               <div *ngIf="!currentProduct.canBeReturned">
+                  <span class="non-returnable-text">
+                     <mat-icon class="non-returnable-icon">error</mat-icon>Ez a termék nem adható vissza.
+                  </span>
+               </div>
+            </div>
          </div>
-      </div>
+      </mat-card>
 
-      <!-- Product image -->
-      <div class="product-img-container">
-         <img class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
-      </div>
+      <!-- Price container -->
+      <mat-card class="price-container">
 
-      <!-- Product info-->
-      <div class="product-info-container">
-         <p class="product-part-number">{{ currentProduct.partNumber }}</p>
-         <p class="product-name">{{ currentProduct.name }}</p>
-         <p>{{ currentProduct.brand }}</p>
-         <p class="product-description">{{ currentProduct.description }}</p>
+         <div *ngIf="currentProduct">
+            <div class="info-row">
+               <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTax(currentProduct.price)) }}</span>
+            </div>
 
-         <div *ngIf="!currentProduct.canBeReturned">
-            <span class="non-returnable-text">
-               <mat-icon class="non-returnable-icon">error</mat-icon>Ez a termék nem adható vissza.
-            </span>
+            <div class="info-row">
+               <span class="price-info">Nettó ár:</span><span class="product-net-price">{{ formatPriceToString(currentProduct.price) }}</span>
+            </div>
+
+            <div class="info-row">
+               <span class="price-info">Elérhető mennyiség:</span><span class="product-net-price">7</span>
+            </div>
+
+            <!-- Add to Cart section-->
+            <div class="cart-container">
+
+               <div class="amount-container">
+                  <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
+                  <input id="amount-input" class="amount-input" type="number" value="1" #quantity>
+                  <div class="amount-button input-positive" (click)="incrementInputValue()">+</div>
+               </div>
+
+               <div class="cart-button-container">
+                  <button mat-raised-button class="cart-button" (click)="addToCart(quantity.value)">Kosárba rakás</button>
+               </div>
+
+               <!-- Add to Favorites section -->
+               <div>
+                  <span class="favorite-text">
+                     <mat-icon class="favorite-icon">favorite</mat-icon>Kívánságlistához adás
+                  </span>
+               </div>
+
+               <div class="question-section">
+                  <p>Kérdésed van a termékkel kapcsolatban? Tedd fel bátran itt!</p>
+               </div>
+
+            </div>
          </div>
-      </div>
+
+      </mat-card>
+
+      <!-- Specification container -->
+      <mat-card class="specification-container">
+
+         <!-- Property and Factory Numbers buttons -->
+         <div class="buttons-container">
+            <div class="buttons-inner-container">
+               <div class="info-button button-properties" [ngClass]="{'info-button-selected': displayedInformation == 0}" (click)="changeInformationDisplay(0)">Tulajdonságok</div>
+               <div class="info-button button-factory-numbers" [ngClass]="{'info-button-selected': displayedInformation == 1}" (click)="changeInformationDisplay(1)">Gyári számok</div>
+            </div>
+         </div>
+
+         <!-- Information: properties -->
+         <div *ngIf="displayedInformation == 0">
+            <p *ngIf="propertyTypes.length == 0">Ennek a terméknek nincsenek tulajdonságai.</p>
+            <table class="properties-table" rules="all">
+               <ng-container>
+                  <tr *ngFor="let propertyTypes of propertyTypes; let i = index;">
+                     <td class="properties-table-row properties-first-column">{{ propertyTypes }}</td>
+                     <td class="properties-table-row properties-second-column">{{ propertyValues[i] }}</td>
+                  </tr>
+               </ng-container>
+            </table>
+         </div>
+
+         <!-- Information: factory numbers-->
+         <div *ngIf="displayedInformation == 1">
+            <p *ngIf="factoryNumberCodes.length == 0">Ennek a terméknek nincsenek gyári számai.</p>
+            <table class="factory-numbers-table">
+               <ng-container *ngFor="let factoryNumberCode of factoryNumberCodes; let i = index;">
+                  <tr>
+                     <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumberCode }}</td>
+                     <td class="factory-numbers-table-row factory-numbers-second-column">{{ factoryNumberBrands[i] }}</td>
+                  </tr>
+               </ng-container>
+            </table>
+         </div>
+
+      </mat-card>
+
    </div>
-</mat-card>
-
-<!-- Price container -->
-<mat-card class="price-container">
-
-   <div *ngIf="currentProduct">
-      <div class="info-row">
-         <span class="price-info">Bruttó ár:</span><span class="product-final-price">{{ formatPriceToString(addTax(currentProduct.price)) }}</span>
-      </div>
-
-      <div class="info-row">
-         <span class="price-info">Nettó ár:</span><span class="product-net-price">{{ formatPriceToString(currentProduct.price) }}</span>
-      </div>
-
-      <div class="info-row">
-         <span class="price-info">Elérhető mennyiség:</span><span class="product-net-price">7</span>
-      </div>
-
-      <!-- Add to Cart section-->
-      <div class="cart-container">
-
-         <div class="amount-container">
-            <div class="amount-button input-negative" (click)="decrementInputValue()">-</div>
-            <input id="amount-input" class="amount-input" type="number" value="1" #quantity>
-            <div class="amount-button input-positive" (click)="incrementInputValue()">+</div>
-         </div>
-
-         <div class="cart-button-container">
-            <button mat-raised-button class="cart-button" (click)="addToCart(quantity.value)">Kosárba rakás</button>
-         </div>
-
-         <!-- Add to Favorites section -->
-         <div>
-            <span class="favorite-text">
-               <mat-icon class="favorite-icon">favorite</mat-icon>Kívánságlistához adás
-            </span>
-         </div>
-
-         <div class="question-section">
-            <p>Kérdésed van a termékkel kapcsolatban? Tedd fel bátran itt!</p>
-         </div>
-
-      </div>
-   </div>
-
-</mat-card>
-
-<!-- Specification container -->
-<mat-card class="specification-container">
-
-   <!-- Property and Factory Numbers buttons -->
-   <div class="buttons-container">
-      <div class="buttons-inner-container">
-         <div class="info-button button-properties" [ngClass]="{'info-button-selected': displayedInformation == 0}" (click)="changeInformationDisplay(0)">Tulajdonságok</div>
-         <div class="info-button button-factory-numbers" [ngClass]="{'info-button-selected': displayedInformation == 1}" (click)="changeInformationDisplay(1)">Gyári számok</div>
-      </div>
-   </div>
-
-   <!-- Information: properties -->
-   <div *ngIf="displayedInformation == 0">
-      <table class="properties-table" rules="all">
-         <ng-container>
-            <tr *ngFor="let propertyTypes of propertyTypes; let i = index;">
-               <td class="properties-table-row properties-first-column">{{ propertyTypes }}</td>
-               <td class="properties-table-row properties-second-column">{{ propertyValues[i] }}</td>
-            </tr>
-         </ng-container>
-      </table>
-   </div>
-
-   <!-- Information: factory numbers-->
-   <div *ngIf="displayedInformation == 1">
-      <table class="factory-numbers-table">
-         <ng-container *ngFor="let factoryNumberCode of factoryNumberCodes; let i = index;">
-            <tr>
-               <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumberCode }}</td>
-               <td class="factory-numbers-table-row factory-numbers-second-column">{{ factoryNumberBrands[i] }}</td>
-            </tr>
-         </ng-container>
-      </table>
-   </div>
-
-</mat-card>
+</div>
 
 <div *ngIf="currentProduct" id="imageModal" class="modal">
    <mat-icon class="modal-white-icon modal-close-icon" (click)="closeImageModal()">close</mat-icon>

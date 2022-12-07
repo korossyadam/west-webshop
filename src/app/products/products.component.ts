@@ -32,8 +32,6 @@ export class ProductsComponent implements OnInit {
       let clickedCategory = this.route.snapshot.paramMap.get('specialCategory');
       let searchedPartNumber = this.route.snapshot.paramMap.get('partNumber');
 
-      console.log(searchedPartNumber);
-
       if (searchedCategory) {
          let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
 
@@ -49,7 +47,8 @@ export class ProductsComponent implements OnInit {
             this.products.push(newProduct);
          }
       } else if (clickedCategory) {
-         this.productsService.getProductsBySpecialCategory(parseInt(searchedCategory)).subscribe(data => {
+         console.log(clickedCategory);
+         this.productsService.getProductsBySpecialCategory(parseInt(clickedCategory)).subscribe(data => {
             this.products = data;
          })
       } else if (searchedPartNumber) {

@@ -72,7 +72,7 @@ export class AdminComponent implements OnInit {
 
     // Upload the actual Product
     let productToUpload = new Product(partNumber, name, description, [], parseInt(specialCategory), brand, price, [], [], parseInt(stock), returnable, imgUrls, []);
-    this.adminService.addProduct(productToUpload).then(res => {
+    this.adminService.addProduct(Object.assign({}, productToUpload)).then(res => {
       this.showSnackBar('A termék sikeresen fel lett töltve!', 'Bezár', 4000);
     });
 

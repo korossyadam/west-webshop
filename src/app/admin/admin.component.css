@@ -1,11 +1,11 @@
 .content-container {
-   position: absolute;
    width: 100%;
    margin: 0 auto;
 }
 
 .content-inner-container {
    width: 1600px;
+   min-height: 600px;
    margin: 0 auto;
    margin-top: 50px;
 }
