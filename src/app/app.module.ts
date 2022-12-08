@@ -50,6 +50,7 @@ import { ProductComponent } from './product/product.component';
 import { FeaturedComponent } from './featured/featured.component';
 import { AdminComponent } from './admin/admin.component';
 import { Categories2Component } from './categories2/categories2.component';
+import { AdminGuard } from './services/admin.guard';
 
 
 @NgModule({

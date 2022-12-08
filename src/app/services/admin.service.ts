@@ -14,6 +14,15 @@ export class AdminService {
 
   constructor(private afs: AngularFirestore, private db: AngularFireDatabase, private afbs: AngularFireStorage) { }
 
+  // Attempt login (for guard)
+  getAdminId(id: string) {
+    return this.afs.collection('safeConfig', ref => {
+      let query: CollectionReference | Query = ref;
+      query = query.where('adminId', '==', id).limit(10);
+      return query;
+    }).valueChanges();
+  }
+
   // Upload an image
   async uploadImage(imagePath: string) {
     var ref = 'products/' + Math.random() + imagePath;
@@ -68,7 +77,7 @@ export class AdminService {
    * @param offer The Offer with its new variables
    * @returns Promise
    */
-   updateOffer(offer: Offer): Promise<void> {
+  updateOffer(offer: Offer): Promise<void> {
     return this.afs.doc('offers/' + offer['id']).update(offer);
   }
 
@@ -105,5 +114,4 @@ export class AdminService {
       return query;
     }).valueChanges() as Observable<Order[]>;
   }
-  
 }

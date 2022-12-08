@@ -9,13 +9,13 @@ import { UtilsService } from './utils.service';
 export class AuthGuardService implements CanActivate {
 
    // Static functions
-   getName = this.utilsService.getName;
+   getEmail = this.utilsService.getEmail;
 
    constructor(private utilsService: UtilsService, private router: Router) { }
 
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
       let isLoggedIn: boolean = false;
-      if (this.getName() != '')
+      if (this.getEmail() != '')
          isLoggedIn = true;
 
       if (isLoggedIn) {
