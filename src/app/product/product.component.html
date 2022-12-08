@@ -14,7 +14,13 @@
          <mat-card class="product-container">
 
             <!-- Back button -->
-            <p class="back-button" (click)="navigateBack()">Vissza</p>
+            <div class="back-container" (click)="navigateBack()">
+               <button mat-icon-button class="back-icon">
+                  <mat-icon>arrow_back_ios</mat-icon>
+               </button>
+               <p class="back-text">Vissza</p>
+            </div>
+           
 
             <div *ngIf="currentProduct">
                <div *ngIf="currentProduct.imgurls.length > 1" class="image-selector-container">
@@ -25,7 +31,8 @@
 
                <!-- Product image -->
                <div class="product-img-container">
-                  <img class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
+                  <img *ngIf="selectedImageUrl != ''" class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
+                  <img *ngIf="selectedImageUrl == ''" class="product-img no-img" src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png">
                </div>
 
                <!-- Product info-->
@@ -133,8 +140,14 @@
 </div>
 
 <div *ngIf="currentProduct" id="imageModal" class="modal">
+   
+   <div class="modal-img-container">
+      <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex > 0" class="modal-white-icon modal-arrow-icon back" (click)="previousModalImage()">arrow_back_ios</mat-icon>
+      <img [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="modal-img">
+      <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex+1 < currentProduct.imgurls.length" class="modal-white-icon modal-arrow-icon forward" (click)="nextModalImage()">arrow_forward_ios</mat-icon>
+   </div>
+
+   
    <mat-icon class="modal-white-icon modal-close-icon" (click)="closeImageModal()">close</mat-icon>
-   <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex > 0" class="modal-white-icon modal-arrow-icon" (click)="previousModalImage()">arrow_back_ios</mat-icon>
-   <img [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="modal-img">
-   <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex+1 < currentProduct.imgurls.length" class="modal-white-icon modal-arrow-icon" (click)="nextModalImage()">arrow_forward_ios</mat-icon>
+   
 </div>

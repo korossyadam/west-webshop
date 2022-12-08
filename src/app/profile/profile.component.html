@@ -68,7 +68,7 @@
                </table>
 
                <!-- No orders yet text -->
-               <div *ngIf="currentUser && orders.length < 1">
+               <div *ngIf="currentUser && orders && orders.length < 1">
                   Nincsen korábbi rendelésed.
                </div>
             </div>
@@ -180,12 +180,12 @@
                   <tbody>
                      <tr *ngFor="let car of cars; let i = index;" class="car-row">
                         <div class="garage-car-container" [routerLink]="['/car', car.carIndex]">
-                           <td>{{ (i+1) }}.</td>
-                           <td>{{ car.brand }}</td>
-                           <td>{{ car.chassis }}</td>
-                           <td>{{ car.year }}</td>
-                           <td>{{ car.engine }}</td>
-                           <td>{{ car.engineCode }}</td>
+                           <td class="garage-index">{{ (i+1) }}.</td>
+                           <td class="garage-brand">{{ car.brand }}</td>
+                           <td class="garage-chassis text-limit">{{ car.chassis }}</td>
+                           <td class="garage-year">{{ car.year }}</td>
+                           <td class="garage-engine text-limit">{{ car.engine }}</td>
+                           <td class="garage-engine-code text-limit">{{ car.engineCode }}</td>
                         </div>
                         <td>
                            <mat-icon class="garage-delete-icon" (click)="removeGarageCar(car)">close</mat-icon>

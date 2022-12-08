@@ -28,13 +28,31 @@
 }
 
 /* Global back button */
-.back-button {
+.back-container {
+   position: absolute;
    font-size: 16px;
    color: #444444;
    cursor: pointer;
-   position: absolute;
-   top: -30px;
+   top: -35px;
    left: 0px;
+   transition: 0.25s;
+}
+
+.back-container:hover {
+   color: var(--color-primary);
+   transition: 0.25s;
+}
+
+.back-icon {
+   float: left;
+   transform: scale(0.7);
+}
+
+.back-text {
+   float: right;
+   margin-top: 8px;
+   margin-left: -10px;
+   margin-bottom: 0;
 }
 
 .back-button:hover {

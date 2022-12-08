@@ -13,7 +13,6 @@
 
 .title {
    display: inline-block;
-   font-family: 'Roboto', sans-serif;
    font-weight: 600;
    font-size: 20px;
    line-height: 10%;
@@ -21,6 +20,11 @@
 
 .buttons-container {
    float: right;
+}
+
+.navigation-icon-container {
+   color: #333333;
+   transition: 0.25s;
 }
 
 .navigation-icon {
@@ -85,32 +89,43 @@
 
 .product-partnumber {
    width: fit-content;
-   font-family: 'Roboto', sans-serif;
    line-height: 10%;
    font-size: 12px;
    color: #828282;
    cursor: pointer;
+   white-space: nowrap;
+   transition: 0.25s;
 }
 
 .product-name {
    width: fit-content;
-   font-family: 'Roboto', sans-serif;
    line-height: 30%;
    cursor: pointer;
    color: #555555;
+   white-space: nowrap;
+   transition: 0.25s;
 }
 
 .product-price {
-   font-family: 'Roboto', sans-serif;
    line-height: 110%;
-   font-weight: 500;
-   color: #333333;
+   font-weight: 600;
+   color: var(--color-primary);
 }
 
-.shopping-cart {
+.shopping-cart-button {
    margin: 25px 10px 0px 0px;
    float: right;
    color: #333333;
+   transition: 0.25s;
+}
+
+.navigation-icon-container:hover,
+.product-partnumber:hover,
+.product-name:hover,
+.shopping-cart-button:hover {
+   color: var(--color-primary);
+   transition: 0.25s;
+
 }
 
 .notransition {
@@ -118,4 +133,4 @@
    -moz-transition: none !important;
    -o-transition: none !important;
    transition: none !important;
- }
+}

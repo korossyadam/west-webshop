@@ -9,12 +9,19 @@ import { Product } from "../models/product.model";
 })
 export class UtilsService {
 
+  // Globally accessed sidenav variables
+  public openSidenavEvent: EventEmitter<any> = new EventEmitter();
+
   // Globally accessed cart variables
   public cartUpdated: EventEmitter<any[]> = new EventEmitter();
   public cartItems = [];
   public total: number = 0;
 
   constructor(public sanitizer: DomSanitizer, private _snackBar: MatSnackBar) { }
+
+  openSidenav(): void {
+    this.openSidenavEvent.emit();
+  }
 
   /**
    * Adds a Product to the cart

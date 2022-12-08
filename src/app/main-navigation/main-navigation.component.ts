@@ -45,7 +45,11 @@ export class MainNavigationComponent implements OnInit {
     * Calls the sidenav's open() method
     */
    onCarSelectorButtonClick(): void {
-      this.carSelectClickedEvent.emit(true);
+      if (this.getEmail() == '') {
+         this.showSnackBar('Ennek a funkciónak a használatához be kell jelentkezned!', 'Bezárás', 4000);
+      } else {
+         this.carSelectClickedEvent.emit(true);
+      }
    }
 
    searchForProduct(searchedText): void {

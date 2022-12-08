@@ -121,7 +121,7 @@ export class ProductsComponent implements OnInit {
             case 'brand':
                return this.compare(a.brand, b.brand, isAsc);
             case 'price':
-               return this.compare(a.price, b.price, isAsc);
+               return this.compare(parseInt(a.price), parseInt(b.price), isAsc);
             case 'stock':
                return this.compare(a.stock, b.stock, isAsc);
             default:

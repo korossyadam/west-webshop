@@ -6,12 +6,12 @@
 
       <!-- Back Button -->
       <div class="buttons-container">
-         <button mat-icon-button (click)="moveSlider(true)">
+         <button mat-icon-button class="navigation-icon-container" (click)="moveSlider(true)">
             <mat-icon class="navigation-icon">arrow_back_ios</mat-icon>
          </button>
 
          <!-- Forward Button -->
-         <button mat-icon-button (click)="moveSlider(false)">
+         <button mat-icon-button class="navigation-icon-container" (click)="moveSlider(false)">
             <mat-icon class="navigation-icon">arrow_forward_ios</mat-icon>
          </button>
       </div>
@@ -35,8 +35,8 @@
 
          <!-- Info below product image -->
          <div class="product-info-container">
-            <button mat-icon-button class="shopping-cart">
-               <mat-icon>shopping_cart</mat-icon>
+            <button mat-icon-button class="shopping-cart-button">
+               <mat-icon class="shopping-cart material-icons-outlined">shopping_cart</mat-icon>
             </button>
             <p class="product-partnumber" [routerLink]="['/product', product.partNumber]">{{ product.partNumber }}</p>
             <p class="product-name" [routerLink]="['/product', product.partNumber]">{{ product.name }}</p>

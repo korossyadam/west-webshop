@@ -15,14 +15,12 @@
    position: absolute;
    top: 40px;
    font-size: 20px;
-   font-family: 'Roboto', sans-serif;
    color: white;
 }
 
 .label-small {
    position: absolute;
    font-size: 14px;
-   font-family: 'Roboto', sans-serif;
    font-weight: bold;
    color: #7a7a7a;
 }
@@ -30,7 +28,6 @@
 .data {
    position: absolute;
    font-size: 14px;
-   font-family: 'Roboto', sans-serif;
    font-weight: bold;
    color: white;
 }
@@ -112,7 +109,6 @@
    top: 100px;
    left: 79%;
    font-size: 14px;
-   font-family: 'Roboto', sans-serif;
    font-weight: bold;
    color: #7a7a7a;
 }
@@ -126,7 +122,6 @@
    top: 130px;
    left: 79%;
    font-size: 14px;
-   font-family: 'Roboto', sans-serif;
    font-weight: bold;
    color: #7a7a7a;
 }

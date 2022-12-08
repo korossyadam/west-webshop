@@ -6,6 +6,7 @@ import { Car } from '../models/car.model';
 import { MatSidenav } from '@angular/material/sidenav';
 import { first } from 'rxjs/operators';
 import { Product } from '../models/product.model';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
    selector: 'app-car-selector',
@@ -55,7 +56,7 @@ export class CarSelectorComponent implements OnInit {
 
    public loading = false;
 
-   constructor(private carSelectorService: CarSelectorService, private cdr: ChangeDetectorRef) { }
+   constructor(private utilsService: UtilsService, private carSelectorService: CarSelectorService, private cdr: ChangeDetectorRef) { }
 
    // KeyBoardListener - we use this to close all sidenavs with ESCAPE
    @HostListener('document:keyup', ['$event'])
@@ -67,6 +68,10 @@ export class CarSelectorComponent implements OnInit {
 
    ngOnInit(): void {
       this.listElements = this.brands;
+
+      this.utilsService.openSidenavEvent.subscribe(res => {
+         this.openSideNav();
+      })
    }
 
    /**

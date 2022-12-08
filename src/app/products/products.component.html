@@ -67,8 +67,8 @@
           <!-- Product stock -->
           <td>
             <div *ngIf="product.stock > 0">
-              <p *ngIf="product.stock > 5" class="in-stock">Raktáron (5+)</p>
-              <p *ngIf="product.stock <= 5" class="in-stock">Raktáron ({{ product.stock }})</p>
+              <p *ngIf="product.stock > 10" class="in-stock">Raktáron (10+)</p>
+              <p *ngIf="product.stock <= 10" class="in-stock">Raktáron ({{ product.stock }})</p>
             </div>
             <p *ngIf="product.stock <= 0" class="out-of-stock">Nincs raktáron</p>
           </td>

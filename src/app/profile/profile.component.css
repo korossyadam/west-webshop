@@ -7,6 +7,7 @@
    width: 940px;
    margin: 0 auto;
    margin-top: 50px;
+   margin-bottom: 230px;
    padding: 15px;
    overflow: hidden;
 }
@@ -267,6 +268,42 @@
    cursor: pointer;
    color: var(--color-primary);
    transition: 0.25s;
+}
+
+/*
+garage-index">{{ (i+1) }}.</td>
+                           <td class="garage-brand">{{ car.brand }}</td>
+                           <td class="garage-chassis">{{ car.chassis }}</td>
+                           <td class="garage-year">{{ car.year }}</td>
+                           <td class="garage-engine text-limit">{{ car.engine }}</td>
+                           <td class="garage-engine-code te
+*/
+
+.garage-index {
+   width: 10px;
+}
+
+.garage-brand {
+   width: 130px;
+}
+
+.garage-chassis {
+   width: 120px;
+   white-space: nowrap;
+}
+
+.garage-year {
+   width: 140px;
+}
+
+.garage-engine, .garage-engine-code {
+   max-width: 50px;
+}
+
+.text-limit {
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
 }
 
 /* Logout styles */

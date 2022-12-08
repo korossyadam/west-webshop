@@ -1,24 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
    selector: 'app-home',
    templateUrl: './home.component.html',
    styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-   constructor() { }
-
-   ngOnInit(): void {
-
-   }
+   constructor(private utilsService: UtilsService) { }
 
    onCarSelectorButtonClick(): void {
-      // Event emit here
-   }
-
-   onOfferButtonClick(): void {
-      // Routing logic here
+      this.utilsService.openSidenav();
    }
 
 }

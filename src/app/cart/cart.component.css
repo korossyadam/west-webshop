@@ -1,6 +1,6 @@
 .content-container {
    width: 100%;
-   min-height: 500px;
+   min-height: 600px;
    margin: 0 auto;
 }
 
@@ -8,6 +8,7 @@
    width: 1200px;
    margin: 0 auto;
    margin-top: 50px;
+   margin-bottom: 230px;
 }
 
 .stepper {
