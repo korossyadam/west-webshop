@@ -298,6 +298,12 @@ nav ul ul ul div {
    float: right;
 }
 
+.cart-product-list-container {
+   max-height: 300px;
+   overflow-y: auto;
+   overflow-x: hidden;
+}
+
 .cart-product-container {
    position: relative;
    width: 100%;

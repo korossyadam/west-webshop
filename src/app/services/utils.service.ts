@@ -1,12 +1,18 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { EventEmitter } from "@angular/core";
 import { Product } from "../models/product.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
+
+  // Globally accessed cart variables
+  public cartUpdated: EventEmitter<any[]> = new EventEmitter();
+  public cartItems = [];
+  public total: number = 0;
 
   constructor(public sanitizer: DomSanitizer, private _snackBar: MatSnackBar) { }
 
@@ -49,6 +55,55 @@ export class UtilsService {
     }
 
     localStorage.setItem('cart', JSON.stringify(currentCart));
+
+    this.refreshCart();
+    this.openSnackBar("A(z) '" + productToAdd.partNumber + "' termék sikeresen a kosárhoz lett adva.", 'Bezárás', 4000);
+  }
+
+  /**
+    * Refreshes the global cartItems variable
+    * Emits an event to notify all components using this public cart
+    */
+  refreshCart(): void {
+    this.cartItems = [];
+    this.total = 0;
+
+    let localStorageCart = localStorage.getItem('cart');
+    if (localStorageCart) {
+      this.cartItems = JSON.parse(localStorageCart);
+    }
+
+    this.calculateTotal();
+    if (this.cartUpdated)
+      this.cartUpdated.emit(this.cartItems);
+  }
+
+  /**
+     * Deletes an item from the cart
+     * Modifies both cartItems[], and localStorage cart
+     * 
+     * @param index The index of the Product to remove in cartItems[]
+     */
+  deleteCartItem(index: number): void {
+    this.cartItems.splice(index, 1);
+    this.calculateTotal();
+
+    localStorage.setItem('cart', JSON.stringify(this.cartItems));
+  }
+
+  /**
+   * Calculates the total of the order
+   * Needs to be re-calculated every time the cart changes
+   * 
+   * @returns The newly calculated total
+   */
+  calculateTotal(): number {
+    this.total = 0;
+    for (let i = 0; i < this.cartItems.length; i++) {
+      this.total += this.cartItems[i].price * this.cartItems[i].quantity;
+    }
+
+    return this.total;
   }
 
   /**

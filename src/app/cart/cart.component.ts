@@ -18,7 +18,12 @@ export class CartComponent implements OnInit {
    firstFormGroup: FormGroup;
    secondFormGroup: FormGroup;
 
+   // Static variables
+   globalCartItems = this.utilsService.cartItems;
+
    // Static functions
+   refreshCart = this.utilsService.refreshCart;
+   calculateTotal = this.utilsService.calculateTotal;
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    sanitize = this.utilsService.sanitize;
@@ -60,21 +65,20 @@ export class CartComponent implements OnInit {
          secondCtrl: ['', Validators.required],
       });
 
-      this.fillCart();
-      this.calculateTotal();
+      this.utilsService.cartUpdated.subscribe(newCartData => {
+         this.cartItems = newCartData;
+         this.calculateTotalWithShipping();
+         
+      })
+
+      this.refreshCart();
+      this.disableInitialLoading();
    }
 
    /**
-    * Populates cartItems array from localStorage
+    * Disables mat-spinner after a set time (ex.: 1000 ms)
     */
-   async fillCart(): Promise<void> {
-      this.cartItems = [];
-
-      let localStorageCart = localStorage.getItem('cart');
-      if (localStorageCart) {
-         this.cartItems = JSON.parse(localStorageCart);
-      }
-
+   async disableInitialLoading(): Promise<void> {
       await new Promise(resolve => setTimeout(resolve, 1000));
       this.initialLoading = false;
    }
@@ -83,7 +87,7 @@ export class CartComponent implements OnInit {
     * Calculates the total of the order
     * Needs to be re-calculated every time the cart changes (including shipping and payment info)
     */
-   calculateTotal(): number {
+   calculateTotalWithShipping(): number {
       this.deliveryPrice = 0;
       this.total = 0;
 
@@ -115,8 +119,17 @@ export class CartComponent implements OnInit {
       if (parseInt(element.value) >= 7)
          return;
 
+      // Increment input value
       element.value = (parseInt(element.value) + 1).toString();
+
+      // Update JSON is localStorage
+      this.cartItems = JSON.parse(localStorage.getItem('cart'));
       this.cartItems[cartIndex].quantity += 1;
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+
+      // Emit event to utilsService
+      this.refreshCart();
+      this.utilsService.cartUpdated.emit(this.cartItems);
    }
 
    /**
@@ -131,8 +144,17 @@ export class CartComponent implements OnInit {
       if (parseInt(element.value) <= 1)
          return;
 
+      // Decrement input value
       element.value = (parseInt(element.value) - 1).toString();
+
+      // Update JSON is localStorage
+      this.cartItems = JSON.parse(localStorage.getItem('cart'));
       this.cartItems[cartIndex].quantity -= 1;
+      localStorage.setItem('cart', JSON.stringify(this.cartItems));
+
+      // Emit event to utilsService
+      this.refreshCart();
+      this.utilsService.cartUpdated.emit(this.cartItems);
    }
 
    /**
@@ -146,6 +168,10 @@ export class CartComponent implements OnInit {
       this.calculateTotal();
 
       localStorage.setItem('cart', JSON.stringify(this.cartItems));
+
+      // Emit event to utilsService
+      this.refreshCart();
+      this.utilsService.cartUpdated.emit(this.cartItems);
    }
 
    /**

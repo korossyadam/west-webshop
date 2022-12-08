@@ -94,7 +94,6 @@ export class ProductsComponent implements OnInit {
       let quantity = quantityInput.value;
 
       this.utilsService.addProductToCart(productToAdd, parseInt(quantity));
-      this.utilsService.openSnackBar('Termék sikeresen a kosárhoz adva!', 'Bezárás', 4000);
    }
 
    /**

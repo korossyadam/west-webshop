@@ -3,7 +3,6 @@ export class Product {
    public name: string;
    public description: string;
    public categories: string[];
-   public secondCategory: string;
    public specialCategory: number;
    public brand: string;
    public price: string;
@@ -29,9 +28,8 @@ export class Product {
       this.imgurls = imgurls;
       this.carIndexes = carIndexes;
 
-      this.secondCategory = this.categories[1];
-      if (this.secondCategory === undefined) {
-         this.secondCategory = '';
+      if (this.price == '-') {
+         this.price = '990';
       }
    }
 

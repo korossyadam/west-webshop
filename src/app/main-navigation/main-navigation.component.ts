@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { UtilsService } from '../services/utils.service';
 
@@ -13,6 +14,9 @@ export class MainNavigationComponent implements OnInit {
    @Output() carSelectClickedEvent = new EventEmitter<boolean>();
 
    // Static functions
+   refreshCart = this.utilsService.refreshCart;
+   calculateTotal = this.utilsService.calculateTotal;
+   deleteCartItem = this.utilsService.deleteCartItem;
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    sanitize = this.utilsService.sanitize;
@@ -20,30 +24,21 @@ export class MainNavigationComponent implements OnInit {
    getEmail = this.utilsService.getEmail;
    showSnackBar = this.utilsService.openSnackBar;
    
-   public cartItems = [];
-   public total: number;
-
    public searchedText: string;
+
+   public ob = of(this.utilsService.cartItems);
+   public cartItems = [];
+   public total = 0;
 
    constructor(private utilsService: UtilsService, private authService: AuthService, private route: Router) { }
 
    ngOnInit(): void {
-      this.fillCart();
-   }
+      this.utilsService.cartUpdated.subscribe(newCartData => {
+         this.cartItems = newCartData;
+         this.total = this.calculateTotal();
+      })
 
-   /**
-    * Populates cartItems array from localStorage
-    */
-   fillCart(): void {
-      this.cartItems = [];
-      this.total = 0;
-
-      let localStorageCart = localStorage.getItem('cart');
-      if (localStorageCart) {
-         this.cartItems = JSON.parse(localStorageCart);
-      }
-
-      this.calculateTotal();
+      this.refreshCart();
    }
 
    /**
@@ -51,30 +46,6 @@ export class MainNavigationComponent implements OnInit {
     */
    onCarSelectorButtonClick(): void {
       this.carSelectClickedEvent.emit(true);
-   }
-
-   /**
-    * Calculates the total of the order
-    * Needs to be re-calculated every time the cart changes
-    */
-    calculateTotal(): void {
-      this.total = 0;
-      for (let i = 0; i < this.cartItems.length; i++) {
-         this.total += this.cartItems[i].price * this.cartItems[i].quantity;
-      }
-   }
-
-   /**
-    * Deletes an item from the cart
-    * Modifies both cartItems[], and localStorage cart
-    * 
-    * @param index The index of the Product to remove in cartItems[]
-    */
-    deleteCartItem(index: number): void {
-      this.cartItems.splice(index, 1);
-      this.calculateTotal();
-
-      localStorage.setItem('cart', JSON.stringify(this.cartItems));
    }
 
    searchForProduct(searchedText): void {
