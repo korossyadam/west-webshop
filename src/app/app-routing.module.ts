@@ -27,8 +27,8 @@ const routes: Routes = [
   { path: 'products/:category', component: ProductsComponent },
   { path: 'products/:searchedCategory', component: ProductsComponent },
   { path: 'product/:partNumber', component: ProductComponent },
-  { path: 'categories', component: CategoriesComponent },
-  { path: 'categories2', component: Categories2Component },
+  { path: 'categories/:category', component: CategoriesComponent },
+  { path: 'categories2/:category', component: Categories2Component },
   { path: 'admin', component: AdminComponent },
 ];
 

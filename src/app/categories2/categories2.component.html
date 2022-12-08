@@ -1,13 +1,14 @@
 
 <div class="content-container">
 
+   <p class="title">Egyéb termékeink</p>
    <table class="table">
       <tbody>
          <tr>
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 0">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 0}">
                      <div class="category-title-container">
                         <p>AUTÓÁPOLÁS</p>
                      </div>
@@ -19,7 +20,7 @@
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 1">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 1}">
                      <div class="category-title-container">
                         <p>BELTÉR</p>
                      </div>
@@ -32,7 +33,7 @@
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 2">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 2}">
                      <div class="category-title-container">
                         <p>KÜLTÉR</p>
                      </div>
@@ -45,7 +46,7 @@
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 3">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 3}">
                      <div class="category-title-container">
                         <p>FOLYADÉKOK</p>
                      </div>
@@ -60,58 +61,59 @@
       </tbody>
    </table>
 
-   
-
+   <!-- Show selected categories below -->
    <div>
 
       <!-- Car care -->
       <mat-card *ngIf="selectedCategoryIndex == 0" class="categories-container">
          <ul>
-            <li>Ablaktisztítás</li>
-            <li>Kefék törlőkendők</li>
-            <li>Motorblokk tisztítás</li>
-            <li>Felni tisztítás</li>
-            <li>Polírozás</li>
+            <li [routerLink]="['/products', { specialCategory: 0 }]">Ablaktisztítás</li>
+            <li [routerLink]="['/products', { specialCategory: 1 }]">Kefék törlőkendők</li>
+            <li [routerLink]="['/products', { specialCategory: 2 }]">Motorblokk tisztítás</li>
+            <li [routerLink]="['/products', { specialCategory: 3 }]">Felni tisztítás</li>
+            <li [routerLink]="['/products', { specialCategory: 4 }]">Polírozás</li>
          </ul>
       </mat-card>
 
       <!-- Interior -->
       <mat-card *ngIf="selectedCategoryIndex == 1" class="categories-container">
          <ul>
-            <li>Üléshuzatok</li>
-            <li>Kormányvédők</li>
-            <li>Autószőnyegek</li>
-            <li>Szivargyújtó</li>
-            <li>Illatosítók</li>
-            <li>Belső ventilátorok</li>
+            <li [routerLink]="['/products', { specialCategory: 5 }]">Üléshuzatok</li>
+            <li [routerLink]="['/products', { specialCategory: 6 }]">Kormányvédők</li>
+            <li [routerLink]="['/products', { specialCategory: 7 }]">Autószőnyegek</li>
+            <li [routerLink]="['/products', { specialCategory: 8 }]">Szivargyújtó</li>
+            <li [routerLink]="['/products', { specialCategory: 9 }]">Illatosítók</li>
+            <li [routerLink]="['/products', { specialCategory: 10 }]">Belső ventilátorok</li>
          </ul>
       </mat-card>
 
       <!-- Exterior -->
       <mat-card *ngIf="selectedCategoryIndex == 2" class="categories-container">
          <ul>
-            <li>Ablaktörlő lapátok</li>
-            <li>Hátsó lámpák</li>
-            <li>Gumilámpák, izzós</li>
-            <li>Gumilámpák, LED</li>
-            <li>Helyzetjelzők izzós</li>
-            <li>Helyzetjelzők, LED</li>
-            <li>Munkalámpák, izzós</li>
-            <li>Munkalámpák, LED</li>
-            <li>Megkülönböztető lámpák, izzós</li>
-            <li>Megkülönböztető lámpák, LED</li>
+            <li [routerLink]="['/products', { specialCategory: 11 }]">Ablaktörlő lapátok</li>
+            <li [routerLink]="['/products', { specialCategory: 12 }]">Hátsó lámpák</li>
+            <li [routerLink]="['/products', { specialCategory: 13 }]">Gumilámpák, izzós</li>
+            <li [routerLink]="['/products', { specialCategory: 14 }]">Gumilámpák, LED</li>
+            <li [routerLink]="['/products', { specialCategory: 15 }]">Helyzetjelzők izzós</li>
+            <li [routerLink]="['/products', { specialCategory: 16 }]">Helyzetjelzők, LED</li>
+            <li [routerLink]="['/products', { specialCategory: 17 }]">Munkalámpák, izzós</li>
+            <li [routerLink]="['/products', { specialCategory: 18 }]">Munkalámpák, LED</li>
+            <li [routerLink]="['/products', { specialCategory: 19 }]">Megkülönböztető lámpák, izzós</li>
+            <li [routerLink]="['/products', { specialCategory: 20 }]">Megkülönböztető lámpák, LED</li>
+            <li [routerLink]="['/products', { specialCategory: 21 }]">Dísztárcsák</li>
+            <li [routerLink]="['/products', { specialCategory: 22 }]">Tanksapkák</li>
+            <li [routerLink]="['/products', { specialCategory: 23 }]">Rendszámtábla tartók</li>
+            <li [routerLink]="['/products', { specialCategory: 24 }]">Fényvisszaverők</li>
          </ul>
       </mat-card>
 
       <!-- Fluids -->
       <mat-card *ngIf="selectedCategoryIndex == 3" class="categories-container">
          <ul>
-            <li>Motorolaj</li>
-            <li>Hajtómű olaj</li>
-            <li>Hidraulika olaj</li>
-            <li>Fagyálló</li>
-            <li>Nyári ablakmosó folyadék</li>
-            <li>Téli ablakmosó folyadék</li>
+            <li [routerLink]="['/products', { specialCategory: 25 }]">Hajtómű olaj</li>
+            <li [routerLink]="['/products', { specialCategory: 26 }]">Fagyálló</li>
+            <li [routerLink]="['/products', { specialCategory: 27 }]">Nyári ablakmosó folyadék</li>
+            <li [routerLink]="['/products', { specialCategory: 28 }]">Téli ablakmosó folyadék</li>
          </ul>
       </mat-card>
 

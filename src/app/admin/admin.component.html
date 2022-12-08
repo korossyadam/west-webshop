@@ -1,6 +1,26 @@
 <div class="content-container">
    <div class="content-inner-container">
-      <button mat-raised-button color="primary" (click)="openNewProductDialog()">Új termék hozzáadása</button>
+
+      <mat-card class="product-card">
+
+         <!-- Add Products -->
+         <p>Termék hozzáadása</p>
+         <button mat-raised-button color="primary" (click)="openProductDialog()">Új termék hozzáadása</button>
+
+         <!-- Update Products -->
+         <p>Termék frissítése</p>
+         <div class="update-button-container">
+            <input placeholder="A termék pontos cikkszáma" #updatePartNumber>
+            <button mat-raised-button color="primary" (click)="attemptToOpenUpdateDialog(updatePartNumber.value)">Megnyitás</button>
+         </div>
+
+         <!-- Delete Products -->
+         <p>Termék törlése</p>
+         <div class="update-button-container">
+            <input placeholder="A termék pontos cikkszáma" #deletePartNumber>
+            <button mat-raised-button color="warn" (click)="attemptToOpenDeleteProductDialog(deletePartNumber.value)">Törlés</button>
+         </div>
+      </mat-card>
 
       <!-- Offers section -->
       <mat-card class="offer-card">
@@ -10,15 +30,15 @@
          <mat-form-field appearance="fill" class="datepicker-container" color="primary">
             <mat-label>Keresési intervallum</mat-label>
             <mat-date-range-input [formGroup]="offerRange" [rangePicker]="appointmentPicker">
-               <input matStartDate formControlName="start" placeholder="Start date">
-               <input matEndDate formControlName="end" placeholder="End date">
+               <input matStartDate formControlName="start" placeholder="Kezdő időpont">
+               <input matEndDate formControlName="end" placeholder="Végső időpont">
             </mat-date-range-input>
             <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="appointmentPicker"></mat-datepicker-toggle>
             <mat-date-range-picker #appointmentPicker></mat-date-range-picker>
 
-            <mat-error *ngIf="offerRange.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-            <mat-error *ngIf="offerRange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+            <mat-error *ngIf="offerRange.controls.start.hasError('matStartDateInvalid')">Helytelen kezdő időpont</mat-error>
+            <mat-error *ngIf="offerRange.controls.end.hasError('matEndDateInvalid')">Helytelen végső időpont</mat-error>
          </mat-form-field>
 
          <!-- Checkbox and query button -->
@@ -64,22 +84,81 @@
 
       </mat-card>
 
+      <!-- Orders section -->
+      <mat-card class="order-card">
+         <p>Rendelések</p>
+
+         <!-- Date picker -->
+         <mat-form-field appearance="fill" class="datepicker-container" color="primary">
+            <mat-label>Keresési intervallum</mat-label>
+            <mat-date-range-input [formGroup]="offerRange" [rangePicker]="orderPicker">
+               <input matStartDate formControlName="start" placeholder="Kezdő időpont">
+               <input matEndDate formControlName="end" placeholder="Végső időpont">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="orderPicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #orderPicker></mat-date-range-picker>
+
+            <mat-error *ngIf="orderRange.controls.start.hasError('matStartDateInvalid')">Helytelen kezdő időpont</mat-error>
+            <mat-error *ngIf="orderRange.controls.end.hasError('matEndDateInvalid')">Helytelen végső időpont</mat-error>
+         </mat-form-field>
+
+         <!-- Query button -->
+         <div class="offer-input-container">
+            <button mat-raised-button class="offer-query-button" color="primary" (click)="queryForOrders(orderRange.value['start'], orderRange.value['end'])">Lekérdezés</button>
+         </div>
+
+         <!-- Order table -->
+         <table mat-table [dataSource]="orders" class="offer-table">
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+               <th mat-header-cell *matHeaderCellDef>Dátum</th>
+               <td mat-cell *matCellDef="let element">{{ element.date.toDate().toLocaleString() }}</td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+               <th mat-header-cell *matHeaderCellDef>E-mail cím</th>
+               <td mat-cell *matCellDef="let element">{{ element.shippingAddress.email }}</td>
+            </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+               <th mat-header-cell *matHeaderCellDef>Végösszeg</th>
+               <td mat-cell *matCellDef="let element">{{ formatPrice(addTax(element.totalPrice)) }}</td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+               <th mat-header-cell *matHeaderCellDef>Megnyitás</th>
+               <td mat-cell *matCellDef="let element">
+                  <button mat-raised-button color="primary" (click)="openOrderDialog(element)">Megnyitás</button>
+               </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="orderColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: orderColumns;"></tr>
+         </table>
+      </mat-card>
+
    </div>
 </div>
 
 <!-- Dialog that opens when we want to upload a new Product -->
-<ng-template #newProductDialogRef>
-   <p class="dialog-title">Új termék hozzáadása</p>
+<ng-template #newProductDialogRef let-product>
+   <p *ngIf="product" class="dialog-title">Termék módosítása</p>
+   <p *ngIf="!product" class="dialog-title">Új termék hozzáadása</p>
    <mat-divider class="dialog-divider"></mat-divider>
 
    <!-- Body -->
-   <input placeholder="Cikkszám" #partNumber>
-   <input placeholder="Név" #name>
-   <input placeholder="Leírás" #description>
-   <input placeholder="Márka" #brand>
-   <input placeholder="Nettó ár" #price>
-   <input placeholder="Raktár mennyisége" #stock>
-   <select #specialCategory>
+   <input placeholder="Cikkszám" [value]="product ? product.partNumber : ''" #partNumber>
+   <input placeholder="Név" [value]="product ? product.name : ''" #name>
+   <input placeholder="Leírás" [value]="product ? product.description : ''" #description>
+   <input placeholder="Márka" [value]="product ? product.brand : ''" #brand>
+   <input placeholder="Nettó ár" [value]="product ? product.price : ''" #price>
+   <input placeholder="Raktár mennyisége" [value]="product ? product.stock : ''" #stock>
+   <select #specialCategory [value]="product ? product.specialCategory : '-1'">
       <option value="-1">Nincs</option>
       <option value="0">Egyéb termékek / Autóápolás / Tisztítás</option>
       <option value="1">Egyéb termékek / Autóápolás / Kefék, törlőkendők</option>
@@ -110,7 +189,7 @@
       <option value="26">Egyéb termékek / Folyadékok / Fagyálló</option>
       <option value="27">Egyéb termékek / Folyadékok / Ablakmosó folyadék / Nyári</option>
       <option value="28">Egyéb termékek / Folyadékok / Ablakmosó folyadék / Téli</option>
-      
+
       <option value="29">Garázs felszerelések / Szerszámok / Kézi szerszámok</option>
       <option value="30">Garázs felszerelések / Szerszámok / Elektromos szerszámok</option>
       <option value="31">Garázs felszerelések / Szerszámok / Mérőeszközök</option>
@@ -125,12 +204,25 @@
       <option value="40">Garázs felszerelések / Univerzális tartozékok / Biztosítékok</option>
       <option value="41">Garázs felszerelések / Univerzális tartozékok / Gyorskötözők</option>
    </select>
-   <mat-checkbox [checked]="true" #returnable>Visszaküldhető</mat-checkbox><br>
+   <mat-checkbox [checked]="product ? product.returnable : true" #returnable>Visszaküldhető</mat-checkbox><br>
    <input type="file" multiple (change)="onFileChange($event)" #images><br>
 
    <!-- Buttons -->
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
-   <button mat-raised-button class="dialog-ok-button" color="primary" (click)="addNewProduct(partNumber.value, name.value, description.value, specialCategory.value, brand.value, price.value, stock.value, returnable.checked)">Termék feltöltése</button>
+   <button *ngIf="!product" mat-raised-button class="dialog-ok-button" color="primary" (click)="addNewProduct(partNumber.value, name.value, description.value, specialCategory.value, brand.value, price.value, stock.value, returnable.checked)">Termék feltöltése</button>
+   <button *ngIf="product" mat-raised-button class="dialog-ok-button" color="primary" (click)="updateProduct(product, product.id, partNumber.value, name.value, description.value, specialCategory.value, brand.value, price.value, stock.value, returnable.checked)">Termék módosítása</button>
+</ng-template>
+
+<!-- Dialog that opens when we want to delete a Product -->
+<ng-template #deleteProductDialogRef let-product>
+   <p class="dialog-title">Termék törlése</p>
+
+   <!-- Body -->
+   <p class="offer-row">Biztosan ki akarod törölni ezt a terméket?</p>
+
+   <!-- Buttons -->
+   <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
+   <button mat-raised-button class="dialog-ok-button" color="warn" mat-dialog-close (click)="deleteProduct(product.id)">Törlés</button>
 </ng-template>
 
 <!-- Dialog that opens when we want to answer an Offer -->
@@ -151,4 +243,98 @@
    <!-- Buttons -->
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
    <button mat-raised-button class="dialog-ok-button" color="primary" mat-dialog-close (click)="answerOffer(offer, answer.value)">Válaszadás</button>
+</ng-template>
+
+<!-- Dialog that opens when inspecting an Order -->
+<ng-template #orderDialogRef let-order>
+   <p class="dialog-title">Rendelés: {{ timestampToDate(order.date).toLocaleString() }}</p>
+   <div *ngIf="order">
+
+      <!-- List all products in the Order-->
+      <table class="table">
+         <thead>
+            <th>Megnevezés</th>
+            <th>Mennyiség</th>
+            <th>Ár</th>
+         </thead>
+
+         <tbody>
+            <tr *ngFor="let product of order.orderedProducts">
+
+               <td class="info-column">
+                  <div class="info-container">
+                     <p [routerLink]="['/product', product.partNumber]" class="part-number" mat-dialog-close>{{ product.partNumber }}</p>
+                     <p class="name">{{ product.name }}</p>
+                     <p class="brand">{{ product.brand }}</p>
+                  </div>
+               </td>
+
+               <td class="amount-column">
+                  <p>{{ product.quantity }} db.</p>
+               </td>
+
+               <td class="price-column">
+                  <div class="price-container">
+                     <p class="price">{{ formatPrice(addTax(product.price)) }}</p>
+                     <p class="net-price">({{ formatPrice(product.price) }} + 27% ÁFA)</p>
+                  </div>
+               </td>
+
+            </tr>
+
+            <tr class="total-row">
+               <td></td>
+               <td></td>
+               <td class="price-column total-column">
+                  <div class="price-container">
+                     <p>Szállítás: {{ formatPrice(order.deliveryPrice) }}</p>
+                     <p>Végösszeg: {{ formatPrice(addTax(order.totalPrice)) }}</p>
+                  </div>
+               </td>
+            </tr>
+
+         </tbody>
+      </table>
+
+      <mat-divider></mat-divider>
+
+      <!-- Other information about the Order-->
+      <div>
+         <div class="quarter-container">
+            <p class="quarter-title">Alap adatok</p>
+            <div class="quarter-text-container">
+               <p>{{ order.shippingAddress.name }}</p>
+               <p>{{ order.shippingAddress.email }}</p>
+               <p>{{ order.shippingAddress.phoneNumber }}</p>
+               <p>{{ order.shippingAddress.address }}</p>
+               <p *ngIf="order.shippingAddress.comment">{{ order.shippingAddress.comment }}</p>
+            </div>
+         </div>
+
+         <div class="quarter-container">
+            <p class="quarter-title">Számlázási adatok</p>
+            <div class="quarter-text-container">
+               <p>{{ order.billingAddress.name }}</p>
+               <p>{{ order.billingAddress.address }}</p>
+               <p *ngIf="order.billingAddress.taxNumber">{{ order.billingAddress.taxNumber }}</p>
+            </div>
+         </div>
+
+         <div class="quarter-container">
+            <p class="quarter-title">Átvétel</p>
+            <div class="quarter-text-container">
+               <p>Házhozszállítás</p>
+            </div>
+         </div>
+
+         <div class="quarter-container">
+            <p class="quarter-title">Fizetés</p>
+            <div class="quarter-text-container">
+               <p>Utánvét</p>
+            </div>
+         </div>
+      </div>
+
+   </div>
+   <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
 </ng-template>

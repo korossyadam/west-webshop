@@ -1,17 +1,17 @@
-
 <div class="content-container">
 
+   <p class="title">Garázs felszerelések</p>
    <table class="table">
       <tbody>
          <tr>
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 0">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 0}">
                      <div class="category-title-container">
                         <p>SZERSZÁMOK</p>
                      </div>
-                     <img src="https://cdn.hiconsumption.com/wp-content/uploads/2021/07/Essential-Tools-For-DIY-Car-Mechanics-0-Hero.jpg"  style="position: relative; top: -20px;" class="main-category-img">
+                     <img src="https://cdn.hiconsumption.com/wp-content/uploads/2021/07/Essential-Tools-For-DIY-Car-Mechanics-0-Hero.jpg" style="position: relative; top: -20px;"  class="main-category-img">
                      <div class="shadow"></div>
                   </div>
                </div>
@@ -19,12 +19,12 @@
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 1">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 1}">
                      <div class="category-title-container">
                         <p>GARÁZS BERENDEZÉSEK</p>
                      </div>
                      
-                     <img src="https://img.freepik.com/premium-photo/car-lifting-equipment-garage-being-repair-fix_103864-175.jpg?w=2000" style="position: relative; top: -50px;" class="main-category-img">
+                     <img src="https://img.freepik.com/premium-photo/car-lifting-equipment-garage-being-repair-fix_103864-175.jpg?w=2000" style="position: relative; top: -50px;"  class="main-category-img">
                      <div class="shadow"></div>
                   </div>
                </div>
@@ -32,12 +32,12 @@
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 2">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 2}">
                      <div class="category-title-container">
                         <p>MUNKAVÉDELMI KELLÉKEK</p>
                      </div>
                      
-                     <img src="https://t4.ftcdn.net/jpg/02/09/17/81/360_F_209178141_PWVPizuCoZWeJ0Oz7ErqRSyInrtre3it.jpg" class="main-category-img">
+                     <img src="https://t4.ftcdn.net/jpg/02/09/17/81/360_F_209178141_PWVPizuCoZWeJ0Oz7ErqRSyInrtre3it.jpg" style="position: relative; top: -20px;" class="main-category-img">
                      <div class="shadow"></div>
                   </div>
                </div>
@@ -45,12 +45,12 @@
 
             <td>
                <div class="main-category-container" (click)="selectedCategoryIndex = 3">
-                  <div class="main-category-inner-container">
+                  <div class="main-category-inner-container" [ngClass]="{'active': selectedCategoryIndex == 3}">
                      <div class="category-title-container">
                         <p>UNIVERZÁLIS TARTOZÉKOK</p>
                      </div>
                      
-                     <img src="https://media.istockphoto.com/id/157614639/photo/mechanical-city-constructional-still-life.jpg?s=612x612&w=0&k=20&c=5E4LMtwkgiHrEUIi6T_ksKQCH-eamkV_ab3gB_DjKRw=" style="position: relative; top: -10px;" class="main-category-img">
+                     <img src="https://media.istockphoto.com/id/157614639/photo/mechanical-city-constructional-still-life.jpg?s=612x612&w=0&k=20&c=5E4LMtwkgiHrEUIi6T_ksKQCH-eamkV_ab3gB_DjKRw=" class="main-category-img">
                      <div class="shadow"></div>
                   </div>
                </div>
@@ -60,14 +60,46 @@
       </tbody>
    </table>
 
-   
-
+   <!-- Show selected categories below -->
    <div>
-      <div *ngIf="selectedCategoryIndex == 0">
-         <p>Szerszámok</p>
-      </div>
-   </div>
 
-   
+      <!-- Tools -->
+      <mat-card *ngIf="selectedCategoryIndex == 0" class="categories-container">
+         <ul>
+            <li [routerLink]="['/products', { specialCategory: 29 }]">Kézi szerszámok</li>
+            <li [routerLink]="['/products', { specialCategory: 30 }]">Elektromos szerszámok</li>
+            <li [routerLink]="['/products', { specialCategory: 31 }]">Mérőeszközök</li>
+         </ul>
+      </mat-card>
+
+      <!-- Garage equipment -->
+      <mat-card *ngIf="selectedCategoryIndex == 1" class="categories-container">
+         <ul>
+            <li [routerLink]="['/products', { specialCategory: 32 }]">Kézhigiénia</li>
+            <li [routerLink]="['/products', { specialCategory: 33 }]">Tisztítás</li>
+            <li [routerLink]="['/products', { specialCategory: 34 }]">Klímaszervíz</li>
+            <li [routerLink]="['/products', { specialCategory: 35 }]">Akkumulátor szervíz</li>
+         </ul>
+      </mat-card>
+
+      <!-- Safety -->
+      <mat-card *ngIf="selectedCategoryIndex == 2" class="categories-container">
+         <ul>
+            <li [routerLink]="['/products', { specialCategory: 36 }]">Ruházat</li>
+            <li [routerLink]="['/products', { specialCategory: 37 }]">Biztonsági felszerelés</li>
+         </ul>
+      </mat-card>
+
+      <!-- Universal -->
+      <mat-card *ngIf="selectedCategoryIndex == 3" class="categories-container">
+         <ul>
+            <li [routerLink]="['/products', { specialCategory: 38 }]">Alátétek</li>
+            <li [routerLink]="['/products', { specialCategory: 39 }]">O-gyűrűk</li>
+            <li [routerLink]="['/products', { specialCategory: 40 }]">Biztosítékok</li>
+            <li [routerLink]="['/products', { specialCategory: 41 }]">Gyorskötözők</li>
+         </ul>
+      </mat-card>
+
+   </div>
 
 </div>

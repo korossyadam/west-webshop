@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Product } from '../models/product.model';
 import { Observable, first, firstValueFrom, map } from 'rxjs';
 import { Offer } from '../models/offer.model';
+import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +46,9 @@ export class AdminService {
     return this.afs.collection('offers', ref => {
       let query: CollectionReference | Query = ref;
       if (unAnsweredOnly) {
-        query = query.orderBy('date').startAt(from).endAt(to).where('answered', '==', false).limit(100);
+        query = query.orderBy('date').startAt(from).endAt(to).where('answered', '==', false).limit(20);
       } else {
-        query = query.orderBy('date').startAt(from).endAt(to).limit(100);
+        query = query.orderBy('date').startAt(from).endAt(to).limit(20);
       }
       return query;
     }).snapshotChanges().pipe(
@@ -67,7 +68,42 @@ export class AdminService {
    * @param offer The Offer with its new variables
    * @returns Promise
    */
-  updateOffer(offer: Offer): Promise<void> {
+   updateOffer(offer: Offer): Promise<void> {
     return this.afs.doc('offers/' + offer['id']).update(offer);
   }
+
+  // Get a single product
+  getSingleProduct(partNumber: string): Observable<Product[]> {
+    return this.afs.collection('products', ref => {
+      let query: CollectionReference | Query = ref;
+      query = query.where('partNumber', '==', partNumber).limit(1);
+      return query;
+    }).snapshotChanges().pipe(
+      map(offers => {
+        return offers.map(o => {
+          const data = o.payload.doc.data() as Product;
+          const id = o.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
+
+  updateProduct(product: Product, uid: string): Promise<void> {
+    return this.afs.collection('products').doc(uid).update(product);
+  }
+
+  deleteProduct(uid: string): Promise<void> {
+    return this.afs.collection('products').doc(uid).delete();
+  }
+
+  // Get Orders
+  getOrders(from: Date, to: Date): Observable<Order[]> {
+    return this.afs.collection('orders', ref => {
+      let query: CollectionReference | Query = ref;
+      query = query.orderBy('date').startAt(from).endAt(to).limit(20);
+      return query;
+    }).valueChanges() as Observable<Order[]>;
+  }
+  
 }

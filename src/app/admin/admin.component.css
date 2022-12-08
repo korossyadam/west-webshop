@@ -10,6 +10,26 @@
    margin-top: 50px;
 }
 
+/* Products styles */
+.product-card {
+   float: left;
+   width: 32%;
+}
+
+.product-card p {
+   margin-bottom: 0;
+   clear: both;
+}
+
+.update-button-container * {
+   float: left;
+   width: 40%;
+}
+
+.update-button-container input {
+   margin-top: 0;
+}
+
 .dialog-title {
    font-size: 20px;
    font-weight: 600;
@@ -29,7 +49,9 @@
    float: right;
 }
 
-input, textarea, select {
+input,
+textarea,
+select {
    margin-left: 0;
 }
 
@@ -45,7 +67,7 @@ input[type='file'] {
 .offer-card {
    float: right;
    width: 1000px;
-   height: 500px;
+   min-height: 219px;
 }
 
 .datepicker-container {
@@ -76,11 +98,104 @@ input[type='file'] {
    text-decoration: underline;
 }
 
-.offer-card input {
+.offer-card input,
+.order-card input {
    width: 100% !important;
    height: auto !important;
    margin: 0 !important;
    padding: 0 !important;
    border: none !important;
    box-shadow: none !important;
+}
+
+/* Order styles */
+.order-card {
+   clear: both;
+   float: left;
+   margin-top: 25px;
+   margin-bottom: 200px;
+   width: calc(100% - 32px);
+}
+
+/* Order modal styles */
+.table {
+   margin-top: 30px;
+   width: 100%;
+}
+
+.table th:nth-child(2),
+.table th:nth-child(1) {
+   text-align: left;
+}
+
+.info-container {
+   line-height: 30%;
+   margin-top: -8px;
+}
+
+.price-container {
+   line-height: 10%;
+   text-align: center;
+   margin-right: 20px;
+   font-weight: 500;
+}
+
+.price {
+   font-size: 18px;
+   color: var(--color-primary);
+   font-weight: 500;
+}
+
+.net-price {
+   color: #666666;
+   font-size: 11px;
+}
+
+.part-number {
+   width: fit-content;
+   font-size: 18px;
+   color: #444444;
+   font-weight: 500;
+   cursor: pointer;
+}
+
+.part-number:hover {
+   color: var(--color-primary);
+}
+
+.name {
+   color: #444444;
+   margin-top: -1px;
+   font-weight: 500;
+}
+
+.brand {
+   font-size: 13px;
+   font-weight: 500;
+   color: #7a7a7a;
+}
+
+.total-row {
+   height: 50px;
+}
+
+.total-column {
+   border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.quarter-container {
+   width: 44%;
+   max-height: 98px;
+   float: left;
+   margin: 20px;
+   text-align: center;
+}
+
+.quarter-title {
+   color: #a6a6a6;
+   margin: 0 0 2px 0;
+}
+
+.quarter-text-container>p {
+   margin: 0;
 }

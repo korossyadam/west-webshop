@@ -33,25 +33,25 @@
             <ul>
                <li><a routerLink="/main">Főoldal</a></li>
 
-               <li><a routerLink="/categories">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></a>
+               <li><a [routerLink]="['/categories', 0]">Garázs felszerelések<mat-icon class="arrow">expand_more</mat-icon></a>
                   <ul>
                      <div>
-                        <li><a routerLink="/categories">Szerszámok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories', 0]">Szerszámok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
                                  <li><a [routerLink]="['products', { specialCategory: 29 }]">Kézi szerszámok</a></li>
                                  <li><a [routerLink]="['products', { specialCategory: 30 }]">Elektromos szerszámok</a></li>
-                                 <li><a [routerLink]="['products', { specialCategory: 32 }]">Mérőeszközök</a></li>
+                                 <li><a [routerLink]="['products', { specialCategory: 31 }]">Mérőeszközök</a></li>
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories">Garázs berendezések<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories', 1]">Garázs berendezések<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Műhelyhigiénia<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['/categories', 1]">Műhelyhigiénia<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
-                                          <li><a [routerLink]="['products', { specialCategory: 31 }]">Kézhigiénia</a></li>
+                                          <li><a [routerLink]="['products', { specialCategory: 32 }]">Kézhigiénia</a></li>
                                           <li><a [routerLink]="['products', { specialCategory: 33 }]">Tisztítás</a></li>
                                        </div>
 
@@ -73,7 +73,7 @@
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories">Munkavédelmi kellékek<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories', 2]">Munkavédelmi kellékek<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
                                  <li><a [routerLink]="['products', { specialCategory: 36 }]">Ruházat</a></li>
@@ -81,10 +81,10 @@
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories">Univerzális tartozékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories', 3]">Univerzális tartozékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
-                                 <li><a routerLink="/categories">Alátétek és O-gyűrűk<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['/categories', 3]">Alátétek és O-gyűrűk<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
                                           <li><a [routerLink]="['products', { specialCategory: 38 }]">Alátétek</a></li>
@@ -119,10 +119,10 @@
                   </ul>
                </li>
 
-               <li><a routerLink="/categories2">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
+               <li><a [routerLink]="['/categories2', 0]">Egyéb termékek<mat-icon class="arrow">expand_more</mat-icon></a>
                   <ul>
                      <div>
-                        <li><a routerLink="/categories2">Autóápolás<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories2', 0]">Autóápolás<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                         <ul>
                            <div>
                               <li><a [routerLink]="['products', { specialCategory: 0 }]">Ablaktisztítás</a></li>
@@ -133,7 +133,7 @@
                            </div>
                         </ul>
                      </li>
-                        <li><a routerLink="/categories2">Beltér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories2', 1]">Beltér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
                                  <li><a [routerLink]="['products', { specialCategory: 5 }]">Üléshuzatok</a></li>
@@ -145,15 +145,15 @@
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories2">Kültér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories2', 2]">Kültér<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
                                  <li><a [routerLink]="['products', { specialCategory: 11 }]">Ablaktörlő lapátok</a></li>
-                                 <li><a routerLink="/categories2">Lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['/categories2', 2]">Lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
                                           <li><a [routerLink]="['products', { specialCategory: 12 }]">Hátsó lámpák</a></li>
-                                          <li><a routerLink="/categories2">Gumilámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a [routerLink]="['/categories2', 2]">Gumilámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
                                                    <li><a [routerLink]="['products', { specialCategory: 13 }]">Izzós</a></li>
@@ -161,7 +161,7 @@
                                                 </div>
                                              </ul>
                                           </li>
-                                          <li><a routerLink="/categories2">Helyzetjelzők<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a [routerLink]="['/categories2', 2]">Helyzetjelzők<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
                                                    <li><a [routerLink]="['products', { specialCategory: 15 }]">Izzós</a></li>
@@ -169,7 +169,7 @@
                                                 </div>
                                              </ul>
                                           </li>
-                                          <li><a routerLink="/categories2">Munkalámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a [routerLink]="['/categories2', 2]">Munkalámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
                                                    <li><a [routerLink]="['products', { specialCategory: 17 }]">Izzós</a></li>
@@ -177,7 +177,7 @@
                                                 </div>
                                              </ul>
                                           </li>
-                                          <li><a routerLink="/categories2">Megkülönböztető lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                          <li><a [routerLink]="['/categories2', 2]">Megkülönböztető lámpák<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                              <ul>
                                                 <div>
                                                    <li><a [routerLink]="['products', { specialCategory: 19 }]">Izzós</a></li>
@@ -195,12 +195,12 @@
                               </div>
                            </ul>
                         </li>
-                        <li><a routerLink="/categories2">Folyadékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                        <li><a [routerLink]="['/categories2', 3]">Folyadékok<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                            <ul>
                               <div>
                                  <li><a [routerLink]="['products', { specialCategory: 25 }]">Hajtómű olaj</a></li>
                                  <li><a [routerLink]="['products', { specialCategory: 26 }]">Fagyálló</a></li>
-                                 <li><a routerLink="/categories2">Ablakmosó folyadék<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
+                                 <li><a [routerLink]="['/categories2', 3]">Ablakmosó folyadék<mat-icon class="arrow-horizontal">chevron_right</mat-icon></a>
                                     <ul>
                                        <div>
                                           <li><a [routerLink]="['products', { specialCategory: 27 }]">Nyári ablakmosó folyadék</a></li>

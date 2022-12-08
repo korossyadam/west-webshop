@@ -28,34 +28,35 @@ export class ProductsComponent implements OnInit {
     * Only the neccessary information is saved about the products
     */
    ngOnInit(): void {
-      let searchedCategory = this.route.snapshot.paramMap.get('category');
-      let clickedCategory = this.route.snapshot.paramMap.get('specialCategory');
-      let searchedPartNumber = this.route.snapshot.paramMap.get('partNumber');
+      this.route.params.subscribe(params => {
+         let searchedCategory = params['category'];
+         let searchedPartNumber =  params['partNumber'];
+         let clickedCategory =  params['specialCategory'];
 
-      if (searchedCategory) {
-         let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
+         if (searchedCategory) {
+            let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
 
-         for (let i = 0; i < productsString.length; i++) {
-            let productParts = productsString[i].split('!');
-            let partNumber = productParts[0];
-            let name = productParts[1];
-            let imgurl = productParts[2];
-            let price = productParts[3];
-            let brand = productParts[4];
+            for (let i = 0; i < productsString.length; i++) {
+               let productParts = productsString[i].split('!');
+               let partNumber = productParts[0];
+               let name = productParts[1];
+               let imgurl = productParts[2];
+               let price = productParts[3];
+               let brand = productParts[4];
 
-            let newProduct = new Product(partNumber, name, '', [], 0, brand, price, [], [], 0, true, [imgurl], []);
-            this.products.push(newProduct);
+               let newProduct = new Product(partNumber, name, '', [], 0, brand, price, [], [], 0, true, [imgurl], []);
+               this.products.push(newProduct);
+            }
+         } else if (clickedCategory) {
+            this.productsService.getProductsBySpecialCategory(parseInt(clickedCategory)).subscribe(data => {
+               this.products = data;
+            })
+         } else if (searchedPartNumber) {
+            this.productsService.search(searchedPartNumber).subscribe(data => {
+               this.products = data;
+            })
          }
-      } else if (clickedCategory) {
-         console.log(clickedCategory);
-         this.productsService.getProductsBySpecialCategory(parseInt(clickedCategory)).subscribe(data => {
-            this.products = data;
-         })
-      } else if (searchedPartNumber) {
-         this.productsService.search(searchedPartNumber).subscribe(data => {
-            this.products = data;
-         })
-      }
+      });
       
    }
 

@@ -1,7 +1,9 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { first } from 'rxjs';
 import { Offer } from '../models/offer.model';
+import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { AdminService } from '../services/admin.service';
 import { UtilsService } from '../services/utils.service';
@@ -15,32 +17,75 @@ export class AdminComponent implements OnInit {
 
   // Static functions
   showSnackBar = this.utilsService.openSnackBar;
+  addTax = this.utilsService.addTaxToPrice;
+  formatPrice = this.utilsService.formatPriceToString;
 
   // References to openable dialogs
   @ViewChild('newProductDialogRef') newProductDialogRef!: TemplateRef<any>;
+  @ViewChild('deleteProductDialogRef') deleteProductDialogRef!: TemplateRef<any>;
   @ViewChild('offerDialogRef') offerDialogRef!: TemplateRef<any>;
+  @ViewChild('orderDialogRef') orderDialogRef!: TemplateRef<any>;
 
   public productFiles: string[] = [];
 
-  // Form for appointments query
-  offerRange = new FormGroup({
+  // Form for offer query
+  public offerRange = new FormGroup({
     start: new FormControl(new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)),
     end: new FormControl(new Date()),
   });
 
-  offerColumns: string[] = ['date', 'email', 'answered', 'action'];
+  // Form for order query
+  public orderRange = new FormGroup({
+    start: new FormControl(new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)),
+    end: new FormControl(new Date()),
+  });
+
+  public offerColumns: string[] = ['date', 'email', 'answered', 'action'];
+  public orderColumns: string[] = ['date', 'email', 'price', 'action'];
 
   public offers: Offer[] = [];
+  public orders: Order[] = [];
 
   constructor(private utilsService: UtilsService, private dialog: MatDialog, private adminService: AdminService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   /**
    * Opens the dialog where admin can add new Products
    */
-  openNewProductDialog(): void {
-    this.dialog.open(this.newProductDialogRef, { width: '500px' });
+  openProductDialog(productToUpdate?: Product): void {
+    this.dialog.open(this.newProductDialogRef, { data: productToUpdate, width: '500px' });
+  }
+
+  attemptToOpenUpdateDialog(partNumber: string): void {
+    this.adminService.getSingleProduct(partNumber).pipe(first()).subscribe(data => {
+      if (data.length == 0) {
+        this.showSnackBar(partNumber + ' cikkszámú termék nem létezik!', 'Bezárás', 4000);
+      } else {
+        this.openProductDialog(data[0]);
+      }
+    });
+  }
+
+  /**
+   * Opens the dialog where admin can add new Products
+   */
+  openDeleteProductDialog(productToDelete: Product): void {
+    this.dialog.open(this.deleteProductDialogRef, { data: productToDelete, width: '500px' });
+  }
+
+  attemptToOpenDeleteProductDialog(partNumber: string): void {
+    this.adminService.getSingleProduct(partNumber).pipe(first()).subscribe(data => {
+      if (data.length == 0) {
+        this.showSnackBar(partNumber + ' cikkszámú termék nem létezik!', 'Bezárás', 4000);
+      } else {
+        this.openDeleteProductDialog(data[0]);
+      }
+    });
+  }
+
+  deleteProduct(id: string): void {
+    this.adminService.deleteProduct(id);
   }
 
   /**
@@ -75,7 +120,21 @@ export class AdminComponent implements OnInit {
     this.adminService.addProduct(Object.assign({}, productToUpload)).then(res => {
       this.showSnackBar('A termék sikeresen fel lett töltve!', 'Bezár', 4000);
     });
+  }
 
+  async updateProduct(originalProduct: Product, uid: string, partNumber: string, name: string, description: string, specialCategory: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
+    originalProduct.partNumber = partNumber;
+    originalProduct.name = name;
+    originalProduct.description = description;
+    originalProduct.specialCategory = parseInt(specialCategory);
+    originalProduct.brand = brand;
+    originalProduct.price = price;
+    originalProduct.stock = parseInt(stock);
+    originalProduct.canBeReturned = returnable;
+
+    this.adminService.updateProduct(Object.assign({}, originalProduct), uid).then(res => {
+      this.showSnackBar('A termék sikeresen módosítva lett!', 'Bezár', 4000);
+    });
   }
 
   /**
@@ -101,7 +160,7 @@ export class AdminComponent implements OnInit {
     if (answered)
       return 'Megválaszolva';
     else
-      return 'Nincs megválaszolva'
+      return 'Nincs megválaszolva';
   }
 
   /**
@@ -125,6 +184,36 @@ export class AdminComponent implements OnInit {
     this.adminService.updateOffer(offer).then(res => {
       this.showSnackBar('Árajánlat sikeresen megválaszolva!', 'Bezár', 4000);
     });
+  }
+
+  /**
+   * Queries for Orders based on given criterias
+   * 
+   * @param from From which Date to query Orders
+   * @param to To which Date to query Orders
+   */
+  queryForOrders(from: Date, to: Date): void {
+    this.adminService.getOrders(from, to).subscribe(data => {
+      this.orders = data;
+      this.showSnackBar('Sikeres lekérdezés!', 'Bezár', 4000);
+    });
+  }
+
+  /**
+   * Opens the dialog where admin can view an Order
+   */
+   openOrderDialog(order: Order): void {
+    this.dialog.open(this.orderDialogRef, { data: order, width: '1000px' });
+  }
+
+  /**
+    * Converts a Firebase Timestamp object to a more readable Date object
+    * 
+    * @param timestamp The Timestamp to convert
+    * @returns The Date object
+    */
+  timestampToDate(timestamp: any): Date {
+    return timestamp.toDate();
   }
 
 }
