@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
    formatPriceToString = this.utilsService.formatPriceToString;
    showSnackBar = this.utilsService.openSnackBar;
 
+   public initialLoading: boolean = true;
+
    constructor(private route: ActivatedRoute, private utilsService: UtilsService, private productsService: ProductsService) { }
 
    /**
@@ -47,13 +49,17 @@ export class ProductsComponent implements OnInit {
                let newProduct = new Product(partNumber, name, '', [], 0, brand, price, [], [], 0, true, [imgurl], []);
                this.products.push(newProduct);
             }
+            
+            this.initialLoading = false;
          } else if (clickedCategory) {
             this.productsService.getProductsBySpecialCategory(parseInt(clickedCategory)).subscribe(data => {
                this.products = data;
+               this.initialLoading = false;
             })
          } else if (searchedPartNumber) {
             this.productsService.search(searchedPartNumber).subscribe(data => {
                this.products = data;
+               this.initialLoading = false;
             })
          }
       });

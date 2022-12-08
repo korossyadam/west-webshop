@@ -51,7 +51,7 @@ export class MainNavigationComponent implements OnInit {
    searchForProduct(searchedText): void {
       const minimumLength = 3;
 
-      if (searchedText.length <= minimumLength) {
+      if (searchedText.length < minimumLength) {
          this.showSnackBar('A keresett szövegnek minimum ' + minimumLength + ' karakternek kell lennie!', 'Bezárás', 4000);
       } else {
          this.route.navigateByUrl('/products;partNumber=' + searchedText);

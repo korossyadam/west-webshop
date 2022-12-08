@@ -301,7 +301,7 @@ nav ul ul ul div {
 .cart-product-list-container {
    max-height: 300px;
    overflow-y: auto;
-   overflow-x: hidden;
+   line-height: 1.2;
 }
 
 .cart-product-container {
@@ -314,7 +314,7 @@ nav ul ul ul div {
 .cart-product-info-container {
    position: absolute;
    left: 100px;
-   width: 100%;
+   width: calc(100% - 100px);
    float: left;
 }
 
@@ -360,7 +360,7 @@ nav ul ul ul div {
    font-size: 15px;
    color: #333333;
    margin-top: 10px;
-   margin-bottom: 0px;
+   margin-bottom: 3px;
 }
 
 .product-name {

@@ -1,7 +1,15 @@
 <div class="content-container">
   <div class="content-inner-container">
 
-    <table class="table">
+    <div *ngIf="initialLoading" class="initial-spinner-container">
+      <mat-spinner class="initial-spinner" diameter="140"></mat-spinner>
+    </div>
+
+    <div *ngIf="!initialLoading && products.length == 0" class="no-results-container">
+      <p>Nincs találat.</p>
+    </div>
+
+    <table *ngIf="!initialLoading && products.length > 0" class="table">
 
       <!-- Table head -->
       <thead>

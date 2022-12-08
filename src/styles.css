@@ -11,6 +11,22 @@
    right: 50px !important;
 }
 
+/* Styles used for loading spinner */
+.initial-spinner-container {
+   width: 100%;
+   text-align: center;
+}
+
+.initial-spinner {
+   margin: 0 auto;
+   width: 200%;
+}
+
+.no-results-container {
+   text-align: center;
+   font-size: 18px;
+}
+
 /* Global back button */
 .back-button {
    font-size: 16px;

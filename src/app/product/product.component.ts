@@ -17,6 +17,9 @@ export class ProductComponent implements OnInit {
   formatPriceToString = this.utilsService.formatPriceToString;
   sanitize = this.utilsService.sanitize;
 
+  // Initial loading flag
+  public initialLoading: boolean = true;
+
   // Keeps track of product that we want to show
   public currentProductId: string;
   public currentProduct: Product;
@@ -39,21 +42,25 @@ export class ProductComponent implements OnInit {
     this.productsService.getProduct(this.currentProductId).subscribe(data => {
       this.currentProduct = data[0];
 
-      // Set default visible product image
-      this.selectedImageUrl = this.currentProduct.imgurls[0];
-      this.selectedImageIndex = 0;
+      if (this.currentProduct) {
+        // Set default visible product image
+        this.selectedImageUrl = this.currentProduct.imgurls[0];
+        this.selectedImageIndex = 0;
 
-      // Fill up properties array
-      for (let i = 0; i < this.currentProduct.properties.length; i++) {
-        this.propertyTypes[i] = this.currentProduct.properties[i].split('*')[0];
-        this.propertyValues[i] = this.currentProduct.properties[i].split('*')[1];
+        // Fill up properties array
+        for (let i = 0; i < this.currentProduct.properties.length; i++) {
+          this.propertyTypes[i] = this.currentProduct.properties[i].split('*')[0];
+          this.propertyValues[i] = this.currentProduct.properties[i].split('*')[1];
+        }
+
+        // Fill up factory numbers array
+        for (let i = 0; i < this.currentProduct.factoryNumbers.length; i++) {
+          this.factoryNumberCodes[i] = this.currentProduct.factoryNumbers[i].split('*')[0];
+          this.factoryNumberBrands[i] = this.currentProduct.factoryNumbers[i].split('*')[1];
+        }
       }
 
-      // Fill up factory numbers array
-      for (let i = 0; i < this.currentProduct.factoryNumbers.length; i++) {
-        this.factoryNumberCodes[i] = this.currentProduct.factoryNumbers[i].split('*')[0];
-        this.factoryNumberBrands[i] = this.currentProduct.factoryNumbers[i].split('*')[1];
-      }
+      this.initialLoading = false;
     });
 
     this.displayedInformation = 0;

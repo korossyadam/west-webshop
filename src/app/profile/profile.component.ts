@@ -48,7 +48,9 @@ export class ProfileComponent implements OnInit {
    constructor(private utilsService: UtilsService, private route: ActivatedRoute, private profileService: ProfileService, private dialog: MatDialog) { }
 
    ngOnInit(): void {
-      this.step = parseInt(this.route.snapshot.paramMap.get('tab'));
+      this.route.params.subscribe(params => {
+         this.step = parseInt(params['tab']);
+      });
 
       this.profileService.getCurrentUser().subscribe(data => {
          this.currentUser = data as User;
