@@ -8,17 +8,29 @@
     <div *ngIf="!initialLoading && products.length == 0" class="no-results-container">
       <p>Nincs találat.</p>
     </div>
+    
+    <!-- Query card -->
+    <mat-card *ngIf="!initialLoading && products.length > 0" class="query-container">
+      <mat-checkbox [(ngModel)]="onlyInStock" (change)="reAddElements()">Csak raktáron lévők</mat-checkbox>
 
-    <table *ngIf="!initialLoading && products.length > 0" class="table">
+      <!-- Brand selector -->
+      <p class="brand-selector-title">Gyártmány</p>
+      <select [(ngModel)]="selectedBrand" (change)="reAddElements()">
+        <option value="all">Mind</option>
+        <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+      </select>
+    </mat-card>
+
+    <table *ngIf="!initialLoading && products.length > 0" class="table" matSort (matSortChange)="sortData($event)">
 
       <!-- Table head -->
       <thead>
         <tr>
           <th class="image-column"></th>
-          <th>Megnevezés</th>
-          <th>Gyártmány</th>
-          <th>Ár</th>
-          <th>Készlet</th>
+          <th mat-sort-header="name">Megnevezés</th>
+          <th mat-sort-header="brand">Gyártmány</th>
+          <th mat-sort-header="price">Ár</th>
+          <th mat-sort-header="stock">Készlet</th>
           <th class="order-column">Rendelés</th>
           <th class="action-column">Egyéb</th>
         </tr>
@@ -26,7 +38,7 @@
 
       <!-- Table body -->
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of activeProducts">
 
           <!-- Product image -->
           <td>
@@ -79,7 +91,18 @@
           </td>
         </tr>
 
+        <tr *ngIf="activeProducts.length == 0">
+          <td colspan="8">
+            <div class="no-such-product-container">
+              Nincs ilyen termék.
+            </div>
+          </td>
+        </tr>
+
       </tbody>
     </table>
+
+    
+
   </div>
 </div>

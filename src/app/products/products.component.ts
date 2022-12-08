@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
 import { UtilsService } from '../services/utils.service';
+import { Sort } from '@angular/material/sort';
 
 @Component({
    selector: 'app-products',
@@ -13,13 +14,20 @@ export class ProductsComponent implements OnInit {
 
    @Input() searchedText = '';
    public products: Product[] = [];
+   public activeProducts: Product[] = [];
 
    // Static functions
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    showSnackBar = this.utilsService.openSnackBar;
 
+   // Initial loading flag
    public initialLoading: boolean = true;
+
+   public onlyInStock: boolean = false;
+   public selectedBrand: string = 'all';
+
+   public brands: string[] = [];
 
    constructor(private route: ActivatedRoute, private utilsService: UtilsService, private productsService: ProductsService) { }
 
@@ -32,8 +40,8 @@ export class ProductsComponent implements OnInit {
    ngOnInit(): void {
       this.route.params.subscribe(params => {
          let searchedCategory = params['category'];
-         let searchedPartNumber =  params['partNumber'];
-         let clickedCategory =  params['specialCategory'];
+         let searchedPartNumber = params['partNumber'];
+         let clickedCategory = params['specialCategory'];
 
          if (searchedCategory) {
             let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
@@ -49,22 +57,82 @@ export class ProductsComponent implements OnInit {
                let newProduct = new Product(partNumber, name, '', [], 0, brand, price, [], [], 0, true, [imgurl], []);
                this.products.push(newProduct);
             }
-            
+            this.activeProducts = this.products;
+
+            this.getDistinctBrands();
             this.initialLoading = false;
          } else if (clickedCategory) {
             this.productsService.getProductsBySpecialCategory(parseInt(clickedCategory)).subscribe(data => {
                this.products = data;
+               this.activeProducts = data;
+
+               this.getDistinctBrands();
                this.initialLoading = false;
-            })
+            });
          } else if (searchedPartNumber) {
             this.productsService.search(searchedPartNumber).subscribe(data => {
                this.products = data;
+               this.activeProducts = data;
+
+               this.getDistinctBrands();
                this.initialLoading = false;
-            })
+            });
          }
       });
-      
+
    }
+
+   getDistinctBrands(): void {
+      this.products.forEach(product => {
+         let brand = product.brand.toUpperCase();
+
+         if (!this.brands.includes(brand)) {
+            this.brands.push(brand);
+         }
+      });
+   }
+
+   reAddElements(): void {
+      this.activeProducts = this.products.slice();
+      for (let i = 0; i < this.activeProducts.length; i++) {
+         let product = this.activeProducts[i];
+         if ((this.onlyInStock && product.stock <= 0) || (this.selectedBrand != 'all' && this.selectedBrand != product.brand)) {
+            const index = this.activeProducts.indexOf(product, 0);
+            if (index > -1) {
+               this.activeProducts.splice(index, 1);
+               i--;
+            }
+         }
+      };
+   }
+
+   sortData(sort: Sort) {
+      const data = this.activeProducts.slice();
+      if (!sort.active || sort.direction === '') {
+         this.activeProducts = data;
+         return;
+      }
+
+      this.activeProducts = data.sort((a, b) => {
+         const isAsc = sort.direction === 'asc';
+         switch (sort.active) {
+            case 'name':
+               return this.compare(a.name, b.name, isAsc);
+            case 'brand':
+               return this.compare(a.brand, b.brand, isAsc);
+            case 'price':
+               return this.compare(a.price, b.price, isAsc);
+            case 'stock':
+               return this.compare(a.stock, b.stock, isAsc);
+            default:
+               return 0;
+         }
+      });
+   }
+
+   compare(a: number | string, b: number | string, isAsc: boolean) {
+      return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+    }
 
    /**
    * Increments the cart button value by 1

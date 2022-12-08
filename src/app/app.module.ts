@@ -24,6 +24,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -95,6 +96,7 @@ import { Categories2Component } from './categories2/categories2.component';
     MatNativeDateModule,
     MatSnackBarModule,
     MatTableModule,
+    MatSortModule,
     MatSelectModule,
     MatFormFieldModule,
     MatSidenavModule,
