@@ -22,6 +22,11 @@
 
       <!-- This section contains the parts -->
       <div class="parts-container">
+
+         <div *ngIf="this.originalTreeData.length == 0">
+            Ehhez a járműhőz még nincsen alkatrészünk! Nézz vissza később.
+         </div>
+
          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
 
             <mat-tree-node class="node" *matTreeNodeDef="let node" matTreeNodePadding [routerLink]="['/products', node.name]">

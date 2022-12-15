@@ -36,7 +36,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { CarSelectorComponent } from './car-selector/car-selector.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
@@ -58,7 +58,7 @@ import { AdminGuard } from './services/admin.guard';
     AppComponent,
     MainNavigationComponent,
     ProductsComponent,
-    CarSelectorComponent,
+    SidenavComponent,
     LoginComponent,
     ProfileComponent,
     HomeComponent,

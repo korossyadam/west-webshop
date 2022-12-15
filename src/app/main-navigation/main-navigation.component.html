@@ -2,11 +2,15 @@
    <div class="inner-container">
 
       <!-- Top left and top right parallelograms -->
-      <div class="parallelogram parallelogram-left"></div>
-      <div class="parallelogram parallelogram-right"></div>
+      <div class="parallelogram parallelogram-left">
+         <p class="upper-info info-text-left">Keress telefonon: {{ companyPhoneNumber }}</p>
+      </div>
+      <div class="parallelogram parallelogram-right">
+         <p class="upper-info info-text-right">Email címünk: {{ companyEmail }}</p>
+      </div>
 
       <!-- Clickable logo -->
-      <h2 class="logo" routerLink="/main"><div class="logo-text"><span class="primary">WEST</span> ALKATRÉSZ</div></h2>
+      <h2 class="logo" routerLink="/main"><span class="primary">WEST</span> ALKATRÉSZ</h2>
 
       <!-- 2 buttons -->
       <div class="buttons-container">
@@ -29,6 +33,13 @@
 
       <!-- Navigation options on the left -->
       <div class="nav-container">
+
+         <!-- Mobile menu button -->
+         <button mat-icon-button class="mobile-nav-button" (click)="onMobileMenuButtonClick()">
+            <mat-icon>menu</mat-icon>
+         </button>
+
+         <!-- Desktop navigation -->
          <nav>
             <ul>
                <li><a routerLink="/main">Főoldal</a></li>
@@ -221,6 +232,8 @@
 
       <!-- Account -->
       <div *ngIf="getName() != ''" class="profile-container">
+
+         <!-- Account on desktop -->
          <nav>
             <ul>
                <li><a class="profile-name">{{ getName() }}<mat-icon class="profile-arrow">expand_more</mat-icon><br><span class="profile-email">{{ getEmail() }}</span></a>
@@ -239,12 +252,21 @@
                   </ul>
                </li>
             </ul>
-
          </nav>
+
+         <!-- Account on mobile -->
+         <div class="mobile-profile" routerLink="/profile/0">
+            <a class="profile-text">
+               <mat-icon class="cart-icon">person</mat-icon>
+            </a>
+         </div>
+
       </div>
       
       <!-- Cart -->
-      <div *ngIf="getName() != ''" class="cart-container">
+      <div class="cart-container">
+
+         <!-- Cart on desktop -->
          <nav>
             <ul>
                <li>
@@ -316,6 +338,17 @@
                </li>
             </ul>
          </nav>
+
+         <!-- Cart on mobile -->
+         <div class="mobile-cart" routerLink="/cart">
+            <a class="cart-text">
+               <mat-icon class="cart-icon">shopping_cart</mat-icon>
+               <div *ngIf="cartItems.length > 0" class="cart-indicator">
+                  <p class="cart-indicator-text">{{ cartItems.length }}</p>
+               </div>
+            </a>
+         </div>
+
       </div>
 
       <!-- Login buttons -->

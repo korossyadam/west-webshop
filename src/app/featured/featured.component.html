@@ -35,7 +35,7 @@
 
          <!-- Info below product image -->
          <div class="product-info-container">
-            <button mat-icon-button class="shopping-cart-button">
+            <button mat-icon-button class="shopping-cart-button" (click)="addProductToCart(product)">
                <mat-icon class="shopping-cart material-icons-outlined">shopping_cart</mat-icon>
             </button>
             <p class="product-partnumber" [routerLink]="['/product', product.partNumber]">{{ product.partNumber }}</p>

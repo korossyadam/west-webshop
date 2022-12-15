@@ -31,11 +31,11 @@ export class FeaturedComponent implements OnInit {
       this.productsService.getProductsByArray(this.featuredProductNumbers).subscribe(data => {
         this.featuredProducts = data;
         localStorage.setItem('featured', JSON.stringify(data));
-      })
+      });
     }
 
-    
-    
+
+
     /*
     this.featuredProducts.push(new Product('PJH112', 'Munkahenger, kuplung', '', [], 0, 'TRW MOTO', '21656', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/l9zklzftkza3nolgqzvi.jpg'], []));
     this.featuredProducts.push(new Product('MMT A174 031', 'Krokodil emelő 2T', '', [], 0, 'TRW MOTO', '17440', [], [], 0, true, ['https://ic-files-res.cloudinary.com/image/upload/v1/item/esncqlncnstg09dy9ogo.jpg'], []));
@@ -108,6 +108,16 @@ export class FeaturedComponent implements OnInit {
       element.classList.remove('notransition');
       this.slidersMoving -= 1;
     });
+  }
+
+  /**
+   * Adds a featured Product to globally accessed cart
+   * Always adds 1
+   * 
+   * @param product The Product to add
+   */
+  addProductToCart(product: Product): void {
+    this.addToCart(product, 1);
   }
 
   /**

@@ -6,6 +6,9 @@ import { Product } from '../models/product.model';
 import { Observable, first, firstValueFrom, map } from 'rxjs';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
+import { Car } from '../models/car.model';
+import { Chassis } from '../models/chassis.model';
+import { deleteField } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -114,4 +117,40 @@ export class AdminService {
       return query;
     }).valueChanges() as Observable<Order[]>;
   }
+
+  // Upload Data
+  async addChassis(collectionName: string, data: Chassis, id?: string): Promise<string> {
+    const uid = id ? id : this.afs.createId();
+    // data.id = uid;
+    await this.afs.collection(collectionName).doc(uid).set(data);
+    return uid;
+ }
+
+ // Upload Data
+ async addCars(collectionName: string, data: Car, id?: string): Promise<string> {
+    const uid = id ? id : this.afs.createId();
+    // data.id = uid;
+    await this.afs.collection(collectionName).doc(uid).set(data);
+    return uid;
+ }
+
+
+ modifyQuantity(line: string) {
+    let parts: string[] = line.split(';');
+    let index = parts[0];
+
+    let fields: string[] = [];
+    for (let i = 1; i < parts.length; i++) {
+       fields.push(parts[i].split(' ')[0] + '*' + parts[i].split(' ')[1]);
+    }
+    //console.log(fields);
+    //console.log(index);
+    this.afs.collection("cars", ref => ref.where('carIndex', '==', parseInt(index))).get().subscribe(data => {
+       let id = data.docs[0].id;
+       this.afs.collection('cars').doc(id).update({
+          productLengths: fields,
+          productLenghts: deleteField(),
+       }).then(res => console.log(id + ' finished'));
+    });
+ }
 }

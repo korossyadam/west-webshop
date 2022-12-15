@@ -11,9 +11,9 @@ import { UtilsService } from '../services/utils.service';
 })
 export class MainNavigationComponent implements OnInit {
 
-   @Output() carSelectClickedEvent = new EventEmitter<boolean>();
-
    // Static functions
+   companyPhoneNumber = this.utilsService.companyPhoneNumber;
+   companyEmail = this.utilsService.companyEmail;
    refreshCart = this.utilsService.refreshCart;
    calculateTotal = this.utilsService.calculateTotal;
    deleteCartItem = this.utilsService.deleteCartItem;
@@ -23,10 +23,11 @@ export class MainNavigationComponent implements OnInit {
    getName = this.utilsService.getName;
    getEmail = this.utilsService.getEmail;
    showSnackBar = this.utilsService.openSnackBar;
+   openCarSelectorSidenav = this.utilsService.openCarSelectorSidenav;
+   openMobileSidenav = this.utilsService.openMobileSidenav;
    
    public searchedText: string;
 
-   public ob = of(this.utilsService.cartItems);
    public cartItems = [];
    public total = 0;
 
@@ -42,17 +43,24 @@ export class MainNavigationComponent implements OnInit {
    }
 
    /**
-    * Calls the sidenav's open() method
+    * Emits an event through utilsService to open the car selector sidenav
     */
    onCarSelectorButtonClick(): void {
       if (this.getEmail() == '') {
          this.showSnackBar('Ennek a funkciónak a használatához be kell jelentkezned!', 'Bezárás', 4000);
       } else {
-         this.carSelectClickedEvent.emit(true);
+         this.openCarSelectorSidenav();
       }
    }
 
-   searchForProduct(searchedText): void {
+   /**
+    * Emits an event through utilsService to open the mobile sidenav
+    */
+   onMobileMenuButtonClick(): void {
+      this.openMobileSidenav();
+   }
+
+   searchForProduct(searchedText: string): void {
       const minimumLength = 3;
 
       if (searchedText.length < minimumLength) {

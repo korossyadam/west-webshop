@@ -224,6 +224,12 @@ export class CarComponent implements OnInit {
    * If amount of products is greater than 0, put (amount) to end of category name
    */
   ignoreEmptyMainCategories(): void {
+    if (!this.currentCar.productLengths) {
+      this.originalTreeData = [];
+      this.dataSource.data = [];
+      return;
+    }
+
     for (let i = 0; i < this.originalTreeData.length; i++) {
       for (let j = 0; j < this.currentCar.productLengths.length; j++) {
         if (this.currentCar.productLengths[j].split('*')[0] == this.originalTreeData[i].value) {

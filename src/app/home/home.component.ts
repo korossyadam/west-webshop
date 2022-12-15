@@ -11,7 +11,7 @@ export class HomeComponent {
    constructor(private utilsService: UtilsService) { }
 
    onCarSelectorButtonClick(): void {
-      this.utilsService.openSidenav();
+      this.utilsService.openCarSelectorSidenav();
    }
 
 }

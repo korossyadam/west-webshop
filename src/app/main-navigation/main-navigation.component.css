@@ -24,14 +24,32 @@
    float: left;
    margin-left: -10px;
    transform: skew(-30deg);
-   border-bottom-right-radius: 3px;
+   border-bottom-right-radius: 2px;
 }
 
 .parallelogram-right {
    float: right;
    margin-right: -10px;
    transform: skew(30deg);
-   border-bottom-left-radius: 3px;
+   border-bottom-left-radius: 2px;
+}
+
+.upper-info {
+   position: absolute;
+   top: 4px;
+   margin: 0;
+   color: white;
+   font-size: 14px;
+}
+
+.info-text-left {
+   right: 32px;
+   transform: skew(30deg);
+}
+
+.info-text-right {
+   left: 32px;
+   transform: skew(-30deg);
 }
 
 .trapezoid {
@@ -52,6 +70,8 @@
    color: #333333;
    margin: 0;
    cursor: pointer;
+   width: fit-content;
+   margin: 0 auto;
 }
 
 .search-container {
@@ -446,6 +466,16 @@ nav ul ul ul div {
    height: 0px;
 }
 
+/* Mobile cart styles */
+.mobile-cart {
+   display: none;
+}
+
+/* Mobile profile styles */
+.mobile-profile {
+   display: none;
+}
+
 /* Login buttons when user is not logged in */
 .login-buttons-container {
    position: absolute;
@@ -479,4 +509,250 @@ nav ul ul ul div {
 
 .primary {
    color: var(--color-primary);
+}
+
+/* Responsivity styles */
+.mobile-nav-button {
+   display: none;
+   padding-top: 3px;
+   margin-left: 20px;
+}
+
+@media screen and (max-width: 1890px) {
+   .nav-container>nav>ul>li {
+      margin-left: 20px;
+   }
+}
+
+@media screen and (max-width: 1750px) {
+   .buttons-inner-container {
+      width: 760px;
+   }
+}
+
+@media screen and (max-width: 1650px) {
+   .buttons-inner-container {
+      width: 690px;
+   }
+}
+
+@media screen and (max-width: 1580px) {
+   .buttons-container {
+      top: 46px;
+   }
+
+   .buttons-inner-container {
+      width: 615px;
+   }
+
+   .button {
+      padding: 0px 5px;
+   }
+}
+
+
+@media screen and (max-width: 1580px) {
+   .nav-container>nav>ul>li {
+      margin-left: 5px;
+   }
+}
+
+@media screen and (max-width: 1440px) {
+   .mobile-nav-button {
+      display: block;
+   }
+
+   .nav-container nav {
+      display: none;
+   }
+
+   .nav-container {
+      margin-top: -6px;
+   }
+}
+
+@media screen and (max-width: 1300px) {
+   .parallelogram {
+      width: 38%;
+   }
+
+   .cart-container nav {
+      display: none;
+   }
+
+   .cart-container {
+      right: 100px;
+   }
+
+   .mobile-cart {
+      display: block;
+   }
+
+   .profile-container nav {
+      display: none;
+   }
+
+   .profile-container {
+      margin-top: -32px;
+   }
+
+   .mobile-profile {
+      display: block;
+   }
+
+   .cart-indicator {
+      top: 3px;
+      left: 11px;
+   }
+
+   .cart-indicator-text {
+      margin: -5px 0px 0px -2px;
+   }
+
+}
+
+@media screen and (max-width: 1050px) {
+   .parallelogram {
+      width: 33%;
+   }
+}
+
+@media screen and (max-width: 900px) {
+   .trapezoid {
+      display: none;
+   }
+
+   .search-container {
+      top: 49px;
+   }
+
+   .buttons-container {
+      display: none;
+   }
+
+   .search-container {
+
+      width: 500px;
+
+   }
+
+   .search-inner-container {
+
+      width: 447px;
+   }
+
+   .search-field {
+      width: 320px;
+   }
+
+   .info-text-left {
+      right: 14px;
+   }
+
+   .info-text-right {
+      left: 14px;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   .parallelogram {
+      display: none;
+   }
+
+   .mobile-nav-button {
+      top: -42px;
+   }
+
+   .logo {
+      margin-left: 70px;
+   }
+
+   .search-container {
+      margin-left: 0px;
+   }
+
+   .cart-container {
+      right: 14%;
+   }
+
+}
+
+@media screen and (max-width: 600px) {
+   .search-container {
+      width: 435px;
+   }
+
+   .search-inner-container {
+      width: 380px;
+   }
+
+   .search-field {
+      width: 250px;
+   }
+}
+
+@media screen and (max-width: 520px) {
+   .search-container {
+      width: 300px;
+   }
+
+   .search-inner-container {
+      width: 275px;
+   }
+
+   .search-field {
+      width: 150px;
+   }
+
+   .mobile-nav-button {
+      margin-left: 4px;
+   }
+
+   .logo {
+      margin-left: 50px;
+   }
+
+   .cart-container {
+      right: 20%;
+   }
+}
+
+@media screen and (max-width: 400px) {
+   .search-container {
+      width: 260px;
+   }
+
+   .search-inner-container {
+      width: 230px;
+   }
+
+   .search-field {
+      width: 108px;
+   }
+
+}
+
+@media screen and (max-width: 360px) {
+   .search-container {
+      width: 240px;
+   }
+
+   .search-inner-container {
+      width: 210px;
+   }
+
+   .search-button {
+      display: flex;
+      min-width: unset;
+      width: 40px;
+      justify-content: center;
+   }
+
+   .profile-container {
+      margin-right: 20px;
+   }
+
+   .cart-container {
+      right: 18%;
+   }
 }

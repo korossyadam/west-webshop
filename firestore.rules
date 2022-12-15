@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    match /{document=**} {
+        allow read;
+      }
+      
+    match /cars/{document=**} {
+    	allow write: if request.auth.uid == 'm5I4h7uuSrXW5WPn29opsuS12Q03';
+    }
+    
+    match /chassis/{document=**} {
+    	allow write: if request.auth.uid == 'm5I4h7uuSrXW5WPn29opsuS12Q03';
+    }
+    
+    match /offers/{document=**} {
+    	allow write: if request.auth.uid != null;
+    }
+    
+    match /orders/{document=**} {
+    	allow write;
+    }
+    
+    match /products/{document=**} {
+    	allow write: if request.auth.uid == 'm5I4h7uuSrXW5WPn29opsuS12Q03';
+    }
+    
+    match /users/{document=**} {
+      allow write: if request.auth.uid == 'm5I4h7uuSrXW5WPn29opsuS12Q03'
+    }
+  }
+}

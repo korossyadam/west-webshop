@@ -9,8 +9,13 @@ import { Product } from "../models/product.model";
 })
 export class UtilsService {
 
+  // Global constants
+  public companyPhoneNumber: string = '+36 30 881 9425';
+  public companyEmail: string = 'westkorbt@gmail.com';
+
   // Globally accessed sidenav variables
   public openSidenavEvent: EventEmitter<any> = new EventEmitter();
+  public openMobileSidenavEvent: EventEmitter<any> = new EventEmitter();
 
   // Globally accessed cart variables
   public cartUpdated: EventEmitter<any[]> = new EventEmitter();
@@ -19,8 +24,12 @@ export class UtilsService {
 
   constructor(public sanitizer: DomSanitizer, private _snackBar: MatSnackBar) { }
 
-  openSidenav(): void {
+  openCarSelectorSidenav = (): void => {
     this.openSidenavEvent.emit();
+  }
+
+  openMobileSidenav = (): void => {
+    this.openMobileSidenavEvent.emit();
   }
 
   /**

@@ -340,3 +340,12 @@ textarea {
 ::ng-deep .mat-step-header {
    height: 50px !important;
 }
+
+/* Disable pointer events on expansion panel bodies */
+span.mat-expansion-indicator {
+   pointer-events: visiblefill !important;
+}
+
+mat-expansion-panel-header {
+   pointer-events: none;
+}

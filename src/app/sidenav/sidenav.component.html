@@ -1,0 +1,288 @@
+<!-- Displayed selected vehicle image on top of everything-->
+<mat-card *ngIf="hoveredTextIndex != -1 && stage == 1" class="vehicle-image-container" [ngStyle]="imgCardStyle">
+   <img *ngIf="activeChassis[hoveredTextIndex].hasImg == true" src="https://storage.googleapis.com/west-webshop.appspot.com/{{ activeChassis[hoveredTextIndex].chassisIndex }}.png" alt="">
+   <mat-icon *ngIf="activeChassis[hoveredTextIndex].hasImg == false" class="error-icon">image_not_supported</mat-icon>
+</mat-card>
+
+
+<mat-sidenav-container class="sidenav-container">
+
+   <!-- Car selector sidenav -->
+   <mat-sidenav *ngIf="!menuMode" class="sidenav" [autoFocus]="false" #carSelectorSidenav>
+
+      <!-- Upper filter inputs -->
+      <div class="upper-menu">
+
+         <!-- Close button -->
+         <button mat-icon-button class="close-icon" (click)="closeSidenavs()" onclick="this.blur()">
+            <mat-icon>close</mat-icon>
+         </button>
+
+         <!-- Filtering: Brand selection -->
+         <div *ngIf="stage == 0" class="filter-container">
+            <p class="main-label">Jármű kiválasztása</p>
+            <input type="text" class="text-input" placeholder="Márka" (input)="reAddBrands($event)">
+         </div>
+
+         <!-- Filtering: Chassis selection -->
+         <div *ngIf="stage == 1" class="filter-container">
+
+            <!-- Back button -->
+            <button mat-icon-button class="back-icon" (click)="back()">
+               <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+
+            <!-- Main text label -->
+            <p class="main-label">Karosszéria kiválasztása</p>
+
+            <!-- Type search input -->
+            <input type="text" class="text-input" placeholder="Pl. Civic, Astra, Golf, E46 stb." #type (input)="reAddChassis(type.value, year.value)" />
+
+            <!-- Year search input -->
+            <div class="filter-element-container">
+               <p class="small-label">ÉVJÁRAT</p>
+               <input type="text" class="quarter" placeholder="Pl. 2012" #year (input)="reAddChassis(type.value, year.value)" />
+            </div>
+
+         </div>
+
+         <!-- Filtering: Engine selection -->
+         <div *ngIf="stage == 2" class="filter-container">
+
+            <!-- Back button -->
+            <button mat-icon-button class="back-icon" (click)="back()">
+               <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+
+            <!-- Main text label -->
+            <p class="main-label">Motorkód kiválasztása</p>
+
+            <!-- Engine code search input -->
+            <input type="text" class="text-input" placeholder="Pl. AVF, Z14XE, 939 A2.000 stb." #engine (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)" />
+
+            <!-- Year search input -->
+            <div class="filter-element-container">
+               <p class="small-label">ÉVJÁRAT</p>
+               <input type="text" class="quarter" placeholder="Pl. 2012" #year />
+            </div>
+
+            <!-- Fuel search input -->
+            <div class="filter-element-container">
+               <p class="small-label">ÜZEMANYAG</p>
+               <select class="filter-select quarter" #fuel (change)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)">
+                  <option value="all">Összes</option>
+                  <option value="Benzin">Benzin</option>
+                  <option value="Dízel">Dízel</option>
+                  <option value="Benzin/elektromos">Elektromos - Benzin</option>
+                  <option value="Dízel/elektromos">Elektromos - Dízel</option>
+                  <option value="villamos">Elektromos</option>
+                  <option value="Benzin/Földgáz (CNG)">Benzin - Földgáz (CNG)</option>
+                  <option value="Benzin/Autógáz (LPG)">Benzin - Autógáz (LPG)</option>
+                  <option value="Benzin/Etanol">Benzin - Etanol</option>
+                  <option value="Etanol">Etanol</option>
+               </select>
+            </div>
+
+            <!-- Performance (KW) search input -->
+            <div class="filter-element-container">
+               <p class="small-label">KW</p>
+               <input type="text" class="quarter" placeholder="Pl. 75" #kw (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)" />
+            </div>
+
+            <!-- Performance (HP) search input -->
+            <div class="filter-element-container">
+               <p class="small-label">LE</p>
+               <input type="text" class="quarter" placeholder="Pl. 101" #hp (input)="reAddCars(engine.value, year.value, kw.value, hp.value, fuel.value)" />
+            </div>
+
+         </div>
+      </div>
+
+      <!-- Lower list -->
+      <div class="lower-menu">
+         <table *ngIf="!loading" cellpadding="0" cellspacing="0">
+
+            <!-- Brand selection -->
+            <tbody *ngIf="stage == 0">
+               <ng-container *ngFor="let brand of activeBrands; let i = index">
+
+                  <!-- Decorative row -->
+                  <tr *ngIf="decorativeRows && decorativeRows[i]" class="decorative-row">
+                     <td>{{ decorativeRows[i] }}</td>
+                  </tr>
+
+                  <!-- Actual selectable row-->
+                  <tr (click)="selectElements(brand)">
+                     <td>{{ brand }}</td>
+                  </tr>
+               </ng-container>
+            </tbody>
+
+            <!-- Chassis selection -->
+            <tbody *ngIf="stage == 1">
+               <ng-container *ngFor="let chassis of activeChassis; let i = index">
+
+                  <!-- Decorative row -->
+                  <tr *ngIf="decorativeRows && decorativeRows[i]" class="decorative-row">
+                     <td colspan="2">{{ decorativeRows[i] }}</td>
+                  </tr>
+
+                  <!-- Actual selectable row-->
+                  <tr [id]="i" (mouseover)="setHoveredIndex(i)" (mouseout)="setHoveredIndex(-1)" (click)="selectElements(chassis.name)">
+                     <td>{{ chassis.name }}</td>
+                     <td class="nowrap">{{ chassis.year }}</td>
+                  </tr>
+               </ng-container>
+            </tbody>
+
+            <!-- Engine selection -->
+            <tbody *ngIf="stage == 2">
+               <ng-container *ngFor="let car of activeCars; let i = index">
+
+                  <!-- Decorative row -->
+                  <tr *ngIf="decorativeRows && decorativeRows[i]" class="decorative-row">
+                     <td colspan="2">{{ decorativeRows[i] }}</td>
+                     <td>KW</td>
+                     <td>LE</td>
+                     <td>CM<sup>3</sup></td>
+                  </tr>
+
+                  <!-- Actual selectable row-->
+                  <tr [routerLink]="['/car', car.carIndex]" (click)="closeSidenavs()">
+                     <td>{{ car.engine }}<span class="engine-code"><br>{{ activeCars[i].engineCode }}</span></td>
+                     <td class="nowrap">{{ car.year }}</td>
+                     <td>{{ car.kw }}</td>
+                     <td>{{ car.hp }}</td>
+                     <td>{{ car.displacement }}</td>
+                  </tr>
+               </ng-container>
+            </tbody>
+
+         </table>
+
+         <!-- Spinning loading screen -->
+         <mat-spinner *ngIf="loading" color="primary" class="spinner"></mat-spinner>
+
+      </div>
+
+   </mat-sidenav>
+
+   <!-- Mobile sidenav -->
+   <mat-sidenav *ngIf="menuMode" class="mobile-sidenav" [autoFocus]="false" #mobileSidenav>
+
+      <div class="mobile-text-container">
+         <p class="name">{{ getName() }}</p>
+         <p class="email">{{ getEmail() }}</p>
+      </div>
+
+      <div class="accordion-container">
+         <mat-accordion class="accordion">
+
+            <!-- 1. expansion panel: Price offer -->
+            <mat-expansion-panel hideToggle routerLink="/main" (click)="closeSidenavs()" disabled>
+               <mat-expansion-panel-header class="grey-text">
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon">home</mat-icon>
+                     Főoldal
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <!-- 2. expansion panel: Car selector -->
+            <mat-expansion-panel hideToggle (click)="switchToCarSelector()" disabled>
+               <mat-expansion-panel-header class="car-selector-expansion-panel-header white-text">
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon white-text">directions_car</mat-icon>
+                     Autó kiválasztása
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <!-- 3. expansion panel: Categories #1 -->
+            <mat-expansion-panel color="primary">
+               <mat-expansion-panel-header>
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon">construction</mat-icon>
+                     Garázs felszerelések
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+
+               <li><a>Szerszámok</a></li>
+               <li><a>Garázs berendezések</a></li>
+               <li><a>Munkavédelmi kellékek</a></li>
+               <li><a>Univerzális tartozékok</a></li>
+            </mat-expansion-panel>
+
+
+            <!-- 4. expansion panel: Categories #2 -->
+            <mat-expansion-panel>
+               <mat-expansion-panel-header>
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon">water_drop</mat-icon>
+                     Egyéb termékek
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+
+               <li><a>Autóápolás</a></li>
+               <li><a>Beltér</a></li>
+               <li><a>Kültér</a></li>
+               <li><a>Folyadékok</a></li>
+            </mat-expansion-panel>
+
+            <!-- 5. expansion panel: Profile -->
+            <mat-expansion-panel>
+               <mat-expansion-panel-header>
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon">person</mat-icon>
+                     Profil
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+
+               <li><a>Személyes adatok</a></li>
+               <li><a>Rendelések</a></li>
+               <li><a>Cím módosítása</a></li>
+               <li><a>Kívánságlista</a></li>
+               <li><a>Árajánlatok</a></li>
+               <li><a>Garázs</a></li>
+               <li><a>Kijelentkezés</a></li>
+            </mat-expansion-panel>
+
+            <!-- 6. expansion panel: Price offer -->
+            <mat-expansion-panel hideToggle routerLink="/offer" (click)="closeSidenavs()" disabled>
+               <mat-expansion-panel-header class="grey-text">
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon">sell</mat-icon>
+                     Árajánlat kérése
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <!-- 7. expansion panel: Logout -->
+            <mat-expansion-panel hideToggle (click)="logOut()" disabled>
+               <mat-expansion-panel-header class="logout-expansion-panel-header white-text">
+                  <mat-panel-title>
+                     <mat-icon class="mobile-menu-icon white-text">logout</mat-icon>
+                     Kijelentkezés
+                  </mat-panel-title>
+               </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+         </mat-accordion>
+      </div>
+
+
+   </mat-sidenav>
+
+   <!-- Actual page content -->
+   <mat-sidenav-content class="content-container">
+      <div class="main">
+         <div class="wrapper">
+            <app-main-navigation></app-main-navigation>
+         </div>
+      </div>
+
+      <!-- Footer -->
+      <app-footer></app-footer>
+   </mat-sidenav-content>
+
+</mat-sidenav-container>

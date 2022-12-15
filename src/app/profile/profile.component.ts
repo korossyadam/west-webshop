@@ -55,8 +55,6 @@ export class ProfileComponent implements OnInit {
       this.profileService.getCurrentUser().subscribe(data => {
          this.currentUser = data as User;
 
-         console.log(this.currentUser);
-
          // Query for Cars
          for (let i = 0; i < this.currentUser.garage.length; i++) {
             this.profileService.getCar(this.currentUser.garage[i]).pipe(first()).subscribe(data => {
