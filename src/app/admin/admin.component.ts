@@ -202,7 +202,7 @@ export class AdminComponent implements OnInit {
   /**
    * Opens the dialog where admin can view an Order
    */
-   openOrderDialog(order: Order): void {
+  openOrderDialog(order: Order): void {
     this.dialog.open(this.orderDialogRef, { data: order, width: '1000px' });
   }
 
@@ -215,5 +215,153 @@ export class AdminComponent implements OnInit {
   timestampToDate(timestamp: any): Date {
     return timestamp.toDate();
   }
+
+  /*
+   addQuantity(): void {
+      fetch('assets/quantity.txt').then(response => response.text()).then(data => {
+         var index = 0;
+         var lines = data.split('\n');
+         while (index < 350) {
+            this.carSelectorService.modifyQuantity(lines[index]);
+            index += 1;
+         }
+      });
+   }
+   */
+
+
+  addProducts(): void {
+    fetch('assets/products.txt').then(response => response.text()).then(data => {
+      var index = 257010;
+      var lines = data.split('\n');
+      while (index < 396123) {
+
+        let partNumber = lines[index].replace(/(\r\n|\n|\r)/gm, "");
+        let categories = lines[index + 1].replace(/(\r\n|\n|\r)/gm, "").split('*');
+        let name = lines[index + 2].replace(/(\r\n|\n|\r)/gm, "");
+        let description = lines[index + 3].replace(/(\r\n|\n|\r)/gm, "");
+        let brand = lines[index + 4].replace(/(\r\n|\n|\r)/gm, "");
+        let price = lines[index + 5].replace(/(\r\n|\n|\r)/gm, "");
+        let imgurls = lines[index + 6].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
+        let properties = lines[index + 7].replace(/(\r\n|\n|\r|[|]|')/gm, "").split(", ");
+
+        for (let i = 0; i < properties.length; i++) {
+          if (properties[i]) {
+            properties[i] = properties[i].trim();
+            if (properties[i].charAt(0) == '[') {
+              properties[i] = properties[i].substring(1, properties[i].length);
+            }
+            if (properties[i].charAt(properties[i].length - 1) == ']') {
+              properties[i] = properties[i].substring(0, properties[i].length - 1);
+            }
+            if (properties[i] == '*') {
+              properties.splice(i, 1);
+              i--;
+            }
+          }
+        }
+
+
+        for (let i = 0; i < imgurls.length; i++) {
+          if (imgurls[i])
+            imgurls[i] = imgurls[i].trim();
+        }
+
+        let stock = 0;
+        let storages = lines[index + 8].replace(/(\r\n|\n|\r|[|]|')/gm, "").split(',');
+        for (let i = 0; i < storages.length; i++) {
+          let stockString = (storages[i].replace('[', '').replace(']', '').replace('>', '').split('/')[2]);
+          if (stockString) {
+            stock += parseInt(stockString.trim());
+          } else {
+            stock += 0;
+          }
+        }
+
+        let factoryNumbers = lines[index + 9].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
+        let returnable = lines[index + 10].replace(/(\r\n|\n|\r)/gm, "").toLowerCase() == 'true';
+        let carIndexes = lines[index + 11].replace(/(\r\n|\n|\r)/gm, "").replace(' ', '').split(',');
+
+        for (let i = 0; i < factoryNumbers.length; i++) {
+          if (factoryNumbers[i])
+            factoryNumbers[i] = factoryNumbers[i].trim();
+        }
+
+        for (let i = 0; i < carIndexes.length; i++) {
+          if (carIndexes[i])
+            carIndexes[i] = carIndexes[i].trim();
+        }
+
+        let newProduct = new Product(partNumber, name, description, categories, -1, brand, price, properties, factoryNumbers, stock, returnable, imgurls, carIndexes);
+        //console.log(newProduct);
+        //this.carSelectorService.addProduct(Object.assign({}, newProduct)).then(res => {
+        //console.log(partNumber + ' was added');
+        //});
+
+        index += 13;
+      }
+
+    });
+  }
+
+
+  /*
+  addChassis(): void {
+    fetch('assets/chassis.txt').then(response => response.text()).then(data => {
+    var index = 0;
+    var lines = data.split('\n');
+    while (index < 26904) {
+          var chassisIndex = lines[index];
+          var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
+          var name = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
+          var year = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
+ 
+          var hasImg = true;
+          var hasImgString = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
+          if (hasImgString == 'false') {
+           hasImg = false;
+          }
+ 
+          var chassy = new Chassis(parseInt(chassisIndex), brand, name, year, hasImg);
+          console.log(chassy);
+ 
+          this.carSelectorService.addChassis('chassis', Object.assign({}, chassy));
+          index += 6;
+        }
+        
+      });
+      
+    }
+    */
+
+  /*
+  addCars(): void {
+    fetch('assets/cars.txt').then(response => response.text()).then(data => {
+      var index = 0;
+      var lines = data.split('\n');
+      while(index < 185364){
+        var carIndex = lines[index];
+        var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
+        var chassisIndex = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
+        var chassis = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
+        var engine = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
+        var engineCode = lines[index+5].replace(/(\r\n|\n|\r)/gm, "");
+        var year = lines[index+6].replace(/(\r\n|\n|\r)/gm, "");
+        var kw = lines[index+7].replace(/(\r\n|\n|\r)/gm, "");
+        var hp = lines[index+8].replace(/(\r\n|\n|\r)/gm, "");
+        var displacement = lines[index+9].replace(/(\r\n|\n|\r)/gm, "");
+        var fuel = lines[index+10].replace(/(\r\n|\n|\r)/gm, "");
+ 
+        var car = new Car(parseInt(carIndex), parseInt(chassisIndex), brand, chassis, engine, engineCode, kw, hp, displacement, year, fuel);
+        console.log(car);
+ 
+        this.carSelectorService.addCars('cars', Object.assign({}, car));
+        index += 12;
+      }
+      
+    });
+    
+  }
+  */
 
 }
