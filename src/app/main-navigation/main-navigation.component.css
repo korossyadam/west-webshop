@@ -476,6 +476,16 @@ nav ul ul ul div {
    display: none;
 }
 
+/* Mobile login styles */
+.mobile-login {
+   display: none;
+}
+
+.login-text {
+   position: relative;
+   top: -6px;
+}
+
 /* Login buttons when user is not logged in */
 .login-buttons-container {
    position: absolute;
@@ -533,6 +543,14 @@ nav ul ul ul div {
 @media screen and (max-width: 1650px) {
    .buttons-inner-container {
       width: 690px;
+   }
+
+   .login-buttons-desktop {
+      display: none;
+   }
+
+   .mobile-login {
+      display: block;
    }
 }
 
@@ -607,6 +625,14 @@ nav ul ul ul div {
 
    .cart-indicator-text {
       margin: -5px 0px 0px -2px;
+   }
+
+   .login-text {
+      display: none;
+   }
+
+   .mobile-login {
+      margin-right: -25px;
    }
 
 }
@@ -754,5 +780,10 @@ nav ul ul ul div {
 
    .cart-container {
       right: 18%;
+   }
+
+   .mobile-login {
+      position: relative;
+      left: 15px;
    }
 }
