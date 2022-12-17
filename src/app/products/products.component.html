@@ -1,10 +1,12 @@
 <div class="content-container">
   <div class="content-inner-container">
 
+   <!-- Loading spinner -->
     <div *ngIf="initialLoading" class="initial-spinner-container">
       <mat-spinner class="initial-spinner" diameter="140"></mat-spinner>
     </div>
 
+    <!-- No products found message -->
     <div *ngIf="!initialLoading && products.length == 0" class="no-results-container">
       <p>Nincs találat.</p>
     </div>
@@ -21,6 +23,7 @@
       </select>
     </mat-card>
 
+    <!-- Table of products -->
     <table *ngIf="!initialLoading && products.length > 0" class="table" matSort (matSortChange)="sortData($event)">
 
       <!-- Table head -->
@@ -38,12 +41,18 @@
 
       <!-- Table body -->
       <tbody>
-        <tr *ngFor="let product of activeProducts">
+        <tr *ngFor="let product of activeProducts; let i = index;">
 
           <!-- Product image -->
           <td>
             <div class="product-img-container">
-              <img class="product-img" src="{{ product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}" [routerLink]="['/product', product.partNumber]">
+               <div *ngIf="product.imgurls.length == 0" class="no-img-container">
+                  <mat-icon class="no-img">image_not_supported</mat-icon>
+               </div>
+               <ng-container *ngIf="product.imgurls.length > 0">
+                  <img [hidden]="loadFlags[i]" class="product-img" src="{{ product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}" [routerLink]="['/product', product.partNumber]" (load)="disableLoadFlag(i)">
+                  <mat-spinner *ngIf="loadFlags[i]" [diameter]="50"></mat-spinner>
+               </ng-container>
             </div>
           </td>
 
@@ -78,7 +87,7 @@
             <div class="amount-container">
               <div class="amount-button input-negative" (click)="decrementInputValue(product.partNumber)">-</div>
               <input [id]="product.partNumber" class="amount-input" type="number" value="1" #quantity>
-              <div class="amount-button input-positive" (click)="incrementInputValue(product.partNumber)">+</div>
+              <div class="amount-button input-positive" (click)="incrementInputValue(product.partNumber, product.stock)">+</div>
             </div>
 
             <button mat-raised-button class="cart-button" (click)="addToCart(product)">Kosárba</button>
@@ -91,6 +100,7 @@
           </td>
         </tr>
 
+        <!-- No products found after filtering message -->
         <tr *ngIf="activeProducts.length == 0">
           <td colspan="8">
             <div class="no-such-product-container">
@@ -101,8 +111,6 @@
 
       </tbody>
     </table>
-
-    
 
   </div>
 </div>

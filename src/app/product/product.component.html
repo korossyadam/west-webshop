@@ -32,7 +32,9 @@
                <!-- Product image -->
                <div class="product-img-container">
                   <img *ngIf="selectedImageUrl != ''" class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
-                  <img *ngIf="selectedImageUrl == ''" class="product-img no-img" src="https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png">
+                  <div class="no-img-container">
+                     <mat-icon *ngIf="selectedImageUrl == ''" class="no-img">image_not_supported</mat-icon>
+                  </div>
                </div>
 
                <!-- Product info-->

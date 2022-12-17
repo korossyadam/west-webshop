@@ -70,8 +70,17 @@
    opacity: 1;
 }
 
+.no-img-container {
+   display: flex;
+   min-width: 300px;
+   justify-content: center;
+   align-items: center;
+   height: inherit;
+}
+
 .no-img {
    cursor: default;
+   transform: scale(9);
 }
 
 .product-part-number {

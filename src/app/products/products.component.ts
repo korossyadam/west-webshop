@@ -16,6 +16,9 @@ export class ProductsComponent implements OnInit {
    public products: Product[] = [];
    public activeProducts: Product[] = [];
 
+   // Keeps track of unloaded images to display spinners in their place
+   public loadFlags: boolean[] = [];
+
    // Static functions
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
@@ -24,9 +27,11 @@ export class ProductsComponent implements OnInit {
    // Initial loading flag
    public initialLoading: boolean = true;
 
+   // Variables used to filter
    public onlyInStock: boolean = false;
    public selectedBrand: string = 'all';
 
+   // Populated by unique brands from all displayed products
    public brands: string[] = [];
 
    constructor(private route: ActivatedRoute, private utilsService: UtilsService, private productsService: ProductsService) { }
@@ -58,6 +63,7 @@ export class ProductsComponent implements OnInit {
                this.products.push(newProduct);
             }
             this.activeProducts = this.products;
+            this.setLoadFlags();
 
             this.getDistinctBrands();
             this.initialLoading = false;
@@ -80,6 +86,24 @@ export class ProductsComponent implements OnInit {
          }
       });
 
+   }
+
+   /**
+    * Populates loadFlags[] with 'true' values
+    */
+   setLoadFlags(): void {
+      let len = this.products.length;
+      this.loadFlags = new Array(len).fill(true);
+   }
+
+   /**
+    * Sets a loading flag to 'false' at a given index
+    * Gets called when an image is done loading
+    * 
+    * @param index The index of the flag to modify
+    */
+   disableLoadFlag(index: number): void {
+      this.loadFlags[index] = false;
    }
 
    getDistinctBrands(): void {
@@ -138,9 +162,9 @@ export class ProductsComponent implements OnInit {
    * Increments the cart button value by 1
    * Does not increment if incremented value would be higher than the avaible product stock
    */
-   incrementInputValue(inputId: string): void {
+   incrementInputValue(inputId: string, maxValue: number): void {
       let element = (<HTMLInputElement>document.getElementById(inputId));
-      if (parseInt(element.value) >= 7)
+      if (parseInt(element.value) >= maxValue)
          return;
 
       element.value = (parseInt(element.value) + 1).toString();
