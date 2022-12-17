@@ -1,50 +1,68 @@
 <div class="content-container">
    <div class="content-inner-container">
 
+      <div *ngIf="initialLoading" class="spinner-container">
+         <mat-spinner class="car-spinner" [diameter]="150"></mat-spinner>
+      </div>
+
       <!-- This section contains data about the current Car -->
-      <div *ngIf="currentCar" class="car-container">
-         <img class="car-img" src="https://storage.googleapis.com/west-webshop.appspot.com/{{ currentCar.chassisIndex }}.png" alt="">
-         <p>{{ currentCar.brand }}</p>
-         <p>{{ currentCar.chassis }}</p>
-         <p>{{ currentCar.engine }} ({{ currentCar.hp }}LE)</p>
-         <mat-divider></mat-divider>
-         <div class="car-info">
-            <p>Gyártási év: <span>{{ currentCar.year }}</span></p>
-            <p>Teljesítmény [LE]: <span>{{ currentCar.hp }}</span></p>
-            <p>Teljesítmény [KW]: <span>{{ currentCar.kw }}</span></p>
-            <p>Hengerűrtartalom: <span>{{ currentCar.displacement }}</span></p>
-            <p>Motorkódok: <span>{{ currentCar.engineCode }}</span></p>
-            <p>Üzemanyag: <span>{{ currentCar.fuel }}</span></p>
+      <div class="car-container">
+
+         
+
+         <div *ngIf="!initialLoading && currentCar">
+
+            <img class="car-img" src="https://storage.googleapis.com/west-webshop.appspot.com/{{ currentCar.chassisIndex }}.png" alt="">
+            <p>{{ currentCar.brand }}</p>
+            <p>{{ currentCar.chassis }}</p>
+            <p>{{ currentCar.engine }} ({{ currentCar.hp }}LE)</p>
+            <mat-divider></mat-divider>
+
+            <div class="car-info">
+               <p>Gyártási év: <span>{{ currentCar.year }}</span></p>
+               <p>Teljesítmény [LE]: <span>{{ currentCar.hp }}</span></p>
+               <p>Teljesítmény [KW]: <span>{{ currentCar.kw }}</span></p>
+               <p>Hengerűrtartalom: <span>{{ currentCar.displacement }}</span></p>
+               <p>Motorkódok: <span>{{ currentCar.engineCode }}</span></p>
+               <p>Üzemanyag: <span>{{ currentCar.fuel }}</span></p>
+            </div>
+
+            <button mat-raised-button class="garage-button" color="primary" (click)="addToGarage()">JÁRMŰ MENTÉSE</button>
          </div>
 
-         <button mat-raised-button class="garage-button" color="primary" (click)="addToGarage()">JÁRMŰ MENTÉSE</button>
       </div>
 
       <!-- This section contains the parts -->
       <div class="parts-container">
 
-         <div *ngIf="this.originalTreeData.length == 0">
-            Ehhez a járműhőz még nincsen alkatrészünk! Nézz vissza később.
+         <div *ngIf="!initialLoading">
+            <div *ngIf="this.originalTreeData.length == 0">
+               Ehhez a járműhőz még nincsen alkatrészünk! Nézz vissza később.
+            </div>
+   
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+   
+               <mat-tree-node class="node" *matTreeNodeDef="let node" matTreeNodePadding [routerLink]="['/products', node.name]">
+                  <button mat-icon-button disabled></button>
+                  <p>{{node.name}} ({{node.amount}})</p>
+               </mat-tree-node>
+   
+               <!-- This is the tree node template for expandable nodes -->
+               <mat-tree-node class="node" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle (click)="getProducts(node)">
+                  <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name">
+                     <mat-icon class="mat-icon-rtl-mirror">
+                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                     </mat-icon>
+                  </button>
+                  {{node.name}} ({{node.amount}})
+               </mat-tree-node>
+   
+            </mat-tree>
          </div>
 
-         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-
-            <mat-tree-node class="node" *matTreeNodeDef="let node" matTreeNodePadding [routerLink]="['/products', node.name]">
-               <button mat-icon-button disabled></button>
-               <p>{{node.name}} {{node.amount}}</p>
-            </mat-tree-node>
-
-            <!-- This is the tree node template for expandable nodes -->
-            <mat-tree-node class="node" *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle (click)="getProducts(node)">
-               <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name">
-                  <mat-icon class="mat-icon-rtl-mirror">
-                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                  </mat-icon>
-               </button>
-               {{node.name}} {{node.amount}}
-            </mat-tree-node>
-
-         </mat-tree>
+         
+         
       </div>
+      
    </div>
 </div>

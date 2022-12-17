@@ -29,7 +29,7 @@ export class CarService {
 
   // Get Products
   getProducts(carIndex: string, partCategory: string): Observable<Product[]> {
-    return this.afs.collection("products", ref => ref.where("carIndexes", "array-contains", carIndex.toString()).where('secondCategory', '==', partCategory).orderBy('price', 'asc').limit(10)).valueChanges() as Observable<Product[]>;
+    return this.afs.collection("products", ref => ref.where("carIndexes", "array-contains", carIndex.toString()).where('secondCategory', '==', partCategory).orderBy('price', 'asc').limit(100)).valueChanges() as Observable<Product[]>;
   }
 
   addToGarage(carIndex: number): Promise<void> {

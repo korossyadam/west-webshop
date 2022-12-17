@@ -1,20 +1,25 @@
 .content-container {
-   top: 90px;
-   margin: 0 auto;
    width: 100%;
+   margin: 0 auto;
+   margin-top: 60px;
 }
 
 .content-inner-container {
    width: 1300px;
    margin: 0 auto;
    margin-bottom: 60px;
+   overflow: auto;
 }
 
 .car-container {
+   display: flex;
    width: 350px;
+   min-height: 650px;
    text-align: center;
    float: left;
    margin-bottom: 230px;
+   justify-content: center;
+   align-items: center;
 }
 
 .car-container p {
@@ -53,4 +58,20 @@
    color: var(--color-primary);
    background-color: #f2f2f2;
    transition: 0.25s;
+}
+
+.spinner-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+}
+
+.car-spinner {
+   margin-top: 100px;
+}
+
+.products-spinner {
+   margin-top: 50px;
 }
