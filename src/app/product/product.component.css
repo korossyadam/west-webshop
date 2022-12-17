@@ -55,7 +55,6 @@
    width: fit-content;
    height: 255px;
    max-width: 300px;
-   border: 1px solid rgba(0, 0, 0, 0.12);
    float: left;
    margin: 0px 10px;
 }
@@ -116,7 +115,7 @@
 .price-container {
    float: right;
    width: 300px;
-   height: 300px;
+   height: 400px;
    padding: 20px;
 }
 
@@ -139,9 +138,10 @@
 }
 
 .product-final-price {
-   font-size: 24px;
-   font-weight: 500;
+   font-size: 26px;
+   font-weight: 600;
    text-align: right;
+   color: var(--color-primary);
 }
 
 .product-net-price {
@@ -228,24 +228,26 @@
 }
 
 .info-button-selected {
-   box-sizing: border-box;
-   -moz-box-sizing: border-box;
-   -webkit-box-sizing: border-box;
    border-bottom: 2px solid var(--color-primary);
+   color: var(--color-primary);
 }
 
 .button-properties {
    float: left;
+   transition: color 0.25s linear, background-color 0.25s linear;
 }
 
 .button-factory-numbers {
    float: right;
+   transition: color 0.25s linear, background-color 0.25s linear;
 }
 
 .button-properties:hover,
 .button-factory-numbers:hover {
-   background-color: #f0f0f0;
+   color: var(--color-primary);
+   background-color: #e7e7e7;
    cursor: pointer;
+   transition: color 0.25s linear, background-color 0.25s linear;
 }
 
 .properties-table {
@@ -344,6 +346,24 @@
 
 .forward {
    right: 20px;
+}
+
+.in-stock {
+   color: green;
+   font-size: 18px;
+   font-weight: 600;
+}
+
+.check-icon {
+   position: relative;
+   top: 5px;
+}
+
+.shipping-info {
+   margin-top: 10px;
+   text-align: center;
+   color: green;
+   font-weight: 600;
 }
 
 .modal-img {
