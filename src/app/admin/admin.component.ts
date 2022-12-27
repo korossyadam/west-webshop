@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs';
 import { Offer } from '../models/offer.model';
@@ -26,15 +26,33 @@ export class AdminComponent implements OnInit {
   @ViewChild('offerDialogRef') offerDialogRef!: TemplateRef<any>;
   @ViewChild('orderDialogRef') orderDialogRef!: TemplateRef<any>;
 
+  // This variable keeps track of how many inputs should be visible for category selection
+  public specialCategoryInputs: number[] = [-1];
+
+  // The images to upload when uploading a new Product
   public productFiles: string[] = [];
 
-  // Form for offer query
+  // Images that are visible when updating a Product
+  public activeImageUrls: string[] = [];
+
+  // Images that are going to be deleted when updating a Product
+  public deletedImageUrls: string[] = [];
+
+  // Form for adding Products
+  public addProductForm = new FormGroup({
+   partNumber: new FormControl('', [Validators.required])
+  })
+
+  // This variable stores validation errors regarding the Product form
+  public productFormError = '';
+
+  // Form for Offer query
   public offerRange = new FormGroup({
     start: new FormControl(new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)),
     end: new FormControl(new Date()),
   });
 
-  // Form for order query
+  // Form for Order query
   public orderRange = new FormGroup({
     start: new FormControl(new Date(Date.now() - 14 * 24 * 60 * 60 * 1000)),
     end: new FormControl(new Date()),
@@ -50,11 +68,13 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  get partNumberControl() { return this.addProductForm.get('partNumber'); }
+
   /**
    * Opens the dialog where admin can add new Products
    */
   openProductDialog(productToUpdate?: Product): void {
-    this.dialog.open(this.newProductDialogRef, { data: productToUpdate, width: '500px' });
+    this.dialog.open(this.newProductDialogRef, { data: productToUpdate, width: '1000px' });
   }
 
   attemptToOpenUpdateDialog(partNumber: string): void {
@@ -62,9 +82,16 @@ export class AdminComponent implements OnInit {
       if (data.length == 0) {
         this.showSnackBar(partNumber + ' cikkszámú termék nem létezik!', 'Bezárás', 4000);
       } else {
+        this.activeImageUrls = data[0].imgurls;
+        this.deletedImageUrls = [];
         this.openProductDialog(data[0]);
       }
     });
+  }
+
+  deleteImage(index: number): void {
+    this.deletedImageUrls.push(this.activeImageUrls[index]);
+    this.activeImageUrls.splice(index, 1);
   }
 
   /**
@@ -88,6 +115,10 @@ export class AdminComponent implements OnInit {
     this.adminService.deleteProduct(id);
   }
 
+  addSpecialCategory(): void {
+   this.specialCategoryInputs.push(-1);
+  }
+
   /**
    * This function is called every time the file input value changes on new product dialog
    * @param event Contains the newly selected file references
@@ -105,7 +136,18 @@ export class AdminComponent implements OnInit {
    * First, uploads all selected images, and stores their references
    * Next, the Product is saved with an array of the uploaded image's references
    */
-  async addNewProduct(partNumber: string, name: string, description: string, specialCategory: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
+  async addNewProduct(partNumber: string, name: string, description: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
+
+    if (this.addProductForm.get('partNumber').errors?.['required']) {
+        this.productFormError = 'A cikkszám nem lehet üres.'
+        return;
+    }
+
+   for (let i = 0; i < this.specialCategoryInputs.length; i++) {
+      if (this.specialCategoryInputs[i] == -1) {
+         this.specialCategoryInputs.splice(i, 1);
+      }
+   }
 
     // Upload images first
     let imgUrls: string[] = [];
@@ -116,23 +158,32 @@ export class AdminComponent implements OnInit {
     }
 
     // Upload the actual Product
-    let productToUpload = new Product(partNumber, name, description, [], parseInt(specialCategory), brand, price, [], [], parseInt(stock), returnable, imgUrls, []);
-    this.adminService.addProduct(Object.assign({}, productToUpload)).then(res => {
+    let productToUpload = new Product(partNumber, name, description, [], this.specialCategoryInputs, brand, price, [], [], parseInt(stock), returnable, imgUrls, []);
+    this.adminService.uploadData('products', Object.assign({}, productToUpload)).then(() => {
       this.showSnackBar('A termék sikeresen fel lett töltve!', 'Bezár', 4000);
     });
   }
 
-  async updateProduct(originalProduct: Product, uid: string, partNumber: string, name: string, description: string, specialCategory: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
+  async updateProduct(originalProduct: Product, uid: string, partNumber: string, name: string, description: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
     originalProduct.partNumber = partNumber;
     originalProduct.name = name;
     originalProduct.description = description;
-    originalProduct.specialCategory = parseInt(specialCategory);
+    originalProduct.specialCategories = this.specialCategoryInputs;
     originalProduct.brand = brand;
     originalProduct.price = price;
     originalProduct.stock = parseInt(stock);
+
+    if (!returnable)
+        returnable = true;
+
     originalProduct.canBeReturned = returnable;
 
     this.adminService.updateProduct(Object.assign({}, originalProduct), uid).then(res => {
+        this.deletedImageUrls.forEach(src => {
+            console.log(src);
+            this.adminService.deleteImage(src);
+        });
+
       this.showSnackBar('A termék sikeresen módosítva lett!', 'Bezár', 4000);
     });
   }
@@ -206,6 +257,14 @@ export class AdminComponent implements OnInit {
     this.dialog.open(this.orderDialogRef, { data: order, width: '1000px' });
   }
 
+  categorizeProduct(): void {
+    this.adminService.getNextUncategorizedProduct().subscribe(data => {
+        this.activeImageUrls = data[0].imgurls;
+        this.deletedImageUrls = [];
+        this.openProductDialog(data[0]);
+    })
+  }
+
   /**
     * Converts a Firebase Timestamp object to a more readable Date object
     * 
@@ -229,6 +288,30 @@ export class AdminComponent implements OnInit {
    }
    */
 
+   addUncategoriedProducts(): void {
+    fetch('assets/ap_products.txt').then(response => response.text()).then(data => {
+        let lines = data.split('\n');
+        for (let i = 0; i < lines.length-6; i++){
+            let partNumber = lines[i].replace(/(\r\n|\n|\r)/gm, "");
+            let name = lines[i+1].replace(/(\r\n|\n|\r)/gm, "");
+            let brand = lines[i+2].replace(/(\r\n|\n|\r)/gm, "");
+            let price = lines[i+3].replace(/(\r\n|\n|\r)/gm, "");
+            let stock = parseInt(lines[i+4].replace(/(\r\n|\n|\r)/gm, ""));
+            let imgurls = lines[i+5].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
+
+            let description = lines[i+6].replace(/(\r\n|\n|\r)/gm, "");
+
+            i += 7;
+
+            let product = new Product(partNumber, name, description, [], [-2], brand, price, [], [], stock, true, imgurls, []);
+            //this.adminService.uploadData('products', Object.assign({}, product)).then(() => {
+             //   console.log(product.partNumber + ' was uploaded!');
+            //})
+        }
+            
+        
+    });
+   }
 
   addProducts(): void {
     fetch('assets/products.txt').then(response => response.text()).then(data => {
@@ -292,7 +375,7 @@ export class AdminComponent implements OnInit {
             carIndexes[i] = carIndexes[i].trim();
         }
 
-        let newProduct = new Product(partNumber, name, description, categories, -1, brand, price, properties, factoryNumbers, stock, returnable, imgurls, carIndexes);
+        let newProduct = new Product(partNumber, name, description, categories, [], brand, price, properties, factoryNumbers, stock, returnable, imgurls, carIndexes);
         //console.log(newProduct);
         //this.carSelectorService.addProduct(Object.assign({}, newProduct)).then(res => {
         //console.log(partNumber + ' was added');

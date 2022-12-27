@@ -5,7 +5,7 @@
 
 .content-inner-container {
    width: 1600px;
-   min-height: 600px;
+   overflow: auto;
    margin: 0 auto;
    margin-top: 50px;
 }
@@ -19,6 +19,23 @@
 .product-card p {
    margin-bottom: 0;
    clear: both;
+}
+
+.product-dialog {
+    overflow: scroll;
+}
+
+.section-title {
+    margin-bottom: 0;
+    color: grey;
+}
+
+.section-divider {
+    margin-top: 10px;
+}
+
+.delete-img-button {
+    cursor: pointer;
 }
 
 .update-button-container * {
@@ -61,6 +78,10 @@ select {
 
 input[type='file'] {
    margin: 15px 0px;
+}
+
+.error-text {
+    color: red;
 }
 
 /* Offer styles */
@@ -113,7 +134,15 @@ input[type='file'] {
    clear: both;
    float: left;
    margin-top: 25px;
-   margin-bottom: 200px;
+   width: calc(100% - 32px);
+}
+
+/* Dev section stlyes */
+.dev-card {
+   clear: both;
+   float: left;
+   margin-top: 25px;
+   margin-bottom: 300px;
    width: calc(100% - 32px);
 }
 
