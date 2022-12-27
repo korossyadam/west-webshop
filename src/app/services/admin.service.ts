@@ -3,7 +3,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { AngularFirestore, CollectionReference, Query } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Product } from '../models/product.model';
-import { Observable, first, firstValueFrom, map } from 'rxjs';
+import { Observable, firstValueFrom, map } from 'rxjs';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Car } from '../models/car.model';
@@ -46,10 +46,27 @@ export class AdminService {
     return returnValue;
   }
 
+  /**
+   * Deletes an image from storage.
+   *
+   * @param {string} imageUrl The URL of the image to delete.
+   */
+  async deleteImage(imageUrl: string) {
+    this.afbs.refFromURL(imageUrl).delete();
+  }
+
+  getNextUncategorizedProduct(): Observable<Product[]>{
+    return this.afs.collection('products', ref => {
+        let query: CollectionReference | Query = ref;
+        query = query.where('specialCategories', 'array-contains', -2).orderBy('partNumber').limit(1);
+        return query;
+      }).valueChanges() as Observable<Product[]>
+  }
+
   // Upload Data
-  async addProduct(product: Product): Promise<string> {
+  async uploadData(collectionName: string, data: any): Promise<string> {
     const uid = this.afs.createId();
-    await this.afs.collection('products').doc(uid).set(product);
+    await this.afs.collection(collectionName).doc(uid).set(data);
     return uid;
   }
 
@@ -117,23 +134,6 @@ export class AdminService {
       return query;
     }).valueChanges() as Observable<Order[]>;
   }
-
-  // Upload Data
-  async addChassis(collectionName: string, data: Chassis, id?: string): Promise<string> {
-    const uid = id ? id : this.afs.createId();
-    // data.id = uid;
-    await this.afs.collection(collectionName).doc(uid).set(data);
-    return uid;
- }
-
- // Upload Data
- async addCars(collectionName: string, data: Car, id?: string): Promise<string> {
-    const uid = id ? id : this.afs.createId();
-    // data.id = uid;
-    await this.afs.collection(collectionName).doc(uid).set(data);
-    return uid;
- }
-
 
  modifyQuantity(line: string) {
     let parts: string[] = line.split(';');

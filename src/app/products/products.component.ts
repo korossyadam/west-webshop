@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit {
                let price = productParts[3];
                let brand = productParts[4];
 
-               let newProduct = new Product(partNumber, name, '', [], 0, brand, price, [], [], 0, true, [imgurl], []);
+               let newProduct = new Product(partNumber, name, '', [], [], brand, price, [], [], 0, true, [imgurl], []);
                this.products.push(newProduct);
             }
             this.activeProducts = this.products;
