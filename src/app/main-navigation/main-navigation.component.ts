@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
-import { UtilsService } from '../services/utils.service';
+import { Category, UtilsService } from '../services/utils.service';
 
 @Component({
    selector: 'app-main-navigation',
@@ -12,10 +11,8 @@ import { UtilsService } from '../services/utils.service';
 export class MainNavigationComponent implements OnInit {
 
    // Static functions
-   categories = this.utilsService.categories;
    companyPhoneNumber = this.utilsService.companyPhoneNumber;
    companyEmail = this.utilsService.companyEmail;
-   createCategories = this.utilsService.getCategories;
    refreshCart = this.utilsService.refreshCart;
    calculateTotal = this.utilsService.calculateTotal;
    deleteCartItem = this.utilsService.deleteCartItem;
@@ -27,25 +24,30 @@ export class MainNavigationComponent implements OnInit {
    showSnackBar = this.utilsService.openSnackBar;
    openCarSelectorSidenav = this.utilsService.openCarSelectorSidenav;
    openMobileSidenav = this.utilsService.openMobileSidenav;
-   
-   public searchedText: string;
 
+   // Product categories
+   public categories: Category[] = [];
+
+   // Cart variables
    public cartItems = [];
-   public total = 0;
+   public total: number = 0;
 
    constructor(private utilsService: UtilsService, private authService: AuthService, private route: Router) { }
 
    ngOnInit(): void {
+
+      // Get categories from JSON tree
+      this.utilsService.getCategories().then(categories => {
+         this.categories = categories;
+      });
+
+      // Get cartItems
       this.utilsService.cartUpdated.subscribe(newCartData => {
          this.cartItems = newCartData;
          this.total = this.calculateTotal();
       })
 
       this.refreshCart();
-
-      this.createCategories().then(res => {
-         console.log(this.categories);
-      });
    }
 
    /**
@@ -66,6 +68,12 @@ export class MainNavigationComponent implements OnInit {
       this.openMobileSidenav();
    }
 
+   /**
+    * Navigate to product list with searchedText parameter from search bar
+    * No navigation happens in case searchedText does not exceed minimum character requirement
+    * 
+    * @param searchedText The text extracted from search bar
+    */
    searchForProduct(searchedText: string): void {
       const minimumLength = 3;
 
