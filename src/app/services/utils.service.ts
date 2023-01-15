@@ -4,6 +4,11 @@ import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { EventEmitter } from "@angular/core";
 import { Product } from "../models/product.model";
 
+export class Category {
+  name: string;
+  children: Category[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +22,9 @@ export class UtilsService {
   public openSidenavEvent: EventEmitter<any> = new EventEmitter();
   public openMobileSidenavEvent: EventEmitter<any> = new EventEmitter();
 
+  // Global accessed categories
+  public categories: Category[];
+
   // Globally accessed cart variables
   public cartUpdated: EventEmitter<any[]> = new EventEmitter();
   public cartItems = [];
@@ -24,13 +32,24 @@ export class UtilsService {
 
   constructor(public sanitizer: DomSanitizer, private _snackBar: MatSnackBar) { }
 
+  /**
+   * Reads categories.json and populates global categories[]
+   * Keep in mind this function is asynchronous
+   */
+  async getCategories(): Promise<Category[]> {
+    const response = await fetch('/assets/categories.json');
+    const data = await response.json();
+    this.categories = data;
+    return this.categories;
+  }
+
   openCarSelectorSidenav = (): void => {
     this.openSidenavEvent.emit();
-  }
+  };
 
   openMobileSidenav = (): void => {
     this.openMobileSidenavEvent.emit();
-  }
+  };
 
   /**
    * Adds a Product to the cart
@@ -77,9 +96,9 @@ export class UtilsService {
   }
 
   /**
-    * Refreshes the global cartItems variable
-    * Emits an event to notify all components using this public cart
-    */
+   * Refreshes the global cartItems variable
+   * Emits an event to notify all components using this public cart
+   */
   refreshCart(): void {
     this.cartItems = [];
     this.total = 0;
@@ -95,11 +114,11 @@ export class UtilsService {
   }
 
   /**
-     * Deletes an item from the cart
-     * Modifies both cartItems[], and localStorage cart
-     * 
-     * @param index The index of the Product to remove in cartItems[]
-     */
+   * Deletes an item from the cart
+   * Modifies both cartItems[], and localStorage cart
+   * 
+   * @param index The index of the Product to remove in cartItems[]
+   */
   deleteCartItem(index: number): void {
     this.cartItems.splice(index, 1);
     this.calculateTotal();

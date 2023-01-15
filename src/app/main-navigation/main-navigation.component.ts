@@ -12,8 +12,10 @@ import { UtilsService } from '../services/utils.service';
 export class MainNavigationComponent implements OnInit {
 
    // Static functions
+   categories = this.utilsService.categories;
    companyPhoneNumber = this.utilsService.companyPhoneNumber;
    companyEmail = this.utilsService.companyEmail;
+   createCategories = this.utilsService.getCategories;
    refreshCart = this.utilsService.refreshCart;
    calculateTotal = this.utilsService.calculateTotal;
    deleteCartItem = this.utilsService.deleteCartItem;
@@ -40,6 +42,10 @@ export class MainNavigationComponent implements OnInit {
       })
 
       this.refreshCart();
+
+      this.createCategories().then(res => {
+         console.log(this.categories);
+      });
    }
 
    /**
