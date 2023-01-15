@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
 import { ProductsComponent } from './products/products.component';
 
@@ -47,15 +46,15 @@ import { CategoriesComponent } from './categories/categories.component';
 import { OfferComponent } from './offer/offer.component';
 import { CarComponent } from './car/car.component';
 import { ProductComponent } from './product/product.component';
-import { FeaturedComponent } from './featured/featured.component';
+import { FeaturedColumnsComponent } from './featured-columns/featured-columns.component';
+import { FeaturedRowsComponent } from './featured-rows/featured-rows.component';
 import { AdminComponent } from './admin/admin.component';
 import { Categories2Component } from './categories2/categories2.component';
-import { AdminGuard } from './services/admin.guard';
+import { FeaturedCategoriesComponent } from './featured-categories/featured-categories.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
     MainNavigationComponent,
     ProductsComponent,
     SidenavComponent,
@@ -68,10 +67,12 @@ import { AdminGuard } from './services/admin.guard';
     OfferComponent,
     CarComponent,
     ProductComponent,
-    FeaturedComponent,
+    FeaturedColumnsComponent,
+    FeaturedRowsComponent,
     CategoriesComponent,
     AdminComponent,
     Categories2Component,
+    FeaturedCategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +107,6 @@ import { AdminGuard } from './services/admin.guard';
     AngularFirestoreModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [SidenavComponent]
 })
 export class AppModule { }
