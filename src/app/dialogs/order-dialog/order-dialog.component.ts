@@ -14,6 +14,7 @@ export class OrderDialogComponent implements OnInit {
   addTax = this.utilsService.addTaxToPrice;
   formatPriceToString = this.utilsService.formatPriceToString;
   sanitize = this.utilsService.sanitize;
+  timestampToDate = this.utilsService.timestampToDate;
 
   // The Order whose data to display
   public order: Order;
@@ -23,16 +24,6 @@ export class OrderDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  /**
-    * Converts a Firebase Timestamp object to a more readable Date object
-    * 
-    * @param timestamp The Timestamp to convert
-    * @returns The Date object
-    */
-  timestampToDate(timestamp: any): Date {
-    return timestamp.toDate();
   }
 
 }

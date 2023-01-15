@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
    getTaxNumber = this.utilsService.getTaxNumber;
    getPhoneNumber = this.utilsService.getPhoneNumber;
    showSnackBar = this.utilsService.openSnackBar;
+   timestampToDate = this.utilsService.timestampToDate;
 
    public currentUser: User;
    public orders: Order[];
@@ -150,16 +151,6 @@ export class ProfileComponent implements OnInit {
     */
    openOriginalOfferDialog(offerToOpen: Offer) {
       this.dialog.open(OfferDialogComponent, { data: offerToOpen, width: '1000px' });
-   }
-
-   /**
-    * Converts a Firebase Timestamp object to a more readable Date object
-    * 
-    * @param timestamp The Timestamp to convert
-    * @returns The Date object
-    */
-   timestampToDate(timestamp: any): Date {
-      return timestamp.toDate();
    }
 
 }

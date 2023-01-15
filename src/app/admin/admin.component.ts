@@ -282,16 +282,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  /**
-    * Converts a Firebase Timestamp object to a more readable Date object
-    * 
-    * @param timestamp The Timestamp to convert
-    * @returns The Date object
-    */
-  timestampToDate(timestamp: any): Date {
-    return timestamp.toDate();
-  }
-
   uploadProductsFromTextFile(): void {
 
   }

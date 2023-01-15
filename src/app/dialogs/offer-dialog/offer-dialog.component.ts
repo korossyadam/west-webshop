@@ -13,6 +13,7 @@ export class OfferDialogComponent implements OnInit {
 
   // Static functions
   showSnackBar = this.utilsService.openSnackBar;
+  timestampToDate = this.utilsService.timestampToDate;
 
   public offer: Offer;
   public isEditable = false;
@@ -45,16 +46,6 @@ export class OfferDialogComponent implements OnInit {
       this.showSnackBar('A válasz üzenet nem lehet üres!', 'Bezár', 4000);
     }
 
-  }
-
-  /**
-    * Converts a Firebase Timestamp object to a more readable Date object
-    * 
-    * @param timestamp The Timestamp to convert
-    * @returns The Date object
-    */
-  timestampToDate(timestamp: any): Date {
-    return timestamp.toDate();
   }
 
 }

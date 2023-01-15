@@ -189,6 +189,16 @@ export class UtilsService {
   }
 
   /**
+    * Converts a Firebase Timestamp object to a more readable Date object
+    * 
+    * @param timestamp The Timestamp to convert
+    * @returns The Date object
+    */
+  timestampToDate(timestamp: any): Date {
+    return timestamp.toDate();
+  }
+
+  /**
   * Call this function on any URL that does not get display due to security error
   * @param url The URL to sanitize
   * @returns Sanitized URL
