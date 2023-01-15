@@ -241,24 +241,3 @@
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
    <button mat-raised-button class="dialog-ok-button" color="warn" mat-dialog-close (click)="deleteProduct(product.id)">Törlés</button>
 </ng-template>
-
-
-<!-- Dialog that opens when we want to answer an Offer -->
-<ng-template #offerDialogRef let-offer>
-   <p class="dialog-title">Válaszadás egy árajánlatra</p>
-   <mat-divider class="dialog-divider"></mat-divider>
-
-   <!-- Body -->
-   <p class="offer-row"><span class="underlined">Gyártmány:</span> {{ offer.brand }}</p>
-   <p class="offer-row"><span class="underlined">Évjárat:</span> {{ offer.year }}</p>
-   <p class="offer-row"><span class="underlined">Motor:</span> {{ offer.engine }}</p>
-   <p class="offer-row"><span class="underlined">Karosszéria:</span> {{ offer.chassis }}</p>
-   <p class="offer-row"><span class="underlined">Klímaberendezés:</span> {{ offer.ac }}</p>
-   <p class="offer-row"><span class="underlined">Alvázszám:</span> {{ offer.vin }}</p>
-   <p class="offer-row"><span class="underlined">Üzenet:</span> {{ offer.message }}</p>
-   <textarea placeholder="Válaszüzenet..." #answer></textarea>
-
-   <!-- Buttons -->
-   <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
-   <button mat-raised-button class="dialog-ok-button" color="primary" mat-dialog-close (click)="answerOffer(offer, answer.value)">Válaszadás</button>
-</ng-template>

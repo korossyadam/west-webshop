@@ -115,10 +115,6 @@ input[type='file'] {
    margin: 4px 0px;
 }
 
-.underlined {
-   text-decoration: underline;
-}
-
 .offer-card input,
 .order-card input {
    width: 100% !important;

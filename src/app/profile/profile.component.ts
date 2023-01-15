@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from 
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { first, Timestamp } from 'rxjs';
+import { OfferDialogComponent } from '../dialogs/offer-dialog/offer-dialog.component';
 import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 import { Address } from '../models/address.model';
 import { Car } from '../models/car.model';
@@ -32,10 +33,6 @@ export class ProfileComponent implements OnInit {
    getTaxNumber = this.utilsService.getTaxNumber;
    getPhoneNumber = this.utilsService.getPhoneNumber;
    showSnackBar = this.utilsService.openSnackBar;
-
-   // References to openable dialogues
-   @ViewChild('offerOriginalDialogRef') offerOriginalDialogRef!: TemplateRef<any>;
-   @ViewChild('offerAnsweredDialogRef') offerAnsweredDialogRef!: TemplateRef<any>;
 
    public currentUser: User;
    public orders: Order[];
@@ -152,16 +149,7 @@ export class ProfileComponent implements OnInit {
     * @param offerToOpen The Offer whose data we need to display
     */
    openOriginalOfferDialog(offerToOpen: Offer) {
-      this.dialog.open(this.offerOriginalDialogRef, { data: offerToOpen, width: '1000px' });
-   }
-
-   /**
-    * Opens up the Offer dialog, with answer
-    * 
-    * @param offerToOpen The Offer whose data we need to display
-    */
-   openAnsweredOfferDialog(offerToOpen: Offer) {
-      this.dialog.open(this.offerAnsweredDialogRef, { data: offerToOpen, width: '1000px' });
+      this.dialog.open(OfferDialogComponent, { data: offerToOpen, width: '1000px' });
    }
 
    /**

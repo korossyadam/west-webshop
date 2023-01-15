@@ -1,0 +1,22 @@
+.body-container {
+   max-width: 800px;
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
+}
+
+.body-container span {
+   font-style: italic;
+   font-weight: bold;
+   white-space: nowrap;
+}
+
+.body-container p {
+   margin: 9px 0px;
+}
+
+.float-right {
+   float: right;
+}

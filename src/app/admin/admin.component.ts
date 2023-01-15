@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs';
+import { OfferDialogComponent } from '../dialogs/offer-dialog/offer-dialog.component';
 import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
@@ -27,7 +28,6 @@ export class AdminComponent implements OnInit {
   // References to openable dialogs
   @ViewChild('newProductDialogRef') newProductDialogRef!: TemplateRef<any>;
   @ViewChild('deleteProductDialogRef') deleteProductDialogRef!: TemplateRef<any>;
-  @ViewChild('offerDialogRef') offerDialogRef!: TemplateRef<any>;
 
   public categories: string[];
 
@@ -249,21 +249,8 @@ export class AdminComponent implements OnInit {
    * @param offer The Offer to answer
    */
   openOfferDialog(offer: Offer): void {
-    this.dialog.open(this.offerDialogRef, { data: offer, width: '1000px' });
-  }
-
-  /**
-   * Answers an Offer
-   * Sets both 'answer' and 'answered' fields to appropriate value
-   * @param offer The Offer we want to update
-   * @param answer The answer string
-   */
-  answerOffer(offer: Offer, answer: string): void {
-    offer.answer = answer;
-    offer.answered = true;
-    this.adminService.updateOffer(offer).then(res => {
-      this.showSnackBar('Árajánlat sikeresen megválaszolva!', 'Bezár', 4000);
-    });
+    offer['editable'] = true;
+    this.dialog.open(OfferDialogComponent, { data: offer, width: '1000px' });
   }
 
   /**

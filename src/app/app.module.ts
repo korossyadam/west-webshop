@@ -52,6 +52,7 @@ import { AdminComponent } from './admin/admin.component';
 import { Categories2Component } from './categories2/categories2.component';
 import { FeaturedCategoriesComponent } from './featured-categories/featured-categories.component';
 import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component';
+import { OfferDialogComponent } from './dialogs/offer-dialog/offer-dialog.component';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.compon
     Categories2Component,
     FeaturedCategoriesComponent,
     OrderDialogComponent,
+    OfferDialogComponent,
   ],
   imports: [
     BrowserModule,

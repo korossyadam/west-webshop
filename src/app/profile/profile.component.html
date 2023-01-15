@@ -152,10 +152,7 @@
                         <td *ngIf="offer.answered" class="offer-answered">Megválaszolva</td>
                         <td *ngIf="!offer.answered" class="offer-pending">Feldolgozás alatt</td>
                         <td>
-                           <button mat-raised-button color="primary" (click)="openOriginalOfferDialog(offer)">Eredeti üzenet</button>
-                        </td>
-                        <td *ngIf="offer.answered">
-                           <button mat-raised-button color="primary" (click)="openAnsweredOfferDialog(offer)">Válasz üzenet</button>
+                           <button mat-raised-button color="primary" (click)="openOriginalOfferDialog(offer)">Megtekintés</button>
                         </td>
                      </tr>
                   </tbody>
@@ -215,21 +212,3 @@
 
    </div>
 </div>
-
-<!-- Dialog that opens when inspecting an Offer's original question -->
-<ng-template #offerOriginalDialogRef let-offer>
-   <p class="dialog-title">Árajánlat: {{ timestampToDate(offer.date).toLocaleString() }}</p>
-   <div *ngIf="offer">
-      <p>{{ offer.message }}</p>
-      <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
-   </div>
-</ng-template>
-
-<!-- Dialog that opens when inspecting an Offer's original question -->
-<ng-template #offerAnsweredDialogRef let-offer>
-   <p class="dialog-title">Árajánlat: {{ timestampToDate(offer.date).toLocaleString() }}</p>
-   <div *ngIf="offer">
-      <p>{{ offer.answer }}</p>
-      <button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
-   </div>
-</ng-template>

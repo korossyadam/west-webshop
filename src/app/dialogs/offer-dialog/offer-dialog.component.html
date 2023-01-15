@@ -1,0 +1,35 @@
+<div *ngIf="offer">
+
+   <!-- Title -->
+   <p>Árajánlat: {{ timestampToDate(offer.date).toLocaleString() }}</p>
+   <mat-divider></mat-divider>
+
+   <!-- Body -->
+   <div class="body-container">
+      <p><span>Gyártmány:&nbsp;&nbsp;</span>{{ offer.brand }}</p>
+      <p><span>Évjárat:&nbsp;&nbsp;</span>{{ offer.year }}</p>
+      <p><span>Motor:&nbsp;&nbsp;</span>{{ offer.engine }}</p>
+      <p><span>Karosszéria:&nbsp;&nbsp;</span>{{ offer.chassis }}</p>
+      <p><span>Klímaberendezés:&nbsp;&nbsp;</span>{{ offer.ac }}</p>
+      <p><span>Alvázszám:&nbsp;&nbsp;</span>{{ offer.vin }}</p>
+      <p><span>Eredeti üzenet:&nbsp;&nbsp;</span>{{ offer.message }}</p>
+
+      <div *ngIf="offer.answered">
+         <p><span>Válasz üzenet: </span>{{ offer.answer }}</p>
+      </div>
+
+   </div>
+
+   <!-- Footer can change depending where offer is opened from -->
+   <div *ngIf="isEditable">
+      <textarea placeholder="Válaszüzenet..." #answer></textarea>
+
+      <button mat-raised-button mat-dialog-close>Vissza</button>
+      <button mat-raised-button class="float-right" color="primary" mat-dialog-close (click)="answerOffer(offer, answer.value)">Válaszadás</button>
+   </div>
+
+   <div *ngIf="!isEditable">
+      <button mat-raised-button class="float-right" color="primary" mat-dialog-close>Vissza</button>
+   </div>
+
+</div>
