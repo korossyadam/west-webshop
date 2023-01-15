@@ -1,0 +1,70 @@
+.content-container {
+   width: 1000px;
+   margin: 0 auto;
+   margin-bottom: 300px;
+}
+
+.product-container {
+   display: flex;
+   width: 1000px;
+   margin-top: 50px;
+}
+
+.image-container {
+   display: block;
+   width: 400px;
+   min-width: 400px;
+   max-height: 255px;
+   float: right;
+   background-color: white;
+   cursor: pointer;
+   box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 10%);
+   padding: 20px 0px;
+}
+
+.image {
+   width: 100%;
+   max-height: 255px;
+   object-fit: scale-down;
+}
+
+.text-container {
+   float: left;
+   width: 600px;
+}
+
+.description {
+   margin-bottom: 0px;
+}
+
+.price {
+   font-size: 20px;
+   font-weight: 600;
+   color: var(--color-primary);
+   float: left;
+}
+
+.cart-button {
+   float: left;
+   margin-top: 17px;
+   margin-left: 15px;
+}
+
+/* Make image and text switch places every second product */
+.product-container:nth-of-type(odd) .image-container {
+   order: 2;
+   margin-left: 100px;
+}
+
+.product-container:nth-of-type(odd) .text-container {
+   order: 1;
+}
+
+.product-container:nth-of-type(even) .image-container {
+   order: 1;
+   margin-right: 100px;
+}
+
+.product-container:nth-of-type(even) .text-container {
+   order: 2;
+}

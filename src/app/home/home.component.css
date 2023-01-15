@@ -63,3 +63,11 @@
    float: right;
    background-color: #404040;
 }
+
+/* Content styles */
+.content-container {
+   width: 1400px;
+   margin: 0 auto;
+   overflow-x: hidden;
+   overflow-y: auto;
+}

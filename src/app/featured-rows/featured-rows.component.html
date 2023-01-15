@@ -1,0 +1,27 @@
+<div class="content-container">
+
+   <!-- Products ngFor -->
+   <div *ngFor="let product of featuredProducts" class="product-container">
+
+      <!-- Image section -->
+      <div class="image-container">
+         <img [src]="product.imgurls[0]" class="image">
+      </div>
+
+      <!-- Text section -->
+      <div class="text-container">
+
+         <!-- Name and Description -->
+         <h2>{{ product.name }}</h2>
+         <p class="description">{{ product.description }}</p>
+
+         <!-- Price and Add to Cart button -->
+         <div class="price-container">
+            <p class="price">{{ formatPriceToString(product.price) }}</p>
+            <button mat-raised-button class="cart-button" color="primary">Kosárba</button>
+         </div>
+      </div>
+
+   </div>
+
+</div>
