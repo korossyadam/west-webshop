@@ -15,6 +15,7 @@ export interface BillingAddress {
 export interface OrderedProduct {
    partNumber: string;
    name: string;
+   brand: string;
    price: number;
    quantity: number;
    imgurl: string;

@@ -18,7 +18,7 @@
          <p>Termék törlése</p>
          <div class="update-button-container">
             <input placeholder="A termék pontos cikkszáma" #deletePartNumber>
-            <button mat-raised-button color="warn" (click)="attemptToOpenDeleteProductDialog(deletePartNumber.value)">Törlés</button>
+            <button mat-raised-button color="warn" (click)="openDeleteProductDialog(deletePartNumber.value)">Törlés</button>
          </div>
       </mat-card>
 
@@ -142,102 +142,81 @@
          </table>
       </mat-card>
 
+      <!-- Dev card -->
       <mat-card class="dev-card">
          <p>Fejlesztői műveletek</p>
-        
-         <button mat-raised-button (click)="addUncategoriedProducts()">AP Termékek feltöltése</button>
-         <button mat-raised-button (click)="categorizeProduct()">Következő termék kategorizálása</button>
+
+         <div class="dev-section">
+            <p>Termékek</p>
+            <button mat-raised-button (click)="uploadProductsFromTextFile()" color="primary">Termékek feltöltése szöveges fájlból</button>
+         </div>
+
+         <div class="dev-section">
+            <p>AP Termékek</p>
+            <button mat-raised-button (click)="addUncategoriedProducts()" color="primary">AP Termékek feltöltése</button>
+            <button mat-raised-button (click)="categorizeProduct()" color="primary">Következő termék kategorizálása</button>
+         </div>
+
       </mat-card>
 
    </div>
 </div>
 
+
 <!-- Dialog that opens when we want to upload a new Product -->
-<ng-template #newProductDialogRef let-product [formGroup]="addProductForm" class="product-dialog">
+<ng-template #newProductDialogRef let-product class="product-dialog">
    <p *ngIf="product" class="dialog-title">Termék módosítása</p>
    <p *ngIf="!product" class="dialog-title">Új termék hozzáadása</p>
    <mat-divider class="dialog-divider"></mat-divider>
 
-   
+
    <!-- Body -->
    <div mat-dialog-content>
 
-        <div>
-            <p class="section-title">Alapvető adatok</p>
-            <input placeholder="Cikkszám" formControlName="partNumber" [value]="product ? product.partNumber : ''" #partNumber>
-            <input placeholder="Név" [value]="product ? product.name : ''" #name>
-            <input placeholder="Leírás" [value]="product ? product.description : ''" #description>
-            <input placeholder="Márka" [value]="product ? product.brand : ''" #brand>
-            <input placeholder="Nettó ár" [value]="product ? product.price : ''" #price>
-            <input placeholder="Raktár mennyisége" [value]="product ? product.stock : ''" #stock>
-            <mat-checkbox [checked]="product ? product.returnable : true" #returnable>Visszaküldhető</mat-checkbox><br>
-            <mat-divider class="section-divider"></mat-divider>
-        </div>
+      
+      <!-- Basic info -->
+      <div>
+         <p class="section-title">Alapvető adatok</p>
+         <input placeholder="Cikkszám" [value]="product ? product.partNumber : ''" #partNumber>
+         <input placeholder="Név" [value]="product ? product.name : ''" #name>
+         <input placeholder="Leírás" [value]="product ? product.description : ''" #description>
+         <input placeholder="Márka" [value]="product ? product.brand : ''" #brand>
+         <input placeholder="Nettó ár" [value]="product ? product.price : ''" #price>
+         <input placeholder="Raktár mennyisége" [value]="product ? product.stock : ''" #stock>
+         <mat-checkbox [checked]="product ? product.returnable : true" #returnable>Visszaküldhető</mat-checkbox><br>
+         <mat-divider class="section-divider"></mat-divider>
+      </div>
 
-        <div>
-            <p class="section-title">Kategoriák</p>
-            <button mat-raised-button (click)="addSpecialCategory()">Kategória hozzáadása</button><br>
-            <ng-container *ngFor="let categorySelector of specialCategoryInputs; let i = index;">
-               <select #specialCategory [(ngModel)]="product ? product.specialCategories : specialCategoryInputs[i]" [ngModelOptions]="{standalone: true}" >
-                  <option value="-1">Nincs</option>
-                  <option value="0">Egyéb termékek / Autóápolás / Tisztítás</option>
-                  <option value="1">Egyéb termékek / Autóápolás / Kefék, törlőkendők</option>
-                  <option value="2">Egyéb termékek / Autóápolás / Motorblokk tisztítás</option>
-                  <option value="3">Egyéb termékek / Autóápolás / Felni tisztítás</option>
-                  <option value="4">Egyéb termékek / Autóápolás / Polírozás</option>
-                  <option value="5">Egyéb termékek / Beltér / Üléshuzatok</option>
-                  <option value="6">Egyéb termékek / Beltér / Kormányvédők</option>
-                  <option value="7">Egyéb termékek / Beltér / Autószőnyegek</option>
-                  <option value="8">Egyéb termékek / Beltér / Szivargyújtó</option>
-                  <option value="9">Egyéb termékek / Beltér / Illatósítók</option>
-                  <option value="10">Egyéb termékek / Beltér / Belső ventilátorok</option>
-                  <option value="11">Egyéb termékek / Kültér / Ablaktörlő lapátok</option>
-                  <option value="12">Egyéb termékek / Kültér / Lámpák / Hátsó lámpák</option>
-                  <option value="13">Egyéb termékek / Kültér / Lámpák / Gumilámpák / Izzós</option>
-                  <option value="14">Egyéb termékek / Kültér / Lámpák / Gumilámpák / LED-es</option>
-                  <option value="15">Egyéb termékek / Kültér / Lámpák / Helyzetjelzők / Izzós</option>
-                  <option value="16">Egyéb termékek / Kültér / Lámpák / Helyzetjelzők / LED-es</option>
-                  <option value="17">Egyéb termékek / Kültér / Lámpák / Munkalámpák / Izzós</option>
-                  <option value="18">Egyéb termékek / Kültér / Lámpák / Munkalámpák / LED-es</option>
-                  <option value="19">Egyéb termékek / Kültér / Lámpák / Megkülönböztető lámpák / Izzós</option>
-                  <option value="20">Egyéb termékek / Kültér / Lámpák / Megkülönböztető lámpák / LED-es</option>
-                  <option value="21">Egyéb termékek / Kültér / Dísztárcsák</option>
-                  <option value="22">Egyéb termékek / Kültér / Tanksapkák</option>
-                  <option value="23">Egyéb termékek / Kültér / Rendszámtábla tartók</option>
-                  <option value="24">Egyéb termékek / Kültér / Fényvisszaverők</option>
-                  <option value="25">Egyéb termékek / Folyadékok / Hajtómű olaj</option>
-                  <option value="26">Egyéb termékek / Folyadékok / Fagyálló</option>
-                  <option value="27">Egyéb termékek / Folyadékok / Ablakmosó folyadék / Nyári</option>
-                  <option value="28">Egyéb termékek / Folyadékok / Ablakmosó folyadék / Téli</option>
-            
-                  <option value="29">Garázs felszerelések / Szerszámok / Kézi szerszámok</option>
-                  <option value="30">Garázs felszerelések / Szerszámok / Elektromos szerszámok</option>
-                  <option value="31">Garázs felszerelések / Szerszámok / Mérőeszközök</option>
-                  <option value="32">Garázs felszerelések / Garázs berendezések / Műhelyhigiénia / Kézhigiénia</option>
-                  <option value="33">Garázs felszerelések / Garázs berendezések / Műhelyhigiénia / Tisztítás</option>
-                  <option value="34">Garázs felszerelések / Garázs berendezések / Klíma szervíz</option>
-                  <option value="35">Garázs felszerelések / Garázs berendezések / Akkumulátor szervíz</option>
-                  <option value="36">Garázs felszerelések / Munkavédelmi kellékek / Ruházat</option>
-                  <option value="37">Garázs felszerelések / Munkavédelmi kellékek / Biztonsági felszerelés</option>
-                  <option value="38">Garázs felszerelések / Univerzális tartozékok / Alététek és O-gyűrűk / O-gyűrűk</option>
-                  <option value="39">Garázs felszerelések / Univerzális tartozékok / Alététek és O-gyűrűk / Alátétek</option>
-                  <option value="40">Garázs felszerelések / Univerzális tartozékok / Biztosítékok</option>
-                  <option value="41">Garázs felszerelések / Univerzális tartozékok / Gyorskötözők</option>
-               </select>
-            </ng-container>
-            <mat-divider class="section-divider"></mat-divider>
-        </div>
 
-        <div>
-            <p class="section-title">Képek</p>
-            <div *ngIf="product">
-                <div *ngFor="let imgurl of activeImageUrls; let i = index;">
-                    <img [src]="imgurl" width="100" height="100">
-                    <mat-icon class="delete-img-button" (click)="deleteImage(i)">close</mat-icon>
-                </div>
+      <!-- Categories -->
+      <div>
+         <p class="section-title">Kategoriák</p>
+         <button mat-raised-button (click)="addSpecialCategory()">Kategória hozzáadása</button><br>
+
+         <!-- Lopp through every category selector input -->
+         <ng-container *ngFor="let categorySelector of specialCategoryInputs; let i = index;">
+
+            <select #specialCategory [(ngModel)]="specialCategoryInputs[i]" [ngModelOptions]="{standalone: true}">
+               <option value="-1">Nincs</option>
+               <option *ngFor="let category of categories; let j = index;">{{ (j+1) + '. ' + category }}</option>
+            </select>
+
+         </ng-container>
+         <mat-divider class="section-divider"></mat-divider>
+      </div>
+
+      
+      <!-- Images -->
+      <div>
+         <p class="section-title">Képek</p>
+         <div *ngIf="product">
+            <div *ngFor="let imgurl of activeImageUrls; let i = index;">
+               <img [src]="sanitize(imgurl)" width="100" height="100">
+               <mat-icon class="delete-img-button" (click)="deleteImage(i)">close</mat-icon>
             </div>
-            <input type="file" multiple (change)="onFileChange($event)" #images><br>
-        </div>
+         </div>
+         <input type="file" multiple (change)="onFileChange($event)" #images><br>
+      </div>
 
    </div>
 
@@ -247,7 +226,9 @@
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
    <button *ngIf="!product" mat-raised-button class="dialog-ok-button" color="primary" (click)="addNewProduct(partNumber.value, name.value, description.value, brand.value, price.value, stock.value, returnable.checked)">Termék feltöltése</button>
    <button *ngIf="product" mat-raised-button class="dialog-ok-button" color="primary" (click)="updateProduct(product, product.id, partNumber.value, name.value, description.value, brand.value, price.value, stock.value, returnable.checked)">Termék módosítása</button>
+
 </ng-template>
+
 
 <!-- Dialog that opens when we want to delete a Product -->
 <ng-template #deleteProductDialogRef let-product>
@@ -260,6 +241,7 @@
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
    <button mat-raised-button class="dialog-ok-button" color="warn" mat-dialog-close (click)="deleteProduct(product.id)">Törlés</button>
 </ng-template>
+
 
 <!-- Dialog that opens when we want to answer an Offer -->
 <ng-template #offerDialogRef let-offer>
@@ -280,6 +262,7 @@
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>
    <button mat-raised-button class="dialog-ok-button" color="primary" mat-dialog-close (click)="answerOffer(offer, answer.value)">Válaszadás</button>
 </ng-template>
+
 
 <!-- Dialog that opens when inspecting an Order -->
 <ng-template #orderDialogRef let-order>

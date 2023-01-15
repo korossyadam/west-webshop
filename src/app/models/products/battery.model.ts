@@ -11,7 +11,7 @@ export class Battery extends Product {
    public capacityCategory: string[];
    public starterCategory: string[];
 
-   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategories: number[], brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[],
+   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategories: string[], brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[],
                carIndexes: string[], voltage: number, capacity: number, starterCurrent: number, pole: string, width: number, length: number, height: number, capacityCategory: string[]) {
       super(partNumber, name, description, categories, specialCategories, brand, price, properties, factoryNumbers, stock, canBeReturned, imgurls, carIndexes);
       this.voltage = voltage;

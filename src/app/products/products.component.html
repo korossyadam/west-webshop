@@ -10,18 +10,27 @@
     <div *ngIf="!initialLoading && products.length == 0" class="no-results-container">
       <p>Nincs találat.</p>
     </div>
-    
-    <!-- Query card -->
-    <mat-card *ngIf="!initialLoading && products.length > 0" class="query-container">
-      <mat-checkbox [(ngModel)]="onlyInStock" (change)="reAddElements()">Csak raktáron lévők</mat-checkbox>
 
-      <!-- Brand selector -->
-      <p class="brand-selector-title">Gyártmány</p>
-      <select [(ngModel)]="selectedBrand" (change)="reAddElements()">
-        <option value="all">Mind</option>
-        <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
-      </select>
-    </mat-card>
+    <div class="side-menu-container">
+      <!-- List of clickable child categories -->
+      <div class="child-categories-container">
+        <p *ngFor="let childCategory of childCategories" class="child-category" [routerLink]="['/products', { productCategory: childCategory }]">{{ childCategory }}</p>
+      </div>
+      
+      <!-- Query card -->
+      <mat-card *ngIf="!initialLoading && products.length > 0" class="query-container">
+        <mat-checkbox [(ngModel)]="onlyInStock" (change)="reAddElements()">Csak raktáron lévők</mat-checkbox>
+
+        <!-- Brand selector -->
+        <p class="brand-selector-title">Gyártmány</p>
+        <select [(ngModel)]="selectedBrand" class="brand-selector" (change)="reAddElements()">
+          <option value="all">Mind</option>
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+        </select>
+      </mat-card>
+    </div>
+
+    
 
     <!-- Table of products -->
     <table *ngIf="!initialLoading && products.length > 0" class="table" matSort (matSortChange)="sortData($event)">

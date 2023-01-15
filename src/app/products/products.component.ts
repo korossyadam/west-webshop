@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../services/products.service';
-import { UtilsService } from '../services/utils.service';
+import { Category, UtilsService } from '../services/utils.service';
 import { Sort } from '@angular/material/sort';
 
 @Component({
@@ -20,12 +20,16 @@ export class ProductsComponent implements OnInit {
    public loadFlags: boolean[] = [];
 
    // Static functions
+   categories = this.utilsService.categories;
+   getCategories = this.utilsService.getCategories;
    addTax = this.utilsService.addTaxToPrice;
    formatPriceToString = this.utilsService.formatPriceToString;
    showSnackBar = this.utilsService.openSnackBar;
 
    // Initial loading flag
    public initialLoading: boolean = true;
+
+   public childCategories: string[];
 
    // Variables used to filter
    public onlyInStock: boolean = false;
@@ -46,9 +50,12 @@ export class ProductsComponent implements OnInit {
       this.route.params.subscribe(params => {
          let searchedCategory = params['category'];
          let searchedPartNumber = params['partNumber'];
-         let clickedCategory = params['specialCategory'];
+         let clickedCategory = params['productCategory'];
 
-         if (searchedCategory) {
+         // This runs when a product category was clicked from main-navigation
+         if (clickedCategory) {
+            this.queryProductsByNavigationCategory(clickedCategory);
+         } else if (searchedCategory) {
             let productsString = sessionStorage.getItem(searchedCategory).slice(0, -1).split('*');
 
             for (let i = 0; i < productsString.length; i++) {
@@ -67,14 +74,6 @@ export class ProductsComponent implements OnInit {
 
             this.getDistinctBrands();
             this.initialLoading = false;
-         } else if (clickedCategory) {
-            this.productsService.getProductsBySpecialCategory(parseInt(clickedCategory)).subscribe(data => {
-               this.products = data;
-               this.activeProducts = data;
-
-               this.getDistinctBrands();
-               this.initialLoading = false;
-            });
          } else if (searchedPartNumber) {
             this.productsService.search(searchedPartNumber).subscribe(data => {
                this.products = data;
@@ -86,6 +85,68 @@ export class ProductsComponent implements OnInit {
          }
       });
 
+   }
+
+   async queryProductsByNavigationCategory(clickedCategory: string): Promise<void> {
+
+      // Find the category that was clicked
+      await this.getCategories().then(categories => {
+
+         let clickedNode = null;
+         for (let category of categories) {
+            clickedNode = this.findNode(category, clickedCategory) ?? clickedNode;
+         }
+
+         // Create a list of clickable child categories
+         this.childCategories = this.getAllChildren(clickedNode, clickedNode, []);
+         
+         // Sort alphabetically
+         this.childCategories.sort((a, b) => a.localeCompare(b));
+      });
+
+      this.productsService.getProductsBySpecialCategory(clickedCategory).subscribe(data => {
+         this.products = data;
+         this.activeProducts = data;
+
+         this.getDistinctBrands();
+         this.initialLoading = false;
+      });
+   }
+
+   findNode(node: Category, categoryName: string) {
+      if (node.name == categoryName) {
+         return node;
+      }
+
+      if (node.children) {
+         for (const child of node.children) {
+            const foundNode = this.findNode(child, categoryName);
+            if (foundNode) {
+               return foundNode;
+            }
+         }
+      }
+
+      return null;
+   }
+   
+   /**
+    * Gets the 'name' field of all children node of a given root node
+    * 
+    * @param node The root node whose children is checked
+    * @param names The accumulated names
+    * @returns The array of names
+    */
+   getAllChildren(rootNode: Category, currentNode: Category, names: string[]) {
+      if (rootNode !== currentNode) {
+         names.push(currentNode.name);
+      }
+
+      if (currentNode.children) {
+         currentNode.children.forEach(child => this.getAllChildren(rootNode, child, names));
+      }
+
+      return names;
    }
 
    /**
@@ -130,6 +191,12 @@ export class ProductsComponent implements OnInit {
       };
    }
 
+   /**
+    * This function is used by mat-table to sort invidual columns
+    * 
+    * @param sort 
+    * @returns 
+    */
    sortData(sort: Sort) {
       const data = this.activeProducts.slice();
       if (!sort.active || sort.direction === '') {
@@ -156,7 +223,7 @@ export class ProductsComponent implements OnInit {
 
    compare(a: number | string, b: number | string, isAsc: boolean) {
       return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-    }
+   }
 
    /**
    * Increments the cart button value by 1
@@ -175,7 +242,7 @@ export class ProductsComponent implements OnInit {
     * Does not decrement if decremented value would be lower than 1
     */
    decrementInputValue(inputId: string): void {
-      let element = (<HTMLInputElement>document.getElementById(inputId));
+      let element = (<HTMLInputElement> document.getElementById(inputId));
       if (parseInt(element.value) <= 1)
          return;
 

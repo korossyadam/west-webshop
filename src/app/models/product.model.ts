@@ -3,7 +3,7 @@ export class Product {
    public name: string;
    public description: string;
    public categories: string[];
-   public specialCategories: number[];
+   public specialCategories: string[];
    public brand: string;
    public price: string;
    public properties: string[];
@@ -13,7 +13,7 @@ export class Product {
    public imgurls: string[];
    public carIndexes: string[];
 
-   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategories: number[], brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[], carIndexes: string[]) {
+   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategories: string[], brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[], carIndexes: string[]) {
       this.partNumber = partNumber;
       this.name = name;
       this.description = description;

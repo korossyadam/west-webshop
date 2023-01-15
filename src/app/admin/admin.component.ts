@@ -6,7 +6,7 @@ import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { AdminService } from '../services/admin.service';
-import { UtilsService } from '../services/utils.service';
+import { Category, UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-admin',
@@ -15,10 +15,13 @@ import { UtilsService } from '../services/utils.service';
 })
 export class AdminComponent implements OnInit {
 
+  devMode = false;
+
   // Static functions
   showSnackBar = this.utilsService.openSnackBar;
   addTax = this.utilsService.addTaxToPrice;
   formatPrice = this.utilsService.formatPriceToString;
+  sanitize = this.utilsService.sanitize;
 
   // References to openable dialogs
   @ViewChild('newProductDialogRef') newProductDialogRef!: TemplateRef<any>;
@@ -26,8 +29,10 @@ export class AdminComponent implements OnInit {
   @ViewChild('offerDialogRef') offerDialogRef!: TemplateRef<any>;
   @ViewChild('orderDialogRef') orderDialogRef!: TemplateRef<any>;
 
+  public categories: string[];
+
   // This variable keeps track of how many inputs should be visible for category selection
-  public specialCategoryInputs: number[] = [-1];
+  public specialCategoryInputs: string[] = ['Nincs'];
 
   // The images to upload when uploading a new Product
   public productFiles: string[] = [];
@@ -37,11 +42,6 @@ export class AdminComponent implements OnInit {
 
   // Images that are going to be deleted when updating a Product
   public deletedImageUrls: string[] = [];
-
-  // Form for adding Products
-  public addProductForm = new FormGroup({
-   partNumber: new FormControl('', [Validators.required])
-  })
 
   // This variable stores validation errors regarding the Product form
   public productFormError = '';
@@ -66,9 +66,34 @@ export class AdminComponent implements OnInit {
 
   constructor(private utilsService: UtilsService, private dialog: MatDialog, private adminService: AdminService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
 
-  get partNumberControl() { return this.addProductForm.get('partNumber'); }
+    // Convert categories JSON tree to leaf nodes with their absolute paths
+    this.utilsService.getCategories().then(categoriesJson => {
+      this.categories = this.getLeafNodePaths(categoriesJson);
+    });
+  }
+
+  /**
+   * Extracts every leaf node from categories JSON tree
+   * Every extracted leaf node will have their absolute paths as their names
+   * 
+   * @param nodes An array of Category[], representing nodes in the JSON tree
+   * @param path Represents the current path of the function as it traverses the tree
+   * @returns All leaf nodes in the tree, and their absolute location
+   */
+  getLeafNodePaths(nodes: Category[], path: string[] = []): string[] {
+    let leafNodePaths = [];
+    nodes.forEach(node => {
+      if (node.children) {
+        leafNodePaths = leafNodePaths.concat(this.getLeafNodePaths(node.children, [...path, node.name]));
+      } else {
+        leafNodePaths.push([...path, node.name].join(' / '));
+      }
+    });
+
+    return leafNodePaths;
+  }
 
   /**
    * Opens the dialog where admin can add new Products
@@ -94,19 +119,12 @@ export class AdminComponent implements OnInit {
     this.activeImageUrls.splice(index, 1);
   }
 
-  /**
-   * Opens the dialog where admin can add new Products
-   */
-  openDeleteProductDialog(productToDelete: Product): void {
-    this.dialog.open(this.deleteProductDialogRef, { data: productToDelete, width: '500px' });
-  }
-
-  attemptToOpenDeleteProductDialog(partNumber: string): void {
+  openDeleteProductDialog(partNumber: string): void {
     this.adminService.getSingleProduct(partNumber).pipe(first()).subscribe(data => {
       if (data.length == 0) {
         this.showSnackBar(partNumber + ' cikkszámú termék nem létezik!', 'Bezárás', 4000);
       } else {
-        this.openDeleteProductDialog(data[0]);
+        this.dialog.open(this.deleteProductDialogRef, { data: data[0], width: '500px' });
       }
     });
   }
@@ -116,7 +134,7 @@ export class AdminComponent implements OnInit {
   }
 
   addSpecialCategory(): void {
-   this.specialCategoryInputs.push(-1);
+    this.specialCategoryInputs.push('Nincs');
   }
 
   /**
@@ -125,7 +143,6 @@ export class AdminComponent implements OnInit {
    */
   onFileChange(event: any) {
     this.productFiles = [];
-
     for (let i = 0; i < event.target.files.length; i++) {
       this.productFiles.push(event.target.files[i]);
     }
@@ -137,17 +154,7 @@ export class AdminComponent implements OnInit {
    * Next, the Product is saved with an array of the uploaded image's references
    */
   async addNewProduct(partNumber: string, name: string, description: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
-
-    if (this.addProductForm.get('partNumber').errors?.['required']) {
-        this.productFormError = 'A cikkszám nem lehet üres.'
-        return;
-    }
-
-   for (let i = 0; i < this.specialCategoryInputs.length; i++) {
-      if (this.specialCategoryInputs[i] == -1) {
-         this.specialCategoryInputs.splice(i, 1);
-      }
-   }
+    let categories = this.createCategoriesArray();
 
     // Upload images first
     let imgUrls: string[] = [];
@@ -158,31 +165,53 @@ export class AdminComponent implements OnInit {
     }
 
     // Upload the actual Product
-    let productToUpload = new Product(partNumber, name, description, [], this.specialCategoryInputs, brand, price, [], [], parseInt(stock), returnable, imgUrls, []);
+    let productToUpload = new Product(partNumber, name, description, [], categories, brand, price, [], [], parseInt(stock), returnable, imgUrls, []);
     this.adminService.uploadData('products', Object.assign({}, productToUpload)).then(() => {
       this.showSnackBar('A termék sikeresen fel lett töltve!', 'Bezár', 4000);
     });
+  }
+
+  /**
+   * Split selected category inputs to distinct categories
+   * Ex.: Equipment / Tools / Handtools => {'Equipment', 'Tools', 'Handtools'}
+   *      ['Equipment / Tools / Handtools' , [Equipment / Tools / 'Electric tools'] => {'Equipment', 'Tools', 'Handtools', 'Electric tools'}
+   * 
+   * @returns An array of all distinct categories
+   */
+  createCategoriesArray(): string[] {
+    let categories: string[] = [];
+    for (let i = 0; i < this.specialCategoryInputs.length; i++) {
+      if (this.specialCategoryInputs[i] != 'Nincs') {
+        categories.push(...this.specialCategoryInputs[i].split('. ')[1].split(' / '));
+      }
+    }
+
+    // Get rid of duplicataes
+    categories = [...new Set(categories)];
+
+    return categories;
   }
 
   async updateProduct(originalProduct: Product, uid: string, partNumber: string, name: string, description: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
     originalProduct.partNumber = partNumber;
     originalProduct.name = name;
     originalProduct.description = description;
-    originalProduct.specialCategories = this.specialCategoryInputs;
     originalProduct.brand = brand;
     originalProduct.price = price;
     originalProduct.stock = parseInt(stock);
 
+    let categories = this.createCategoriesArray();
+    originalProduct.specialCategories = categories;
+
     if (!returnable)
-        returnable = true;
+      returnable = true;
 
     originalProduct.canBeReturned = returnable;
 
     this.adminService.updateProduct(Object.assign({}, originalProduct), uid).then(res => {
-        this.deletedImageUrls.forEach(src => {
-            console.log(src);
-            this.adminService.deleteImage(src);
-        });
+      this.deletedImageUrls.forEach(src => {
+        this.adminService.deleteImage(src);
+      });
 
       this.showSnackBar('A termék sikeresen módosítva lett!', 'Bezár', 4000);
     });
@@ -258,11 +287,12 @@ export class AdminComponent implements OnInit {
   }
 
   categorizeProduct(): void {
-    this.adminService.getNextUncategorizedProduct().subscribe(data => {
-        this.activeImageUrls = data[0].imgurls;
-        this.deletedImageUrls = [];
-        this.openProductDialog(data[0]);
-    })
+    this.adminService.getNextUncategorizedProduct().pipe(first()).subscribe(data => {
+      this.activeImageUrls = data[0].imgurls;
+      this.deletedImageUrls = [];
+      data[0].price = (parseInt(data[0].price) * 1.1).toString();
+      this.openProductDialog(data[0]);
+    });
   }
 
   /**
@@ -275,176 +305,12 @@ export class AdminComponent implements OnInit {
     return timestamp.toDate();
   }
 
-  /*
-   addQuantity(): void {
-      fetch('assets/quantity.txt').then(response => response.text()).then(data => {
-         var index = 0;
-         var lines = data.split('\n');
-         while (index < 350) {
-            this.carSelectorService.modifyQuantity(lines[index]);
-            index += 1;
-         }
-      });
-   }
-   */
+  uploadProductsFromTextFile(): void {
 
-   addUncategoriedProducts(): void {
-    fetch('assets/ap_products.txt').then(response => response.text()).then(data => {
-        let lines = data.split('\n');
-        for (let i = 0; i < lines.length-6; i++){
-            let partNumber = lines[i].replace(/(\r\n|\n|\r)/gm, "");
-            let name = lines[i+1].replace(/(\r\n|\n|\r)/gm, "");
-            let brand = lines[i+2].replace(/(\r\n|\n|\r)/gm, "");
-            let price = lines[i+3].replace(/(\r\n|\n|\r)/gm, "");
-            let stock = parseInt(lines[i+4].replace(/(\r\n|\n|\r)/gm, ""));
-            let imgurls = lines[i+5].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
-
-            let description = lines[i+6].replace(/(\r\n|\n|\r)/gm, "");
-
-            i += 7;
-
-            let product = new Product(partNumber, name, description, [], [-2], brand, price, [], [], stock, true, imgurls, []);
-            //this.adminService.uploadData('products', Object.assign({}, product)).then(() => {
-             //   console.log(product.partNumber + ' was uploaded!');
-            //})
-        }
-            
-        
-    });
-   }
-
-  addProducts(): void {
-    fetch('assets/products.txt').then(response => response.text()).then(data => {
-      var index = 257010;
-      var lines = data.split('\n');
-      while (index < 396123) {
-
-        let partNumber = lines[index].replace(/(\r\n|\n|\r)/gm, "");
-        let categories = lines[index + 1].replace(/(\r\n|\n|\r)/gm, "").split('*');
-        let name = lines[index + 2].replace(/(\r\n|\n|\r)/gm, "");
-        let description = lines[index + 3].replace(/(\r\n|\n|\r)/gm, "");
-        let brand = lines[index + 4].replace(/(\r\n|\n|\r)/gm, "");
-        let price = lines[index + 5].replace(/(\r\n|\n|\r)/gm, "");
-        let imgurls = lines[index + 6].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
-        let properties = lines[index + 7].replace(/(\r\n|\n|\r|[|]|')/gm, "").split(", ");
-
-        for (let i = 0; i < properties.length; i++) {
-          if (properties[i]) {
-            properties[i] = properties[i].trim();
-            if (properties[i].charAt(0) == '[') {
-              properties[i] = properties[i].substring(1, properties[i].length);
-            }
-            if (properties[i].charAt(properties[i].length - 1) == ']') {
-              properties[i] = properties[i].substring(0, properties[i].length - 1);
-            }
-            if (properties[i] == '*') {
-              properties.splice(i, 1);
-              i--;
-            }
-          }
-        }
-
-
-        for (let i = 0; i < imgurls.length; i++) {
-          if (imgurls[i])
-            imgurls[i] = imgurls[i].trim();
-        }
-
-        let stock = 0;
-        let storages = lines[index + 8].replace(/(\r\n|\n|\r|[|]|')/gm, "").split(',');
-        for (let i = 0; i < storages.length; i++) {
-          let stockString = (storages[i].replace('[', '').replace(']', '').replace('>', '').split('/')[2]);
-          if (stockString) {
-            stock += parseInt(stockString.trim());
-          } else {
-            stock += 0;
-          }
-        }
-
-        let factoryNumbers = lines[index + 9].replace(/(\r\n|\n|\r|[|]|')/gm, "").replace('[', '').replace(']', '').split(',');
-        let returnable = lines[index + 10].replace(/(\r\n|\n|\r)/gm, "").toLowerCase() == 'true';
-        let carIndexes = lines[index + 11].replace(/(\r\n|\n|\r)/gm, "").replace(' ', '').split(',');
-
-        for (let i = 0; i < factoryNumbers.length; i++) {
-          if (factoryNumbers[i])
-            factoryNumbers[i] = factoryNumbers[i].trim();
-        }
-
-        for (let i = 0; i < carIndexes.length; i++) {
-          if (carIndexes[i])
-            carIndexes[i] = carIndexes[i].trim();
-        }
-
-        let newProduct = new Product(partNumber, name, description, categories, [], brand, price, properties, factoryNumbers, stock, returnable, imgurls, carIndexes);
-        //console.log(newProduct);
-        //this.carSelectorService.addProduct(Object.assign({}, newProduct)).then(res => {
-        //console.log(partNumber + ' was added');
-        //});
-
-        index += 13;
-      }
-
-    });
   }
 
-
-  /*
-  addChassis(): void {
-    fetch('assets/chassis.txt').then(response => response.text()).then(data => {
-    var index = 0;
-    var lines = data.split('\n');
-    while (index < 26904) {
-          var chassisIndex = lines[index];
-          var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
-          var name = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
-          var year = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
- 
-          var hasImg = true;
-          var hasImgString = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
-          if (hasImgString == 'false') {
-           hasImg = false;
-          }
- 
-          var chassy = new Chassis(parseInt(chassisIndex), brand, name, year, hasImg);
-          console.log(chassy);
- 
-          this.carSelectorService.addChassis('chassis', Object.assign({}, chassy));
-          index += 6;
-        }
-        
-      });
-      
-    }
-    */
-
-  /*
-  addCars(): void {
-    fetch('assets/cars.txt').then(response => response.text()).then(data => {
-      var index = 0;
-      var lines = data.split('\n');
-      while(index < 185364){
-        var carIndex = lines[index];
-        var brand = lines[index+1].replace(/(\r\n|\n|\r)/gm, "");
-        var chassisIndex = lines[index+2].replace(/(\r\n|\n|\r)/gm, "");
-        var chassis = lines[index+3].replace(/(\r\n|\n|\r)/gm, "");
-        var engine = lines[index+4].replace(/(\r\n|\n|\r)/gm, "");
-        var engineCode = lines[index+5].replace(/(\r\n|\n|\r)/gm, "");
-        var year = lines[index+6].replace(/(\r\n|\n|\r)/gm, "");
-        var kw = lines[index+7].replace(/(\r\n|\n|\r)/gm, "");
-        var hp = lines[index+8].replace(/(\r\n|\n|\r)/gm, "");
-        var displacement = lines[index+9].replace(/(\r\n|\n|\r)/gm, "");
-        var fuel = lines[index+10].replace(/(\r\n|\n|\r)/gm, "");
- 
-        var car = new Car(parseInt(carIndex), parseInt(chassisIndex), brand, chassis, engine, engineCode, kw, hp, displacement, year, fuel);
-        console.log(car);
- 
-        this.carSelectorService.addCars('cars', Object.assign({}, car));
-        index += 12;
-      }
-      
-    });
+  addUncategoriedProducts(): void {
     
   }
-  */
 
 }
