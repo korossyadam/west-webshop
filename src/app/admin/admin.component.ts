@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { first } from 'rxjs';
+import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
@@ -27,7 +28,6 @@ export class AdminComponent implements OnInit {
   @ViewChild('newProductDialogRef') newProductDialogRef!: TemplateRef<any>;
   @ViewChild('deleteProductDialogRef') deleteProductDialogRef!: TemplateRef<any>;
   @ViewChild('offerDialogRef') offerDialogRef!: TemplateRef<any>;
-  @ViewChild('orderDialogRef') orderDialogRef!: TemplateRef<any>;
 
   public categories: string[];
 
@@ -283,7 +283,7 @@ export class AdminComponent implements OnInit {
    * Opens the dialog where admin can view an Order
    */
   openOrderDialog(order: Order): void {
-    this.dialog.open(this.orderDialogRef, { data: order, width: '1000px' });
+    this.dialog.open(OrderDialogComponent, { data: order, width: '1000px' });
   }
 
   categorizeProduct(): void {
