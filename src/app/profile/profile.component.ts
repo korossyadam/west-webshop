@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from 
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { first, Timestamp } from 'rxjs';
+import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 import { Address } from '../models/address.model';
 import { Car } from '../models/car.model';
 import { Offer } from '../models/offer.model';
@@ -33,7 +34,6 @@ export class ProfileComponent implements OnInit {
    showSnackBar = this.utilsService.openSnackBar;
 
    // References to openable dialogues
-   @ViewChild('orderDialogRef') orderDialogRef!: TemplateRef<any>;
    @ViewChild('offerOriginalDialogRef') offerOriginalDialogRef!: TemplateRef<any>;
    @ViewChild('offerAnsweredDialogRef') offerAnsweredDialogRef!: TemplateRef<any>;
 
@@ -143,7 +143,7 @@ export class ProfileComponent implements OnInit {
     * @param orderToOpen The Order whose data we need to display
     */
    openOrderDialog(orderToOpen: Order) {
-      this.dialog.open(this.orderDialogRef, { data: orderToOpen, width: '1000px' });
+      this.dialog.open(OrderDialogComponent, { data: orderToOpen, width: '1000px' });
    }
 
    /**

@@ -258,7 +258,7 @@ export class CartComponent implements OnInit {
       // Fill Order with OrderedProducts
       let orderedProducts: OrderedProduct[] = [];
       for (let cartItem of this.cartItems) {
-         orderedProducts.push({ partNumber: cartItem.partNumber, name: cartItem.name, price: cartItem.price, quantity: cartItem.quantity, imgurl: cartItem.imgurls[0]})
+         orderedProducts.push({ partNumber: cartItem.partNumber, name: cartItem.name, brand: cartItem.brand, price: cartItem.price, quantity: cartItem.quantity, imgurl: cartItem.imgurls[0]})
       }
 
       // Stringify shipping and payment methods

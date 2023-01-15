@@ -51,6 +51,7 @@ import { FeaturedRowsComponent } from './featured-rows/featured-rows.component';
 import { AdminComponent } from './admin/admin.component';
 import { Categories2Component } from './categories2/categories2.component';
 import { FeaturedCategoriesComponent } from './featured-categories/featured-categories.component';
+import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { FeaturedCategoriesComponent } from './featured-categories/featured-cate
     AdminComponent,
     Categories2Component,
     FeaturedCategoriesComponent,
+    OrderDialogComponent,
   ],
   imports: [
     BrowserModule,

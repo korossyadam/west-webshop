@@ -1,0 +1,106 @@
+<div *ngIf="order">
+
+   <!-- Title: Date of the order -->
+   <p class="dialog-title">Rendelés: {{ timestampToDate(order.date).toLocaleString() }}</p>
+
+   <!-- List all products in the Order-->
+   <table class="table">
+      <thead>
+         <th>Kép</th>
+         <th>Megnevezés</th>
+         <th>Mennyiség</th>
+         <th class="center">Ár</th>
+      </thead>
+
+      <tbody>
+         <tr *ngFor="let product of order.orderedProducts">
+            <!-- Product image -->
+            <td class="image-column">
+               <img [src]="sanitize(product.imgurl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="product-img">
+            </td>
+
+            <!-- Product name and brand -->
+            <td class="info-column">
+               <div class="info-container">
+                  <p [routerLink]="['/product', product.partNumber]" class="part-number" mat-dialog-close>{{ product.partNumber }}</p>
+                  <p class="name">{{ product.name }}</p>
+                  <p class="brand">{{ product.brand }}</p>
+               </div>
+            </td>
+
+            <!-- Product quantity -->
+            <td class="amount-column">
+               <p>{{ product.quantity }} db.</p>
+            </td>
+
+            <!-- Product price -->
+            <td class="price-column">
+               <div class="price-container">
+                  <p class="price">{{ formatPriceToString(addTax(product.price)) }}</p>
+                  <p class="net-price">({{ formatPriceToString(product.price) }} + 27% ÁFA)</p>
+               </div>
+            </td>
+         </tr>
+
+         <!-- Total price -->
+         <tr class="total-row">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="price-column total-column">
+               <div class="price-container">
+                  <p>Szállítás: {{ formatPriceToString(order.deliveryPrice) }}</p>
+                  <p>Végösszeg: {{ formatPriceToString(addTax(order.totalPrice)) }}</p>
+               </div>
+            </td>
+         </tr>
+
+      </tbody>
+   </table>
+
+   <mat-divider></mat-divider>
+
+   <!-- Other information about the Order-->
+   <div>
+      <!-- Shipping information -->
+      <div class="quarter-container">
+         <p class="quarter-title">Alap adatok</p>
+         <div class="quarter-text-container">
+            <p>{{ order.shippingAddress.name }}</p>
+            <p>{{ order.shippingAddress.email }}</p>
+            <p>{{ order.shippingAddress.phoneNumber }}</p>
+            <p>{{ order.shippingAddress.address }}</p>
+            <p *ngIf="order.shippingAddress.comment">{{ order.shippingAddress.comment }}</p>
+         </div>
+      </div>
+
+      <!-- Billing information -->
+      <div class="quarter-container">
+         <p class="quarter-title">Számlázási adatok</p>
+         <div class="quarter-text-container">
+            <p>{{ order.billingAddress.name }}</p>
+            <p>{{ order.billingAddress.address }}</p>
+            <p *ngIf="order.billingAddress.taxNumber">{{ order.billingAddress.taxNumber }}</p>
+         </div>
+      </div>
+
+      <!-- Delivery or pickup -->
+      <div class="quarter-container">
+         <p class="quarter-title">Átvétel</p>
+         <div class="quarter-text-container">
+            <p>Házhozszállítás</p>
+         </div>
+      </div>
+
+      <!-- Payment information -->
+      <div class="quarter-container">
+         <p class="quarter-title">Fizetés</p>
+         <div class="quarter-text-container">
+            <p>Utánvét</p>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Back button -->
+<button mat-raised-button class="dialog-close-button" color="primary" mat-dialog-close>Vissza</button>
