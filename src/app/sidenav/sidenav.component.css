@@ -134,6 +134,11 @@
    cursor: default !important;
 }
 
+.brand-disabled {
+   pointer-events: none;
+   opacity: 0.5;
+}
+
 .engine-code {
    font-size: 12px;
    color: #6e6e6e;

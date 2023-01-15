@@ -41,6 +41,9 @@ export class SidenavComponent implements OnInit {
       'SUBARU', 'SUZUKI', 'TATA', 'TESLA', 'TOYOTA', 'TRABANT', 'UAZ', 'VOLVO', 'VW',
       'WARTBURG', 'ZASTAVA', 'ZAZ'];
 
+   // The number of brands that have their products upload into the database (the rest will be disabled)
+   public workingBrands: number = 6;
+
    // Query results are stored in these arrays
    public activeBrands: string[];
    public chassis: Chassis[];
@@ -268,7 +271,7 @@ export class SidenavComponent implements OnInit {
    // This method calls carSelectorService to check for cars in searched brand
    selectElements(selected: string): void {
       this.loading = true;
-      
+
       // Scroll to top of the lower menu
       document.querySelectorAll('.lower-menu')[0]!.scrollTop = 0;
 

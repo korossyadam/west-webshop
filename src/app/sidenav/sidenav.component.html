@@ -4,7 +4,7 @@
    <mat-icon *ngIf="activeChassis[hoveredTextIndex].hasImg == false" class="error-icon">image_not_supported</mat-icon>
 </mat-card>
 
-
+<!-- Sidenav container -->
 <mat-sidenav-container class="sidenav-container">
 
    <!-- Car selector sidenav -->
@@ -112,8 +112,8 @@
                   </tr>
 
                   <!-- Actual selectable row-->
-                  <tr (click)="selectElements(brand)">
-                     <td>{{ brand }}</td>
+                  <tr (click)="selectElements(brand)" [ngClass]="{'brand-disabled': i > workingBrands}">
+                     <td>{{ i > workingBrands ? brand + ' (hamarosan)' : brand }}</td>
                   </tr>
                </ng-container>
             </tbody>
@@ -269,7 +269,6 @@
 
          </mat-accordion>
       </div>
-
 
    </mat-sidenav>
 
