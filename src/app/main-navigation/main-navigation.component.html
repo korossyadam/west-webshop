@@ -57,14 +57,14 @@
                         </li>
                      </div>
                   </ul>
-                </ng-template>
+               </ng-template>
 
-                <!-- Loop through all root nodes, and call template with their children -->
-                <ng-container *ngFor="let rootNode of categories">
+               <!-- Loop through all root nodes, and call template with their children -->
+               <ng-container *ngFor="let rootNode of categories">
                   <li><a routerLink="categories">{{ rootNode.name }}<mat-icon class="arrow">expand_more</mat-icon></a>
                      <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: rootNode.children }"></ng-container>
                   </li>
-                </ng-container>
+               </ng-container>
 
             </ul>
          </nav>
@@ -102,7 +102,7 @@
          </div>
 
       </div>
-      
+
       <!-- Cart -->
       <div class="cart-container">
 
@@ -127,36 +127,36 @@
                         <!-- Cart elements ngFor-->
                         <div class="cart-product-list-container">
                            <div>
-                           <div *ngFor="let product of cartItems; let i = index">
-                              <div class="cart-product-container">
-   
-                                 <!-- Product image -->
-                                 <div class="product-img-container">
-                                    <img [src]="sanitize(product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="product-img">
-                                 </div>
-   
-                                 <!-- Product info -->
-                                 <div class="cart-product-info-container">
-                                    <div class="product-name-container">
-                                       <div class="product-name" [routerLink]="['/product', product.partNumber]">{{ product.name }}<span class="product-brand"> {{ product.brand }}</span></div>
+                              <div *ngFor="let product of cartItems; let i = index">
+                                 <div class="cart-product-container">
+
+                                    <!-- Product image -->
+                                    <div class="product-img-container">
+                                       <img [src]="sanitize(product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="product-img">
                                     </div>
-                                    <p class="product-code">{{ product.partNumber }}</p>
-                                    <p class="product-price">{{ formatPriceToString(addTax(product.price)) }}
-                                       <span class="product-amount">({{ product.quantity }} db)</span>
-                                    </p>
+
+                                    <!-- Product info -->
+                                    <div class="cart-product-info-container">
+                                       <div class="product-name-container">
+                                          <div class="product-name" [routerLink]="['/product', product.partNumber]">{{ product.name }}<span class="product-brand"> {{ product.brand }}</span></div>
+                                       </div>
+                                       <p class="product-code">{{ product.partNumber }}</p>
+                                       <p class="product-price">{{ formatPriceToString(addTax(product.price)) }}
+                                          <span class="product-amount">({{ product.quantity }} db)</span>
+                                       </p>
+                                    </div>
+
+                                    <!-- Delete button -->
+                                    <button mat-icon-button class="delete-icon" (click)="deleteCartItem(i)">
+                                       <mat-icon>close</mat-icon>
+                                    </button>
+
+                                    <!-- Divider -->
+                                    <mat-divider class="divider"></mat-divider>
+
                                  </div>
-   
-                                 <!-- Delete button -->
-                                 <button mat-icon-button class="delete-icon" (click)="deleteCartItem(i)">
-                                    <mat-icon>close</mat-icon>
-                                 </button>
-   
-                                 <!-- Divider -->
-                                 <mat-divider class="divider"></mat-divider>
-   
                               </div>
                            </div>
-                        </div>
                         </div>
 
                         <!-- Subtotal -->
