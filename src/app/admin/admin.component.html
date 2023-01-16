@@ -169,11 +169,9 @@
    <p *ngIf="!product" class="dialog-title">Új termék hozzáadása</p>
    <mat-divider class="dialog-divider"></mat-divider>
 
-
    <!-- Body -->
    <div mat-dialog-content>
 
-      
       <!-- Basic info -->
       <div>
          <p class="section-title">Alapvető adatok</p>
@@ -187,24 +185,23 @@
          <mat-divider class="section-divider"></mat-divider>
       </div>
 
-
       <!-- Categories -->
       <div>
          <p class="section-title">Kategoriák</p>
-         <button mat-raised-button (click)="addSpecialCategory()">Kategória hozzáadása</button><br>
 
          <!-- Lopp through every category selector input -->
          <ng-container *ngFor="let categorySelector of specialCategoryInputs; let i = index;">
-
             <select #specialCategory [(ngModel)]="specialCategoryInputs[i]" [ngModelOptions]="{standalone: true}">
-               <option value="-1">Nincs</option>
+               <option value="Nincs">Nincs</option>
                <option *ngFor="let category of categories; let j = index;">{{ (j+1) + '. ' + category }}</option>
             </select>
-
          </ng-container>
+
+         <!-- New category button -->
+         <button mat-raised-button color="primary" (click)="addSpecialCategory()">Kategória hozzáadása</button>
+
          <mat-divider class="section-divider"></mat-divider>
       </div>
-
       
       <!-- Images -->
       <div>
@@ -216,11 +213,17 @@
             </div>
          </div>
          <input type="file" multiple (change)="onFileChange($event)" #images><br>
+
+         <div *ngFor="let imageUrlInput of imageUrls; let i = index;">
+            <input placeholder="Kép URL" [(ngModel)]="imageUrls[i]">
+         </div>
+
+         <!-- New image URL button -->
+         <button mat-raised-button color="primary" (click)="addImageUrl()">URL hozzáadása</button><br>
+
       </div>
 
    </div>
-
-   <p *ngIf="productFormError != ''" class="error-text">{{ productFormError }}</p>
 
    <!-- Buttons -->
    <button mat-raised-button class="dialog-close-button" mat-dialog-close>Vissza</button>

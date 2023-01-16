@@ -31,8 +31,9 @@ export class AdminComponent implements OnInit {
 
   public categories: string[];
 
-  // This variable keeps track of how many inputs should be visible for category selection
+  // This variable keeps track of how many inputs should be visible
   public specialCategoryInputs: string[] = ['Nincs'];
+  public imageUrls: string[] = [''];
 
   // The images to upload when uploading a new Product
   public productFiles: string[] = [];
@@ -42,9 +43,6 @@ export class AdminComponent implements OnInit {
 
   // Images that are going to be deleted when updating a Product
   public deletedImageUrls: string[] = [];
-
-  // This variable stores validation errors regarding the Product form
-  public productFormError = '';
 
   // Form for Offer query
   public offerRange = new FormGroup({
@@ -137,6 +135,10 @@ export class AdminComponent implements OnInit {
     this.specialCategoryInputs.push('Nincs');
   }
 
+  addImageUrl(): void {
+    this.imageUrls.push('');
+  }
+
   /**
    * This function is called every time the file input value changes on new product dialog
    * @param event Contains the newly selected file references
@@ -163,6 +165,8 @@ export class AdminComponent implements OnInit {
         imgUrls.push(data);
       });
     }
+
+    imgUrls.push(...this.imageUrls.filter(value => value !== ''));
 
     // Upload the actual Product
     let productToUpload = new Product(partNumber, name, description, [], categories, brand, price, [], [], parseInt(stock), returnable, imgUrls, []);

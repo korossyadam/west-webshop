@@ -22,20 +22,20 @@
 }
 
 .product-dialog {
-    overflow: scroll;
+   overflow: scroll;
 }
 
 .section-title {
-    margin-bottom: 0;
-    color: grey;
+   margin-bottom: 0;
+   color: grey;
 }
 
 .section-divider {
-    margin-top: 10px;
+   margin-top: 10px;
 }
 
 .delete-img-button {
-    cursor: pointer;
+   cursor: pointer;
 }
 
 .update-button-container * {
@@ -78,10 +78,6 @@ select {
 
 input[type='file'] {
    margin: 15px 0px;
-}
-
-.error-text {
-    color: red;
 }
 
 /* Offer styles */
@@ -140,87 +136,4 @@ input[type='file'] {
    margin-top: 25px;
    margin-bottom: 300px;
    width: calc(100% - 32px);
-}
-
-/* Order modal styles */
-.table {
-   margin-top: 30px;
-   width: 100%;
-}
-
-.table th:nth-child(2),
-.table th:nth-child(1) {
-   text-align: left;
-}
-
-.info-container {
-   line-height: 30%;
-   margin-top: -8px;
-}
-
-.price-container {
-   line-height: 10%;
-   text-align: center;
-   margin-right: 20px;
-   font-weight: 500;
-}
-
-.price {
-   font-size: 18px;
-   color: var(--color-primary);
-   font-weight: 500;
-}
-
-.net-price {
-   color: #666666;
-   font-size: 11px;
-}
-
-.part-number {
-   width: fit-content;
-   font-size: 18px;
-   color: #444444;
-   font-weight: 500;
-   cursor: pointer;
-}
-
-.part-number:hover {
-   color: var(--color-primary);
-}
-
-.name {
-   color: #444444;
-   margin-top: -1px;
-   font-weight: 500;
-}
-
-.brand {
-   font-size: 13px;
-   font-weight: 500;
-   color: #7a7a7a;
-}
-
-.total-row {
-   height: 50px;
-}
-
-.total-column {
-   border-top: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-.quarter-container {
-   width: 44%;
-   max-height: 98px;
-   float: left;
-   margin: 20px;
-   text-align: center;
-}
-
-.quarter-title {
-   color: #a6a6a6;
-   margin: 0 0 2px 0;
-}
-
-.quarter-text-container>p {
-   margin: 0;
 }
