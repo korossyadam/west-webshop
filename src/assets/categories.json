@@ -94,6 +94,23 @@
                   "name": "Egyéb"
                }
             ]
+         },
+         {
+            "name": "Levegőtechnika",
+            "children": [
+               {
+                  "name": "Toldók"
+               },
+               {
+                  "name": "Levegő csövek"
+               },
+               {
+                  "name": "Közcsavarok"
+               },
+               {
+                  "name": "Légkuplung"
+               }
+            ]
          }
       ]
    },
@@ -140,6 +157,9 @@
                },
                {
                   "name": "Belső ventilátorok"
+               },
+               {
+                  "name": "Tachográf szalag / korong"
                }
             ]
          },
@@ -262,6 +282,43 @@
                         "name": "Üzemanyag adalék"
                      }
                   ]
+               }
+            ]
+         },
+         {
+            "name": "Kötelező felszerelések",
+            "children": [
+               {
+                  "name": "ADR készlet"
+               },
+               {
+                  "name": "Elakadásjelző háromszög"
+               },
+               {
+                  "name": "Elsősegély doboz"
+               },
+               {
+                  "name": "Tűzoltó készülék / tartó"
+               },
+               {
+                  "name": "Láthatósági mellény"
+               }
+            ]
+         },
+         {
+            "name": "Rakományrögzítés",
+            "children": [
+               {
+                  "name": "Spanifer"
+               },
+               {
+                  "name": "Élvédő"
+               },
+               {
+                  "name": "Gumipók"
+               },
+               {
+                  "name": "Csúszásgátló"
                }
             ]
          }

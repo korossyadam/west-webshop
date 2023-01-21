@@ -52,7 +52,13 @@ export class ProductsService {
     }).valueChanges() as Observable<Product[]>;
   }
 
-  // Get exactly one Product
+  /**
+   * Queries for exactly one product
+   * partNumber field has to be exactly correct
+   * 
+   * @param searchedText The partNumber we are looking for
+   * @returns Query result in a form of an Observable
+   */
   getProduct(searchedText: string): Observable<Product[]> {
     return this.afs.collection('products', ref => {
       let query: CollectionReference | Query = ref;

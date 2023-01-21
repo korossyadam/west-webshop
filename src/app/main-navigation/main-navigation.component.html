@@ -23,12 +23,30 @@
       <!-- Search field -->
       <div class="search-container">
          <div class="search-inner-container">
-            <input class="search-field" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" #searchField>
+            <input id="searchField" class="search-field" placeholder="Cikkszám, gyári szám.." maxlength="64" autocomplete="off" [(ngModel)]="searchField" (ngModelChange)="lookForCategories()" (focus)="lookForCategories()">
 
-            <button mat-raised-button class="search-button" color="primary" (click)="searchForProduct(searchField.value)">
+            <button mat-raised-button class="search-button" color="primary" (click)="searchForProduct()">
                <mat-icon>search</mat-icon>
             </button>
+
+            <div class="displayed-category-container">
+
+               <!-- Product under searchbar that matches the searchedText fully -->
+               <div *ngIf="displayedProduct" class="displayed-product-container" [routerLink]="['/product', displayedProduct.partNumber]">
+                  <img [src]="sanitize(displayedProduct.imgurls[0])" class="displayed-product-img">
+                  <div class="displayed-product-inner-container">
+                     <span class="displayed-product-partnumber">{{ displayedProduct.partNumber }}<span class="displayed-product-name">, {{ displayedProduct.name }}</span></span>
+                  </div>
+               </div>
+
+               <!-- Categories under searchbar -->
+               <div *ngFor="let displayedCategory of displayedCategories" class="displayed-category-inner-container" (click)="jumpToCategory(displayedCategory)">
+                  <p>{{ displayedCategory.prefix}} / <span class="bold">{{ displayedCategory.suffix }}</span></p>
+               </div>
+            </div>
+            
          </div>
+
       </div>
 
       <!-- Navigation options on the left -->

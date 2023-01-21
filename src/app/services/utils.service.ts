@@ -43,6 +43,27 @@ export class UtilsService {
     return this.categories;
   }
 
+  /**
+   * Extracts every leaf node from categories JSON tree
+   * Every extracted leaf node will have their absolute paths as their names
+   * 
+   * @param nodes An array of Category[], representing nodes in the JSON tree
+   * @param path Represents the current path of the function as it traverses the tree
+   * @returns All leaf nodes in the tree, and their absolute location
+   */
+  getLeafNodePaths(nodes: Category[], path: string[] = []): string[] {
+    let leafNodePaths = [];
+    nodes.forEach(node => {
+      if (node.children) {
+        leafNodePaths = leafNodePaths.concat(this.getLeafNodePaths(node.children, [...path, node.name]));
+      } else {
+        leafNodePaths.push([...path, node.name].join(' / '));
+      }
+    });
+
+    return leafNodePaths;
+  }
+
   openCarSelectorSidenav = (): void => {
     this.openSidenavEvent.emit();
   };

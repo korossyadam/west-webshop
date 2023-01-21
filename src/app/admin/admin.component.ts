@@ -8,7 +8,7 @@ import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { AdminService } from '../services/admin.service';
-import { Category, UtilsService } from '../services/utils.service';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'app-admin',
@@ -24,6 +24,7 @@ export class AdminComponent implements OnInit {
   addTax = this.utilsService.addTaxToPrice;
   formatPrice = this.utilsService.formatPriceToString;
   sanitize = this.utilsService.sanitize;
+  getLeafNodePaths = this.utilsService.getLeafNodePaths;
 
   // References to openable dialogs
   @ViewChild('newProductDialogRef') newProductDialogRef!: TemplateRef<any>;
@@ -72,26 +73,7 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  /**
-   * Extracts every leaf node from categories JSON tree
-   * Every extracted leaf node will have their absolute paths as their names
-   * 
-   * @param nodes An array of Category[], representing nodes in the JSON tree
-   * @param path Represents the current path of the function as it traverses the tree
-   * @returns All leaf nodes in the tree, and their absolute location
-   */
-  getLeafNodePaths(nodes: Category[], path: string[] = []): string[] {
-    let leafNodePaths = [];
-    nodes.forEach(node => {
-      if (node.children) {
-        leafNodePaths = leafNodePaths.concat(this.getLeafNodePaths(node.children, [...path, node.name]));
-      } else {
-        leafNodePaths.push([...path, node.name].join(' / '));
-      }
-    });
-
-    return leafNodePaths;
-  }
+  
 
   /**
    * Opens the dialog where admin can add new Products
