@@ -12,9 +12,7 @@
                <!-- Title -->
                <p class="section-title">Kosár tartalma</p>
 
-               <div *ngIf="initialLoading">
-                  <mat-spinner class="spinner"></mat-spinner>
-               </div>
+               <mat-spinner *ngIf="initialLoading" class="spinner"></mat-spinner>
 
                <!-- Cart elements ngFor-->
                <div *ngIf="!initialLoading">
