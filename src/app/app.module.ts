@@ -41,7 +41,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { CartComponent } from './cart/cart.component';
-import { BatteryComponent } from './battery/battery.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { OfferComponent } from './offer/offer.component';
 import { CarComponent } from './car/car.component';
@@ -65,7 +64,6 @@ import { OfferDialogComponent } from './dialogs/offer-dialog/offer-dialog.compon
     HomeComponent,
     FooterComponent,
     CartComponent,
-    BatteryComponent,
     OfferComponent,
     CarComponent,
     ProductComponent,

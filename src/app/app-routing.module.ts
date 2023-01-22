@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { BatteryComponent } from './battery/battery.component';
 import { CarComponent } from './car/car.component';
 import { CartComponent } from './cart/cart.component';
 import { CategoriesComponent } from './categories/categories.component';
@@ -21,7 +20,6 @@ const routes: Routes = [
   { path: 'profile/:tab', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'battery', component: BatteryComponent },
   { path: 'offer', component: OfferComponent },
   { path: 'car/:index', component: CarComponent, canActivate: [AuthGuardService] },
   { path: 'products', component: ProductsComponent },
