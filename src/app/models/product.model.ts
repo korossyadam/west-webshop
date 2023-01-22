@@ -1,3 +1,8 @@
+export class KeyValue {
+   key: string;
+   value: string;
+}
+
 export class Product {
    public partNumber: string;
    public name: string;
@@ -6,14 +11,14 @@ export class Product {
    public specialCategories: string[];
    public brand: string;
    public price: string;
-   public properties: string[];
-   public factoryNumbers: string[];
+   public properties: KeyValue[];
+   public factoryNumbers: KeyValue[];
    public stock: number;
    public canBeReturned: boolean;
    public imgurls: string[];
    public carIndexes: string[];
 
-   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategories: string[], brand: string, price: string, properties: string[], factoryNumbers: string[], stock: number, canBeReturned: boolean, imgurls: string[], carIndexes: string[]) {
+   constructor(partNumber: string, name: string, description: string, categories: string[], specialCategories: string[], brand: string, price: string, properties: KeyValue[], factoryNumbers: KeyValue[], stock: number, canBeReturned: boolean, imgurls: string[], carIndexes: string[]) {
       this.partNumber = partNumber;
       this.name = name;
       this.description = description;
@@ -27,10 +32,6 @@ export class Product {
       this.canBeReturned = canBeReturned;
       this.imgurls = imgurls;
       this.carIndexes = carIndexes;
-
-      if (this.price == '-') {
-         this.price = '990';
-      }
    }
 
 }

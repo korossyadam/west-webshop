@@ -6,7 +6,7 @@ import { OfferDialogComponent } from '../dialogs/offer-dialog/offer-dialog.compo
 import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
-import { Product } from '../models/product.model';
+import { Product, KeyValue } from '../models/product.model';
 import { AdminService } from '../services/admin.service';
 import { UtilsService } from '../services/utils.service';
 
@@ -35,6 +35,8 @@ export class AdminComponent implements OnInit {
   // This variable keeps track of how many inputs should be visible
   public specialCategoryInputs: string[] = ['Nincs'];
   public imageUrls: string[] = [''];
+
+  public propertyInputs: KeyValue[] = [];
 
   // The images to upload when uploading a new Product
   public productFiles: string[] = [];
@@ -73,8 +75,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  
-
   /**
    * Opens the dialog where admin can add new Products
    */
@@ -86,11 +86,12 @@ export class AdminComponent implements OnInit {
     this.adminService.getSingleProduct(partNumber).pipe(first()).subscribe(data => {
       if (data.length == 0) {
         this.showSnackBar(partNumber + ' cikkszámú termék nem létezik!', 'Bezárás', 4000);
-      } else {
-        this.activeImageUrls = data[0].imgurls;
-        this.deletedImageUrls = [];
-        this.openProductDialog(data[0]);
+        return;
       }
+
+      this.activeImageUrls = data[0].imgurls;
+      this.deletedImageUrls = [];
+      this.openProductDialog(data[0]);
     });
   }
 
@@ -117,6 +118,10 @@ export class AdminComponent implements OnInit {
     this.specialCategoryInputs.push('Nincs');
   }
 
+  addProperty(): void {
+    this.propertyInputs.push({key: '', value: ''});
+  }
+
   addImageUrl(): void {
     this.imageUrls.push('');
   }
@@ -140,18 +145,19 @@ export class AdminComponent implements OnInit {
   async addNewProduct(partNumber: string, name: string, description: string, brand: string, price: string, stock: string, returnable: boolean): Promise<void> {
     let categories = this.createCategoriesArray();
 
+    this.productFiles.push(...this.imageUrls.filter(value => value !== ''));
+
     // Upload images first
     let imgUrls: string[] = [];
     for (let i = 0; i < this.productFiles.length; i++) {
       await this.adminService.uploadImage(this.productFiles[i]).then(data => {
+        console.log(data);
         imgUrls.push(data);
       });
     }
 
-    imgUrls.push(...this.imageUrls.filter(value => value !== ''));
-
     // Upload the actual Product
-    let productToUpload = new Product(partNumber, name, description, [], categories, brand, price, [], [], parseInt(stock), returnable, imgUrls, []);
+    let productToUpload = new Product(partNumber, name, description, [], categories, brand, price, this.propertyInputs, [], parseInt(stock), returnable, imgUrls, []);
     this.adminService.uploadData('products', Object.assign({}, productToUpload)).then(() => {
       this.showSnackBar('A termék sikeresen fel lett töltve!', 'Bezár', 4000);
     });

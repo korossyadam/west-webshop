@@ -202,6 +202,23 @@
 
          <mat-divider class="section-divider"></mat-divider>
       </div>
+
+      <!-- Properties -->
+      <div>
+         <p class="section-title">Tulajdonságok</p>
+
+         <!-- Lopp through every category selector input -->
+         <ng-container *ngFor="let property of propertyInputs; let i = index;">
+            <div class="property-inputs-container">
+               <input placeholder="Méret" [(ngModel)]="propertyInputs[i]['key']"><input placeholder="50 cm" [(ngModel)]="propertyInputs[i]['value']">
+            </div>
+         </ng-container>
+
+         <!-- New category button -->
+         <button mat-raised-button color="primary" (click)="addProperty()">Tulajdonság hozzáadása</button>
+
+         <mat-divider class="section-divider"></mat-divider>
+      </div>
       
       <!-- Images -->
       <div>

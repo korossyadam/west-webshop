@@ -23,10 +23,6 @@ export class ProductComponent implements OnInit {
   // Keeps track of product that we want to show
   public currentProductId: string;
   public currentProduct: Product;
-  public propertyTypes: string[] = [];
-  public propertyValues: string[] = [];
-  public factoryNumberCodes: string[] = [];
-  public factoryNumberBrands: string[] = [];
 
   // Product image variables
   public selectedImageUrl: string;
@@ -46,18 +42,6 @@ export class ProductComponent implements OnInit {
         // Set default visible product image
         this.selectedImageUrl = this.currentProduct.imgurls[0];
         this.selectedImageIndex = 0;
-
-        // Fill up properties array
-        for (let i = 0; i < this.currentProduct.properties.length; i++) {
-          this.propertyTypes[i] = this.currentProduct.properties[i].split('*')[0];
-          this.propertyValues[i] = this.currentProduct.properties[i].split('*')[1];
-        }
-
-        // Fill up factory numbers array
-        for (let i = 0; i < this.currentProduct.factoryNumbers.length; i++) {
-          this.factoryNumberCodes[i] = this.currentProduct.factoryNumbers[i].split('*')[0];
-          this.factoryNumberBrands[i] = this.currentProduct.factoryNumbers[i].split('*')[1];
-        }
       }
 
       this.initialLoading = false;

@@ -80,9 +80,6 @@
                         "name": "Teszterek"
                      },
                      {
-                        "name": "Indítókábelek"
-                     },
-                     {
                         "name": "Egyéb akkumulátor"
                      }
                   ]
@@ -99,7 +96,40 @@
             "name": "Levegőtechnika",
             "children": [
                {
-                  "name": "Toldók"
+                  "name": "Toldók",
+                  "children": [
+                     {
+                        "name": "Műanyag toldók",
+                        "children": [
+                           {
+                              "name": "Műanyag egyenes toldó"
+                           },
+                           {
+                              "name": "Műanyag könyök toldó"
+                           },
+                           {
+                              "name": "Műanyag T toldó"
+                           },
+                           {
+                              "name": "Műanyag 4-es toldó"
+                           }
+                        ]
+                     },
+                     {
+                        "name": "Fém toldók",
+                        "children": [
+                           {
+                              "name": "Fém egyenes toldó"
+                           },
+                           {
+                              "name": "Fém könyök toldó"
+                           },
+                           {
+                              "name": "Fém T toldó"
+                           }
+                        ]
+                     }
+                  ]
                },
                {
                   "name": "Levegő csövek"

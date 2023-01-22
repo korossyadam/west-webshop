@@ -31,7 +31,7 @@
 
                <!-- Product image -->
                <div class="product-img-container">
-                  <img *ngIf="selectedImageUrl != ''" class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
+                  <img *ngIf="selectedImageUrl" class="product-img" [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" (click)="openImageModal()">
                   <div class="no-img-container">
                      <mat-icon *ngIf="selectedImageUrl == ''" class="no-img">image_not_supported</mat-icon>
                   </div>
@@ -119,12 +119,12 @@
 
             <!-- Information: properties -->
             <div *ngIf="displayedInformation == 0">
-               <p *ngIf="propertyTypes.length == 0">Ennek a terméknek nincsenek tulajdonságai.</p>
+               <p *ngIf="currentProduct.properties.length == 0">Ennek a terméknek nincsenek tulajdonságai.</p>
                <table class="properties-table" rules="all">
-                  <ng-container>
-                     <tr *ngFor="let propertyTypes of propertyTypes; let i = index;">
-                        <td class="properties-table-row properties-first-column">{{ propertyTypes }}</td>
-                        <td class="properties-table-row properties-second-column">{{ propertyValues[i] }}</td>
+                  <ng-container *ngIf="currentProduct">
+                     <tr *ngFor="let property of currentProduct.properties; let i = index;">
+                        <td class="properties-table-row properties-first-column">{{ property.key }}</td>
+                        <td class="properties-table-row properties-second-column">{{ property.value }}</td>
                      </tr>
                   </ng-container>
                </table>
@@ -132,12 +132,12 @@
 
             <!-- Information: factory numbers-->
             <div *ngIf="displayedInformation == 1">
-               <p *ngIf="factoryNumberCodes.length == 0">Ennek a terméknek nincsenek gyári számai.</p>
+               <p *ngIf="currentProduct.factoryNumbers.length == 0">Ennek a terméknek nincsenek gyári számai.</p>
                <table class="factory-numbers-table">
-                  <ng-container *ngFor="let factoryNumberCode of factoryNumberCodes; let i = index;">
+                  <ng-container *ngFor="let factoryNumber of currentProduct.factoryNumbers; let i = index;">
                      <tr>
-                        <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumberCode }}</td>
-                        <td class="factory-numbers-table-row factory-numbers-second-column">{{ factoryNumberBrands[i] }}</td>
+                        <td class="factory-numbers-table-row factory-numbers-first-column">{{ factoryNumber.key }}</td>
+                        <td class="factory-numbers-table-row factory-numbers-second-column">{{ factoryNumber.value }}</td>
                      </tr>
                   </ng-container>
                </table>
@@ -149,14 +149,13 @@
    </div>
 </div>
 
-<div *ngIf="currentProduct" id="imageModal" class="modal">
+<div *ngIf="currentProduct && selectedImageUrl" id="imageModal" class="modal">
    
    <div class="modal-img-container">
       <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex > 0" class="modal-white-icon modal-arrow-icon back" (click)="previousModalImage()">arrow_back_ios</mat-icon>
       <img [src]="sanitize(selectedImageUrl.replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="modal-img">
       <mat-icon *ngIf="currentProduct.imgurls.length > 1 && selectedImageIndex+1 < currentProduct.imgurls.length" class="modal-white-icon modal-arrow-icon forward" (click)="nextModalImage()">arrow_forward_ios</mat-icon>
    </div>
-
    
    <mat-icon class="modal-white-icon modal-close-icon" (click)="closeImageModal()">close</mat-icon>
    

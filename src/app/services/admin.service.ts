@@ -25,8 +25,14 @@ export class AdminService {
 
   // Upload an image
   async uploadImage(imagePath: string) {
-    var ref = 'products/' + Math.random() + imagePath;
+    let min = 10000000;
+    let max = 99999999;
+    console.log(imagePath);
+    let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    let ref = 'products/' + randomNumber + '.png';
     let returnValue = '-1';
+
+    console.log(ref);
 
     // Attempt to upload image to firestore
     await this.afbs.upload(ref, imagePath).then(async finished => {

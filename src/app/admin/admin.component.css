@@ -80,6 +80,10 @@ input[type='file'] {
    margin: 15px 0px;
 }
 
+.property-inputs-container input {
+   width: 40%;
+}
+
 /* Offer styles */
 .offer-card {
    float: right;
