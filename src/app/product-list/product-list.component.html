@@ -1,0 +1,134 @@
+<div class="content-container">
+  <div class="content-inner-container">
+
+   <!-- Loading spinner -->
+    <div *ngIf="initialLoading" class="initial-spinner-container">
+      <mat-spinner class="initial-spinner" diameter="140"></mat-spinner>
+    </div>
+
+    <!-- No products found message -->
+    <div *ngIf="!initialLoading && products.length == 0" class="no-results-container">
+      <p>Nincs találat.</p>
+    </div>
+
+    <div class="side-menu-container">
+      <!-- List of clickable child categories -->
+      <div class="child-categories-container">
+        <p *ngFor="let childCategory of childCategories" class="child-category" [routerLink]="['/products', { productCategory: childCategory }]">{{ childCategory }}</p>
+      </div>
+      
+      <!-- Query card -->
+      <mat-card *ngIf="!initialLoading && products.length > 0" class="query-container">
+        <mat-checkbox [(ngModel)]="onlyInStock" (change)="reAddElements()">Csak raktáron lévők</mat-checkbox>
+
+        <!-- Brand selector -->
+        <p class="brand-selector-title">Gyártmány</p>
+        <select [(ngModel)]="selectedBrand" class="brand-selector" (change)="reAddElements()">
+          <option value="all">Mind</option>
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+        </select>
+      </mat-card>
+
+      <!-- Common properties card -->
+      <mat-card *ngIf="!initialLoading && products.length > 0 && commonProperties.length > 0" class="query-container">
+        <ng-container *ngFor="let commonProperty of commonProperties">
+          <p>{{ commonProperty.title }}</p>
+          <ng-container *ngFor="let value of commonProperty.values; let i = index">
+            <mat-checkbox (change)="onCheckboxChange($event.checked, commonProperty.title, value)">{{ value }}</mat-checkbox>
+          </ng-container>
+        </ng-container>
+      </mat-card>
+
+    </div>
+
+    <!-- Table of products -->
+    <table *ngIf="!initialLoading && products.length > 0" class="table" matSort (matSortChange)="sortData($event)">
+
+      <!-- Table head -->
+      <thead>
+        <tr>
+          <th class="image-column"></th>
+          <th mat-sort-header="name">Megnevezés</th>
+          <th mat-sort-header="brand">Gyártmány</th>
+          <th mat-sort-header="price">Ár</th>
+          <th mat-sort-header="stock">Készlet</th>
+          <th class="order-column">Rendelés</th>
+          <th class="action-column">Egyéb</th>
+        </tr>
+      </thead>
+
+      <!-- Table body -->
+      <tbody>
+        <tr *ngFor="let product of activeProducts; let i = index;">
+
+          <!-- Product image -->
+          <td>
+            <div class="product-img-container">
+               <div *ngIf="product.imgurls.length == 0" class="no-img-container">
+                  <mat-icon class="no-img">image_not_supported</mat-icon>
+               </div>
+               <ng-container *ngIf="product.imgurls.length > 0">
+                  <img [hidden]="loadFlags[i]" class="product-img" src="{{ product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', '') }}" [routerLink]="['/product', product.partNumber]" (load)="disableLoadFlag(i)">
+                  <mat-spinner *ngIf="loadFlags[i]" [diameter]="50"></mat-spinner>
+               </ng-container>
+            </div>
+          </td>
+
+          <!-- Product number and name-->
+          <td>
+            <div class="name-container">
+              <p class="product-partnumber" [routerLink]="['/product', product.partNumber]">{{ product.partNumber }}</p>
+              <p class="product-name">{{ product.name }}</p>
+            </div>
+          </td>
+
+          <!-- Product brand-->
+          <td>{{ product.brand }}</td>
+
+          <!-- Product price -->
+          <td class="price-container">
+            <p class="final-price">{{ formatPriceToString(addTax(product.price)) }}</p>
+            <p class="net-price">{{ formatPriceToString(product.price) }} + áfa</p>
+          </td>
+
+          <!-- Product stock -->
+          <td>
+            <div *ngIf="product.stock > 0">
+              <p *ngIf="product.stock > 10" class="in-stock">Raktáron (10+)</p>
+              <p *ngIf="product.stock <= 10" class="in-stock">Raktáron ({{ product.stock }})</p>
+            </div>
+            <p *ngIf="product.stock <= 0" class="out-of-stock">Nincs raktáron</p>
+          </td>
+
+          <!-- Quantity input and cart button -->
+          <td>
+            <div class="amount-container">
+              <div class="amount-button input-negative" (click)="decrementInputValue(product.partNumber)">-</div>
+              <input [id]="product.partNumber" class="amount-input" type="number" value="1" #quantity>
+              <div class="amount-button input-positive" (click)="incrementInputValue(product.partNumber, product.stock)">+</div>
+            </div>
+
+            <button mat-raised-button class="cart-button" (click)="addToCart(product)">Kosárba</button>
+          </td>
+
+          <!-- Other buttons -->
+          <td class="extra-button-container">
+            <p class="extra-button" (click)="addToWishList(product)">Kívánságlistához adás</p>
+            <p class="extra-button">Kérdésem van a termékkel kapcsolatban</p>
+          </td>
+        </tr>
+
+        <!-- No products found after filtering message -->
+        <tr *ngIf="activeProducts.length == 0">
+          <td colspan="8">
+            <div class="no-such-product-container">
+              Nincs ilyen termék.
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
