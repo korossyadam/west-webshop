@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MainNavigationComponent } from './main-navigation/main-navigation.component';
-import { ProductsComponent } from './products/products.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 import { MatCardModule } from  '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -52,12 +52,13 @@ import { Categories2Component } from './categories2/categories2.component';
 import { FeaturedCategoriesComponent } from './featured-categories/featured-categories.component';
 import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component';
 import { OfferDialogComponent } from './dialogs/offer-dialog/offer-dialog.component';
+import { InfoComponent } from './info/info.component';
 
 
 @NgModule({
   declarations: [
     MainNavigationComponent,
-    ProductsComponent,
+    ProductListComponent,
     SidenavComponent,
     LoginComponent,
     ProfileComponent,
@@ -75,6 +76,7 @@ import { OfferDialogComponent } from './dialogs/offer-dialog/offer-dialog.compon
     FeaturedCategoriesComponent,
     OrderDialogComponent,
     OfferDialogComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
