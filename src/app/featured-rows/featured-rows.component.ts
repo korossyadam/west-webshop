@@ -15,7 +15,7 @@ export class FeaturedRowsComponent implements OnInit {
   addToCart = this.utilsService.addProductToCart;
 
   // Products that are referenced in this array will be queried
-  public featuredProductNumbers = ['MMT A174 031', '39080', 'MA 19-071', 'WG02821', '39-0306', 'YT-85915', 'FT-009C'];
+  public featuredProductNumbers = ['PSZ-1-01', 'TLD-FE-8', 'ML-N-9x3', 'FKT-01', 'FT-009A', 'PCHARGE4V2', 'YT-14501'];
 
   // Gets populated on init
   public featuredProducts: Product[];
@@ -42,6 +42,21 @@ export class FeaturedRowsComponent implements OnInit {
         localStorage.setItem('featured-rows', JSON.stringify(data));
       });
     }
+  }
+
+  /**
+   * Gets the last special category of a product
+   * This is used to display a button to browse products in the same category
+   * 
+   * @param product The product whose last special category will be returned
+   * @returns The buttons inner text, a string
+   */
+  getExactCategory(product: Product): string {
+    let arr = product.specialCategories;
+    if (!arr)
+      return '';
+
+    return arr[arr.length - 1];
   }
 
 }

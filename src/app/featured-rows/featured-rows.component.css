@@ -1,24 +1,26 @@
 .content-container {
-   width: 1000px;
+   width: 950px;
    margin: 0 auto;
-   margin-bottom: 300px;
+   margin-bottom: 100px;
+   margin-top: -30px;
+   padding: 5px 30px;
 }
 
 .product-container {
    display: flex;
-   width: 1000px;
+   width: 950px;
    margin-top: 50px;
 }
 
 .image-container {
    display: block;
-   width: 400px;
-   min-width: 400px;
+   width: 450px;
+   min-width: 450px;
    max-height: 255px;
    float: right;
    background-color: white;
    cursor: pointer;
-   box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 10%);
+   box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 20%);
    padding: 20px 0px;
 }
 
@@ -33,6 +35,18 @@
    width: 600px;
 }
 
+.name {
+   width: fit-content;
+   color: #3e3e3e;
+   cursor: pointer;
+   transition: 0.25s;
+}
+
+.name:hover {
+   color: var(--color-primary);
+   transition: 0.25s;
+}
+
 .description {
    margin-bottom: 0px;
 }
@@ -44,16 +58,20 @@
    float: left;
 }
 
-.cart-button {
+.buttons-container {
    float: left;
    margin-top: 17px;
    margin-left: 15px;
 }
 
+.buttons-container button {
+   margin-right: 10px;
+}
+
 /* Make image and text switch places every second product */
 .product-container:nth-of-type(odd) .image-container {
    order: 2;
-   margin-left: 100px;
+   margin-left: 70px;
 }
 
 .product-container:nth-of-type(odd) .text-container {
@@ -62,7 +80,7 @@
 
 .product-container:nth-of-type(even) .image-container {
    order: 1;
-   margin-right: 100px;
+   margin-right: 80px;
 }
 
 .product-container:nth-of-type(even) .text-container {

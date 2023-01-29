@@ -4,7 +4,7 @@
    <div *ngFor="let product of featuredProducts" class="product-container">
 
       <!-- Image section -->
-      <div class="image-container">
+      <div class="image-container" [routerLink]="['/product', product.partNumber]">
          <img [src]="product.imgurls[0]" class="image">
       </div>
 
@@ -12,16 +12,16 @@
       <div class="text-container">
 
          <!-- Name and Description -->
-         <h2>{{ product.name }}</h2>
+         <h2 class="name" [routerLink]="['/product', product.partNumber]">{{ product.name }}</h2>
          <p class="description">{{ product.description }}</p>
 
-         <!-- Price and Add to Cart button -->
-         <div class="price-container">
-            <p class="price">{{ formatPriceToString(product.price) }}</p>
-            <button mat-raised-button class="cart-button" color="primary">Kosárba</button>
-         </div>
+         <!-- Price and buttons -->
+         <p class="price">{{ formatPriceToString(product.price) }}</p> 
+         <div class="buttons-container">
+            <button mat-raised-button color="primary" (click)="addToCart(product, 1)">Kosárba</button>
+            <button mat-raised-button [routerLink]="['/products', {productCategory: getExactCategory(product)}]">{{ getExactCategory(product) }}</button>
+         </div> 
       </div>
-
    </div>
 
 </div>
