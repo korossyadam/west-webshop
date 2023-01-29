@@ -5,16 +5,15 @@
 
 .category-container {
    position: relative;
-   width: 680px;
+   width: 660px;
    height: fit-content;
-   margin-bottom: 200px;
+   margin: 50px 10px;
 }
 
 .category-inner-container {
    overflow: hidden;
    max-height: 210px;
-   border-radius: 1px;
-   border-radius: 3px;
+   border-radius: 4px;
 }
 
 .float-right {
@@ -23,9 +22,6 @@
 }
 
 .category-img {
-   position: relative;
-   width: 100%;
-   height: 100%;
    filter: blur(0px);
    cursor: pointer;
    transition: 0.45s;
