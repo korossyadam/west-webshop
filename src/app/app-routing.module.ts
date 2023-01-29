@@ -9,7 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { OfferComponent } from './offer/offer.component';
 import { ProductComponent } from './product/product.component';
-import { ProductsComponent } from './products/products.component';
+import { ProductListComponent } from './product-list/product-list.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminGuard } from './services/admin.guard';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -22,9 +22,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent },
   { path: 'offer', component: OfferComponent },
   { path: 'car/:index', component: CarComponent, canActivate: [AuthGuardService] },
-  { path: 'products', component: ProductsComponent },
-  { path: 'products/:category', component: ProductsComponent },
-  { path: 'products/:searchedCategory', component: ProductsComponent },
+  { path: 'products', component: ProductListComponent },
+  { path: 'products/:category', component: ProductListComponent },
+  { path: 'products/:searchedCategory', component: ProductListComponent },
   { path: 'product/:partNumber', component: ProductComponent },
   { path: 'categories/:category', component: CategoriesComponent },
   { path: 'categories2/:category', component: Categories2Component },

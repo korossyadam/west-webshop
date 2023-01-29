@@ -116,8 +116,10 @@ export class ProductListComponent implements OnInit {
          this.products = data;
          this.activeProducts = data;
 
-         this.getDistinctBrands();
-         this.getCommonProperties();
+         if (data.length > 0) {
+            this.getDistinctBrands();
+            this.getCommonProperties();
+         }
          this.initialLoading = false;
       });
    }
