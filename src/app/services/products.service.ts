@@ -47,7 +47,7 @@ export class ProductsService {
   getProductsByArray(partNumbers: string[]): Observable<Product[]> {
     return this.afs.collection('products', ref => {
       let query: CollectionReference | Query = ref;
-      query = query.where('partNumber', 'in', partNumbers).orderBy('name').limit(10);
+      query = query.where('partNumber', 'in', partNumbers).orderBy('name', 'desc').limit(10);
       return query;
     }).valueChanges() as Observable<Product[]>;
   }
