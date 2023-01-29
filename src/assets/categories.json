@@ -85,7 +85,15 @@
                   ]
                },
                {
-                  "name": "Szerelőállványok"
+                  "name": "Emelők",
+                  "children": [
+                     {
+                        "name": "Krokodil emelők"
+                     },
+                     {
+                        "name": "Trapéz emelők"
+                     }
+                  ]
                },
                {
                   "name": "Egyéb"
@@ -154,7 +162,10 @@
                   "name": "Ablaktisztítás"
                },
                {
-                  "name": "Kefék, törlőkendők"
+                  "name": "Kefék"
+               },
+               {
+                  "name": "Törlőkendők"
                },
                {
                   "name": "Motorblokk tisztítás"
@@ -164,6 +175,9 @@
                },
                {
                   "name": "Polírozás"
+               },
+               {
+                  "name": "Egyéb autóápolás"
                }
             ]
          },
@@ -197,7 +211,15 @@
             "name": "Kültér",
             "children": [
                {
-                  "name": "Ablaktörlő lapátok"
+                  "name": "Ablaktörlő lapátok",
+                  "children": [
+                     {
+                        "name": "Személyautó"
+                     },
+                     {
+                        "name": "Teherautó"
+                     }
+                  ]
                },
                {
                   "name": "Lámpák",
@@ -206,21 +228,21 @@
                         "name": "Hátsó lámpák",
                         "children": [
                            {
-                              "name": "Izzós"
+                              "name": "Izzós hátsó lámpák"
                            },
                            {
-                              "name": "LED-es"
+                              "name": "LED-es hátsó lámpák"
                            }
                         ]
                      },
                      {
-                        "name": "Gumilámpák",
+                        "name": "Szélességjelzők",
                         "children": [
                            {
-                              "name": "Izzós"
+                              "name": "Izzós szélességjelzők"
                            },
                            {
-                              "name": "LED-es"
+                              "name": "LED-es szélességjelzők"
                            }
                         ]
                      },
@@ -228,10 +250,10 @@
                         "name": "Helyzetjelzők",
                         "children": [
                            {
-                              "name": "Izzós"
+                              "name": "Izzós helyzetjelzők"
                            },
                            {
-                              "name": "LED-es"
+                              "name": "LED-es helyzetjelzők"
                            }
                         ]
                      },
@@ -239,21 +261,21 @@
                         "name": "Munkalámpák",
                         "children": [
                            {
-                              "name": "Izzós"
+                              "name": "Izzós munkalámpák"
                            },
                            {
-                              "name": "LED-es"
+                              "name": "LED-es munkalámpák"
                            }
                         ]
                      },
                      {
-                        "name": "Megkülönböztető lámpák",
+                        "name": "Forgólámpák",
                         "children": [
                            {
-                              "name": "Izzós"
+                              "name": "Izzós forgólámpák"
                            },
                            {
-                              "name": "LED-es"
+                              "name": "LED-es forgólámpák"
                            }
                         ]
                      }
@@ -269,7 +291,18 @@
                   "name": "Rendszámtábla tartók"
                },
                {
-                  "name": "Fényvisszaverők"
+                  "name": "Fényvisszaverők",
+                  "children": [
+                     {
+                        "name": "Táblák / matricák"
+                     },
+                     {
+                        "name": "Szalagok"
+                     },
+                     {
+                        "name": "Prizmák"
+                     }
+                  ]
                }
             ]
          },
