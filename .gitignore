@@ -50,3 +50,10 @@ Thumbs.db
 products.txt
 quantity.txt
 ap_products.txt
+
+# Other
+.firebase/
+firebase/
+.firebase
+firebase
+/.firebase/
