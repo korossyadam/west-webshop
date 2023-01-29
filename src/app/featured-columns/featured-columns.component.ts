@@ -15,7 +15,7 @@ export class FeaturedColumnsComponent implements OnInit {
   addToCart = this.utilsService.addProductToCart;
 
    // Products that are referenced in this array will be queried
-  public featuredProductNumbers = ['MMT A174 031', '39080', 'MA 19-071', 'WG02821', '39-0306', 'YT-85915', 'FT-009C'];
+  public featuredProductNumbers = ['GP-K-8', 'TLD-FE-8', 'SP-1-5T8M', 'EJ-01', 'KV-1-01', 'EM-T-1T', 'ML-N-9x3'];
 
   // Gets populated on init
   public featuredProducts: Product[];
@@ -58,17 +58,16 @@ export class FeaturedColumnsComponent implements OnInit {
     this.slidersMoving += this.featuredProducts.length * 2;
 
     if (backwards) {
-      this.moveSliderElements(280, false, true);
+      this.moveSliderElements(280, false);
       await new Promise(resolve => setTimeout(resolve, 200));
       this.featuredProducts = this.arrayRotate(this.featuredProducts, true);
-      this.moveSliderElements(-280, true, true);
+      this.moveSliderElements(-280, true);
     } else {
       this.moveSliderElements(-280, false);
       await new Promise(resolve => setTimeout(resolve, 200));
       this.featuredProducts = this.arrayRotate(this.featuredProducts, false);
       this.moveSliderElements(280, true);
     }
-
   }
 
   /**
@@ -77,7 +76,7 @@ export class FeaturedColumnsComponent implements OnInit {
    * @param amount The amount of pixels to move the products with (ex.: 240)
    * @param disableTransition This parameter is needed to disable animations during correction-movements
    */
-  moveSliderElements(amount: number, disableTransition: boolean, backwards: boolean = false): void {
+  moveSliderElements(amount: number, disableTransition: boolean): void {
     let elements = Array.from(document.getElementsByClassName('featured-product') as HTMLCollectionOf<HTMLElement>);
     elements.forEach(async element => {
       if (disableTransition)
@@ -85,7 +84,6 @@ export class FeaturedColumnsComponent implements OnInit {
 
       // Get current position of the product
       let currentPosition = parseInt(element.style.left, 10);
-
       if (!currentPosition) {
         currentPosition = 0;
       }

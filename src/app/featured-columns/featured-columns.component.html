@@ -3,20 +3,13 @@
    <!-- Upper container -->
    <div class="navigation-container">
       <p class="title">Kínálatunkból</p>
+      <mat-divider color="primary"></mat-divider>
 
-      <!-- Back Button -->
+      <!-- Buttons -->
       <div class="buttons-container">
-         <button mat-icon-button class="navigation-icon-container" (click)="moveSlider(true)">
-            <mat-icon class="navigation-icon">arrow_back_ios</mat-icon>
-         </button>
-
-         <!-- Forward Button -->
-         <button mat-icon-button class="navigation-icon-container" (click)="moveSlider(false)">
-            <mat-icon class="navigation-icon">arrow_forward_ios</mat-icon>
-         </button>
+         <button mat-icon-button class="navigation-icon-container" (click)="moveSlider(true)">&lt;</button>
+         <button mat-icon-button class="navigation-icon-container" (click)="moveSlider(false)">&gt;</button>
       </div>
-
-      <mat-divider></mat-divider>
    </div>
 
    <!-- Products container -->
