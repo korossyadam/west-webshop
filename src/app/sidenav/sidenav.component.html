@@ -1,6 +1,6 @@
 <!-- Displayed selected vehicle image on top of everything-->
 <mat-card *ngIf="hoveredTextIndex != -1 && stage == 1" class="vehicle-image-container" [ngStyle]="imgCardStyle">
-   <img *ngIf="activeChassis[hoveredTextIndex].hasImg == true" src="https://storage.googleapis.com/west-webshop.appspot.com/{{ activeChassis[hoveredTextIndex].chassisIndex }}.png" alt="">
+   <img *ngIf="activeChassis[hoveredTextIndex].hasImg == true" src="https://storage.googleapis.com/west-webshop.appspot.com/cars/{{ activeChassis[hoveredTextIndex].chassisIndex }}.png" alt="">
    <mat-icon *ngIf="activeChassis[hoveredTextIndex].hasImg == false" class="error-icon">image_not_supported</mat-icon>
 </mat-card>
 

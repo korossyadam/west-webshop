@@ -299,7 +299,7 @@ export class SidenavComponent implements OnInit {
             let urls = [];
             for (let i = 0; i < this.chassis.length; i++) {
                if (this.chassis[i].hasImg) {
-                  urls.push('https://storage.googleapis.com/west-webshop.appspot.com/' + this.chassis[i].chassisIndex + '.png');
+                  urls.push('https://storage.googleapis.com/west-webshop.appspot.com/cars/' + this.chassis[i].chassisIndex + '.png');
                }
             }
             this.preloadImages(urls);
