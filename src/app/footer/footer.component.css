@@ -4,128 +4,86 @@
 
 .footer {
    position: absolute;
-   left: 0px;
+   margin-top: 130px;
    height: 250px;
    width: 100%;
    background-color: #404040;
    clip-path: polygon(0% 0%, 15% 0%, 16% 9%, 84% 9%, 85% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 
-.label-big {
-   position: absolute;
-   top: 40px;
-   font-size: 20px;
-   color: white;
+.inner-container {
+   display: flex;
+   margin-top: 50px;
+   margin-left: 20%;
+   white-space: nowrap;
 }
 
-.label-small {
-   position: absolute;
-   font-size: 14px;
-   font-weight: bold;
+.column {
+   flex: 1;
+}
+
+p {
+   display: table-row;
    color: #7a7a7a;
-}
-
-.data {
-   position: absolute;
    font-size: 14px;
-   font-weight: bold;
+   font-weight: 700;
+   line-height: 180%;
+}
+
+span {
+   display: table-cell;
+   padding-left: 30px;
+}
+
+h3,
+span {
+   color: rgb(199, 199, 199);
+}
+
+h3 {
+   font-weight: 400;
+}
+
+.link {
+   cursor: pointer;
+   transition: 0.25s;
+}
+
+.link:hover {
    color: white;
+   transition: 0.25s;
 }
 
-.contact {
-   left: 16%;
+@media screen and (max-width: 1300px) {
+   .inner-container {
+      margin-left: 10%;
+   }
+
+   .column {
+      padding-left: 50px;
+   }
 }
 
-.open {
-   left: 46%;
+@media screen and (max-width: 900px) {
+   .footer {
+      height: auto;
+      clip-path: none;
+   }
+
+   .inner-container {
+      display: block;
+      margin-left: 0;
+   }
 }
 
-.information {
-   left: 79%;
+@media screen and (max-width: 500px) {
+   .inner-container {
+      margin-left: -30px;
+   }
 }
 
-.phone-label {
-   top: 100px;
-   left: 16%;
-}
-
-.phone {
-   top: 100px;
-   left: 20%;
-}
-
-.email-label {
-   top: 130px;
-   left: 16%;
-}
-
-.email {
-   top: 130px;
-   left: 20%;
-}
-
-.location-label {
-   top: 160px;
-   left: 16%;
-}
-
-.location {
-   top: 160px;
-   left: 20%;
-}
-
-.first-opening-label {
-   top: 100px;
-   left: 46%;
-}
-
-.first-opening {
-   top: 100px;
-   left: 51%;
-}
-
-.second-opening-label {
-   top: 130px;
-   left: 46%;
-}
-
-.second-opening {
-   top: 130px;
-   left: 51%;
-}
-
-.third-opening-label {
-   top: 160px;
-   left: 46%;
-}
-
-.third-opening {
-   top: 160px;
-   left: 51%;
-}
-
-.delivery {
-   position: absolute;
-   top: 100px;
-   left: 79%;
-   font-size: 14px;
-   font-weight: bold;
-   color: #7a7a7a;
-}
-
-.delivery:hover {
-   color: white;
-}
-
-.return {
-   position: absolute;
-   top: 130px;
-   left: 79%;
-   font-size: 14px;
-   font-weight: bold;
-   color: #7a7a7a;
-}
-
-.return:hover {
-   color: white;
+@media screen and (max-width: 376px) {
+   span {
+      padding-left: 10px;
+   }
 }
