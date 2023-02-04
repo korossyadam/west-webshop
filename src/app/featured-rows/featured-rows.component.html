@@ -16,11 +16,14 @@
          <p class="description">{{ product.description }}</p>
 
          <!-- Price and buttons -->
-         <p class="price">{{ formatPriceToString(product.price) }}</p> 
-         <div class="buttons-container">
-            <button mat-raised-button color="primary" (click)="addToCart(product, 1)">Kosárba</button>
-            <button mat-raised-button [routerLink]="['/products', {productCategory: getExactCategory(product)}]">{{ getExactCategory(product) }}</button>
-         </div> 
+         <div class="nowrap">
+            <p class="price">{{ formatPriceToString(product.price) }}</p> 
+            <div class="buttons-container">
+               <button mat-raised-button color="primary" (click)="addToCart(product, 1)">Kosárba</button>
+               <button mat-raised-button [routerLink]="['/products', {productCategory: getExactCategory(product)}]">{{ getExactCategory(product) }}</button>
+            </div> 
+         </div>
+         
       </div>
    </div>
 

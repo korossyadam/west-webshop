@@ -151,3 +151,43 @@
    -o-transition: none !important;
    transition: none !important;
 }
+
+@media screen and (max-width: 1200px) {
+   .featured-products-container {
+      left: calc((25%) * -1 + 10px);
+   }
+   
+   .featured-product {
+      width: calc(25% - 20px);
+   }
+}
+
+@media screen and (max-width: 1000px) {
+   .featured-products-container {
+      left: calc((33.34%) * -1 + 10px);
+   }
+   
+   .featured-product {
+      width: calc(33.34% - 20px);
+   }
+}
+
+@media screen and (max-width: 750px) {
+   .featured-products-container {
+      left: calc((50%) * -1 + 10px);
+   }
+   
+   .featured-product {
+      width: calc(50% - 20px);
+   }
+}
+
+@media screen and (max-width: 500px) {
+   .featured-products-container {
+      left: calc((100%) * -1 + 10px);
+   }
+   
+   .featured-product {
+      width: calc(100% - 20px);
+   }
+}

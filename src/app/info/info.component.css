@@ -1,0 +1,33 @@
+div {
+   margin: 0 20px;
+}
+
+p {
+   font-size: 15px;
+}
+
+@media screen and (max-width: 1400px) {
+   div {
+      margin: 0px 10px;
+   }
+
+   h2 {
+      font-size: 1.2rem;
+   }
+
+   p {
+      font-size: 1rem;
+   }
+}
+
+@media screen and (max-width: 600px) {
+   .middle {
+      display: none;
+   }
+}
+
+@media screen and (max-width: 350px) {
+   .right {
+      display: none;
+   }
+}

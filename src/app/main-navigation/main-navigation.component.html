@@ -79,7 +79,7 @@
 
                <!-- Loop through all root nodes, and call template with their children -->
                <ng-container *ngFor="let rootNode of categories">
-                  <li><a routerLink="categories">{{ rootNode.name }}<mat-icon class="arrow">expand_more</mat-icon></a>
+                  <li><a>{{ rootNode.name }}<mat-icon class="arrow">expand_more</mat-icon></a>
                      <ng-container *ngTemplateOutlet="recursiveList; context: { $implicit: rootNode.children }"></ng-container>
                   </li>
                </ng-container>
