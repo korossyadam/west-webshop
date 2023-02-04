@@ -37,7 +37,7 @@ span {
 
 h3,
 span {
-   color: rgb(199, 199, 199);
+   color: rgb(230, 230, 230);
 }
 
 h3 {
@@ -50,7 +50,7 @@ h3 {
 }
 
 .link:hover {
-   color: white;
+   color: rgb(199, 199, 199);
    transition: 0.25s;
 }
 
