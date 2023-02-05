@@ -11,7 +11,6 @@
          <!-- Menu options -->
          <div class="options-container">
             <p *ngFor="let option of menuOptions; let i = index;" class="menu-option" [ngClass]="{'active': step == i}" (click)="step = i;">{{ option }}</p>
-
          </div>
 
       </mat-card>
@@ -87,7 +86,6 @@
                   </div>
                </div>
                
-
                <p>Utca, házszám</p>
                <input placeholder="Példa utca 12." [value]="getStreet()" #street>
                <p>Adószám (ha van)</p>
@@ -201,12 +199,9 @@
          <div *ngIf="step == 6">
             <p class="card-title">Biztosan ki szeretnél jelentkezni?</p>
             <mat-divider></mat-divider>
-
             <button mat-raised-button color="warn" class="logout-button">Kijelentkezés</button>
-
          </div>
 
       </mat-card>
-
    </div>
 </div>
