@@ -68,6 +68,7 @@
 }
 
 .dashboard-container {
+   overflow: auto;
    margin-top: 15px;
 }
 
@@ -82,6 +83,7 @@
 
 .table {
    width: 100%;
+   min-width: 650px;
 }
 
 .table th {
@@ -93,19 +95,28 @@
 }
 
 /* Address styles */
+.inline-container {
+   display: flex;
+   width: 380px;
+}
+
+.inline-container input {
+   width: 100%;
+}
+
 .input-left {
-   float: left;
    width: 30%;
+   margin-right: 60px;
 }
 
 .input-right {
-   float: right;
-   width: 70%;
+   width: calc(70%);
 }
 
 /* Wishlist styles */
 .wishlist-table {
    width: 90%;
+   min-width: 650px;
    padding: 20px;
 }
 
@@ -213,5 +224,47 @@
 
 input {
    margin: 0;
-   width: 50%;
+   width: 380px;
+}
+
+@media screen and (max-width: 980px) {
+   .content-inner-container {
+      display: grid;
+      width: 100%;
+   }
+
+   .content-inner-container mat-card {
+      width: calc(100% - 64px);
+      max-width: calc(100vw - 64px);
+      height: fit-content;
+   }
+
+   .options-container>p {
+      padding: 5px 16px;
+   }
+
+   .options-container>p::before {
+      height: 34px;
+      margin-top: -5px;
+   }
+
+   .main-card {
+      margin-top: 30px;
+   }
+}
+
+@media screen and (max-width: 900px) {
+   .content-inner-container {
+      margin-top: 10px;
+   }
+}
+
+@media screen and (max-width: 400px) {
+   input {
+      width: 100%;
+   }
+
+   .input-left {
+      width: 12%;
+   }
 }

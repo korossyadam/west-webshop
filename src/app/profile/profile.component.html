@@ -10,13 +10,8 @@
 
          <!-- Menu options -->
          <div class="options-container">
-            <p class="menu-option" [ngClass]="{'active': step == 0}" (click)="step = 0;">Személyes adatok</p>
-            <p class="menu-option" [ngClass]="{'active': step == 1}" (click)="step = 1;">Rendelések</p>
-            <p class="menu-option" [ngClass]="{'active': step == 2}" (click)="step = 2;">Cím módosítása</p>
-            <p class="menu-option" [ngClass]="{'active': step == 3}" (click)="step = 3;">Kívánságlista</p>
-            <p class="menu-option" [ngClass]="{'active': step == 4}" (click)="step = 4;">Árajánlatok</p>
-            <p class="menu-option" [ngClass]="{'active': step == 5}" (click)="step = 5;">Garázs</p>
-            <p class="menu-option" [ngClass]="{'active': step == 6}" (click)="step = 6;">Kijelentkezés</p>
+            <p *ngFor="let option of menuOptions; let i = index;" class="menu-option" [ngClass]="{'active': step == i}" (click)="step = i;">{{ option }}</p>
+
          </div>
 
       </mat-card>
@@ -80,15 +75,18 @@
             <mat-divider></mat-divider>
 
             <div class="dashboard-container">
-               <div class="input-left">
-                  <p>Irányítószám</p>
-                  <input placeholder="7100" [value]="getZip()" #zip>
+               <div class="inline-container">
+                  <div class="input-left">
+                     <p>Irányítószám</p>
+                     <input placeholder="7100" [value]="getZip()" #zip>
+                  </div>
+   
+                  <div class="input-right">
+                     <p>Település</p>
+                     <input placeholder="Szekszárd" [value]="getCity()" #city>
+                  </div>
                </div>
-
-               <div class="input-right">
-                  <p>Település</p>
-                  <input placeholder="Szekszárd" [value]="getCity()" #city>
-               </div>
+               
 
                <p>Utca, házszám</p>
                <input placeholder="Példa utca 12." [value]="getStreet()" #street>

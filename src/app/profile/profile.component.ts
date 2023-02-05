@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { first, Timestamp } from 'rxjs';
+import { first } from 'rxjs';
 import { OfferDialogComponent } from '../dialogs/offer-dialog/offer-dialog.component';
 import { OrderDialogComponent } from '../dialogs/order-dialog/order-dialog.component';
 import { Address } from '../models/address.model';
@@ -10,7 +10,6 @@ import { Offer } from '../models/offer.model';
 import { Order } from '../models/order.model';
 import { Product } from '../models/product.model';
 import { User } from '../models/user.model';
-import { AuthService } from '../services/auth.service';
 import { ProfileService } from '../services/profile.service';
 import { UtilsService } from '../services/utils.service';
 
@@ -34,6 +33,9 @@ export class ProfileComponent implements OnInit {
    getPhoneNumber = this.utilsService.getPhoneNumber;
    showSnackBar = this.utilsService.openSnackBar;
    timestampToDate = this.utilsService.timestampToDate;
+
+   /* List of menu options */
+   public menuOptions: string[] = ['Személyes adatok', 'Rendelések', 'Cím módosítása', 'Kívánságlista', 'Árajánlatok', 'Garázs', 'Kijelentkezés'];
 
    public currentUser: User;
    public orders: Order[];
