@@ -87,7 +87,6 @@
                   </div>
                </div>
                
-
                <p>Utca, házszám</p>
                <input placeholder="Példa utca 12." [value]="getStreet()" #street>
                <p>Adószám (ha van)</p>
@@ -104,7 +103,6 @@
             <mat-divider></mat-divider>
 
             <div class="dashboard-container">
-
                <table *ngIf="currentUser && currentUser.wishList.length > 0" class="wishlist-table">
                   <tbody>
                      <tr *ngFor="let product of currentUser.wishList; let i = index;" class="wishlist-row">
@@ -201,11 +199,8 @@
          <div *ngIf="step == 6">
             <p class="card-title">Biztosan ki szeretnél jelentkezni?</p>
             <mat-divider></mat-divider>
-
             <button mat-raised-button color="warn" class="logout-button">Kijelentkezés</button>
-
          </div>
-
       </mat-card>
 
    </div>
