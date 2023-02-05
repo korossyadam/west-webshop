@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { off } from 'process';
 import { Offer } from '../models/offer.model';
 import { OfferService } from '../services/offer.service';
 import { UtilsService } from '../services/utils.service';
@@ -10,7 +9,7 @@ import { UtilsService } from '../services/utils.service';
   templateUrl: './offer.component.html',
   styleUrls: ['./offer.component.css']
 })
-export class OfferComponent implements OnInit {
+export class OfferComponent {
 
   // Static functions
   getEmail = this.utilsService.getEmail;
@@ -20,15 +19,12 @@ export class OfferComponent implements OnInit {
   // ngModels
   public brand: string = '';
   public year: string = '';
-  public ac: string = '';
+  public ac: string = 'Klímaberendezés';
   public engine: string = '';
   public chassis: string = '';
   public vin: string = '';
 
   constructor(private utilsService: UtilsService, private offerService: OfferService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
 
   /**
    * Creates a new Offer
@@ -39,27 +35,18 @@ export class OfferComponent implements OnInit {
    */
   createOffer(message: string, email: string, additionalParams: string[]): void {
 
-    // Loop through checkboxes and add them to end of the 'message'
-    if (additionalParams.length > 0) {
-      message += ' EGYÉB TERMÉKEK: ';
-
-      for (let i = 0; i < additionalParams.length; i++) {
-        if (additionalParams[i] != '') {
-          message += additionalParams[i] + ', ';
-        }
-      }
-
-      message = message.slice(0, -2);
+    // Add checkboxes to end of the 'message'
+    const additionalItems = additionalParams.filter(param => param !== '');
+    if (additionalItems.length > 0) {
+      message += ' EGYÉB TERMÉKEK: ' + additionalItems.join(', ');
     }
 
     // If user did not enter an e-mail, default e-mail address is used
-    if (email == '') {
-      email = this.getEmail();
-    }
+    email = email || this.getEmail();
 
     // Create the Offer
     let offer: Offer = new Offer(this.getUserId(), this.brand, this.year, this.ac, this.engine, this.chassis, this.vin, message, email, new Date());
-    this.offerService.createNewOffer(Object.assign({}, offer)).then(res => {
+    this.offerService.createNewOffer(Object.assign({}, offer)).then(() => {
       this.showSnackBar('Árajánlat sikeresen létrehozva!', 'Bezárás', 4000);
 
       // Navigate to 'offers' screen on profile component

@@ -14,31 +14,24 @@
    text-align: center;
 }
 
-.half-container {
-   display: block;
-   overflow: auto;
+.triple-column-container {
+   display: flex;
 }
 
-.half-container input {
-   width: 44%;
+.triple-column-container input:first-child {
+   width: 250%;
 }
 
-.half-container input:nth-child(2) {
-   width: 18%;
+.double-column-container {
+   display: flex;
 }
 
-.half-container select {
-   width: 25%;
-   float: right;
-   height: 39px;
+.align-right {
+   margin-right: 0;
 }
 
-.half-container input:nth-child(5) {
-   float: right;
-}
-
-.half-container input:nth-child(6) {
-   width: calc(94% + 3px);
+.full-size {
+   width: calc(100% - 58px);
 }
 
 .section-title {
@@ -65,23 +58,31 @@
    float: left;
 }
 
-.input-email {
-   width: 20%;
+.button-container {
    float: right;
+}
+
+.input-email {
+   width: 165px;
    margin: 0 10px 0 0;
 }
 
 .send-button {
-   float: right;
    margin: 0 15px 0 0;
 }
 
 textarea {
+   width: calc(100% - 35px);
    height: 90px;
+   margin-right: 0;
 }
 
 .bold {
    font-weight: 600;
+}
+
+.allow-scroll {
+   overflow: scroll;
 }
 
 /* To avoid turning placeholders upper case */
@@ -103,4 +104,47 @@ textarea {
 
 ::placeholder {
    text-transform: none;
+}
+
+@media screen and (max-width: 1200px) {
+   .content-inner-container {
+      width: calc(100% - 80px);
+      margin-left: 40px;
+   }
+}
+
+@media screen and (max-width: 950px) {
+   .triple-column-container input:first-child {
+      width: 140%;
+   }
+
+   .triple-column-container input:nth-child(2) {
+      width: 30%;
+   }
+}
+
+@media screen and (max-width: 700px) {
+   .triple-column-container,
+   .double-column-container {
+      display: block;
+   }
+
+   .content-inner-container .triple-column-container input,
+   .double-column-container input {
+      width: calc(100% - 58px);
+   }
+
+   .content-inner-container .triple-column-container select {
+      width: calc(100% - 8px);
+   }
+}
+
+@media screen and (max-width: 500px) {
+   .button-container {
+      display: grid;
+   }
+
+   .send-button {
+      margin-top: 15px;
+   }
 }
