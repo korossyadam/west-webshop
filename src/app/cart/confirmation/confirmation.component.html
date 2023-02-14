@@ -1,0 +1,97 @@
+<ng-template matStepLabel>Rendelés megerősítése</ng-template>
+
+<!-- Items to be ordered -->
+<div class="confirmation-section-container">
+   <p class="section-title">Termékek</p>
+   <div class="products-flex-container" *ngFor="let product of cartItems">
+
+      <div class="img-container">
+         <img [src]="sanitize(product.imgurls[0])" class="product-img">
+      </div>
+
+      <div class="info-container">
+         <p [routerLink]="['/product', product.partNumber]" class="part-number">{{ product.partNumber }}</p>
+         <p class="name">{{ product.name }}</p>
+         <p class="brand">{{ product.brand }}</p>
+      </div>
+
+      <div class="quantity-container">
+         <p>{{ product.quantity }} db.</p>
+      </div>
+
+      <div class="price-container">
+         <p class="price">{{ formatPriceToString(addTax(product.price)) }} <small>x{{ product.quantity }}</small></p>
+         <p class="net-price">({{ formatPriceToString(product.price) }} + 27% ÁFA)</p>
+      </div>
+
+   </div>
+</div>
+
+<!-- Delivery and shipping info -->
+<div class="lower-flex-container">
+   <div class="shipping-information-container">
+      
+   <p class="section-title">Szállítási információ</p>
+
+      <div class="quarter-container">
+         <p class="quarter-title">Alap adatok</p>
+         <div class="quarter-text-container">
+            <p>{{ form.controls.name.value }}</p>
+            <p>{{ form.controls.email.value }}</p>
+            <p>{{ form.controls.phone.value }}</p>
+            <p>{{ form.controls.zip.value }} {{ form.controls.city.value }}, {{ form.controls.street.value }}</p>
+         </div>
+      </div>
+
+      <div class="quarter-container">
+         <p class="quarter-title">Számlázási adatok</p>
+         <div class="quarter-text-container">
+            <p>{{ form.controls.invoiceName.value }}</p>
+            <p>{{ form.controls.invoiceZip.value }} {{ form.controls.invoiceCity.value }}, {{ form.controls.invoiceStreet.value }}</p>
+            <p>{{ form.controls.taxNumber.value }}</p>
+         </div>
+      </div>
+
+      <div class="quarter-container">
+         <p class="quarter-title">Átvétel</p>
+         <div class="quarter-text-container">
+            <p>{{ shippingMethod }}</p>
+         </div>
+      </div>
+
+      <div class="quarter-container">
+         <p class="quarter-title">Fizetés</p>
+         <div class="quarter-text-container">
+            <p>{{ paymentMethod }}</p>
+         </div>
+      </div>
+   </div>
+
+   <!-- Price info -->
+   <div class="price-information-container">
+      <p class="section-title">Végösszeg</p>
+
+      <!-- Prices with left and right float -->
+      <div class="prices-container">
+         <div *ngIf="shippingPrice != 0">
+            <span>Szállítás </span>
+            <span>{{ formatPriceToString(addTax(shippingPrice)) }}</span>
+         </div>
+         <div>
+            <span><b>Végösszeg </b></span>
+            <span>{{ formatPriceToString(addTax(total)) }}</span>
+         </div>
+      </div>
+
+      <!-- The order button and associated checkbox -->
+      <div class="order-button-container">
+         <mat-checkbox #confirmOrder>Tudomásul veszem, hogy a megrendelés fizetéskötelezettséggel jár.</mat-checkbox>
+         <button mat-raised-button color="primary" class="order-button" matStepperNext [disabled]="!confirmOrder.checked" (click)="finalizeOrder()">Megrendelés</button>
+      </div>
+
+   </div>
+</div>
+
+<div class="float-left clear">
+   <button mat-button color="primary" class="nav-button" matStepperPrevious>Vissza</button>
+</div>

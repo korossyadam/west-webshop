@@ -1,0 +1,49 @@
+<form [formGroup]="form">
+
+   <div class="columns-container">
+
+      <div class="column">
+         <p class="section-title">Alap adatok</p>
+         <input formControlName="name" placeholder="Név" required>
+         <input formControlName="email" placeholder="E-mail cím" required>
+         <input formControlName="phone" placeholder="Telefonszám" required>
+      </div>
+
+      <div class="column">
+         <p class="section-title">Szállítási cím</p>
+         <div class="zip-container">
+            <input formControlName="zip" placeholder="Ir. szám" required>
+         </div>
+         <div class="city-container">
+            <input formControlName="city" placeholder="Település" required>
+         </div>
+         <input formControlName="street" placeholder="Utca, házszám" required>
+         <textarea formControlName="comment" placeholder="Megjegyzés nekünk, vagy a futárnak"></textarea>
+         <mat-checkbox (change)="showTaxNumberFields($event)" #companyPurchase>Cégként vásárolok</mat-checkbox>
+      </div>
+
+      <div class="column">
+         <p class="section-title">Számlázási cím</p>
+
+         <!-- Invoice section that is hidden by default -->
+         <div class="invoice-container">
+            <input formControlName="invoiceName" placeholder="Számlázási név">
+            <div class="zip-container">
+               <input formControlName="invoiceZip" placeholder="Ir. szám">
+            </div>
+            <div class="city-container">
+               <input formControlName="invoiceCity" placeholder="Település">
+            </div>
+            <input formControlName="invoiceStreet" placeholder="Utca, házszám">
+         </div>
+
+         <!-- Tax number section that is hidden by default -->
+         <div class="tax-number-container">
+            <input formControlName="taxNumber" placeholder="Adószám">
+         </div>
+
+         <!-- This checkbox can make invoice section visible -->
+         <mat-checkbox formControlName="sameAsShippingAddress" (change)="changeInvoiceFieldsDisplay($event)" [checked]="true" [disabled]="companyPurchase.checked">Megegyezik a szállítási címmel</mat-checkbox>
+      </div>
+   </div>
+</form>

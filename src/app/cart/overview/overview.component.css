@@ -1,0 +1,250 @@
+.spinner {
+   width: 50%;
+   margin: 0 auto;
+   margin-top: 80px;
+   margin-bottom: 40px;
+}
+
+/* Products styles */
+.accordion-container {
+   margin: 10px;
+}
+
+.header {
+   padding-top: 15px;
+   padding-bottom: 15px;
+   height: 70px;
+}
+
+.flex-container {
+   display: flex;
+   width: 100%;
+   align-items: center;
+}
+
+.flex-container>div:not(:first-child) {
+   width: 22%;
+}
+
+.flex-container>div p {
+   margin: 0;
+}
+
+.img-container {
+   display: flex;
+   width: 120px;
+   justify-content: center;
+   margin-right: 2%;
+}
+
+.product-img {
+   height: 85px;
+}
+
+.info-container {
+   color: #444444;
+}
+
+.info-container p {
+   width: fit-content;
+}
+
+.part-number {
+   font-size: 18px;
+   pointer-events: auto;
+}
+
+.brand {
+   font-size: 13px;
+   color: #7a7a7a;
+}
+
+.price-container {
+   text-align: right;
+   margin-right: 20px;
+   white-space: nowrap;
+}
+
+.price {
+   font-size: 18px;
+   color: #5e5e5e;
+   font-weight: 600;
+}
+
+.net-price {
+   color: #666666;
+   font-size: 12px;
+}
+
+.amount-container {
+   width: 100px !important;
+   height: 36px;
+   pointer-events: auto;
+}
+
+.delete-button {
+   color: #444444;
+   pointer-events: auto;
+}
+
+/* Properties list styles */
+.property-title {
+   position: relative;
+   font-size: 17px;
+   margin: 0;
+}
+
+.property-text {
+   position: relative;
+   display: table-row;
+   top: 10px;
+   font-size: 14px;
+   font-weight: 600;
+   margin: 0;
+}
+
+.property-value {
+   display: table-cell;
+   padding-left: 30px;
+   font-weight: 500;
+}
+
+/* Other first step styles */
+.radio-group {
+   display: flex;
+   flex-direction: column;
+   margin: 15px 0;
+   align-items: flex-start;
+}
+
+.radio-button {
+   margin: 3px 0px;
+}
+
+.radio-button-description {
+   color: #666666;
+   font-size: 12px;
+}
+
+.total-container {
+   float: left;
+}
+
+.total {
+   font-size: 20px;
+   color: #5e5e5e;
+   font-weight: 600;
+}
+
+.total-net {
+   text-align: center;
+   margin-top: -10px;
+   color: #666666;
+   font-size: 14px;
+   font-weight: 500;
+}
+
+::ng-deep .mat-step-header {
+   height: 50px !important;
+}
+
+::ng-deep .mat-radio-label-content {
+   white-space: normal;
+}
+
+/* Disable pointer events on expansion panel bodies */
+span.mat-expansion-indicator {
+   pointer-events: visiblefill !important;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 850px) {
+   .items-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+   }
+
+   .accordion-container {
+      flex-basis: 40%;
+      width: 40%;
+   }
+
+   .flex-container {
+      display: block;
+      height: 100%;
+   }
+
+   .header .flex-container p {
+      width: fit-content;
+      margin: 0 auto;
+   }
+
+   .header {
+      height: 375px;
+      padding: 0;
+   }
+
+   .flex-container>div:not(:first-child) {
+      width: 100%;
+      text-align: center;
+   }
+
+   .img-container {
+      width: auto;
+      margin: 10px 0px 0px 0px;
+   }
+
+   .product-img {
+      height: 150px;
+   }
+
+   .flex-container .price-container:nth-child(3) {
+      display: none;
+   }
+
+   .amount-container {
+      margin: 20px auto;
+   }
+
+   .delete-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+   }
+
+   ::ng-deep .mat-content {
+      height: 100% !important;
+   }
+
+   ::ng-deep .mat-expansion-indicator {
+      display: none;
+   }
+}
+
+@media screen and (max-width: 650px) {
+   .accordion-container {
+      flex-basis: 45%;
+      width: 45%;
+   }
+}
+
+@media screen and (max-width: 550px) {
+   .accordion-container {
+      flex-basis: 75%;
+      width: 75%;
+   }
+
+}
+
+@media screen and (max-width: 400px) {
+   .accordion-container {
+      flex-basis: 100%;
+      width: 100%;
+   }
+
+   .total-container {
+      width: 100%;
+      text-align: center;
+   }
+}

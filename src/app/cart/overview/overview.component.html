@@ -1,0 +1,104 @@
+<!-- Title -->
+<p class="section-title">Kosár tartalma</p>
+
+<mat-spinner *ngIf="initialLoading" class="spinner"></mat-spinner>
+
+<!-- Cart elements ngFor-->
+<div *ngIf="!initialLoading" class="items-container">
+   <div *ngFor="let product of cartItems; let i = index" class="accordion-container">
+
+      <!-- Expansion Panel -->
+      <mat-accordion multi>
+         <mat-expansion-panel class="expansion-panel">
+
+            <!-- Header: visible section -->
+            <mat-expansion-panel-header class="header">
+               <mat-panel-title>
+
+                  <div class="flex-container">
+
+                     <div class="img-container">
+                        <img [src]="sanitize(product.imgurls[0])" class="product-img">
+                     </div>
+
+                     <div class="info-container">
+                        <p [routerLink]="['/product', product.partNumber]" class="part-number">{{ product.partNumber }}</p>
+                        <p class="name">{{ product.name }}</p>
+                        <p class="brand">{{ product.brand }}</p>
+                     </div>
+
+                     <div class="price-container">
+                        <p class="price">{{ formatPriceToString(addTax(product.price)) }} <small>x{{ product.quantity }}</small></p>
+                        <p class="net-price">({{ formatPriceToString(product.price) }} + 27% ÁFA)</p>
+                     </div>
+
+                     <div class="amount-container">
+                        <div class="amount-button input-negative" (click)="decrementInputValue(product.partNumber, i); calculateTotalWithShipping();">-</div>
+                        <input [id]="product.partNumber" class="amount-input" type="number" [value]="product.quantity" #quantity>
+                        <div class="amount-button input-positive" (click)="incrementInputValue(product.partNumber, i); calculateTotalWithShipping();">+</div>
+                     </div>
+
+                     <div class="price-container">
+                        <p class="price">{{ formatPriceToString(addTax(product.price * product.quantity)) }}</p>
+                        <p class="net-price">({{ formatPriceToString(product.price * product.quantity) }} + 27% ÁFA)</p>
+                     </div>
+
+                     <button mat-icon-button class="delete-button" (click)="deleteCartItem(i); $event.stopPropagation();">
+                        <mat-icon>close</mat-icon>
+                     </button>
+
+                  </div>
+
+               </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Hidden section -->
+            <p class="property-title">Tulajdonságok</p>
+            <p *ngFor="let property of product.properties" class="property-text">{{ property.key }}<span class="property-value">{{ property.value }}</span></p>
+
+         </mat-expansion-panel>
+      </mat-accordion>
+
+   </div>
+</div>
+
+<!-- Delivery selection -->
+<div class="delivery-section">
+   <p class="section-title">Szállítási mód</p>
+
+   <mat-radio-group class="radio-group" [(ngModel)]="isShippingChecked" [ngModelOptions]="{standalone: true}" (ngModelChange)="calculateTotalWithShipping()">
+      <mat-radio-button class="radio-button" [value]="false">
+         Személyes átvétel (ingyenes)
+         <div class="radio-button-description">Személyes átvétel üzletünkben, Szekszárdon</div>
+      </mat-radio-button>
+      <mat-radio-button class="radio-button" [value]="true">
+         Házhoz szállítás futárral (1.990 Ft)
+         <div class="radio-button-description">A megrendelést a DPD futárszolgálat szállítja házhoz. A kiszállítás munkanapokon 8 és 17 óra között történik.</div>
+      </mat-radio-button>
+   </mat-radio-group>
+</div>
+
+<!-- Payment selection -->
+<div class="delivery-section">
+   <p class="section-title">Fizetési mód</p>
+
+   <mat-radio-group class="radio-group" [(ngModel)]="isCashPaymentChecked" [ngModelOptions]="{standalone: true}" (ngModelChange)="calculateTotalWithShipping()">
+      <mat-radio-button class="radio-button" [value]="false">
+         Előre utalás (ingyenes)
+         <div class="radio-button-description">A megrendelés megerősítése után elektronikusan kapja meg a díjbekérőt.</div>
+      </mat-radio-button>
+      <mat-radio-button class="radio-button" [value]="true">
+         Utánvét (390 Ft)
+         <div class="radio-button-description">A megrendelést az áru átvételekor a futárszolgálat munkatársánál egyenlítheti ki.</div>
+      </mat-radio-button>
+   </mat-radio-group>
+</div>
+
+<mat-divider></mat-divider>
+
+<!-- Total -->
+<div class="total-container">
+   <p>Végösszeg: <span class="total">{{ formatPriceToString(addTax(total)) }}</span></p>
+   <p class="total-net">({{ formatPriceToString(total) }} + 27% ÁFA)</p>
+</div>
+

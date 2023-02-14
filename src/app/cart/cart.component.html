@@ -2,317 +2,36 @@
    <div class="content-inner-container">
 
       <!-- Stepper -->
-      <mat-stepper class="stepper" [linear]="false" #stepper color="primary">
+      <mat-stepper class="stepper" linear="true" #stepper color="primary">
 
          <!-- First step: Check Products in Cart -->
-         <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
-               <ng-template matStepLabel>Kosár áttekintése</ng-template>
+         <mat-step label="Kosár áttekintése">
+            <app-overview [cartItems]="cartItems" (totalEvent)="setTotal($event)" (shippingPriceEvent)="setShippingPrice($event)" (shippingEvent)="setShippingMethod($event)" (paymentEvent)="setPaymentMethod($event)"></app-overview>
 
-               <!-- Title -->
-               <p class="section-title">Kosár tartalma</p>
-
-               <mat-spinner *ngIf="initialLoading" class="spinner"></mat-spinner>
-
-               <!-- Cart elements ngFor-->
-               <div *ngIf="!initialLoading">
-                  <div *ngFor="let product of cartItems; let i = index" class="accordion-container">
-
-                     <!-- Expansion Panel -->
-                     <mat-accordion multi>
-                        <mat-expansion-panel class="expansion-panel" (click)="$event.stopPropagation();">
-
-                           <!-- Header: visible section -->
-                           <mat-expansion-panel-header class="header" (click)="$event.stopPropagation();">
-                              <mat-panel-title>
-
-                                 <!-- Product info -->
-                                 <table class="table">
-                                    <tbody>
-                                       <tr>
-
-                                          <!-- Image -->
-                                          <td class="image-column">
-                                             <div class="img-container">
-                                                <img [src]="sanitize(product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="product-img">
-                                             </div>
-                                          </td>
-
-                                          <td class="info-column">
-                                             <div class="info-container">
-                                                <p [routerLink]="['/product', product.partNumber]" class="part-number">{{ product.partNumber }}</p>
-                                                <p class="name">{{ product.name }}</p>
-                                                <p class="brand">{{ product.brand }}</p>
-                                             </div>
-                                          </td>
-
-                                          <td class="price-column">
-                                             <div class="price-container">
-                                                <p class="price">{{ formatPriceToString(addTax(product.price)) }}</p>
-                                                <p class="net-price">({{ formatPriceToString(product.price) }} + 27% ÁFA)</p>
-                                             </div>
-                                          </td>
-
-                                          <td class="amount-column" (click)="$event.stopPropagation();">
-                                             <div class="amount-container">
-                                                <div class="amount-button input-negative" (click)="decrementInputValue(product.partNumber, i); calculateTotal();">-</div>
-                                                <input [id]="product.partNumber" class="amount-input" type="number" [value]="product.quantity" #quantity>
-                                                <div class="amount-button input-positive" (click)="incrementInputValue(product.partNumber, i); calculateTotal();">+</div>
-                                             </div>
-                                          </td>
-
-                                          <td>
-                                             <div class="price-container">
-                                                <p class="price">{{ formatPriceToString(addTax(product.price * product.quantity)) }}</p>
-                                                <p class="net-price">({{ formatPriceToString(product.price * product.quantity) }} + 27% ÁFA)</p>
-                                             </div>
-                                          </td>
-
-                                          <td>
-                                             <button mat-icon-button class="delete-button" (click)="deleteCartItem(i); $event.stopPropagation();">
-                                                <mat-icon>close</mat-icon>
-                                             </button>
-                                          </td>
-
-                                       </tr>
-                                    </tbody>
-                                 </table>
-
-                              </mat-panel-title>
-                           </mat-expansion-panel-header>
-
-                           <!-- Hidden section -->
-                           <p class="property-title">Tulajdonságok</p>
-                           <div *ngFor="let property of product.properties">
-                              <p class="property-text">{{ property }}</p>
-                           </div>
-
-                        </mat-expansion-panel>
-                     </mat-accordion>
-
-                  </div>
-               </div>
-
-               <!-- Delivery selection -->
-               <div class="delivery-section">
-                  <p class="section-title">Szállítási mód</p>
-
-                  <mat-radio-group class="radio-group" [(ngModel)]="isShippingChecked" [ngModelOptions]="{standalone: true}" (ngModelChange)="calculateTotal()">
-                     <mat-radio-button class="radio-button" [value]="false">
-                        Személyes átvétel (ingyenes)
-                        <div class="radio-button-description">Személyes átvétel üzletünkben, Szekszárdon</div>
-                     </mat-radio-button>
-                     <mat-radio-button class="radio-button" [value]="true">
-                        Házhoz szállítás futárral (1.990 Ft)
-                        <div class="radio-button-description">A megrendelést a DPD futárszolgálat szállítja házhoz. A kiszállítás munkanapokon 8 és 17 óra között történik.</div>
-                     </mat-radio-button>
-                  </mat-radio-group>
-               </div>
-               <div class="delivery-section">
-
-                  <!-- Payment -->
-                  <p class="section-title">Fizetési mód</p>
-
-                  <mat-radio-group class="radio-group" [(ngModel)]="isCashPaymentChecked" [ngModelOptions]="{standalone: true}" (ngModelChange)="calculateTotal()">
-                     <mat-radio-button class="radio-button" [value]="false">
-                        Előre utalás (ingyenes)
-                        <div class="radio-button-description">A megrendelés megerősítése után elektronikusan kapja meg a díjbekérőt.</div>
-                     </mat-radio-button>
-                     <mat-radio-button class="radio-button" [value]="true">
-                        Utánvét (390 Ft)
-                        <div class="radio-button-description">A megrendelést az áru átvételekor a futárszolgálat munkatársánál egyenlítheti ki.</div>
-                     </mat-radio-button>
-                  </mat-radio-group>
-               </div>
-
-               <mat-divider></mat-divider>
-
-               <!-- Total -->
-               <div class="total-container">
-                  <p>Végösszeg: <span class="total">{{ formatPriceToString(addTax(total)) }}</span></p>
-                  <p class="total-net">({{ formatPriceToString(total) }} + 27% ÁFA)</p>
-               </div>
-
-               <!-- Next Button-->
-               <div class="float-right">
-                  <button class="nav-button" mat-raised-button color="primary" matStepperNext>Tovább</button>
-               </div>
-            </form>
+            <!-- Next Button-->
+            <button class="button next-button" mat-raised-button color="primary" [disabled]="cartItems.length < 1" matStepperNext>Tovább</button>
          </mat-step>
 
          <!-- Second step: Select delivery info -->
-         <mat-step [stepControl]="secondFormGroup" label="Adatok kitöltése">
-            <form [formGroup]="secondFormGroup">
-
-               <div class="first-column">
-                  <p class="section-title">Alap adatok</p>
-                  <input formControlName="secondCtrl" placeholder="Név" #nameInput required>
-                  <input formControlName="secondCtrl" placeholder="E-mail cím" #emailInput required>
-                  <input formControlName="secondCtrl" placeholder="Telefonszám" #phoneNumberInput required>
-               </div>
-
-               <div class="first-column">
-                  <p class="section-title">Szállítási cím</p>
-                  <div class="postal-container">
-                     <input formControlName="secondCtrl" placeholder="Ir. szám" #deliveryPostalCodeInput required>
-                  </div>
-                  <div class="city-container">
-                     <input formControlName="secondCtrl" placeholder="Település" #deliveryCityInput required>
-                  </div>
-                  <input formControlName="secondCtrl" placeholder="Utca, házszám" #deliveryStreetInput required>
-                  <textarea placeholder="Megjegyzés nekünk, vagy a futárnak" #commentInput></textarea>
-                  <mat-checkbox (change)="showTaxNumberFields($event)" #companyPurchase>Cégként vásárolok</mat-checkbox>
-               </div>
-
-               <div class="first-column">
-                  <p class="section-title">Számlázási cím</p>
-
-                  <!-- Invoice section that is hidden by default -->
-                  <div class="invoice-container">
-                     <input formControlName="secondCtrl" placeholder="Számlázási név" #invoiceNameInput required>
-                     <div class="postal-container">
-                        <input formControlName="secondCtrl" placeholder="Ir. szám" #invoicePostalCodeInput required>
-                     </div>
-                     <div class="city-container">
-                        <input formControlName="secondCtrl" placeholder="Település" #invoiceCityInput required>
-                     </div>
-                     <input formControlName="secondCtrl" placeholder="Utca, házszám" #invoiceStreetInput required>
-                  </div>
-
-                  <!-- Tax number section that is hidden by default -->
-                  <div class="tax-number-container">
-                     <input formControlName="secondCtrl" placeholder="Adószám" #taxNumberInput required>
-                  </div>
-
-                  <!-- This checkbox can make invoice section visible -->
-                  <mat-checkbox (change)="changeInvoiceFieldsDisplay($event)" [checked]="true" [disabled]="companyPurchase.checked">Megegyezik a szállítási címmel</mat-checkbox>
-               </div>
-
-               <div class="float-left clear">
-                  <button mat-button class="nav-button" color="primary" matStepperPrevious>Vissza</button>
-               </div>
-
-               <div class="float-right">
-                  <button mat-raised-button class="nav-button" color="primary" matStepperNext (click)="setUserInfo(nameInput.value, emailInput.value, phoneNumberInput.value, deliveryPostalCodeInput.value, deliveryCityInput.value, deliveryStreetInput.value, commentInput.value, invoiceNameInput.value, invoicePostalCodeInput.value, invoiceCityInput.value, invoiceStreetInput.value, taxNumberInput.value)">
-                     Tovább
-                  </button>
-               </div>
-            </form>
+         <mat-step [stepControl]="form" label="Adatok kitöltése">
+            <app-form [form]="form" #formComponent></app-form>
+            <button class="button next-button" mat-raised-button color="primary" (click)="formComponent.attemptToValidate()" matStepperNext>Tovább</button>
+            <button mat-button class="button" color="primary" matStepperPrevious>Vissza</button>
          </mat-step>
 
          <!-- Third step: Confirm order -->
-         <mat-step>
-            <ng-template matStepLabel>Rendelés megerősítése</ng-template>
-
-            <!-- Items to be ordered -->
-            <div class="confirmation-section-container">
-               <p class="section-title">Termékek</p>
-               <table>
-                  <tr *ngFor="let product of cartItems">
-
-                     <td class="image-column">
-                        <img [src]="sanitize(product.imgurls[0].replace('[', '').replace(']', '').replace('/t_t100x100v2', ''))" class="product-img">
-                     </td>
-
-                     <td class="info-column">
-                        <div class="info-container">
-                           <p class="part-number">{{ product.partNumber }}</p>
-                           <p class="name">{{ product.name }}</p>
-                           <p class="brand">{{ product.brand }}</p>
-                        </div>
-                     </td>
-
-                     <td class="amount-column">
-                        <p>{{ product.quantity }} db.</p>
-                     </td>
-
-                     <td class="price-column">
-                        <div class="price-container">
-                           <p class="price">{{ formatPriceToString(addTax(product.price)) }}</p>
-                           <p class="net-price">({{ formatPriceToString(product.price) }} + 27% ÁFA)</p>
-                        </div>
-                     </td>
-
-                  </tr>
-               </table>
-            </div>
-
-            <!-- Delivery and shipping info -->
-            <div class="confirmation-section-half-container right-divider">
-               <p class="section-title">Szállítási információ</p>
-
-               <div class="quarter-container">
-                  <p class="quarter-title">Alap adatok</p>
-                  <div class="quarter-text-container">
-                     <p>Korossy Ádám</p>
-                     <p>adamkorossy1@gmail.com</p>
-                     <p>+3630 757 1571</p>
-                     <p>7100, citcity street. 92.</p>
-                  </div>
-               </div>
-
-               <div class="quarter-container">
-                  <p class="quarter-title">Számlázási adatok</p>
-                  <div class="quarter-text-container">
-                     <p>Korossy Ádám</p>
-                     <p>+3630 757 1571</p>
-                     <p>7100, citcity street. 92.</p>
-                     <p>25618522-2-17</p>
-                  </div>
-               </div>
-
-               <div class="quarter-container">
-                  <p class="quarter-title">Átvétel</p>
-                  <div class="quarter-text-container">
-                     <p>Házhozszállítás</p>
-                  </div>
-               </div>
-
-               <div class="quarter-container">
-                  <p class="quarter-title">Fizetés</p>
-                  <div class="quarter-text-container">
-                     <p>Utánvét</p>
-                  </div>
-               </div>
-            </div>
-
-            <!-- Price info -->
-            <div class="confirmation-section-half-container">
-               <p class="section-title">Végösszeg</p>
-
-               <!-- Prices with left and right float -->
-               <div class="prices-container">
-                  <div class="price-line-container">
-                     <span>Termékek összege</span>
-                     <span class="float-right">561.726 Ft</span>
-                  </div>
-                  <div class="price-line-container">
-                     <span>Szállítás</span>
-                     <span class="float-right">2.340 Ft</span>
-                  </div>
-                  <div class="price-line-container">
-                     <span class="bold">Végösszeg</span>
-                     <span class="float-right bold primary">76.954 Ft</span>
-                  </div>
-               </div>
-
-               <!-- The order button and associated checkbox -->
-               <div class="order-button-container">
-                  <mat-checkbox #confirmOrder>Tudomásul veszem, hogy a megrendelés fizetéskötelezettséggel jár.</mat-checkbox>
-                  <button mat-raised-button color="primary" class="order-button" matStepperNext [disabled]="!confirmOrder.checked" (click)="finalizeOrder()">Megrendelés</button>
-               </div>
-
-            </div>
-
-            <div class="float-left clear">
-               <button mat-button color="primary" class="nav-button" matStepperPrevious>Vissza</button>
-            </div>
-
+         <mat-step label="Megerősítés">
+            <ng-template matStepContent>
+               <app-confirmation [cartItems]="cartItems" [form]="form" [total]="total" [shippingPrice]="shippingPrice" [shippingMethod]="shippingMethod" [paymentMethod]="paymentMethod"></app-confirmation>
+            </ng-template>
          </mat-step>
 
-         <mat-step>
-            <ng-template matStepLabel>Áttekintés</ng-template>
+         <!-- Fourth step: Results after order -->
+         <mat-step label="Áttekintés">
             <p class="title">Köszönjük a rendelést!</p>
+            <div class="centered">
+               <button mat-raised-button class="center" color="primary" routerLink="/profile/1">Rendelések megtekintése</button>
+            </div>
          </mat-step>
 
       </mat-stepper>

@@ -53,6 +53,9 @@ import { FeaturedCategoriesComponent } from './featured-categories/featured-cate
 import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component';
 import { OfferDialogComponent } from './dialogs/offer-dialog/offer-dialog.component';
 import { InfoComponent } from './info/info.component';
+import { OverviewComponent } from './cart/overview/overview.component';
+import { FormComponent } from './cart/form/form.component';
+import { ConfirmationComponent } from './cart/confirmation/confirmation.component';
 
 
 @NgModule({
@@ -77,6 +80,9 @@ import { InfoComponent } from './info/info.component';
     OrderDialogComponent,
     OfferDialogComponent,
     InfoComponent,
+    OverviewComponent,
+    FormComponent,
+    ConfirmationComponent,
   ],
   imports: [
     BrowserModule,

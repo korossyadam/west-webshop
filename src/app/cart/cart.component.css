@@ -17,8 +17,12 @@
    box-shadow: 0px 0px 7px 1px rgba(0, 0, 0, 0.1);
 }
 
-.delivery-section {
-   margin-top: 50px;
+.button {
+   margin-top: 30px;
+}
+
+.next-button {
+   float: right;
 }
 
 .section-title {
@@ -29,323 +33,27 @@
    line-height: 10%;
 }
 
-.spinner {
-   width: 50%;
-   margin: 0 auto;
-   margin-top: 80px;
-   margin-bottom: 40px;
-}
-
-.accordion-container {
-   margin: 10px;
-}
-
-.header {
-   padding-top: 15px;
-   padding-bottom: 15px;
-   height: 70px;
-}
-
-table {
-   width: 100%;
-}
-
-.image-column {
-   width: 10%;
-}
-
-.info-column {
-   width: 25%;
-}
-
-.price-column {
-   width: 20%;
-}
-
-.amount-column {
-   width: 20%;
-}
-
-.info-container {
-   line-height: 30%;
-   margin-top: -8px;
-}
-
-.price-container {
-   line-height: 10%;
-   text-align: right;
-   margin-right: 20px;
-   font-weight: 500;
-}
-
-.price {
-   font-size: 18px;
-   color: var(--color-primary);
-   font-weight: 500;
-}
-
-.net-price {
-   color: #666666;
-   font-size: 11px;
-}
-
-.amount-container {
-   width: 100px;
-   height: 36px;
-   margin: 0 auto;
-   pointer-events: auto;
-}
-
-.delete-button {
-   color: #444444;
-   pointer-events: auto;
-}
-
-.radio-group {
-   display: flex;
-   flex-direction: column;
-   margin: 15px 0;
-   align-items: flex-start;
-}
-
-.radio-button {
-   margin: 12px 0px;
-   font-weight: 500;
-}
-
-.radio-button-description {
-   position: absolute;
-   color: #666666;
-   font-size: 12px;
-   font-weight: 400;
-}
-
-.img-container {
-   display: flex;
-   width: 150px;
-   margin: 10px 0px;
-   justify-content: center;
-   align-items: center;
-}
-
-.product-img {
-   height: 70px;
-}
-
-.part-number {
-   font-size: 18px;
-   color: #444444;
-   pointer-events: auto;
-   font-weight: 500;
-   text-decoration: none;
-}
-
-.name {
-   color: #444444;
-   margin-top: -1px;
-   font-weight: 500;
-   text-decoration: none;
-}
-
-.brand {
-   font-size: 13px;
-   font-weight: 500;
-   text-decoration: none;
-   color: #7a7a7a;
-}
-
-.info-container {
-   position: relative;
-   left: 10px;
-   z-index: 9;
-}
-
-.property-title {
-   position: relative;
-   font-size: 17px;
-   font-weight: 500;
-   margin: 0;
-}
-
-.property-text {
-   position: relative;
-   top: 10px;
-   font-size: 14px;
-   font-weight: 500;
-   margin: 0;
-}
-
-.total-container {
-   float: left;
-}
-
-.total {
-   font-size: 20px;
-   font-weight: 500;
-   color: var(--color-primary);
-}
-
-.total-net {
-   text-align: center;
-   margin-top: -10px;
-   color: #666666;
-   font-size: 14px;
-   font-weight: 500;
-}
-
-.nav-button {
-   position: relative;
-   top: 13px;
-   width: 130px;
-   font-size: 14px;
-   font-weight: 500;
-}
-
-/* Second step specific styles */
-.first-column {
-   width: 33.33%;
-   float: left;
-}
-
-.first-column>input,
-.invoice-container>input,
-.tax-number-container>input {
-   padding-right: 0;
-}
-
-.postal-container {
-   width: 27%;
-   float: left;
-}
-
-.city-container {
-   position: relative;
-   left: -25px;
-   width: calc(70% - 25px);
-   float: right;
-}
-
-textarea {
-   height: 77px;
-   margin-top: -0.0625em;
-}
-
-.invoice-container,
-.tax-number-container {
-   position: relative;
-   top: -1px;
-   height: 0;
-   overflow: hidden;
-   transition: height 0.5s;
-}
-
-.back-button-container {
-   float: left;
-   clear: both;
-}
-
-.next-button-container {
-   float: right;
-}
-
-/* We need this to make the border visible */
-.invoice-container input,
-.tax-number-container input {
-   position: relative;
-   top: 1px;
-}
-
-/* Third section specific styles */
-.confirmation-section-container {
-   width: 100%;
-   display: block;
-   overflow: auto;
-   margin-bottom: 40px;
-}
-
-.confirmation-section-half-container {
-   width: 50%;
-   display: block;
-   overflow: auto;
-   margin-bottom: 40px;
-   float: left;
-}
-
-.right-divider {
-   border-right: 1px solid rgba(0, 0, 0, 0.12);
-   box-sizing: border-box;
-}
-
-.quarter-container {
-   width: 40%;
-   height: 50%;
-   float: left;
-   margin: 20px;
-   text-align: center;
-}
-
-.quarter-title {
-   color: #a6a6a6;
-   margin: 0 0 2px 0;
-}
-
-.quarter-text-container > p {
-   margin: 0;
-}
-
-.prices-container {
-   margin: 0 auto;
-   margin-top: 40px;
-   width: 70%;
-}
-
-.order-button-container {
-   width: 90%;
-   margin: 0 auto;
-   margin-top: 50px;
-   text-align: center;
-}
-
-.order-button {
-   font-size: 16px;
-   padding: 1px 50px;
-   margin-top: 20px;
-}
-
 .title {
    text-align: center;
    font-size: 28px;
+}
+
+.centered {
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .float-left {
    float: left;
 }
 
-.float-right {
-   float: right;
-}
-
 .clear {
    clear: both;
 }
 
-.bold {
-   font-weight: 600;
-}
-
-.primary {
-   color: var(--color-primary);
-}
-
-::ng-deep .mat-step-header {
-   height: 50px !important;
-}
-
-/* Disable pointer events on expansion panel bodies */
-span.mat-expansion-indicator {
-   pointer-events: visiblefill !important;
-}
-
-mat-expansion-panel-header {
-   pointer-events: none;
+@media screen and (max-width: 1200px) {
+   .content-inner-container {
+      width: calc(100% - 40px);
+   }
 }

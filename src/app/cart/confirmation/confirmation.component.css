@@ -1,0 +1,147 @@
+.products-flex-container {
+   display: flex;
+   min-width: 760px;
+   justify-content: space-between;
+}
+
+.products-flex-container>div:not(:first-child) {
+   width: 20%;
+}
+
+.products-flex-container p {
+   margin: 0;
+   white-space: nowrap;
+}
+
+.img-container {
+   width: 30px;
+}
+
+.product-img {
+   height: 90px;
+}
+
+.quantity-container {
+   text-align: center;
+}
+
+/* Lower section styles */
+.lower-flex-container {
+   display: flex;
+}
+
+.lower-flex-container>div {
+   width: 50%;
+}
+
+.shipping-information-container {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.shipping-information-container>div {
+   width: 40%;
+}
+
+.lower-flex-container .section-title {
+   position: absolute;
+   margin-top: -10px;
+}
+
+.price-information-container {
+   border-left: 1px solid rgba(0, 0, 0, 0.12);
+   padding-left: 50px;
+}
+
+.order-button-container {
+   margin-top: 50px;
+   text-align: center;
+}
+
+.order-button {
+   font-size: 16px;
+   padding: 1px 50px;
+   margin-top: 20px;
+}
+
+::ng-deep.mat-checkbox span {
+   white-space: pre-wrap;
+}
+
+.confirmation-section-container {
+   width: 100%;
+   overflow: auto;
+   margin-bottom: 40px;
+}
+
+.quarter-container {
+   width: 40%;
+   height: 50%;
+   min-height: 125px;
+   margin: 20px;
+   text-align: center;
+}
+
+.quarter-title {
+   color: #a6a6a6;
+   margin: 0 0 2px 0;
+}
+
+.quarter-text-container>p {
+   margin: 0;
+}
+
+.prices-container {
+   width: 70%;
+   margin: 0 auto;
+   margin-top: 40px;
+   text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+   .img-container {
+      width: 100px;
+   }
+
+   .lower-flex-container {
+      display: block;
+   }
+
+   .lower-flex-container>div {
+      width: 100%;
+   }
+
+   .lower-flex-container>div>p {
+      display: none;
+   }
+
+   .shipping-information-container>div {
+      width: 45%;
+      flex: 45%;
+      margin: 20px 0px;
+   }
+
+   .price-information-container {
+      padding-left: 0;
+      border: none;
+      margin-top: -60px;
+   }
+
+   .order-button {
+      display: block;
+      margin: 10px auto;
+   }
+}
+
+@media screen and (max-width: 500px) {
+   .shipping-information-container>div {
+      width: 60%;
+      flex: 60%;
+      min-height: 80px;
+      margin: 10px 0px;
+   }
+
+   .prices-container {
+      margin-top: 100px;
+   }
+}

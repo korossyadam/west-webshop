@@ -1,0 +1,64 @@
+/* Second step specific styles */
+.columns-container {
+   display: flex;
+}
+
+.column>input,
+.invoice-container>input,
+.tax-number-container>input {
+   padding-right: 0;
+}
+
+.zip-container {
+   width: 27%;
+   float: left;
+}
+
+.city-container {
+   position: relative;
+   left: -25px;
+   width: calc(70% - 25px);
+   float: right;
+}
+
+textarea {
+   height: 77px;
+   margin-top: -0.0625em;
+}
+
+.invoice-container,
+.tax-number-container {
+   position: relative;
+   top: -1px;
+   height: 0;
+   overflow: hidden;
+   transition: height 0.5s;
+}
+
+/* We need this to make the border visible */
+.invoice-container input,
+.tax-number-container input {
+   position: relative;
+   top: 1px;
+}
+
+/* Responsivity styles */
+@media screen and (max-width: 1200px) {
+   .zip-container {
+      width: 35%;
+   }
+
+   .city-container {
+      width: calc(62% - 25px);
+   }
+}
+
+@media screen and (max-width: 1000px) {
+   .columns-container {
+      display: block;
+   }
+
+   .column {
+      margin-bottom: 35px;
+   }
+}
